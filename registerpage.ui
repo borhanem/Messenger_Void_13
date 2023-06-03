@@ -55,9 +55,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>40</y>
-      <width>371</width>
-      <height>340</height>
+      <y>50</y>
+      <width>361</width>
+      <height>341</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_2">
@@ -76,17 +76,11 @@
       </widget>
      </item>
      <item row="1" column="0" colspan="2">
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QLabel" name="fname_warning_lbl">
+       <property name="text">
+        <string>first name warning...</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="Password_lbl_2">
@@ -103,17 +97,11 @@
       </widget>
      </item>
      <item row="3" column="0" colspan="2">
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QLabel" name="lnam_warning_lbl">
+       <property name="text">
+        <string>last name warning...</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="usrname_lbl">
@@ -126,6 +114,13 @@
       <widget class="QLineEdit" name="usrname_led">
        <property name="placeholderText">
         <string>voidUser1234</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <widget class="QLabel" name="usrname_warning_lbl">
+       <property name="text">
+        <string>user name warning</string>
        </property>
       </widget>
      </item>
@@ -149,49 +144,6 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0" colspan="2">
-      <spacer name="horizontalSpacer_6">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="Email_lbl_2">
-       <property name="text">
-        <string>Email Address:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QLineEdit" name="Email_led_2">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="placeholderText">
-        <string>saymyname@gmail.com</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0" colspan="2">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
      <item row="8" column="0">
       <widget class="QLabel" name="confirmpass_lbl">
        <property name="text">
@@ -210,44 +162,32 @@
       </widget>
      </item>
      <item row="7" column="0" colspan="2">
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QLabel" name="password_warning_lbl">
+       <property name="text">
+        <string>Password warning...</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
+      </widget>
+     </item>
+     <item row="9" column="0" colspan="2">
+      <widget class="QLabel" name="confirm_pass_warning_lbl">
+       <property name="text">
+        <string>confirm Password warning...</string>
        </property>
-      </spacer>
+      </widget>
      </item>
     </layout>
    </widget>
    <widget class="QPushButton" name="register_pbn">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>400</y>
+      <x>290</x>
+      <y>410</y>
       <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Register</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>400</y>
-      <width>63</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
     </property>
    </widget>
   </widget>

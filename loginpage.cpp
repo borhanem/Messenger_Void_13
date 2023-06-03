@@ -7,6 +7,8 @@ LoginPage::LoginPage(QWidget *parent) :
 {
     ui->setupUi(this);
     register_ptr = new RegisterPage();
+    ui->usrname_warning_lbl->clear();
+    ui->password_warning_lbl->clear();
 
 }
 
@@ -39,11 +41,11 @@ int LoginPage::checkInput()
     QString pass_word = ui->password_led->text();
     if(user_name.isEmpty())
     {
-        ui->usrname_warning_lbl->setText("<!> User Name is Empty");
+        ui->usrname_warning_lbl->setText("<!> Username box is Empty");
     }
     if(pass_word.isEmpty())
     {
-        ui->password_warning_lbl->setText("<!> PassWord is Empty");
+        ui->password_warning_lbl->setText("<!> Password box is Empty");
     }
 }
 

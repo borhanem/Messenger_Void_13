@@ -2,7 +2,7 @@
 #define REGISTERPAGE_H
 
 #include <QDialog>
-
+#include <QString>
 namespace Ui {
 class RegisterPage;
 }
@@ -15,8 +15,12 @@ public:
     explicit RegisterPage(QWidget *parent = nullptr);
     ~RegisterPage();
 
+private slots:
+    void on_register_pbn_clicked();
+
 private:
     Ui::RegisterPage *ui;
+    int checkInput();
 };
 
 #endif // REGISTERPAGE_H
