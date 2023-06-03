@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 170, 255);
+background-color: rgb(0, 0, 0);
+</string>
+  </property>
   <widget class="QPushButton" name="Register_pbn">
    <property name="geometry">
     <rect>
@@ -48,6 +53,9 @@
      <height>451</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(158, 158, 158);</string>
+   </property>
    <property name="title">
     <string>Register</string>
    </property>
@@ -63,6 +71,9 @@
     <layout class="QFormLayout" name="formLayout_2">
      <item row="0" column="0">
       <widget class="QLabel" name="FName_lbl_2">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
         <string>First Name:</string>
        </property>
@@ -70,6 +81,11 @@
      </item>
      <item row="0" column="1">
       <widget class="QLineEdit" name="FName_led_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(56, 56, 56);
+border-color: rgb(170, 170, 127);
+border-radius:5%;</string>
+       </property>
        <property name="placeholderText">
         <string>Walter</string>
        </property>
@@ -77,6 +93,9 @@
      </item>
      <item row="1" column="0" colspan="2">
       <widget class="QLabel" name="fname_warning_lbl">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(170, 0, 0);</string>
+       </property>
        <property name="text">
         <string>first name warning...</string>
        </property>
@@ -84,6 +103,9 @@
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="Password_lbl_2">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
         <string>Last Name:</string>
        </property>
@@ -91,6 +113,11 @@
      </item>
      <item row="2" column="1">
       <widget class="QLineEdit" name="LName_led_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(170, 0, 0);
+border-color: rgb(170, 170, 127);
+border-radius:5%;</string>
+       </property>
        <property name="placeholderText">
         <string>White</string>
        </property>
@@ -98,6 +125,9 @@
      </item>
      <item row="3" column="0" colspan="2">
       <widget class="QLabel" name="lnam_warning_lbl">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(170, 0, 0);</string>
+       </property>
        <property name="text">
         <string>last name warning...</string>
        </property>
@@ -105,6 +135,9 @@
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="usrname_lbl">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
         <string>User Name:</string>
        </property>
@@ -112,13 +145,21 @@
      </item>
      <item row="4" column="1">
       <widget class="QLineEdit" name="usrname_led">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(56, 56, 56);
+border-color: rgb(170, 170, 127);
+border-radius:5%;</string>
+       </property>
        <property name="placeholderText">
-        <string>voidUser1234</string>
+        <string>VoidUser78</string>
        </property>
       </widget>
      </item>
      <item row="5" column="0" colspan="2">
       <widget class="QLabel" name="usrname_warning_lbl">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(170, 0, 0);</string>
+       </property>
        <property name="text">
         <string>user name warning</string>
        </property>
@@ -126,6 +167,9 @@
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="LName_lbl_2">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
         <string>Password:</string>
        </property>
@@ -133,6 +177,11 @@
      </item>
      <item row="6" column="1">
       <widget class="QLineEdit" name="pass_led_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(170, 0, 0);
+border-color: rgb(170, 170, 127);
+border-radius:5%;</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -140,29 +189,40 @@
         <enum>QLineEdit::Password</enum>
        </property>
        <property name="placeholderText">
-        <string>****************</string>
+        <string>**********</string>
        </property>
       </widget>
      </item>
      <item row="8" column="0">
       <widget class="QLabel" name="confirmpass_lbl">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
-        <string>Confirm Password:</string>
+        <string>Confirm Pass:</string>
        </property>
       </widget>
      </item>
      <item row="8" column="1">
       <widget class="QLineEdit" name="confirmpass_led">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(56, 56, 56);
+border-color: rgb(170, 170, 127);
+border-radius:5%;</string>
+       </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
        </property>
        <property name="placeholderText">
-        <string>****************</string>
+        <string>**********</string>
        </property>
       </widget>
      </item>
      <item row="7" column="0" colspan="2">
       <widget class="QLabel" name="password_warning_lbl">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(170, 0, 0);</string>
+       </property>
        <property name="text">
         <string>Password warning...</string>
        </property>
@@ -170,6 +230,9 @@
      </item>
      <item row="9" column="0" colspan="2">
       <widget class="QLabel" name="confirm_pass_warning_lbl">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(170, 0, 0);</string>
+       </property>
        <property name="text">
         <string>confirm Password warning...</string>
        </property>
@@ -183,8 +246,13 @@
       <x>290</x>
       <y>410</y>
       <width>101</width>
-      <height>31</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(170, 0, 0);
+border-radius: 5px;
+color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Register</string>
