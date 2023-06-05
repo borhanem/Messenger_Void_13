@@ -65,7 +65,7 @@ background-color: rgb(0, 0, 0);
       <x>30</x>
       <y>50</y>
       <width>361</width>
-      <height>341</height>
+      <height>321</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_2">
@@ -256,6 +256,22 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Register</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="register_result_lbl">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>380</y>
+      <width>359</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>registering result...</string>
     </property>
    </widget>
   </widget>

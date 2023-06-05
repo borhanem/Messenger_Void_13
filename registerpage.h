@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QString>
+#include "api.h"
 namespace Ui {
 class RegisterPage;
 }
@@ -17,10 +18,13 @@ public:
 
 private slots:
     void on_register_pbn_clicked();
+    void server_handler_on_success(QByteArray* data);
+    void server_handler_on_failure( QNetworkReply *reply);
 
 private:
     Ui::RegisterPage *ui;
-    int checkInput();
+    void checkInput();
+    API *m_server;
 };
 
 #endif // REGISTERPAGE_H
