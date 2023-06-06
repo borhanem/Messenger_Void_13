@@ -23,7 +23,7 @@ void User::login(char* filePath)
 {
     // implement logout if needed
     API loginApi("http://api.barafardayebehtar.ml:8080");
-    ifstream fileExistCheck;
+    std::ifstream fileExistCheck;
     fileExistCheck.open(filePath);
     if(fileExistCheck){
         loginApi.Register(m_username,m_password);
