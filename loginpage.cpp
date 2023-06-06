@@ -2,7 +2,7 @@
 #include "ui_loginpage.h"
 #include <fstream>
 LoginPage::LoginPage(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::LoginPage)
 {
     ui->setupUi(this);
@@ -53,13 +53,15 @@ void LoginPage::server_handler_on_success(QByteArray *data)
     QJsonObject jObj = jDoc.object();
     QString respond_code =  jObj.value("code").toString();
     QString respond_message =jObj.value("message").toString();
-    QString respond_token = jObj.value("value").toString();
+    QString respond_token = jObj.value("token").toString();
+    qDebug() << respond_token;
     if(respond_code =="200")
     {
         ui->login_result_lbl->setStyleSheet("QLabel {  color : green; }");
         User login_user(ui->username_led->text(),ui->password_led->text(),respond_token);
         char path[] = "userLog.dat";
         login_user.login(path);
+        this->close();
     }
     else
     {

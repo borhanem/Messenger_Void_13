@@ -3,6 +3,22 @@
 #include <iostream>
 
 
+User::User() : m_username ("afasdfasf"),
+               m_password("adfasfdasdf"),
+               m_token("afasfdasdf")
+{
+    std::ifstream iFile;
+    char path[] = "userLog.dat";
+    iFile.open(path);
+    if(iFile.is_open())
+    {
+        iFile.read((char*)this,sizeof(User));
+        iFile.close();
+    }
+
+
+}
+
 User::User(QString userName, QString passWord, QString token, QObject *parent)
     : QObject{parent},m_username(userName),m_password(passWord),m_token(token)
 {

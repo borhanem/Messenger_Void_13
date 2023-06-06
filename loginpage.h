@@ -1,14 +1,14 @@
 #ifndef LOGINPAGE_H
 #define LOGINPAGE_H
 #include "registerpage.h"
-#include <QWidget>
+#include <QDialog>
 #include <QString>
 #include "api.h"
 namespace Ui {
 class LoginPage;
 }
 
-class LoginPage : public QWidget
+class LoginPage : public QDialog
 {
     Q_OBJECT
 
