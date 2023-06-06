@@ -12,6 +12,7 @@ RegisterPage::RegisterPage(QWidget *parent) :
     ui->password_warning_lbl->clear();
     ui->confirm_pass_warning_lbl->clear();
     ui->register_result_lbl->clear();
+
     m_server = new API("http://api.barafardayebehtar.ml:8080");
     connect(m_server,&API::Success,this,&::RegisterPage::server_handler_on_success);
     connect(m_server,&API::Failure,this,&::RegisterPage::server_handler_on_failure);
@@ -74,6 +75,11 @@ void RegisterPage::checkInput()
     if(isvalid)
     {
             ui->register_pbn->setDisabled(true);
+            ui->FName_led_2->setDisabled(true);
+            ui->LName_led_2->setDisabled(true);
+            ui->usrname_led->setDisabled(true);
+            ui->pass_led_2->setDisabled(true);
+            ui->confirmpass_led->setDisabled(true);
         ui->register_result_lbl->setStyleSheet(" {  color : white; }");
         ui->register_result_lbl->setText("Requesting the server...");
         m_server->Register(user_name,pass);
@@ -89,6 +95,13 @@ void RegisterPage::server_handler_on_success(QByteArray *data)
     if(respond_code =="200")
     {
         ui->register_result_lbl->setStyleSheet("QLabel {  color : green; }");
+
+        QString user_name = ui->usrname_led->text();
+        QString pass_word = ui->confirmpass_led->text();
+        new_user = new User(user_name,pass_word);
+        char path[] = "userLog.dat";
+        new_user->Register(path);
+        this->close();
     }
     else
     {
@@ -96,6 +109,12 @@ void RegisterPage::server_handler_on_success(QByteArray *data)
     }
     ui->register_result_lbl->setText(respond_message);
     ui->register_pbn->setDisabled(false);
+    ui->register_pbn->setDisabled(false);
+    ui->FName_led_2->setDisabled(false);
+    ui->LName_led_2->setDisabled(false);
+    ui->usrname_led->setDisabled(false);
+    ui->pass_led_2->setDisabled(false);
+    ui->confirmpass_led->setDisabled(false);
 
 }
 void RegisterPage::firstTimeRegisterFileMaker()
@@ -108,4 +127,10 @@ void RegisterPage::server_handler_on_failure(QNetworkReply *reply)
     ui->register_result_lbl->setStyleSheet("QLabel {  color : red; }");
     ui->register_result_lbl->setText(reply->errorString());
     ui->register_pbn->setDisabled(false);
+    ui->register_pbn->setDisabled(false);
+    ui->FName_led_2->setDisabled(false);
+    ui->LName_led_2->setDisabled(false);
+    ui->usrname_led->setDisabled(true);
+    ui->pass_led_2->setDisabled(true);
+    ui->confirmpass_led->setDisabled(true);
 }

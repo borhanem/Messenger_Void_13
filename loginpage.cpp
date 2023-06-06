@@ -1,6 +1,8 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
+#include <fstream>
 #include <QFile>
+
 QString read(QString path)
 {
     QFile file(path);
@@ -11,6 +13,7 @@ QString read(QString path)
     }
     return "";
 }
+
 
 LoginPage::LoginPage(QWidget *parent) :
     QWidget(parent),
@@ -38,6 +41,17 @@ void LoginPage::on_Register_pbn_clicked()
     this->hide();
     register_ptr->show();
     register_ptr->exec();
+    char path[] = "userLog.dat";
+    std::ifstream iFile;
+    iFile.open(path);
+    if(iFile.is_open())
+    {
+        User default_user("null","null");
+        iFile.read((char*)&default_user,sizeof(default_user));
+        ui->username_led->setText(default_user.getUserName());
+        ui->password_led->setText(default_user.getPassword());
+        checkInput();
+    }
     this->show();
 }
 
@@ -53,9 +67,13 @@ void LoginPage::server_handler_on_success(QByteArray *data)
     QJsonObject jObj = jDoc.object();
     QString respond_code =  jObj.value("code").toString();
     QString respond_message =jObj.value("message").toString();
+    QString respond_token = jObj.value("value").toString();
     if(respond_code =="200")
     {
         ui->login_result_lbl->setStyleSheet("QLabel {  color : green; }");
+        User login_user(ui->username_led->text(),ui->password_led->text(),respond_token);
+        char path[] = "userLog.dat";
+        login_user.login(path);
     }
     else
     {
@@ -63,6 +81,8 @@ void LoginPage::server_handler_on_success(QByteArray *data)
     }
     ui->login_result_lbl->setText(respond_message);
     ui->login_pbn->setDisabled(false);
+    ui->username_led->setDisabled(false);
+    ui->password_led->setDisabled(false);
 }
 
 void LoginPage::server_handler_on_failure(QNetworkReply *reply)
@@ -70,6 +90,8 @@ void LoginPage::server_handler_on_failure(QNetworkReply *reply)
     ui->login_result_lbl->setStyleSheet("QLabel {  color : red; }");
     ui->login_result_lbl->setText(reply->errorString());
     ui->login_pbn->setDisabled(false);
+    ui->username_led->setDisabled(false);
+    ui->password_led->setDisabled(false);
 }
 
 void LoginPage::checkInput()
@@ -92,6 +114,8 @@ void LoginPage::checkInput()
     if(valid)
     {
     ui->login_pbn->setDisabled(true);
+    ui->username_led->setDisabled(true);
+    ui->password_led->setDisabled(true);
     m_server->Login(user_name,pass_word);
     ui->login_result_lbl->setStyleSheet(" {  color : white; }");
     ui->login_result_lbl->setText("sending Request to server...");

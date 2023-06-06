@@ -8,9 +8,14 @@ class User : public QObject
     Q_OBJECT
 public:
     explicit User(QString userName,QString passWord,QString token = "",QObject* parent = nullptr);
+
     void signUp(char* filePath);
+    void Register(char* filePath);
     void login(char* filePath);
     void logOut(char* filePath);
+    QString getUserName();
+    QString getPassword();
+    QString getToken();
 private:
     QString m_username;
     QString m_password;

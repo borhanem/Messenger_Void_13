@@ -10,7 +10,7 @@ User::User(QString userName, QString passWord, QString token, QObject *parent)
 
 }
 
-void User::signUp(char* filePath)
+void User::Register(char* filePath)
 {
     writeToFile(filePath);
 
@@ -21,20 +21,27 @@ void User::signUp(char* filePath)
 
 void User::login(char* filePath)
 {
-    // implement logout if needed
-    API loginApi("http://api.barafardayebehtar.ml:8080");
-    std::ifstream fileExistCheck;
-    fileExistCheck.open(filePath);
-    if(fileExistCheck){
-        loginApi.Register(m_username,m_password);
-    }else{
-
-    }
+    writeToFile(filePath);
 }
 
 void User::logOut(char* filePath)
 {
     std::remove(filePath);
+}
+
+QString User::getUserName()
+{
+    return m_username;
+}
+
+QString User::getPassword()
+{
+    return m_password;
+}
+
+QString User::getToken()
+{
+    return m_token;
 }
 
 void User::writeToFile(char *filePath)
