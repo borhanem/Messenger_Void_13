@@ -9,7 +9,7 @@ class User : public QObject
 public:
     explicit User(QString userName,QString passWord,QString token = "",QObject* parent = nullptr);
     void signUp(char* filePath);
-    void login();
+    void login(char* filePath);
     void logOut(char* filePath);
 private:
     QString m_username;
