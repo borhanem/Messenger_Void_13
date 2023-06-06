@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QString>
 #include "api.h"
+#include "user.h"
 namespace Ui {
 class RegisterPage;
 }
@@ -25,6 +26,7 @@ private:
     Ui::RegisterPage *ui;
     void checkInput();
     API *m_server;
+    User *new_user;
     void firstTimeRegisterFileMaker();
 };
 
