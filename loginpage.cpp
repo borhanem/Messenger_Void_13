@@ -102,3 +102,31 @@ void LoginPage::checkInput()
 
 
 
+
+void LoginPage::on_Theme_1_clicked()
+{
+    QString css = read(QString(":/new/prefix1/Style/Style1.css"));
+
+    if( css.length() > 0)
+    {
+    ((QApplication*)QApplication::instance())->setStyleSheet(css);
+    \
+
+    }
+}
+
+
+
+
+void LoginPage::on_Theme_2_pbn_clicked()
+{
+    QString css = read(QString(":/new/prefix1/Style/Style2.css"));
+
+    if( css.length() > 0)
+    {
+    ((QApplication*)QApplication::instance())->setStyleSheet(css);
+    \
+
+    }
+}
+

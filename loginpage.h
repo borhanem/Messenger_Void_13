@@ -25,6 +25,10 @@ private slots:
     void server_handler_on_failure( QNetworkReply *reply);
 
 
+    void on_Theme_1_clicked();
+
+    void on_Theme_2_pbn_clicked();
+
 private:
     void checkInput();
     Ui::LoginPage *ui;
