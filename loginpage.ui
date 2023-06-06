@@ -26,7 +26,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(179, 179, 179);</string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string>Login</string>
@@ -41,9 +41,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color: rgb(255, 255, 255);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Log in</string>
@@ -72,9 +70,7 @@ color: rgb(255, 255, 255);</string>
      <item row="0" column="1">
       <widget class="QLineEdit" name="username_led">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="placeholderText">
         <string>John Doe</string>
@@ -87,7 +83,7 @@ border-radius:5%;</string>
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>username warning...</string>
+        <string>Username warning...</string>
        </property>
       </widget>
      </item>
@@ -105,9 +101,7 @@ border-radius:5%;</string>
      <item row="2" column="1">
       <widget class="QLineEdit" name="password_led">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
@@ -123,7 +117,7 @@ border-radius:5%;</string>
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>password warning...</string>
+        <string>Password warning...</string>
        </property>
       </widget>
      </item>
@@ -142,7 +136,7 @@ border-radius:5%;</string>
      <string notr="true">color: rgb(170, 0, 0);</string>
     </property>
     <property name="text">
-     <string>login result...</string>
+     <string>Login result...</string>
     </property>
    </widget>
   </widget>
@@ -181,9 +175,7 @@ border-radius:5%;</string>
      <item>
       <widget class="QPushButton" name="Register_pbn">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Register</string>

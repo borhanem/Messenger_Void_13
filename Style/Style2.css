@@ -3,8 +3,16 @@ QWidget
 color : white;
 background-color: black;
 }
-QPushButton
+QPushButton#login_pbn
 {
-background-color: rgb(170, 0, 0);
+background-color : gold;
 
 }
+QPushButton
+{
+background-color : green;
+
+}
+
+
+

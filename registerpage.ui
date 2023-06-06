@@ -80,9 +80,7 @@
      <item row="0" column="1">
       <widget class="QLineEdit" name="FName_led_2">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="placeholderText">
         <string>Walter</string>
@@ -95,7 +93,7 @@ border-radius:5%;</string>
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>first name warning...</string>
+        <string>First name warning...</string>
        </property>
       </widget>
      </item>
@@ -112,9 +110,7 @@ border-radius:5%;</string>
      <item row="2" column="1">
       <widget class="QLineEdit" name="LName_led_2">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(170, 0, 0);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="placeholderText">
         <string>White</string>
@@ -127,7 +123,7 @@ border-radius:5%;</string>
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>last name warning...</string>
+        <string>Last name warning...</string>
        </property>
       </widget>
      </item>
@@ -144,9 +140,7 @@ border-radius:5%;</string>
      <item row="4" column="1">
       <widget class="QLineEdit" name="usrname_led">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="placeholderText">
         <string>VoidUser78</string>
@@ -159,7 +153,7 @@ border-radius:5%;</string>
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>user name warning</string>
+        <string>User name warning</string>
        </property>
       </widget>
      </item>
@@ -176,9 +170,7 @@ border-radius:5%;</string>
      <item row="6" column="1">
       <widget class="QLineEdit" name="pass_led_2">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(170, 0, 0);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string/>
@@ -204,9 +196,7 @@ border-radius:5%;</string>
      <item row="8" column="1">
       <widget class="QLineEdit" name="confirmpass_led">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
@@ -232,7 +222,7 @@ border-radius:5%;</string>
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>confirm Password warning...</string>
+        <string>Confirm Password warning...</string>
        </property>
       </widget>
      </item>
@@ -248,9 +238,7 @@ border-radius:5%;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color: rgb(255, 255, 255);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Register</string>
@@ -269,7 +257,7 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">color: rgb(170, 0, 0);</string>
     </property>
     <property name="text">
-     <string>registering result...</string>
+     <string>Registering result...</string>
     </property>
    </widget>
   </widget>
