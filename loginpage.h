@@ -29,6 +29,9 @@ private slots:
 
     void on_Theme_2_pbn_clicked();
 
+
+    void on_Theme_3_pbn_clicked();
+
 private:
     void checkInput();
     Ui::LoginPage *ui;

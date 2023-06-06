@@ -110,8 +110,6 @@ void LoginPage::on_Theme_1_clicked()
     if( css.length() > 0)
     {
     ((QApplication*)QApplication::instance())->setStyleSheet(css);
-    \
-
     }
 }
 
@@ -125,8 +123,20 @@ void LoginPage::on_Theme_2_pbn_clicked()
     if( css.length() > 0)
     {
     ((QApplication*)QApplication::instance())->setStyleSheet(css);
-    \
+    }
+}
 
+
+
+
+
+void LoginPage::on_Theme_3_pbn_clicked()
+{
+    QString css = read(QString(":/new/prefix1/Style/Style3.css"));
+
+    if( css.length() > 0)
+    {
+    ((QApplication*)QApplication::instance())->setStyleSheet(css);
     }
 }
 

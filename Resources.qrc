@@ -7,6 +7,9 @@
         <file>Style/Purp.png</file>
         <file>Style/Stars.png</file>
         <file>Style/red.png</file>
+        <file>Style/Icon3.png</file>
+        <file>Style/Green.png</file>
+        <file>Style/LightBlue.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

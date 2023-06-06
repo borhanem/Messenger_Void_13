@@ -221,6 +221,24 @@ border-radius:0%;</string>
     <string/>
    </property>
   </widget>
+  <widget class="QPushButton" name="Theme_3_pbn">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>430</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/Style/LightBlue.png);
+border-color: rgb(170, 170, 127);
+border-radius:0%;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
