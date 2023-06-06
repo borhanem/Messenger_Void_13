@@ -25,6 +25,7 @@ private:
     Ui::RegisterPage *ui;
     void checkInput();
     API *m_server;
+    void firstTimeRegisterFileMaker();
 };
 
 #endif // REGISTERPAGE_H

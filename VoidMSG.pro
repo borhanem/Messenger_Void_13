@@ -13,13 +13,15 @@ SOURCES += \
     loginpage.cpp \
     main.cpp \
     mainwindow.cpp \
-    registerpage.cpp
+    registerpage.cpp \
+    user.cpp
 
 HEADERS += \
     api.h \
     loginpage.h \
     mainwindow.h \
-    registerpage.h
+    registerpage.h \
+    user.h
 
 FORMS += \
     loginpage.ui \

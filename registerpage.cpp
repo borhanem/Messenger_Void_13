@@ -79,6 +79,7 @@ void RegisterPage::checkInput()
         m_server->Register(user_name,pass);
     }
 }
+
 void RegisterPage::server_handler_on_success(QByteArray *data)
 {
     QJsonDocument jDoc = QJsonDocument::fromJson(*data);
@@ -95,6 +96,11 @@ void RegisterPage::server_handler_on_success(QByteArray *data)
     }
     ui->register_result_lbl->setText(respond_message);
     ui->register_pbn->setDisabled(false);
+
+}
+void RegisterPage::firstTimeRegisterFileMaker()
+{
+
 }
 
 void RegisterPage::server_handler_on_failure(QNetworkReply *reply)
