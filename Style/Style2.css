@@ -1,18 +1,37 @@
 QWidget
 {
-color : white;
-background-color: black;
+color: rgb(170, 170, 255);
+background-color: black ;
 }
-QPushButton#login_pbn
+QLabel
 {
-background-color : gold;
-
+color: rgb(255, 255, 255);
+}
+QLineEdit#username_led
+{
+background-color:rgb(56, 56, 56);
+border-color: rgb(170, 170, 127);
+border-radius:5%;
+}
+QLineEdit#password_led
+{
+background-color:rgb(56, 56, 56);
+border-color: rgb(170, 170, 127);
+border-radius:5%;
 }
 QPushButton
 {
-background-color : green;
-
+background-color: rgb(170, 0, 255);
+border-radius: 5px;
+color: rgb(255, 255, 255);
 }
-
-
-
+QLineEdit
+{
+background-color: rgb(56, 56, 56);
+border-color: rgb(170, 170, 127);
+border-radius:5%;
+}
+QGroupBox
+{
+color: rgb(170, 170, 255);
+}

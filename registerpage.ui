@@ -52,7 +52,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(158, 158, 158);</string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string>Register</string>
@@ -70,7 +70,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="FName_lbl_2">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>First Name:</string>
@@ -100,7 +100,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="Password_lbl_2">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Last Name:</string>
@@ -130,7 +130,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="usrname_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>User Name:</string>
@@ -160,7 +160,7 @@
      <item row="6" column="0">
       <widget class="QLabel" name="LName_lbl_2">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Password:</string>
@@ -186,7 +186,7 @@
      <item row="8" column="0">
       <widget class="QLabel" name="confirmpass_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Confirm Pass:</string>

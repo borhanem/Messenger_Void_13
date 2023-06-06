@@ -1,5 +1,16 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
+#include <QFile>
+QString read(QString path)
+{
+    QFile file(path);
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream in(&file);
+        return in.readAll();
+    }
+    return "";
+}
 
 LoginPage::LoginPage(QWidget *parent) :
     QWidget(parent),
@@ -86,4 +97,8 @@ void LoginPage::checkInput()
     ui->login_result_lbl->setText("sending Request to server...");
     }
     }
+
+
+
+
 

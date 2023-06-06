@@ -60,7 +60,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="username_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Username:</string>
@@ -90,8 +90,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="password_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Password:</string>
@@ -165,7 +164,7 @@
      <item>
       <widget class="QLabel" name="Register_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Got No Account?</string>
@@ -184,6 +183,38 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="Theme_1">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>440</y>
+     <width>31</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(170, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Theme_2_pbn">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>440</y>
+     <width>31</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(170, 0, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>
