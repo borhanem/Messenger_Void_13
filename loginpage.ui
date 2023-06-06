@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 0);</string>
+   <string notr="true"/>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -26,7 +26,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(179, 179, 179);</string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string>Login</string>
@@ -41,9 +41,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color: rgb(255, 255, 255);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Log in</string>
@@ -62,19 +60,17 @@ color: rgb(255, 255, 255);</string>
      <item row="0" column="0">
       <widget class="QLabel" name="username_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
-        <string>UserName:</string>
+        <string>Username:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
       <widget class="QLineEdit" name="username_led">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="placeholderText">
         <string>John Doe</string>
@@ -87,15 +83,14 @@ border-radius:5%;</string>
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>username warning...</string>
+        <string>Wrong Username&lt;!&gt;</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="password_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Password:</string>
@@ -105,9 +100,7 @@ border-radius:5%;</string>
      <item row="2" column="1">
       <widget class="QLineEdit" name="password_led">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
@@ -123,7 +116,7 @@ border-radius:5%;</string>
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>password warning...</string>
+        <string>Wrong Password&lt;!&gt;</string>
        </property>
       </widget>
      </item>
@@ -142,7 +135,7 @@ border-radius:5%;</string>
      <string notr="true">color: rgb(170, 0, 0);</string>
     </property>
     <property name="text">
-     <string>login result...</string>
+     <string>Login result...</string>
     </property>
    </widget>
   </widget>
@@ -171,7 +164,7 @@ border-radius:5%;</string>
      <item>
       <widget class="QLabel" name="Register_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Got No Account?</string>
@@ -181,9 +174,7 @@ border-radius:5%;</string>
      <item>
       <widget class="QPushButton" name="Register_pbn">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Register</string>
@@ -192,6 +183,43 @@ color: rgb(255, 255, 255);</string>
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="Theme_1">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>430</y>
+     <width>20</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/Style/red.png);
+border-color: rgb(170, 170, 127);
+border-radius:0%;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Theme_2_pbn">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>430</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/Style/Stars.png);
+border-color: rgb(170, 170, 127);
+border-radius:0%;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

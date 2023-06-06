@@ -1,5 +1,16 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
+#include <QFile>
+QString read(QString path)
+{
+    QFile file(path);
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream in(&file);
+        return in.readAll();
+    }
+    return "";
+}
 
 LoginPage::LoginPage(QWidget *parent) :
     QWidget(parent),
@@ -86,4 +97,36 @@ void LoginPage::checkInput()
     ui->login_result_lbl->setText("sending Request to server...");
     }
     }
+
+
+
+
+
+
+void LoginPage::on_Theme_1_clicked()
+{
+    QString css = read(QString(":/new/prefix1/Style/Style1.css"));
+
+    if( css.length() > 0)
+    {
+    ((QApplication*)QApplication::instance())->setStyleSheet(css);
+    \
+
+    }
+}
+
+
+
+
+void LoginPage::on_Theme_2_pbn_clicked()
+{
+    QString css = read(QString(":/new/prefix1/Style/Style2.css"));
+
+    if( css.length() > 0)
+    {
+    ((QApplication*)QApplication::instance())->setStyleSheet(css);
+    \
+
+    }
+}
 

@@ -1,0 +1,37 @@
+QWidget
+{
+color : gray;
+background-color: black ;
+}
+QLabel
+{
+color: rgb(255, 255, 255);
+}
+QLineEdit#pass_led_2
+{
+background-color: rgb(170, 0, 0);
+border-color: rgb(170, 170, 127);
+border-radius:5%;
+}
+QLineEdit#LName_led_2
+{
+background-color: rgb(170, 0, 0);
+border-color: rgb(170, 170, 127);
+border-radius:5%;
+}
+QPushButton
+{
+background-color: rgb(170, 0, 0);
+border-radius: 5px;
+color: rgb(255, 255, 255);
+}
+QLineEdit
+{
+background-color: rgb(56, 56, 56);
+border-color: rgb(170, 170, 127);
+border-radius:5%;
+}
+QGroupBox
+{
+color: rgb(179, 179, 179);
+}
