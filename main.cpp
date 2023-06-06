@@ -12,7 +12,7 @@ void changeStyle(QString num)
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QString d ="2";
+    QString d ="1";
     QString css = read(QString(":/new/prefix1/Style/Style"  + d + ".css"));
 
     if( css.length() > 0)

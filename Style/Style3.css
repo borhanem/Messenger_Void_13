@@ -19,11 +19,6 @@ background-color: rgb(170, 0, 0);
 border-color: rgb(170, 170, 127);
 border-radius:5%;
 }
-QPushButton#Theme_2_pbn
-{
-background-image: url(:/new/prefix1/Style/Stars.png);
-border-radius: 5px;
-}
 QPushButton
 {
 background-color: rgb(170, 0, 0);
