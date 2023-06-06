@@ -1,4 +1,5 @@
 #include "user.h"
+#include "api.h"
 #include <fstream>
 #include <iostream>
 
@@ -18,9 +19,17 @@ void User::signUp(char* filePath)
     // do stuff later cuz this function is so stupid
 }
 
-void User::login()
+void User::login(char* filePath)
 {
+    // implement logout if needed
+    API loginApi("http://api.barafardayebehtar.ml:8080");
+    ifstream fileExistCheck;
+    fileExistCheck.open(filePath);
+    if(fileExistCheck){
+        loginApi.Register(m_username,m_password);
+    }else{
 
+    }
 }
 
 void User::logOut(char* filePath)
