@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 0);</string>
+   <string notr="true"/>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -65,7 +65,7 @@ color: rgb(255, 255, 255);</string>
         <string notr="true">color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>UserName:</string>
+        <string>Username:</string>
        </property>
       </widget>
      </item>
