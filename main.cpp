@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     std::ifstream iFile;
-    char path[] = "userLog.dat";
+    char path[] = "userLog.txt";
     iFile.open(path);
     if(!iFile.is_open())
     {

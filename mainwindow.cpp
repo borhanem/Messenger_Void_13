@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     m_user = new User();
+    char path[] = "userLog.txt";
+    m_user->loadFromFile(path);
     qDebug() << "Alaki";
     qDebug() <<  m_user->getUserName();
     qDebug()<< " " <<m_user->getToken();

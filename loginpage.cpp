@@ -27,7 +27,7 @@ void LoginPage::on_Register_pbn_clicked()
     this->hide();
     register_ptr->show();
     register_ptr->exec();
-    char path[] = "userLog.dat";
+    char path[] = "userLog.txt";
     std::ifstream iFile;
     iFile.open(path);
     if(iFile.is_open())
@@ -54,12 +54,12 @@ void LoginPage::server_handler_on_success(QByteArray *data)
     QString respond_code =  jObj.value("code").toString();
     QString respond_message =jObj.value("message").toString();
     QString respond_token = jObj.value("token").toString();
-    qDebug() << respond_token;
+    qDebug() << "from Server Handler: " << respond_token;
     if(respond_code =="200")
     {
         ui->login_result_lbl->setStyleSheet("QLabel {  color : green; }");
         User login_user(ui->username_led->text(),ui->password_led->text(),respond_token);
-        char path[] = "userLog.dat";
+        char path[] = "userLog.txt";
         login_user.login(path);
         this->close();
     }

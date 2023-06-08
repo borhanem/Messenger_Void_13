@@ -99,7 +99,7 @@ void RegisterPage::server_handler_on_success(QByteArray *data)
         QString user_name = ui->usrname_led->text();
         QString pass_word = ui->confirmpass_led->text();
         new_user = new User(user_name,pass_word);
-        char path[] = "userLog.dat";
+        char path[] = "userLog.txt";
         new_user->Register(path);
         this->close();
     }
