@@ -1,0 +1,28 @@
+QWidget
+{
+color: rgb(170, 170, 255);
+background-image: url(:/new/prefix1/Style/Stars.png);
+background-color: black;
+}
+
+QLabel
+{
+color: rgb(255, 255, 255);
+}
+
+QPushButton
+{
+background-image: url(:/new/prefix1/Style/Purp.png);
+border-radius: 5px;
+color: rgb(255, 255, 255);
+}
+QLineEdit
+{
+background-color: rgb(56, 56, 56);
+border-color: rgb(170, 170, 127);
+border-radius:5%;
+}
+QGroupBox
+{
+color: rgb(170, 170, 255);
+}
