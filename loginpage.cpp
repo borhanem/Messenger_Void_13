@@ -1,6 +1,21 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
 #include <fstream>
+#include <QFile>
+
+QString read(QString path)
+{
+    QFile file(path);
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream in(&file);
+        return in.readAll();
+    }
+    return "";
+}
+
+
+
 LoginPage::LoginPage(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginPage),
@@ -108,5 +123,40 @@ bool LoginPage::checkInput()
         isValid = false;
     }
     return isValid;
+}
+
+void ThemeChange (QString i)
+{
+    QString css = read(QString(":/new/prefix1/Style/Style"+ i +".css"));
+
+    if( css.length() > 0)
+    {
+        ((QApplication*)QApplication::instance())->setStyleSheet(css);
     }
+}
+
+void LoginPage::on_Theme_1_clicked()
+{
+        ThemeChange("1");
+}
+
+
+
+void LoginPage::on_Theme_2_pbn_clicked()
+{
+    ThemeChange("2");
+}
+
+
+
+void LoginPage::on_Theme_3_pbn_clicked()
+{
+      ThemeChange("3");
+}
+
+
+void LoginPage::on_pushButton_clicked()
+{
+        ThemeChange("4");
+}
 

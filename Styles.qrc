@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>Style/Green.png</file>
+        <file>Style/LightPink.png</file>
+        <file>Style/Stars.png</file>
+        <file>Style/red.png</file>
+        <file>Style/Style1.css</file>
+        <file>Style/Style2.css</file>
+        <file>Style/Style3.css</file>
+        <file>Style/Style4.css</file>
+    </qresource>
+</RCC>

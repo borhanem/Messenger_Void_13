@@ -24,11 +24,22 @@ private slots:
     void server_handler_on_success();
     void server_handler_on_failure(QString error);
     void autoLogin(User* NewUser);
+
+
+    void on_Theme_1_clicked();
+    void on_Theme_2_pbn_clicked();
+    void on_Theme_3_pbn_clicked();
+    void on_pushButton_clicked();
+
+
 private:
     bool checkInput();
     Ui::LoginPage *ui;
     RegisterPage *register_ptr;
     User *mp_user;
 };
+
+
+QString read(QString path);
 
 #endif // LOGINPAGE_H

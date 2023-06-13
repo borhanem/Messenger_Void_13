@@ -6,27 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>489</width>
-    <height>516</height>
+    <width>457</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Login</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 0);</string>
+   <string notr="true"/>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>70</y>
+     <x>60</x>
+     <y>50</y>
      <width>341</width>
      <height>231</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(179, 179, 179);</string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string>Login</string>
@@ -41,9 +41,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color: rgb(255, 255, 255);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Log in</string>
@@ -53,61 +51,46 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
+      <y>20</y>
       <width>321</width>
-      <height>119</height>
+      <height>146</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="username_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
-        <string>UserName:</string>
+        <string>Username:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="username_led">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
-       </property>
-       <property name="placeholderText">
-        <string>John Doe</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="2">
+     <item row="2" column="0" colspan="2">
       <widget class="QLabel" name="usrname_warning_lbl">
        <property name="styleSheet">
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>username warning...</string>
+        <string>Username Warning...</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="password_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Password:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QLineEdit" name="password_led">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;</string>
+        <string notr="true"/>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
@@ -117,15 +100,38 @@ border-radius:5%;</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0" colspan="2">
+     <item row="4" column="0" colspan="2">
       <widget class="QLabel" name="password_warning_lbl">
        <property name="styleSheet">
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
-        <string>password warning...</string>
+        <string>Password Warning...</string>
        </property>
       </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="username_led">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="placeholderText">
+        <string>John Doe</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </widget>
@@ -149,8 +155,8 @@ border-radius:5%;</string>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>310</y>
+     <x>60</x>
+     <y>290</y>
      <width>341</width>
      <height>80</height>
     </rect>
@@ -171,7 +177,7 @@ border-radius:5%;</string>
      <item>
       <widget class="QLabel" name="Register_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Got No Account?</string>
@@ -181,9 +187,7 @@ border-radius:5%;</string>
      <item>
       <widget class="QPushButton" name="Register_pbn">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Register</string>
@@ -192,6 +196,79 @@ color: rgb(255, 255, 255);</string>
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="Theme_1">
+   <property name="geometry">
+    <rect>
+     <x>321</x>
+     <y>390</y>
+     <width>22</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/Style/red.png);
+border-color: rgb(170, 170, 127);
+border-radius:10%;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Theme_2_pbn">
+   <property name="geometry">
+    <rect>
+     <x>292</x>
+     <y>390</y>
+     <width>22</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/Style/Stars.png);
+border-color: rgb(170, 170, 127);
+border-radius:10%;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>390</y>
+     <width>22</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/Style/Green.png);
+border-color: rgb(170, 170, 127);
+border-radius: 10%;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Theme_3_pbn">
+   <property name="geometry">
+    <rect>
+     <x>379</x>
+     <y>390</y>
+     <width>22</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/Style/LightPink.png);
+border-color: rgb(170, 170, 127);
+border-radius: 10%;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

@@ -32,3 +32,18 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    Style/Green.png \
+    Style/LightPink.png \
+    Style/Lime.png \
+    Style/Purp.png \
+    Style/Stars.png \
+    Style/Style1.css \
+    Style/Style2.css \
+    Style/Style3.css \
+    Style/Style4.css \
+    Style/red.png
+
+RESOURCES += \
+    Styles.qrc
