@@ -15,12 +15,21 @@ public:
     explicit API(const QString& sUrl,QObject *parent = nullptr);
     void Register(const QString& uname,const QString& pass);
     void Login(const QString& uname,const QString& pass);
+    void Logout(const QString &uname, const QString &pass);
     QByteArray* getResponse();
 signals:
-    void Success(QByteArray* data);
-    void Failure(QNetworkReply *reply);
+    void SuccessOnRegister();
+    void SuccessOnLogin(QString new_token);
+    void SuccessOnLogout();
+    void FailureOnRegister(QString error);
+    void FailureOnLogin(QString error);
+    void FailureOnLogout(QString error);
 private slots:
-    void getData();
+    void RegisterResponder();
+    void LoginResponder();
+    void LogoutResponder();
+
+    //void getData();
 private:
     QString url_s;
     QNetworkAccessManager* man_ptr;

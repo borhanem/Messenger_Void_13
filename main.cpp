@@ -5,17 +5,20 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    std::ifstream iFile;
-    char path[] = "userLog.txt";
-    iFile.open(path);
-    if(!iFile.is_open())
-    {
-    LoginPage lpg;
-    lpg.show();
-    lpg.exec();
-    }
-    iFile.close();
-    MainWindow myMain;
-    myMain.show();
+//    std::ifstream iFile;
+//    iFile.open("userLog.dat");
+//    if(!iFile.is_open())
+//    {
+        LoginPage lpg;
+        lpg.show();
+        lpg.exec();
+//    }
+//    else
+//    {
+//        MainWindow main;
+//        iFile.close();
+//        main.show();
+//    }
+
     return a.exec();
 }

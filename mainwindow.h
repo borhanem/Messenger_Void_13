@@ -15,8 +15,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+
+    void on_logout_pbn_clicked();
+
 private:
     Ui::MainWindow *ui;
-    User* m_user;
+    User* mp_user;
 };
 #endif // MAINWINDOW_H

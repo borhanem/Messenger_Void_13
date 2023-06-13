@@ -3,21 +3,26 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow),
+      mp_user(new User())
 {
     ui->setupUi(this);
-    m_user = new User();
-    char path[] = "userLog.txt";
-    m_user->loadFromFile(path);
-    qDebug() << "Alaki";
-    qDebug() <<  m_user->getUserName();
-    qDebug()<< " " <<m_user->getToken();
-    QString txt = "you logged in as " + m_user->getUserName() + "\n" + "Your Token: " + m_user->getToken();
-    ui->sample->setText(txt);
+    mp_user->loadFromFile();
+    ui->user_led->setText(mp_user->getUserName());
+    ui->pass_led->setText(mp_user->getPassword());
+    ui->token_led->setText(mp_user->getToken());
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+
+
+void MainWindow::on_logout_pbn_clicked()
+{
+    mp_user->logOut();
 }
 

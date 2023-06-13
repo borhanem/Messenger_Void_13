@@ -3,7 +3,8 @@
 
 RegisterPage::RegisterPage(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::RegisterPage)
+    ui(new Ui::RegisterPage),
+    mp_newuser(new User())
 {
     ui->setupUi(this);
     ui->fname_warning_lbl->clear();
@@ -12,10 +13,10 @@ RegisterPage::RegisterPage(QWidget *parent) :
     ui->password_warning_lbl->clear();
     ui->confirm_pass_warning_lbl->clear();
     ui->register_result_lbl->clear();
+    ui->register_pbn->setDefault(true);
+    connect(mp_newuser,&User::Success,this,&::RegisterPage::server_handler_on_success);
+    connect(mp_newuser,&User::Failure,this,&::RegisterPage::server_handler_on_failure);
 
-    m_server = new API("http://api.barafardayebehtar.ml:8080");
-    connect(m_server,&API::Success,this,&::RegisterPage::server_handler_on_success);
-    connect(m_server,&API::Failure,this,&::RegisterPage::server_handler_on_failure);
 }
 
 RegisterPage::~RegisterPage()
@@ -26,12 +27,36 @@ RegisterPage::~RegisterPage()
 void RegisterPage::on_register_pbn_clicked()
 {
 
-    checkInput();
+    ui->register_pbn->setDisabled(true);
+    ui->FName_led_2->setDisabled(true);
+    ui->LName_led_2->setDisabled(true);
+    ui->usrname_led->setDisabled(true);
+    ui->pass_led_2->setDisabled(true);
+    ui->confirmpass_led->setDisabled(true);
+    if(checkInput())
+    {
+        QString user_name = ui->usrname_led->text();
+        QString pass = ui->pass_led_2->text();
+        ui->register_result_lbl->setStyleSheet(" {  color : white; }");
+        ui->register_result_lbl->setText("Requesting the server...");
+        mp_newuser->SetUserName(user_name);
+        mp_newuser->SetPassWord(pass);
+        mp_newuser->Register();
+
+    }
+    else{
+        ui->register_pbn->setDisabled(false);
+        ui->FName_led_2->setDisabled(false);
+        ui->LName_led_2->setDisabled(false);
+        ui->usrname_led->setDisabled(false);
+        ui->pass_led_2->setDisabled(false);
+        ui->confirmpass_led->setDisabled(false);
+    }
 }
 
-void RegisterPage::checkInput()
+bool RegisterPage::checkInput()
 {
-    bool isvalid=true;
+    bool isValid=true;
     ui->fname_warning_lbl->clear();
     ui->lnam_warning_lbl->clear();
     ui->usrname_warning_lbl->clear();
@@ -45,92 +70,60 @@ void RegisterPage::checkInput()
     if(fname.isEmpty())
     {
         ui->fname_warning_lbl->setText("<!> First Name is Empty");
-        isvalid=false;
+        isValid=false;
     }
     if(lname.isEmpty())
     {
         ui->lnam_warning_lbl->setText("<!> Last Name is Empty");
-        isvalid=false;
+        isValid=false;
     }
     if(user_name.isEmpty())
     {
         ui->usrname_warning_lbl->setText("<!> User Name is Empty");
-        isvalid=false;
+        isValid=false;
     }
     if(pass.isEmpty())
     {
         ui->password_warning_lbl->setText("<!> PassWord is Empty");
-        isvalid=false;
+        isValid=false;
     }
     if(confirm_pass.isEmpty())
     {
         ui->confirm_pass_warning_lbl->setText("<!> Confirm is Empty");
-        isvalid=false;
+        isValid=false;
     }
     if(confirm_pass != pass)
     {
         ui->confirm_pass_warning_lbl->setText("<!> Doesn't match");
-        isvalid=false;
+        isValid=false;
     }
-    if(isvalid)
-    {
-            ui->register_pbn->setDisabled(true);
-            ui->FName_led_2->setDisabled(true);
-            ui->LName_led_2->setDisabled(true);
-            ui->usrname_led->setDisabled(true);
-            ui->pass_led_2->setDisabled(true);
-            ui->confirmpass_led->setDisabled(true);
-        ui->register_result_lbl->setStyleSheet(" {  color : white; }");
-        ui->register_result_lbl->setText("Requesting the server...");
-        m_server->Register(user_name,pass);
-    }
+    return isValid;
 }
 
-void RegisterPage::server_handler_on_success(QByteArray *data)
+void RegisterPage::server_handler_on_success()
 {
-    QJsonDocument jDoc = QJsonDocument::fromJson(*data);
-    QJsonObject jObj = jDoc.object();
-    QString respond_code =  jObj.value("code").toString();
-    QString respond_message =jObj.value("message").toString();
-    if(respond_code =="200")
-    {
-        ui->register_result_lbl->setStyleSheet("QLabel {  color : green; }");
 
-        QString user_name = ui->usrname_led->text();
-        QString pass_word = ui->confirmpass_led->text();
-        new_user = new User(user_name,pass_word);
-        char path[] = "userLog.txt";
-        new_user->Register(path);
-        this->close();
-    }
-    else
-    {
-        ui->register_result_lbl->setStyleSheet("QLabel {  color : red; }");
-    }
-    ui->register_result_lbl->setText(respond_message);
-    ui->register_pbn->setDisabled(false);
+    ui->register_result_lbl->setStyleSheet("QLabel {  color : green; }");
+    ui->register_result_lbl->setText("You Registered Successfuly!");
     ui->register_pbn->setDisabled(false);
     ui->FName_led_2->setDisabled(false);
     ui->LName_led_2->setDisabled(false);
     ui->usrname_led->setDisabled(false);
     ui->pass_led_2->setDisabled(false);
     ui->confirmpass_led->setDisabled(false);
+    emit RegisterSuccessfully(mp_newuser);
+    this->close();
 
 }
-void RegisterPage::firstTimeRegisterFileMaker()
-{
 
-}
-
-void RegisterPage::server_handler_on_failure(QNetworkReply *reply)
+void RegisterPage::server_handler_on_failure(QString error)
 {
     ui->register_result_lbl->setStyleSheet("QLabel {  color : red; }");
-    ui->register_result_lbl->setText(reply->errorString());
-    ui->register_pbn->setDisabled(false);
+    ui->register_result_lbl->setText(error);
     ui->register_pbn->setDisabled(false);
     ui->FName_led_2->setDisabled(false);
     ui->LName_led_2->setDisabled(false);
-    ui->usrname_led->setDisabled(true);
-    ui->pass_led_2->setDisabled(true);
-    ui->confirmpass_led->setDisabled(true);
+    ui->usrname_led->setDisabled(false);
+    ui->pass_led_2->setDisabled(false);
+    ui->confirmpass_led->setDisabled(false);
 }

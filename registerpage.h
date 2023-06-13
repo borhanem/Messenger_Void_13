@@ -19,15 +19,16 @@ public:
 
 private slots:
     void on_register_pbn_clicked();
-    void server_handler_on_success(QByteArray* data);
-    void server_handler_on_failure( QNetworkReply *reply);
+    void server_handler_on_success();
+    void server_handler_on_failure(QString error);
 
+signals:
+    void RegisterSuccessfully(User* new_user);
 private:
     Ui::RegisterPage *ui;
-    void checkInput();
-    API *m_server;
-    User *new_user;
-    void firstTimeRegisterFileMaker();
+    bool checkInput();
+    User *mp_newuser;
+
 };
 
 #endif // REGISTERPAGE_H

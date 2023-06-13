@@ -3,7 +3,7 @@
 #include "registerpage.h"
 #include <QDialog>
 #include <QString>
-#include "api.h"
+#include "user.h"
 namespace Ui {
 class LoginPage;
 }
@@ -21,13 +21,14 @@ private slots:
     void on_Register_pbn_clicked();
 
     void on_login_pbn_clicked();
-    void server_handler_on_success(QByteArray* data);
-    void server_handler_on_failure( QNetworkReply *reply);
+    void server_handler_on_success();
+    void server_handler_on_failure(QString error);
+    void autoLogin(User* NewUser);
 private:
-    void checkInput();
+    bool checkInput();
     Ui::LoginPage *ui;
     RegisterPage *register_ptr;
-    API *m_server;
+    User *mp_user;
 };
 
 #endif // LOGINPAGE_H
