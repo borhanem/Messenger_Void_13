@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-User::User() : m_file_path("userLog.dat"),
+User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
                m_username ("VoidUser"),
                m_password("123456789"),
                m_token("borhan81alireza82mahta83"),
@@ -19,7 +19,7 @@ User::User() : m_file_path("userLog.dat"),
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
     : QObject{parent},
-      m_file_path(userPath),
+      m_UserLogFilePath(userPath),
       m_username(userName),
       m_password(passWord),
       m_token(token),
@@ -53,7 +53,7 @@ void User::logOut()
 
 int User::loadFromFile()
 {
-    QFile logFile(m_file_path);
+    QFile logFile(m_UserLogFilePath);
     if(!logFile.open(QIODevice::ReadOnly))
     {
         return -1;
@@ -101,7 +101,12 @@ int User::loadFromFile()
 
 int User::saveToFile()
 {
-    QFile logFile(m_file_path);
+    QDir LogDir;
+    if(!LogDir.exists("UserInfo"))
+    {
+        LogDir.mkpath("UserInfo");
+    }
+    QFile logFile(m_UserLogFilePath);
     if(!logFile.open(QIODevice::WriteOnly))
     {
         return -1;
@@ -198,7 +203,7 @@ void User::server_handler_on_Login(QString token)
 
 void User::server_handler_on_Logout()
 {
-    std::remove(m_file_path.toStdString().c_str());
+    std::remove(m_UserLogFilePath.toStdString().c_str());
     emit Success();
 }
 

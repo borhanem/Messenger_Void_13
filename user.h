@@ -6,6 +6,7 @@
 #include "api.h"
 #include <QDataStream>
 #include <QFile>
+#include <QDir>
 class User : public QObject
 {
     Q_OBJECT
@@ -25,7 +26,7 @@ public:
     friend QDataStream& operator<<(QDataStream &stream,const User &u);
     friend QDataStream& operator>>(QDataStream &stream,User &u);
 private:
-    const QString m_file_path;
+    const QString m_UserLogFilePath;
     QString m_username;
     QString m_password;
     QString m_token;
