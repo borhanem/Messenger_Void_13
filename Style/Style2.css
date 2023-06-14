@@ -1,8 +1,8 @@
 QWidget
 {
 color: rgb(170, 170, 255);
-background-image: url(:/new/prefix1/Style/Stars.png);
 background-color: black;
+background-image: url(:/new/prefix1/Style/Stars.png);
 }
 
 QLabel

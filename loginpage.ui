@@ -22,7 +22,7 @@
      <x>60</x>
      <y>50</y>
      <width>341</width>
-     <height>231</height>
+     <height>261</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -156,9 +156,9 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>290</y>
+     <y>310</y>
      <width>341</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
    </property>
    <property name="title">
@@ -200,9 +200,9 @@
   <widget class="QPushButton" name="Theme_1">
    <property name="geometry">
     <rect>
-     <x>321</x>
-     <y>390</y>
-     <width>22</width>
+     <x>231</x>
+     <y>431</y>
+     <width>36</width>
      <height>20</height>
     </rect>
    </property>
@@ -219,14 +219,14 @@ border-radius:10%;
   <widget class="QPushButton" name="Theme_2_pbn">
    <property name="geometry">
     <rect>
-     <x>292</x>
-     <y>390</y>
-     <width>22</width>
+     <x>274</x>
+     <y>431</y>
+     <width>36</width>
      <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/new/prefix1/Style/Stars.png);
+    <string notr="true">background-image: url(:/new/prefix1/Style/Purp.png);
 border-color: rgb(170, 170, 127);
 border-radius:10%;</string>
    </property>
@@ -237,9 +237,9 @@ border-radius:10%;</string>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>390</y>
-     <width>22</width>
+     <x>317</x>
+     <y>431</y>
+     <width>36</width>
      <height>20</height>
     </rect>
    </property>
@@ -255,9 +255,9 @@ border-radius: 10%;</string>
   <widget class="QPushButton" name="Theme_3_pbn">
    <property name="geometry">
     <rect>
-     <x>379</x>
-     <y>390</y>
-     <width>22</width>
+     <x>360</x>
+     <y>431</y>
+     <width>36</width>
      <height>20</height>
     </rect>
    </property>
