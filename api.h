@@ -16,6 +16,7 @@ public:
     void Register(const QString& uname,const QString& pass);
     void Login(const QString& uname,const QString& pass);
     void Logout(const QString &uname, const QString &pass);
+    void SendMessageToUser(const QString& token,const QString& dst,const QString& body);
     QByteArray* getResponse();
 signals:
     void SuccessOnRegister();
@@ -24,11 +25,13 @@ signals:
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);
     void FailureOnLogout(QString error);
+    void SuccessOnSendMsgToUser();
+    void FailureOnSendMsgToUser(QString error);
 private slots:
     void RegisterResponder();
     void LoginResponder();
     void LogoutResponder();
-
+    void SendMessageToUserResponder();
     //void getData();
 private:
     QString url_s;

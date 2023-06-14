@@ -18,8 +18,15 @@ int main(int argc, char *argv[])
     {
         a.setStyleSheet(css);
     }
+
     if(!userLogFile.exists())
     {
+
+
+ /*   MainWindow b;
+    b.show(); */
+
+
         LoginPage lpg;
         lpg.show();
         lpg.exec();

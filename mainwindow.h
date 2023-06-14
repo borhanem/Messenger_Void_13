@@ -1,8 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
 #include "user.h"
+#include <QDateTime>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -18,6 +18,8 @@ public:
 private slots:
 
     void on_logout_pbn_clicked();
+
+    void on_toolButton_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -13,6 +13,7 @@ SOURCES += \
     loginpage.cpp \
     main.cpp \
     mainwindow.cpp \
+    message.cpp \
     registerpage.cpp \
     user.cpp
 
@@ -20,6 +21,7 @@ HEADERS += \
     api.h \
     loginpage.h \
     mainwindow.h \
+    message.h \
     registerpage.h \
     user.h
 

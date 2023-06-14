@@ -30,6 +30,13 @@ void API::Logout(const QString &uname, const QString &pass)
     connect(reply,&QNetworkReply::finished,this,&API::LogoutResponder);
 }
 
+void API::SendMessageToUser(const QString &token, const QString &dst, const QString &body)
+{
+    QString temp = url_s +"/sendmessageuser?token="+token+"&dst="+dst+"&body="+body;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::LogoutResponder);
+}
+
 QByteArray *API::getResponse()
 {
     return data;
@@ -109,6 +116,34 @@ void API::LogoutResponder()
         else
         {
             emit FailureOnLogout(respond_message);
+        }
+        }
+        else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnLogout(reply->errorString());
+        }
+        reply->deleteLater();
+}
+
+void API::SendMessageToUserResponder()
+{
+        if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            emit SuccessOnSendMsgToUser();
+        }
+        else
+        {
+            emit FailureOnSendMsgToUser(respond_message);
         }
         }
         else {
