@@ -10,22 +10,24 @@ int main(int argc, char *argv[])
 //    iFile.open("userLog.dat");
 //    if(!iFile.is_open())
 //    {
+    QFile userLogFile("userLog.dat");
     QString css = read(":/new/prefix1/Style/Style1.css");
 
+    MainWindow main;
     if( css.length() > 0)
     {
         a.setStyleSheet(css);
     }
+    if(!userLogFile.exists())
+    {
         LoginPage lpg;
         lpg.show();
         lpg.exec();
-//    }
-//    else
-//    {
-//        MainWindow main;
-//        iFile.close();
-//        main.show();
-//    }
+    }
+    else
+    {
+        main.show();
+    }
 
     return a.exec();
 }

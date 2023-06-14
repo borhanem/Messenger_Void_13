@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QDebug>
 #include "api.h"
+#include <QDataStream>
+#include <QFile>
 class User : public QObject
 {
     Q_OBJECT
@@ -20,7 +22,8 @@ public:
     QString getToken();
     void SetUserName(const QString& new_user_name);
     void SetPassWord(const QString& new_pass_word);
-
+    friend QDataStream& operator<<(QDataStream &stream,const User &u);
+    friend QDataStream& operator>>(QDataStream &stream,User &u);
 private:
     const QString m_file_path;
     QString m_username;

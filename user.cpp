@@ -53,75 +53,98 @@ void User::logOut()
 
 int User::loadFromFile()
 {
-
-    char *data;
-    size_t data_size;
-    std::ifstream iFile;
-    iFile.open(m_file_path.toStdString().c_str(),std::ios::binary);
-    if(iFile.is_open())
+    QFile logFile(m_file_path);
+    if(!logFile.open(QIODevice::ReadOnly))
     {
-            // load m_username member data
-            iFile.read((char*)&data_size,sizeof(size_t));
-            data = new char[data_size+1];
-            iFile.read(data,data_size*sizeof(char));
-            data[data_size]='\0';
-            m_username = data;
-            delete[] data;
-            // load m_password member data
-            iFile.read((char*)&data_size,sizeof(size_t));
-            data = new char[data_size+1];
-            iFile.read(data,data_size*sizeof(char));
-            data[data_size]='\0';
-            m_password = data;
-            delete[] data;
-            // load m_token member data
-            iFile.read((char*)&data_size,sizeof(size_t));
-            data = new char[data_size+1];
-            iFile.read(data,data_size*sizeof(char));
-            data[data_size]='\0';
-            m_token = data;
-            delete[] data;
-
-            // close the file
-            return 0;
-        iFile.close();
+        return -1;
     }
-    return -1;
+    QDataStream user_ds(&logFile);
+    user_ds.setVersion(QDataStream::Qt_6_5);
+    user_ds >> *this;
+
+    logFile.close();
+    return 0;
+//    char *data;
+//    size_t data_size;
+//    std::ifstream iFile;
+//    iFile.open(m_file_path.toStdString().c_str(),std::ios::binary);
+//    if(iFile.is_open())
+//    {
+//            // load m_username member data
+//            iFile.read((char*)&data_size,sizeof(size_t));
+//            data = new char[data_size+1];
+//            iFile.read(data,data_size*sizeof(char));
+//            data[data_size]='\0';
+//            m_username = data;
+//            delete[] data;
+//            // load m_password member data
+//            iFile.read((char*)&data_size,sizeof(size_t));
+//            data = new char[data_size+1];
+//            iFile.read(data,data_size*sizeof(char));
+//            data[data_size]='\0';
+//            m_password = data;
+//            delete[] data;
+//            // load m_token member data
+//            iFile.read((char*)&data_size,sizeof(size_t));
+//            data = new char[data_size+1];
+//            iFile.read(data,data_size*sizeof(char));
+//            data[data_size]='\0';
+//            m_token = data;
+//            delete[] data;
+
+//            // close the file
+//            return 0;
+//        iFile.close();
+//    }
+//    return -1;
 }
 
 int User::saveToFile()
 {
-    //char *data;
-    size_t data_size;
-    std::string std_data;
-    std::ofstream oFile;
-    oFile.open(m_file_path.toStdString().c_str(),std::ios::binary);
-    if(oFile.is_open())
+    QFile logFile(m_file_path);
+    if(!logFile.open(QIODevice::WriteOnly))
     {
-        // save m_username member data
-    std_data = m_username.toStdString();
-    data_size = std_data.size();
-    //data = std_data.data();
-    oFile.write((char*)&data_size,sizeof(size_t));
-    oFile.write(std_data.c_str(),data_size*sizeof(char));
-        // save m_password member data
-    std_data = m_password.toStdString();
-    data_size = std_data.size();
-    //data = std_data.data();
-    oFile.write((char*)&data_size,sizeof(size_t));
-    oFile.write(std_data.c_str(),data_size*sizeof(char));
-        // save m_token member data
-    std_data = m_token.toStdString();
-    data_size = std_data.size();
-    //data = std_data.data();
-    oFile.write((char*)&data_size,sizeof(size_t));
-    oFile.write(std_data.c_str(),data_size*sizeof(char));
-
-    // close the file
-    oFile.close();
-        return 0;
+        return -1;
     }
-    return -1;
+    QDataStream user_ds(&logFile);
+    user_ds.setVersion(QDataStream::Qt_6_5);
+    user_ds << *this;
+
+    logFile.close();
+    return 0;
+//    //char *data;
+//    size_t data_size;
+//    std::string std_data;
+//    std::ofstream oFile;
+//    oFile.open(m_file_path.toStdString().c_str(),std::ios::binary);
+
+//    if(oFile.is_open())
+//    {
+
+//        // save m_username member data
+////    std_data = m_username.toStdString();
+////    data_size = std_data.size();
+////    //data = std_data.data();
+////    oFile.write((char*)&data_size,sizeof(size_t));
+////    oFile.write(std_data.c_str(),data_size*sizeof(char));
+////        // save m_password member data
+////    std_data = m_password.toStdString();
+////    data_size = std_data.size();
+////    //data = std_data.data();
+////    oFile.write((char*)&data_size,sizeof(size_t));
+////    oFile.write(std_data.c_str(),data_size*sizeof(char));
+////        // save m_token member data
+////    std_data = m_token.toStdString();
+////    data_size = std_data.size();
+////    //data = std_data.data();
+////    oFile.write((char*)&data_size,sizeof(size_t));
+////    oFile.write(std_data.c_str(),data_size*sizeof(char));
+
+////    // close the file
+////    oFile.close();
+////        return 0;
+////    }
+////    return -1;
 
 }
 
@@ -183,7 +206,20 @@ void User::server_handler_on_failure(QString error)
 {
     emit Failure(error);
 }
-
+QDataStream& operator<<(QDataStream &stream,const User &u)
+{
+    stream << u.m_username;
+    stream << u.m_password;
+    stream << u.m_token;
+    return stream;
+}
+QDataStream& operator>>(QDataStream &stream, User &u)
+{
+    stream >> u.m_username;
+    stream >> u.m_password;
+    stream >> u.m_token;
+    return stream;
+}
 //void User::LoadToFile(char *filePath)
 //{
 //    std::ofstream f1out;
