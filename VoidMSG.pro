@@ -14,6 +14,10 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     message.cpp \
+    refresherDirect.cpp \
+    refresherabstract.cpp \
+    refresherchannel.cpp \
+    refreshergroup.cpp \
     registerpage.cpp \
     user.cpp
 
@@ -22,6 +26,10 @@ HEADERS += \
     loginpage.h \
     mainwindow.h \
     message.h \
+    refresherDirect.h \
+    refresherabstract.h \
+    refresherchannel.h \
+    refreshergroup.h \
     registerpage.h \
     user.h
 
