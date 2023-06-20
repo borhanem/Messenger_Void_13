@@ -1,3 +1,7 @@
+QToolButton
+{
+background-image: url(:/new/prefix1/Style/Pink_Setting.png);
+}
 QWidget
 {
 color :rgb(4, 93, 148);

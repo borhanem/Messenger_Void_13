@@ -3,6 +3,10 @@ QWidget
 color : rgb(4, 93, 148);
 background-color: rgb(139, 220, 255);
 }
+QToolButton
+{
+background-image: url(:/new/prefix1/Style/Green_Setting.png);
+}
 QLabel
 {
 color: rgb(2, 2, 161);

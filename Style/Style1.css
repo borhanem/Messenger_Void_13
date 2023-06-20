@@ -1,3 +1,7 @@
+QToolButton
+{
+background-image: url(:/new/prefix1/Style/Red_Setting.png);
+}
 QWidget
 {
 color : gray;
