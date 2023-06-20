@@ -12,11 +12,8 @@ refresherAbstract::refresherAbstract(QObject *parent)
 void refresherAbstract::run()
 {
     int msgCount = 0;
-<<<<<<< HEAD
-    msgCount = msgCountInit();
-=======
+
 //    msgCount = msgCountInit();
->>>>>>> b4fcbc2ff6a80bfd461b9bf5c48b9a0ea95ee8b5
     while(true){
         QThread::sleep(FREEZEDURATION);
         jSonChecker(msgCount);

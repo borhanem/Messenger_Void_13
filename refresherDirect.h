@@ -12,7 +12,7 @@ public:
     void jSonChecker(int& argMsgCount);
     int msgCountInit(const QString& responseMsg);
 signals:
-    void directRefreshSignal();
+    void DMRefreshSignal();
 };
 
 

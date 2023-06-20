@@ -179,6 +179,7 @@ void API::getMsgResponder(int argMsgID)
             } else if(argMsgID == 3){
                 emit SuccessOnGetMsgChannel(jDoc);
             }
+            // for emitting the response jsonDoc
             emit getMsgCountSignal(respond_message);
          } else {
             emit FailureOnGetMsg(respond_message);
