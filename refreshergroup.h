@@ -9,6 +9,7 @@ class refresherGroup : public refresherAbstract
 public:
     explicit refresherGroup(QObject *parent = nullptr);
     void jSonChecker(int& argMsgCount);
+    int msgCountInit(const QString& responseMsg);
 signals:
     void groupRefreshSignal();
 };

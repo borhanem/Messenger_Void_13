@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QThread>
+#include "api.h"
+#include "user.h"
 
 #define FREEZEDURATION 1
 
@@ -13,8 +15,11 @@ public:
     explicit refresherAbstract(QObject *parent = nullptr);
     void run();
     virtual void jSonChecker(int& argMsgCount) = 0;
-    int msgCountInit();
+    virtual int msgCountInit(const QString& responseMsg) = 0;
 signals:
+
+private:
+    User* currUser;
 };
 
 #endif // REFRESHERABSTRACT_H

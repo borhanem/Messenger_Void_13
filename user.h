@@ -16,6 +16,9 @@ public:
     void Register();
     void login();
     void logOut();
+    void getMsgDM(const QString &dst); // new entry
+    void getMsgGroup(const QString &dst); // new entry
+    void getMsgChannel(const QString &dst); // new entry
     int loadFromFile();
     int saveToFile();
     QString getUserName();

@@ -9,9 +9,5 @@
         <file>Style/Style3.css</file>
         <file>Style/Style4.css</file>
         <file>Style/Purp.png</file>
-        <file>Style/Pink_Setting.png</file>
-        <file>Style/Purp_Setting.png</file>
-        <file>Style/Red_Setting.png</file>
-        <file>Style/Green_Setting.png</file>
     </qresource>
 </RCC>

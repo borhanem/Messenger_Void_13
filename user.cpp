@@ -48,7 +48,22 @@ void User::login()
 void User::logOut()
 {
     m_server->Logout(this->m_username,this->m_password);
-   // std::remove(m_file_path.toStdString().c_str());
+    // std::remove(m_file_path.toStdString().c_str());
+}
+
+void User::getMsgDM(const QString &dst)
+{
+    m_server->getMsgDM(this->m_token,dst);
+}
+
+void User::getMsgGroup(const QString &dst)
+{
+    m_server->getMsgGroup(this->m_token,dst);
+}
+
+void User::getMsgChannel(const QString &dst)
+{
+    m_server->getMsgChannel(this->m_token,dst);
 }
 
 int User::loadFromFile()

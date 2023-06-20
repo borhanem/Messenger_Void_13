@@ -9,3 +9,8 @@ void refresherDirect::jSonChecker(int &argMsgCount)
 {
 
 }
+
+int refresherDirect::msgCountInit(const QString &responseMsg)
+{
+
+}
