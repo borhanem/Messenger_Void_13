@@ -8,7 +8,7 @@ class refresherGroup : public refresherAbstract
     Q_OBJECT
 public:
     explicit refresherGroup(QObject *parent = nullptr);
-    void jSonChecker(int argMsgCount);
+    void jSonChecker(int& argMsgCount);
 signals:
     void groupRefreshSignal();
 };

@@ -8,7 +8,7 @@ class refresherChannel : public refresherAbstract
     Q_OBJECT
 public:
     explicit refresherChannel(QObject *parent = nullptr);
-    void jSonChecker(int argMsgCount);
+    void jSonChecker(int& argMsgCount);
 signals:
     void channelRefreshChecker();
 };

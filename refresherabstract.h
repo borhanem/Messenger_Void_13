@@ -12,7 +12,8 @@ class refresherAbstract : public QThread
 public:
     explicit refresherAbstract(QObject *parent = nullptr);
     void run();
-    virtual void jSonChecker(int argMsgCount) = 0;
+    virtual void jSonChecker(int& argMsgCount) = 0;
+    int msgCountInit();
 signals:
 };
 

@@ -5,7 +5,7 @@ refresherGroup::refresherGroup(QObject * parent)
 
 }
 
-void refresherGroup::jSonChecker(int argMsgCount)
+void refresherGroup::jSonChecker(int &argMsgCount)
 {
 
 }

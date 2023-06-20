@@ -9,7 +9,7 @@ class refresherDirect : public refresherAbstract
     Q_OBJECT
 public:
     explicit refresherDirect(QObject *parent = nullptr);
-    void jSonChecker(int argMsgCount);
+    void jSonChecker(int& argMsgCount);
 signals:
     void directRefreshSignal();
 };

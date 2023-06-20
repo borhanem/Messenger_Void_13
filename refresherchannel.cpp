@@ -5,7 +5,7 @@ refresherChannel::refresherChannel(QObject *parent)
 
 }
 
-void refresherChannel::jSonChecker(int argMsgCount)
+void refresherChannel::jSonChecker(int &argMsgCount)
 {
 
 }
