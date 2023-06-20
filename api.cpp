@@ -37,6 +37,42 @@ void API::SendMessageToUser(const QString &token, const QString &dst, const QStr
     connect(reply,&QNetworkReply::finished,this,&API::LogoutResponder);
 }
 
+void API::getMsgDM(const QString &token, const QString &dst)
+{
+    QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::DMId);
+}
+
+void API::getMsgGroup(const QString &token, const QString &dst)
+{
+    QString temp = url_s + "/getgroupchats?token=" + token + "&dst=" + dst;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::GroupId);
+}
+
+void API::getMsgChannel(const QString &token, const QString &dst)
+{
+    QString temp = url_s + "/getchannelchats?token=" + token + "&dst=" + dst;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::ChannelID);
+}
+
+void API::DMId()
+{
+    getMsgResponder(1);
+}
+
+void API::GroupId()
+{
+    getMsgResponder(2);
+}
+
+void API::ChannelID()
+{
+    getMsgResponder(3);
+}
+
 QByteArray *API::getResponse()
 {
     return data;
@@ -125,6 +161,33 @@ void API::LogoutResponder()
         emit FailureOnLogout(reply->errorString());
         }
         reply->deleteLater();
+}
+
+void API::getMsgResponder(int argMsgID)
+{
+     if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            if (argMsgID == 1){
+                emit SuccessOnGetMsgDM(jDoc);
+            } else if(argMsgID == 2){
+                emit SuccessOnGetMsgGroup(jDoc);
+            } else if(argMsgID == 3){
+                emit SuccessOnGetMsgChannel(jDoc);
+            }
+            emit getMsgCountSignal(respond_message);
+         } else {
+            emit FailureOnGetMsg(respond_message);
+        }
+     } else {
+        data = NULL;
+        emit FailureOnGetMsg(reply->errorString());
+     }
+    reply->deleteLater();
 }
 
 void API::SendMessageToUserResponder()

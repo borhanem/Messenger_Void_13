@@ -9,3 +9,7 @@ void refresherChannel::jSonChecker(int &argMsgCount)
 {
 
 }
+
+int refresherChannel::msgCountInit(const QString& responseMsg){
+
+}

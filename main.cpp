@@ -14,9 +14,6 @@ int main(int argc, char *argv[])
     QString css = read(":/new/prefix1/Style/Style1.css");
 
     MainWindow main;
-
-      main.show();
-
     if( css.length() > 0)
     {
         a.setStyleSheet(css);
