@@ -3,6 +3,8 @@
 #include <QMainWindow>
 #include "user.h"
 #include <QDateTime>
+#include <QMouseEvent>
+#include <QPoint>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,6 +19,12 @@ public:
     bool setting_show;
 
 private slots:
+
+    void mousePressEvent(QMouseEvent *event);
+
+    void mouseMoveEvent(QMouseEvent *event);
+
+    void mouseReleaseEvent(QMouseEvent *event);
 
     void on_logout_pbn_clicked();
 
@@ -33,5 +41,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     User* mp_user;
+    QPoint m_windowPos;
+    QPoint m_mousePressPos;
 };
 #endif // MAINWINDOW_H

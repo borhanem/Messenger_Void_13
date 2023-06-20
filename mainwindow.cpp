@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "loginpage.h"
 #include <Qthread>
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
@@ -13,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->user_led->setText(mp_user->getUserName());
     ui->pass_led->setText(mp_user->getPassword());
     ui->token_led->setText(mp_user->getToken());
-
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->pass_led->hide();
     ui->label->hide();
     ui->Theme_3_pbn->hide();
@@ -32,6 +34,35 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        // Store the initial position of the mouse press event
+        m_mousePressPos = event->pos();
+        // Store the initial position of the window
+        m_windowPos = pos();
+    }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton) {
+        // Calculate the new position of the window based on the mouse movement
+        QPoint diff = event->pos() - m_mousePressPos;
+        QPoint newWindowPos = m_windowPos + diff;
+        // Update the position of the window
+        move(newWindowPos);
+    }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        // Reset the stored positions
+        m_mousePressPos = QPoint();
+        m_windowPos = QPoint();
+    }
+}
 
 void MainWindow::on_logout_pbn_clicked()
 {

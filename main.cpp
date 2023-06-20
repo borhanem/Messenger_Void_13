@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QFile>
 #include <fstream>
+#include<QFrame>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
     QString css = read(":/new/prefix1/Style/Style1.css");
 
     MainWindow main;
+
     if( css.length() > 0)
     {
         a.setStyleSheet(css);
