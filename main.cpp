@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
     {
 
 
- /*   MainWindow b;
-    b.show(); */
+    MainWindow b;
+    b.show();
 
 
         LoginPage lpg;
