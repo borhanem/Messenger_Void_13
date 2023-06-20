@@ -31,7 +31,6 @@ private slots:
     void on_Theme_3_pbn_clicked();
     void on_pushButton_clicked();
 
-
 private:
     bool checkInput();
     Ui::LoginPage *ui;
@@ -41,5 +40,5 @@ private:
 
 
 QString read(QString path);
-
+void ThemeChange (QString i);
 #endif // LOGINPAGE_H

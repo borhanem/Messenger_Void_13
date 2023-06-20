@@ -14,12 +14,21 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    bool setting_show;
 
 private slots:
 
     void on_logout_pbn_clicked();
 
-    void on_toolButton_clicked();
+    void on_Theme_1_clicked();
+
+    void on_Theme_2_pbn_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_Theme_3_pbn_clicked();
+
+    void on_toolButton_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
