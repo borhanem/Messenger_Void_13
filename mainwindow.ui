@@ -26,9 +26,9 @@
    <widget class="QLineEdit" name="user_led">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>30</y>
-      <width>131</width>
+      <x>451</x>
+      <y>38</y>
+      <width>119</width>
       <height>28</height>
      </rect>
     </property>
@@ -39,9 +39,9 @@
    <widget class="QLabel" name="user_lbl">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>10</y>
-      <width>131</width>
+      <x>451</x>
+      <y>11</y>
+      <width>52</width>
       <height>20</height>
      </rect>
     </property>
@@ -49,15 +49,15 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>You're logged in as :     </string>
+     <string>User:     </string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>60</y>
-      <width>81</width>
+      <x>451</x>
+      <y>73</y>
+      <width>68</width>
       <height>20</height>
      </rect>
     </property>
@@ -71,9 +71,9 @@
    <widget class="QLineEdit" name="pass_led">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>80</y>
-      <width>131</width>
+      <x>451</x>
+      <y>100</y>
+      <width>119</width>
       <height>28</height>
      </rect>
     </property>
@@ -84,9 +84,9 @@
    <widget class="QLabel" name="token_lbl">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>110</y>
-      <width>63</width>
+      <x>451</x>
+      <y>135</y>
+      <width>46</width>
       <height>20</height>
      </rect>
     </property>
@@ -100,9 +100,9 @@
    <widget class="QLineEdit" name="token_led">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>130</y>
-      <width>131</width>
+      <x>451</x>
+      <y>162</y>
+      <width>119</width>
       <height>28</height>
      </rect>
     </property>
@@ -113,10 +113,10 @@
    <widget class="QPushButton" name="logout_pbn">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>170</y>
-      <width>131</width>
-      <height>61</height>
+      <x>451</x>
+      <y>224</y>
+      <width>121</width>
+      <height>29</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -155,8 +155,8 @@
    <widget class="QPushButton" name="Theme_2_pbn">
     <property name="geometry">
      <rect>
-      <x>477</x>
-      <y>249</y>
+      <x>482</x>
+      <y>290</y>
       <width>24</width>
       <height>21</height>
      </rect>
@@ -173,8 +173,8 @@ border-radius:10%;</string>
    <widget class="QPushButton" name="Theme_1">
     <property name="geometry">
      <rect>
-      <x>445</x>
-      <y>249</y>
+      <x>450</x>
+      <y>290</y>
       <width>25</width>
       <height>21</height>
      </rect>
@@ -192,8 +192,8 @@ border-radius:10%;
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>508</x>
-      <y>249</y>
+      <x>513</x>
+      <y>290</y>
       <width>25</width>
       <height>21</height>
      </rect>
@@ -210,8 +210,8 @@ border-radius: 10%;</string>
    <widget class="QPushButton" name="Theme_3_pbn">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>249</y>
+      <x>545</x>
+      <y>290</y>
       <width>24</width>
       <height>21</height>
      </rect>
