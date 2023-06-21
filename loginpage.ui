@@ -271,6 +271,16 @@ border-radius: 10%;</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>username_led</tabstop>
+  <tabstop>password_led</tabstop>
+  <tabstop>login_pbn</tabstop>
+  <tabstop>Register_pbn</tabstop>
+  <tabstop>Theme_1</tabstop>
+  <tabstop>Theme_2_pbn</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>Theme_3_pbn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
