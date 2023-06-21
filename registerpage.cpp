@@ -12,11 +12,27 @@ RegisterPage::RegisterPage(QWidget *parent) :
     ui->usrname_warning_lbl->clear();
     ui->password_warning_lbl->clear();
     ui->confirm_pass_warning_lbl->clear();
+    setWindowFlags(Qt::FramelessWindowHint);
+
     ui->register_result_lbl->clear();
     ui->register_pbn->setDefault(true);
     connect(mp_newuser,&User::Success,this,&::RegisterPage::server_handler_on_success);
     connect(mp_newuser,&User::Failure,this,&::RegisterPage::server_handler_on_failure);
 
+}
+
+void RegisterPage::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void RegisterPage::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
 }
 
 RegisterPage::~RegisterPage()

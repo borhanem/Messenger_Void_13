@@ -38,12 +38,12 @@ private slots:
 
     void on_toolButton_clicked(bool checked);
 
+    void on_Exit_pbn_clicked();
+
 private:
     Ui::MainWindow *ui;
     User* mp_user;
     QPoint dragPosition;
-    QPoint m_windowPos;
-    QPoint m_mousePressPos;
     QPropertyAnimation* user_lbl_hide;
     QPropertyAnimation* user_led_hide;
     QPropertyAnimation* pass_lbl_hide;

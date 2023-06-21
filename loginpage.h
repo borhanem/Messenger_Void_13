@@ -5,6 +5,8 @@
 #include <QString>
 #include "user.h"
 #include "theme.h"
+#include <QMouseEvent>
+#include <QPoint>
 namespace Ui {
 class LoginPage;
 }
@@ -19,6 +21,10 @@ public:
 
 private slots:
 
+    void mousePressEvent(QMouseEvent *event);
+
+    void mouseMoveEvent(QMouseEvent *event);
+
     void on_Register_pbn_clicked();
 
     void on_login_pbn_clicked();
@@ -32,11 +38,15 @@ private slots:
     void on_Theme_3_pbn_clicked();
     void on_pushButton_clicked();
 
+    void on_Exit_pbn_clicked();
+
 private:
     bool checkInput();
     Ui::LoginPage *ui;
     RegisterPage *register_ptr;
     User *mp_user;
+    QPoint dragPosition;
+
 };
 
 

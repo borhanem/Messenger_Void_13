@@ -3,7 +3,8 @@
 
 #include <QDialog>
 #include <QString>
-#include "api.h"
+#include <QPoint>
+#include <QMouseEvent>
 #include "user.h"
 namespace Ui {
 class RegisterPage;
@@ -18,6 +19,10 @@ public:
     ~RegisterPage();
 
 private slots:
+    void mousePressEvent(QMouseEvent *event);
+
+    void mouseMoveEvent(QMouseEvent *event);
+
     void on_register_pbn_clicked();
     void server_handler_on_success();
     void server_handler_on_failure(QString error);
@@ -25,6 +30,7 @@ private slots:
 signals:
     void RegisterSuccessfully(User* new_user);
 private:
+    QPoint dragPosition;
     Ui::RegisterPage *ui;
     bool checkInput();
     User *mp_newuser;

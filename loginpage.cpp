@@ -30,6 +30,21 @@ LoginPage::LoginPage(QWidget *parent) :
     connect(mp_user,&User::Success,this,&::LoginPage::server_handler_on_success);
     connect(mp_user,&User::Failure,this,&::LoginPage::server_handler_on_failure);
     connect(register_ptr,&RegisterPage::RegisterSuccessfully,this,&LoginPage::autoLogin);
+     setWindowFlags(Qt::FramelessWindowHint);
+}
+
+void LoginPage::mousePressEvent(QMouseEvent* event)
+{
+     dragPosition = event->globalPos() - frameGeometry().topLeft();
+     event->accept();
+}
+void LoginPage::mouseMoveEvent(QMouseEvent* event)
+{
+     if (event->buttons() & Qt::LeftButton)
+     {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+     }
 }
 
 LoginPage::~LoginPage()
@@ -170,5 +185,11 @@ void LoginPage::on_Theme_3_pbn_clicked()
 void LoginPage::on_pushButton_clicked()
 {
         ThemeChange("4");
+}
+
+
+void LoginPage::on_Exit_pbn_clicked()
+{
+        close();
 }
 

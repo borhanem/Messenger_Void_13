@@ -237,3 +237,9 @@ void MainWindow::on_toolButton_clicked(bool checked)
 
 }
 
+
+void MainWindow::on_Exit_pbn_clicked()
+{
+    close();
+}
+
