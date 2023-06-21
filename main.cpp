@@ -4,6 +4,24 @@
 #include <QFile>
 #include <fstream>
 #include<QFrame>
+QString loadTheme()
+{
+    QString i = ":/new/prefix1/Style/Style1.css";
+    QDir settingDir;
+    if(!settingDir.exists("settingInfo"))
+    {
+        settingDir.mkpath("settingInfo");
+    }
+    QFile logFile("settingInfo/settingLog.dat");
+    if(!logFile.open(QIODevice::ReadOnly))
+    {
+        return i;
+    }
+    QDataStream data_dst(&logFile);
+    data_dst >> i;
+    i= ":/new/prefix1/Style/Style"+ i +".css";
+    return i;
+}
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -12,7 +30,7 @@ int main(int argc, char *argv[])
 //    if(!iFile.is_open())
 //    {
     QFile userLogFile("userLog.dat");
-    QString css = read(":/new/prefix1/Style/Style1.css");
+    QString css = read(loadTheme());
 
     MainWindow main;
 

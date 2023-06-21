@@ -125,7 +125,7 @@ bool LoginPage::checkInput()
     return isValid;
 }
 
-void ThemeChange (QString i)
+int ThemeChange (QString i)
 {
     QString css = read(QString(":/new/prefix1/Style/Style"+ i +".css"));
 
@@ -133,6 +133,18 @@ void ThemeChange (QString i)
     {
         ((QApplication*)QApplication::instance())->setStyleSheet(css);
     }
+    QDir settingDir;
+    if(!settingDir.exists("settingInfo"))
+    {
+        settingDir.mkpath("settingInfo");
+    }
+    QFile logFile("settingInfo/settingLog.dat");
+    if(!logFile.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        return -1;
+    }
+    QDataStream data_dst(&logFile);
+    data_dst << i;
 }
 
 void LoginPage::on_Theme_1_clicked()

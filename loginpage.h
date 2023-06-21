@@ -40,5 +40,5 @@ private:
 
 
 QString read(QString path);
-void ThemeChange (QString i);
+int ThemeChange (QString i);
 #endif // LOGINPAGE_H
