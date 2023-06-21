@@ -20,6 +20,7 @@ SOURCES += \
     refresherchannel.cpp \
     refreshergroup.cpp \
     registerpage.cpp \
+    theme.cpp \
     user.cpp
 
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     refresherchannel.h \
     refreshergroup.h \
     registerpage.h \
+    theme.h \
     user.h
 
 FORMS += \

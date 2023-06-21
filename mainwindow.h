@@ -26,8 +26,6 @@ private slots:
 
     void mouseMoveEvent(QMouseEvent *event);
 
-    void mouseReleaseEvent(QMouseEvent *event);
-
     void on_logout_pbn_clicked();
 
     void on_Theme_1_clicked();
@@ -43,6 +41,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     User* mp_user;
+    QPoint dragPosition;
     QPoint m_windowPos;
     QPoint m_mousePressPos;
     QPropertyAnimation* user_lbl_hide;
