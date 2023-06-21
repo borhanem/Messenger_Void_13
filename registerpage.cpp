@@ -22,6 +22,7 @@ RegisterPage::RegisterPage(QWidget *parent) :
 RegisterPage::~RegisterPage()
 {
     delete ui;
+    delete mp_user;
 }
 
 void RegisterPage::on_register_pbn_clicked()

@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete mp_user;
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
