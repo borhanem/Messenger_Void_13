@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QString>
 #include "user.h"
+#include "theme.h"
 namespace Ui {
 class LoginPage;
 }
@@ -39,6 +40,4 @@ private:
 };
 
 
-QString read(QString path);
-int ThemeChange (QString i);
 #endif // LOGINPAGE_H
