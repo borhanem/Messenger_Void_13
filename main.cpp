@@ -5,7 +5,6 @@
 #include <QFile>
 #include <fstream>
 #include<QFrame>
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -13,11 +12,8 @@ int main(int argc, char *argv[])
 //    iFile.open("userLog.dat");
 //    if(!iFile.is_open())
 //    {
-    QFile userLogFile("userLog.dat");
+    QFile userLogFile("UserInfo/userLog.dat");
     QString css = read(loadTheme());
-
-    MainWindow main;
-
     if( css.length() > 0)
     {
         a.setStyleSheet(css);
@@ -25,19 +21,14 @@ int main(int argc, char *argv[])
 
     if(!userLogFile.exists())
     {
-
-
-    MainWindow b;
-    b.show();
-
-
-        LoginPage lpg;
-        lpg.show();
-        lpg.exec();
+        LoginPage* lpg = new LoginPage();
+        lpg->open();
+       // delete lpg;
     }
     else
     {
-        main.show();
+        MainWindow* main = new MainWindow();
+        main->show();
     }
 
     return a.exec();
