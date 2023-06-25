@@ -219,7 +219,7 @@ void User::server_handler_on_Login(QString token)
 void User::server_handler_on_Logout()
 {
     std::remove(m_UserLogFilePath.toStdString().c_str());
-    emit Success();
+    emit SuccessOnLogout();
 }
 
 void User::server_handler_on_failure(QString error)

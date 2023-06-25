@@ -7,6 +7,7 @@
 #include <QPoint>
 #include <QRect>
 #include <QPropertyAnimation>
+#include <loginpage.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -38,6 +39,8 @@ private slots:
 
     void on_toolButton_clicked(bool checked);
 
+    void logoutUser();
+
 private:
     Ui::MainWindow *ui;
     User* mp_user;
@@ -59,5 +62,6 @@ private:
     QPropertyAnimation* color_2_hide;
     QPropertyAnimation* color_3_hide;
     QPropertyAnimation* color_4_hide;
+
 };
 #endif // MAINWINDOW_H

@@ -44,7 +44,9 @@ private slots:
     void server_handler_on_failure(QString Error);
 signals:
     void Success();
+    void SuccessOnLogout();
     void Failure(QString Error);
+    void FailureOnLogout(QString Error);
 };
 
 #endif // USER_H

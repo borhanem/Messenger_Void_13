@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton->hide();
     ui->token_lbl->hide();
     ui->token_led->hide();
+    connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
 }
 
 MainWindow::~MainWindow()
@@ -235,5 +236,12 @@ void MainWindow::on_toolButton_clicked(bool checked)
 
 
 
+}
+
+void MainWindow::logoutUser()
+{
+    LoginPage* lpgPtr = new LoginPage();
+    lpgPtr->open();
+    this->close();
 }
 
