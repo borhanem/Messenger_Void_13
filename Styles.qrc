@@ -13,5 +13,8 @@
         <file>Style/Pink_Setting.png</file>
         <file>Style/Purp_Setting.png</file>
         <file>Style/Red_Setting.png</file>
+        <file>Style/Light_Exit.png</file>
+        <file>Style/Red_Exit.png</file>
+        <file>Style/Purp_Exit.png</file>
     </qresource>
 </RCC>

@@ -258,3 +258,9 @@ void MainWindow::delete_createGroupPage()
     delete mp_cgp;
 }
 
+
+void MainWindow::on_Exit_pbn_clicked()
+{
+    close();
+}
+

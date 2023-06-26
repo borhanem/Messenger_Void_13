@@ -4,7 +4,11 @@ color: rgb(170, 170, 255);
 background-color: black;
 background-image: url(:/new/prefix1/Style/Stars.png);
 }
-QToolButton
+QToolButton#Exit_pbn
+{
+image: url(:/new/prefix1/Style/Purp_Exit.png);
+}
+QToolButton#toolButton
 {
 background-image: url(:/new/prefix1/Style/Purp_Setting.png);
 }
