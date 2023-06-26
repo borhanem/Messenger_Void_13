@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-
+#include <QRegularExpression>
 User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
                m_username ("VoidUser"),
                m_password("123456789"),
@@ -15,15 +15,19 @@ User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::FailureOnGetMsg,this,&User::server_handler_on_failure); // new entry
+    QObject::connect(m_server,&API::getMsgCountSignalDM,this,&User::msgCountDmSlot); // new entry
+    QObject::connect(m_server,&API::getMsgCountSignalChannel,this,&User::msgCountChannelSlot); // new entry
+    QObject::connect(m_server,&API::getMsgCountSignalGroup,this,&User::msgCountGroupSlot); // new entry
 }
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
     : QObject{parent},
-      m_UserLogFilePath(userPath),
-      m_username(userName),
-      m_password(passWord),
-      m_token(token),
-      m_server(new API("http://api.barafardayebehtar.ml:8080"))
+    m_UserLogFilePath(userPath),
+    m_username(userName),
+    m_password(passWord),
+    m_token(token),
+    m_server(new API("http://api.barafardayebehtar.ml:8080"))
 {
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
@@ -31,6 +35,11 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::FailureOnGetMsg,this,&User::server_handler_on_failure); // new entry
+    QObject::connect(m_server,&API::getMsgCountSignalDM,this,&User::msgCountDmSlot); // new entry
+    QObject::connect(m_server,&API::getMsgCountSignalChannel,this,&User::msgCountChannelSlot); // new entry
+    QObject::connect(m_server,&API::getMsgCountSignalGroup,this,&User::msgCountGroupSlot); // new entry
+
 }
 
 void User::Register()
@@ -41,15 +50,17 @@ void User::Register()
 void User::login()
 {
     m_server->Login(this->m_username,this->m_password);
-   // saveToFile(filePath);
+    // saveToFile(filePath);
 
 }
 
 void User::logOut()
 {
     m_server->Logout(this->m_username,this->m_password);
-   // std::remove(m_file_path.toStdString().c_str());
+    // std::remove(m_file_path.toStdString().c_str());
 }
+
+
 
 int User::loadFromFile()
 {
@@ -176,6 +187,97 @@ void User::SetUserName(const QString &new_user_name)
 void User::SetPassWord(const QString &new_pass_word)
 {
     m_password = new_pass_word;
+}
+
+void User::msgCountChannelSlot(QString argMsgCount)
+{
+    QRegularExpression re("-\\d+-");
+
+    // Find the first match in the string
+    QRegularExpressionMatch match = re.match(argMsgCount);
+    if (match.hasMatch()) {
+        // Extract the matched text
+        QString matchText = match.captured(0);
+
+        // Remove the hyphens from the matched text
+        QString numStr = matchText.remove('-');
+
+        // Convert the number string to an integer
+        int num = numStr.toInt();
+
+        msgCountChannel = num;
+    }else{
+        qDebug() << "User::msgCountDmSlot error";
+
+    }
+}
+
+void User::msgCountDmSlot(QString argMsgCount)
+{
+    QRegularExpression re("-\\d+-");
+
+    // Find the first match in the string
+    QRegularExpressionMatch match = re.match(argMsgCount);
+    if (match.hasMatch()) {
+        // Extract the matched text
+        QString matchText = match.captured(0);
+
+        // Remove the hyphens from the matched text
+        QString numStr = matchText.remove('-');
+
+        // Convert the number string to an integer
+        int num = numStr.toInt();
+
+        msgCountDm = num;
+    }else{
+        qDebug() << "User::msgCountDmslot error";
+
+    }
+}
+
+void User::msgCountGroupSlot(QString argMsgCount)
+{
+    QRegularExpression re("-\\d+-");
+
+    // Find the first match in the string
+    QRegularExpressionMatch match = re.match(argMsgCount);
+    if (match.hasMatch()) {
+        // Extract the matched text
+        QString matchText = match.captured(0);
+
+        // Remove the hyphens from the matched text
+        QString numStr = matchText.remove('-');
+
+        // Convert the number string to an integer
+        int num = numStr.toInt();
+
+        msgCountGroup = num;
+    }else{
+        qDebug() << "User::msgCountGroupSlot error";
+
+    }
+}
+
+int User::msgCountGetterDm()
+{
+    return msgCountDm;
+}
+
+int User::msgCountGetterChannel()
+{
+    return msgCountChannel;
+}
+
+int User::msgCountGetterGroup()
+{
+    return msgCountGroup;
+}
+
+void User::allMsgCountsReInit(QString dst)
+{
+    m_server->getMsgChannel(m_token,dst);
+    m_server->getMsgDM(m_token,dst);
+    m_server->getMsgGroup(m_token,dst);
 }
 
 void User::server_handler_on_Register()

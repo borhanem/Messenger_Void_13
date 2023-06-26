@@ -7,10 +7,18 @@ class refresherGroup : public refresherAbstract
 {
     Q_OBJECT
 public:
-    explicit refresherGroup(QObject *parent = nullptr);
-    void jSonChecker(int argMsgCount);
+    explicit refresherGroup( QObject *parent = nullptr,const QString& argDst = "");
+    void refresherMain() override;
+    void msgCountInit() override;
+private:
+    QString dstGroup;
+    int msgCount;
+    User* currUser;
 signals:
     void groupRefreshSignal();
+private slots:
+
+
 };
 
 #endif // REFRESHERGROUP_H
