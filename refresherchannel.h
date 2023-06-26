@@ -20,6 +20,7 @@ signals:
     void channelRefreshSignal();
 private slots:
 
+
 };
 
 #endif // REFRESHERCHANNEL_H

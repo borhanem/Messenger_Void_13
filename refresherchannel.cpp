@@ -12,6 +12,7 @@ refresherChannel::refresherChannel(QObject *parent,const QString& argDst)
     msgCountInit();
 }
 
+
 void refresherChannel::refresherMain()
 {
     int countTemp = currUser->msgCountGetterChannel();
@@ -20,8 +21,6 @@ void refresherChannel::refresherMain()
         msgCount = countTemp;
     }
 }
-
-
 
 void refresherChannel::msgCountInit()
 {

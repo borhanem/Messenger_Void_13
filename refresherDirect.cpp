@@ -12,7 +12,6 @@ refresherDirect::refresherDirect(QObject *parent,const QString& argDst)
     msgCountInit();
 }
 
-
 void refresherDirect::refresherMain()
 {
     int countTemp = currUser->msgCountGetterDm();

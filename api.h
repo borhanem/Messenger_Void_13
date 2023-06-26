@@ -9,6 +9,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
+
 class API : public QObject
 {
     Q_OBJECT
@@ -18,6 +19,7 @@ public:
     void Login(const QString& uname,const QString& pass);
     void Logout(const QString &uname, const QString &pass);
     void SendMessageToUser(const QString& token,const QString& dst,const QString& body);
+    void createGroup(const QString& token,const QString& groupName);
     void getMsgDM(const QString &token, const QString &dst); // new entry
     void getMsgGroup(const QString &token, const QString &dst); // new entry
     void getMsgChannel(const QString &token, const QString &dst); // new entry
@@ -32,10 +34,12 @@ signals:
     void getMsgCountSignalDM(QString msgCount);
     void getMsgCountSignalGroup(QString msgCount);
     void getMsgCountSignalChannel(QString msgCount);
+    void SuccessOnCreateGroup();
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);
     void FailureOnLogout(QString error);
     void FailureOnGetMsg(QString error); // new entry
+    void FailureOnCreateGroup(QString error);
     void SuccessOnSendMsgToUser();
     void FailureOnSendMsgToUser(QString error);
 private slots:
@@ -45,7 +49,8 @@ private slots:
     void getMsgDmResponder(); // new entry
     void getMsgGroupResponder(); // new entry
     void getMsgChannelResponder(); // new entry
-    void SendMessageToUserResponder();
+    void createGroupResponder();    
+    void SendMessageToUserResponder(); // new entry
     //void getData();
 private:
     QString url_s;

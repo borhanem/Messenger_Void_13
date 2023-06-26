@@ -7,6 +7,7 @@ class refresherGroup : public refresherAbstract
 {
     Q_OBJECT
 public:
+
     explicit refresherGroup( QObject *parent = nullptr,const QString& argDst = "");
     void refresherMain() override;
     void msgCountInit() override;

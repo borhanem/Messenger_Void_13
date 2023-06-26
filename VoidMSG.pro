@@ -1,5 +1,6 @@
 QT       += core gui
 QT          +=network
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++20
@@ -10,6 +11,7 @@ CONFIG += c++20
 
 SOURCES += \
     api.cpp \
+    creategrouppage.cpp \
     loginpage.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -19,10 +21,12 @@ SOURCES += \
     refresherchannel.cpp \
     refreshergroup.cpp \
     registerpage.cpp \
+    theme.cpp \
     user.cpp
 
 HEADERS += \
     api.h \
+    creategrouppage.h \
     loginpage.h \
     mainwindow.h \
     message.h \
@@ -31,9 +35,11 @@ HEADERS += \
     refresherchannel.h \
     refreshergroup.h \
     registerpage.h \
+    theme.h \
     user.h
 
 FORMS += \
+    creategrouppage.ui \
     loginpage.ui \
     mainwindow.ui \
     registerpage.ui

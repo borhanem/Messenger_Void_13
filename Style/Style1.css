@@ -1,3 +1,11 @@
+QToolButton#toolButton
+{
+background-image: url(:/new/prefix1/Style/Red_Setting.png);
+}
+QToolButton#Exit_pbn
+{
+image: url(:/new/prefix1/Style/Red_Exit.png);
+}
 QWidget
 {
 color : gray;

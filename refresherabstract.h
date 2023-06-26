@@ -14,11 +14,13 @@ class refresherAbstract : public QThread
 public:
     explicit refresherAbstract(QObject *parent = nullptr);
     void run();
+
     virtual void refresherMain() = 0;
     virtual void msgCountInit() = 0;
 signals:
 
 private slots:
+signals:
 
 };
 

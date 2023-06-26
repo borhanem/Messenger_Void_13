@@ -1,4 +1,5 @@
 #include "loginpage.h"
+#include "mainwindow.h"
 #include "ui_loginpage.h"
 #include <fstream>
 #include <QFile>
@@ -19,17 +20,17 @@ QString read(QString path)
 LoginPage::LoginPage(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginPage),
+    register_ptr(NULL),
     mp_user(new User())
 {
     ui->setupUi(this);
-    register_ptr=new RegisterPage(this);
+//    register_ptr=new RegisterPage(this);
     ui->usrname_warning_lbl->clear();
     ui->password_warning_lbl->clear();
     ui->login_result_lbl->clear();
     ui->login_pbn->setDefault(true);
     connect(mp_user,&User::Success,this,&::LoginPage::server_handler_on_success);
     connect(mp_user,&User::Failure,this,&::LoginPage::server_handler_on_failure);
-    connect(register_ptr,&RegisterPage::RegisterSuccessfully,this,&LoginPage::autoLogin);
 }
 
 LoginPage::~LoginPage()
@@ -42,11 +43,16 @@ LoginPage::~LoginPage()
 void LoginPage::on_Register_pbn_clicked()
 {
     this->hide();
-    register_ptr->show();
-    register_ptr->exec();
+    if(register_ptr == NULL)
+    {
+    register_ptr=new RegisterPage(this);
+    connect(register_ptr,&RegisterPage::RegisterSuccessfully,this,&LoginPage::autoLogin);
+    connect(register_ptr,&RegisterPage::finished,this,&LoginPage::registerPage_handler);
+    }
+    register_ptr->open();
 //    delete register_ptr;
 //    register_ptr = new RegisterPage(this);
-    this->show();
+//    this->show();
 }
 
 
@@ -87,7 +93,9 @@ void LoginPage::server_handler_on_success()
     ui->login_pbn->setDisabled(false);
     ui->username_led->setDisabled(false);
     ui->password_led->setDisabled(false);
-    //this->close();
+    MainWindow* mainptr = new MainWindow();
+    mainptr->show();
+    this->close();
 }
 
 void LoginPage::server_handler_on_failure(QString error)
@@ -97,6 +105,11 @@ void LoginPage::server_handler_on_failure(QString error)
     ui->login_pbn->setDisabled(false);
     ui->username_led->setDisabled(false);
     ui->password_led->setDisabled(false);
+}
+
+void LoginPage::registerPage_handler(int i)
+{
+    this->show();
 }
 
 void LoginPage::autoLogin(User *NewUser)
@@ -125,14 +138,28 @@ bool LoginPage::checkInput()
     return isValid;
 }
 
-void ThemeChange (QString i)
+int ThemeChange (QString i)
 {
     QString css = read(QString(":/new/prefix1/Style/Style"+ i +".css"));
 
     if( css.length() > 0)
     {
         ((QApplication*)QApplication::instance())->setStyleSheet(css);
+        QDir settingDir;
+        if(!settingDir.exists("settingInfo"))
+        {
+            settingDir.mkpath("settingInfo");
+        }
+        QFile logFile("settingInfo/settingLog.dat");
+        if(!logFile.open(QIODevice::WriteOnly | QIODevice::Truncate))
+        {
+            return -1;
+        }
+        QDataStream data_dst(&logFile);
+        data_dst << i;
+        return 0;
     }
+    return 1;
 }
 
 void LoginPage::on_Theme_1_clicked()

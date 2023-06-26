@@ -19,6 +19,8 @@ User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::getMsgCountSignalDM,this,&User::msgCountDmSlot); // new entry
     QObject::connect(m_server,&API::getMsgCountSignalChannel,this,&User::msgCountChannelSlot); // new entry
     QObject::connect(m_server,&API::getMsgCountSignalGroup,this,&User::msgCountGroupSlot); // new entry
+    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
+    QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
 }
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
@@ -39,7 +41,8 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::getMsgCountSignalDM,this,&User::msgCountDmSlot); // new entry
     QObject::connect(m_server,&API::getMsgCountSignalChannel,this,&User::msgCountChannelSlot); // new entry
     QObject::connect(m_server,&API::getMsgCountSignalGroup,this,&User::msgCountGroupSlot); // new entry
-
+    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
+    QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
 }
 
 void User::Register()
@@ -58,9 +61,13 @@ void User::logOut()
 {
     m_server->Logout(this->m_username,this->m_password);
     // std::remove(m_file_path.toStdString().c_str());
+
 }
 
-
+void User::createGroup(const QString &groupName)const
+{
+    m_server->createGroup(this->m_token,groupName);
+}
 
 int User::loadFromFile()
 {
@@ -306,6 +313,11 @@ void User::server_handler_on_Login(QString token)
 void User::server_handler_on_Logout()
 {
     std::remove(m_UserLogFilePath.toStdString().c_str());
+    emit SuccessOnLogout();
+}
+
+void User::server_handler_on_creategGroup()
+{
     emit Success();
 }
 

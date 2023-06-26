@@ -10,12 +10,6 @@
     <height>600</height>
    </rect>
   </property>
-  <property name="maximumSize">
-   <size>
-    <width>598</width>
-    <height>600</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -26,9 +20,9 @@
    <widget class="QLineEdit" name="user_led">
     <property name="geometry">
      <rect>
-      <x>451</x>
-      <y>38</y>
-      <width>119</width>
+      <x>440</x>
+      <y>30</y>
+      <width>131</width>
       <height>28</height>
      </rect>
     </property>
@@ -39,30 +33,30 @@
    <widget class="QLabel" name="user_lbl">
     <property name="geometry">
      <rect>
-      <x>451</x>
-      <y>11</y>
-      <width>52</width>
+      <x>440</x>
+      <y>10</y>
+      <width>131</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>User:     </string>
+     <string>You're logged in as :     </string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>451</x>
-      <y>73</y>
-      <width>68</width>
+      <x>440</x>
+      <y>60</y>
+      <width>81</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Password :</string>
@@ -71,9 +65,9 @@
    <widget class="QLineEdit" name="pass_led">
     <property name="geometry">
      <rect>
-      <x>451</x>
-      <y>100</y>
-      <width>119</width>
+      <x>440</x>
+      <y>80</y>
+      <width>131</width>
       <height>28</height>
      </rect>
     </property>
@@ -84,14 +78,14 @@
    <widget class="QLabel" name="token_lbl">
     <property name="geometry">
      <rect>
-      <x>451</x>
-      <y>135</y>
-      <width>46</width>
+      <x>440</x>
+      <y>110</y>
+      <width>63</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Token :</string>
@@ -100,9 +94,9 @@
    <widget class="QLineEdit" name="token_led">
     <property name="geometry">
      <rect>
-      <x>451</x>
-      <y>162</y>
-      <width>119</width>
+      <x>440</x>
+      <y>130</y>
+      <width>131</width>
       <height>28</height>
      </rect>
     </property>
@@ -113,10 +107,10 @@
    <widget class="QPushButton" name="logout_pbn">
     <property name="geometry">
      <rect>
-      <x>451</x>
-      <y>224</y>
-      <width>121</width>
-      <height>29</height>
+      <x>440</x>
+      <y>170</y>
+      <width>131</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -139,7 +133,7 @@
    <widget class="QToolButton" name="toolButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>70</x>
       <y>20</y>
       <width>31</width>
       <height>31</height>
@@ -155,8 +149,8 @@
    <widget class="QPushButton" name="Theme_2_pbn">
     <property name="geometry">
      <rect>
-      <x>482</x>
-      <y>290</y>
+      <x>477</x>
+      <y>249</y>
       <width>24</width>
       <height>21</height>
      </rect>
@@ -173,8 +167,8 @@ border-radius:10%;</string>
    <widget class="QPushButton" name="Theme_1">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>290</y>
+      <x>445</x>
+      <y>249</y>
       <width>25</width>
       <height>21</height>
      </rect>
@@ -192,8 +186,8 @@ border-radius:10%;
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>513</x>
-      <y>290</y>
+      <x>508</x>
+      <y>249</y>
       <width>25</width>
       <height>21</height>
      </rect>
@@ -210,8 +204,8 @@ border-radius: 10%;</string>
    <widget class="QPushButton" name="Theme_3_pbn">
     <property name="geometry">
      <rect>
-      <x>545</x>
-      <y>290</y>
+      <x>540</x>
+      <y>249</y>
       <width>24</width>
       <height>21</height>
      </rect>
@@ -225,62 +219,6 @@ border-radius: 10%;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="createGroup_pbn">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>390</y>
-      <width>111</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>New Group</string>
-    </property>
-   </widget>
-   <widget class="QToolButton" name="Exit_pbn">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>31</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 10%;
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>440</y>
-      <width>111</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>New Chat</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>480</y>
-      <width>111</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>New Chanell</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -292,6 +230,7 @@ border-radius: 10%;</string>
     </rect>
    </property>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
