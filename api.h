@@ -21,6 +21,7 @@ public:
     void Login(const QString& uname,const QString& pass);
     void Logout(const QString &uname, const QString &pass);
     void SendMessageToUser(const QString& token,const QString& dst,const QString& body);
+    void createGroup(const QString& token,const QString& groupName);
     void getMsgDM(const QString &token, const QString &dst); // new entry
     void getMsgGroup(const QString &token, const QString &dst); // new entry
     void getMsgChannel(const QString &token, const QString &dst); // new entry
@@ -35,17 +36,20 @@ signals:
     void SuccessOnGetMsgDM(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgGroup(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgChannel(QJsonDocument jSonContent); // new entry
+    void SuccessOnCreateGroup();
     void getMsgCountSignal(QString msgCount);
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);
     void FailureOnLogout(QString error);
     void FailureOnGetMsg(QString error); // new entry
+    void FailureOnCreateGroup(QString error);
     void SuccessOnSendMsgToUser();
     void FailureOnSendMsgToUser(QString error);
 private slots:
     void RegisterResponder();
     void LoginResponder();
     void LogoutResponder();
+    void createGroupResponder();
     void getMsgResponder(int argMsgID); // new entry
     void SendMessageToUserResponder(); // new entry
     //void getData();

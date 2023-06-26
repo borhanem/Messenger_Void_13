@@ -16,6 +16,7 @@ public:
     void Register();
     void login();
     void logOut();
+    void createGroup(const QString& groupName)const;
     void getMsgDM(const QString &dst); // new entry
     void getMsgGroup(const QString &dst); // new entry
     void getMsgChannel(const QString &dst); // new entry
@@ -41,6 +42,7 @@ private slots:
     void server_handler_on_Register();
     void server_handler_on_Login(QString token);
     void server_handler_on_Logout();
+    void server_handler_on_creategGroup();
     void server_handler_on_failure(QString Error);
 signals:
     void Success();

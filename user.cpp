@@ -15,6 +15,8 @@ User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
+    QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
 }
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
@@ -31,6 +33,8 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
+     QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
 }
 
 void User::Register()
@@ -49,6 +53,11 @@ void User::logOut()
 {
     m_server->Logout(this->m_username,this->m_password);
     // std::remove(m_file_path.toStdString().c_str());
+}
+
+void User::createGroup(const QString &groupName)const
+{
+    m_server->createGroup(this->m_token,groupName);
 }
 
 void User::getMsgDM(const QString &dst)
@@ -220,6 +229,11 @@ void User::server_handler_on_Logout()
 {
     std::remove(m_UserLogFilePath.toStdString().c_str());
     emit SuccessOnLogout();
+}
+
+void User::server_handler_on_creategGroup()
+{
+    emit Success();
 }
 
 void User::server_handler_on_failure(QString error)

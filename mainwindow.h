@@ -7,7 +7,8 @@
 #include <QPoint>
 #include <QRect>
 #include <QPropertyAnimation>
-#include <loginpage.h>
+#include "loginpage.h"
+#include "creategrouppage.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -40,6 +41,8 @@ private slots:
     void on_toolButton_clicked(bool checked);
 
     void logoutUser();
+
+    void on_createGroup_pbn_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -11,6 +11,7 @@ CONFIG += c++20
 
 SOURCES += \
     api.cpp \
+    creategrouppage.cpp \
     loginpage.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     api.h \
+    creategrouppage.h \
     loginpage.h \
     mainwindow.h \
     message.h \
@@ -37,6 +39,7 @@ HEADERS += \
     user.h
 
 FORMS += \
+    creategrouppage.ui \
     loginpage.ui \
     mainwindow.ui \
     registerpage.ui

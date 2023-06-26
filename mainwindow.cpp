@@ -245,3 +245,10 @@ void MainWindow::logoutUser()
     this->close();
 }
 
+
+void MainWindow::on_createGroup_pbn_clicked()
+{
+    CreateGroupPage* cgpPtr = new CreateGroupPage(this->mp_user,this);
+    cgpPtr->open();
+}
+
