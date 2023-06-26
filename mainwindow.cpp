@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton->hide();
     ui->token_lbl->hide();
     ui->token_led->hide();
+    connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
 }
 
 MainWindow::~MainWindow()
@@ -241,5 +242,24 @@ void MainWindow::on_toolButton_clicked(bool checked)
 void MainWindow::on_Exit_pbn_clicked()
 {
     close();
+
+void MainWindow::logoutUser()
+{
+    LoginPage* lpgPtr = new LoginPage();
+    lpgPtr->open();
+    this->close();
+}
+
+
+void MainWindow::on_createGroup_pbn_clicked()
+{
+    mp_cgp = new CreateGroupPage(this->mp_user,this);
+    mp_cgp->open();
+    connect(mp_cgp,&CreateGroupPage::finished,this,&MainWindow::delete_createGroupPage);
+}
+
+void MainWindow::delete_createGroupPage()
+{
+    delete mp_cgp;
 }
 

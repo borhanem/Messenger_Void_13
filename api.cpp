@@ -37,6 +37,16 @@ void API::SendMessageToUser(const QString &token, const QString &dst, const QStr
     connect(reply,&QNetworkReply::finished,this,&API::LogoutResponder);
 }
 
+void API::createGroup(const QString &token, const QString &groupName)
+{
+    /*
+     * /creategroup?token=7a3c48f7c7939b7269d01443a431825f&group_name=G1&group_title=Group1
+     */
+    QString temp = url_s + "/creategroup?token="+token+"&group_name="+groupName;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::createGroupResponder);
+}
+
 void API::getMsgDM(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
@@ -159,6 +169,34 @@ void API::LogoutResponder()
         // qDebug() << "Error:" << reply->errorString();
         data = NULL;
         emit FailureOnLogout(reply->errorString());
+        }
+        reply->deleteLater();
+}
+
+void API::createGroupResponder()
+{
+        if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            emit SuccessOnCreateGroup();
+        }
+        else
+        {
+            emit FailureOnCreateGroup(respond_message);
+        }
+        }
+        else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnCreateGroup(reply->errorString());
         }
         reply->deleteLater();
 }

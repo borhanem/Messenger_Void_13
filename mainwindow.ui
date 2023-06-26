@@ -226,6 +226,7 @@ border-radius: 10%;</string>
     </property>
    </widget>
    <widget class="QToolButton" name="Exit_pbn">
+   <widget class="QPushButton" name="createGroup_pbn">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -240,6 +241,12 @@ border-radius: 10%;</string>
     </property>
     <property name="text">
      <string/>
+      <width>111</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>New Group</string>
     </property>
    </widget>
   </widget>

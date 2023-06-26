@@ -7,6 +7,8 @@
 #include <QPoint>
 #include <QRect>
 #include <QPropertyAnimation>
+#include "loginpage.h"
+#include "creategrouppage.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -39,10 +41,16 @@ private slots:
     void on_toolButton_clicked(bool checked);
 
     void on_Exit_pbn_clicked();
+    void logoutUser();
+
+    void on_createGroup_pbn_clicked();
+
+    void delete_createGroupPage();
 
 private:
     Ui::MainWindow *ui;
     User* mp_user;
+    CreateGroupPage* mp_cgp;
     QPoint dragPosition;
     QPropertyAnimation* user_lbl_hide;
     QPropertyAnimation* user_led_hide;
@@ -59,5 +67,6 @@ private:
     QPropertyAnimation* color_2_hide;
     QPropertyAnimation* color_3_hide;
     QPropertyAnimation* color_4_hide;
+
 };
 #endif // MAINWINDOW_H

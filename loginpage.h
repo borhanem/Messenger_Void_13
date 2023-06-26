@@ -26,10 +26,10 @@ private slots:
     void mouseMoveEvent(QMouseEvent *event);
 
     void on_Register_pbn_clicked();
-
     void on_login_pbn_clicked();
     void server_handler_on_success();
     void server_handler_on_failure(QString error);
+    void registerPage_handler(int i);
     void autoLogin(User* NewUser);
 
 
