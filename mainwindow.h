@@ -44,9 +44,11 @@ private slots:
 
     void on_createGroup_pbn_clicked();
 
+    void delete_createGroupPage();
 private:
     Ui::MainWindow *ui;
     User* mp_user;
+    CreateGroupPage* mp_cgp;
     QPoint dragPosition;
     QPoint m_windowPos;
     QPoint m_mousePressPos;

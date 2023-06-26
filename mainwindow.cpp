@@ -248,7 +248,13 @@ void MainWindow::logoutUser()
 
 void MainWindow::on_createGroup_pbn_clicked()
 {
-    CreateGroupPage* cgpPtr = new CreateGroupPage(this->mp_user,this);
-    cgpPtr->open();
+    mp_cgp = new CreateGroupPage(this->mp_user,this);
+    mp_cgp->open();
+    connect(mp_cgp,&CreateGroupPage::finished,this,&MainWindow::delete_createGroupPage);
+}
+
+void MainWindow::delete_createGroupPage()
+{
+    delete mp_cgp;
 }
 

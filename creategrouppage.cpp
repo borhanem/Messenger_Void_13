@@ -8,6 +8,7 @@ CreateGroupPage::CreateGroupPage(const User* const user,QWidget *parent) :
 {
     ui->setupUi(this);
     ui->result_lbl->clear();
+    ui->creategroup_pbn->setDefault(true);
     connect(mp_user,&User::Success,this,&CreateGroupPage::success_on_create_group);
     connect(mp_user,&User::Failure,this,&CreateGroupPage::failure_on_create_group);
 }
@@ -15,6 +16,7 @@ CreateGroupPage::CreateGroupPage(const User* const user,QWidget *parent) :
 CreateGroupPage::~CreateGroupPage()
 {
     delete ui;
+    qDebug("createGroupPage destructor!");
 }
 
 void CreateGroupPage::on_cancel_pbn_clicked()
@@ -52,10 +54,16 @@ void CreateGroupPage::success_on_create_group()
     }
     ui->result_lbl->setText("Group created Successfully");
     newGroup.close();
+    ui->cancel_pbn->setDisabled(false);
+    ui->creategroup_pbn->setDisabled(false);
+    ui->groupname_led->setDisabled(false);
 }
 
 void CreateGroupPage::failure_on_create_group(const QString &error)
 {
     ui->result_lbl->setText(error);
+    ui->cancel_pbn->setDisabled(false);
+    ui->creategroup_pbn->setDisabled(false);
+    ui->groupname_led->setDisabled(false);
 }
 

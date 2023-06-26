@@ -34,7 +34,7 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
-     QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
 }
 
 void User::Register()
