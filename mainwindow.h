@@ -36,6 +36,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_Exit_pbn_clicked();
+
     void on_Theme_3_pbn_clicked();
 
     void on_toolButton_clicked(bool checked);
