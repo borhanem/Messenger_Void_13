@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
+User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
                m_username ("VoidUser"),
                m_password("123456789"),
                m_token("borhan81alireza82mahta83"),
@@ -126,9 +126,9 @@ int User::loadFromFile()
 int User::saveToFile()
 {
     QDir LogDir;
-    if(!LogDir.exists("UserInfo"))
+    if(!LogDir.exists("vdata/UserInfo"))
     {
-        LogDir.mkpath("UserInfo");
+        LogDir.mkpath("vdata/UserInfo");
     }
     QFile logFile(m_UserLogFilePath);
     if(!logFile.open(QIODevice::WriteOnly))

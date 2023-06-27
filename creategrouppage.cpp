@@ -46,7 +46,12 @@ void CreateGroupPage::on_creategroup_pbn_clicked()
 
 void CreateGroupPage::success_on_create_group()
 {
-    QFile newGroup(ui->groupname_led->text()+".dat");
+    QDir groupDir;
+    if(!groupDir.exists("vdata/MsgData/Groups"))
+    {
+        groupDir.mkpath("vdata/MsgData/Groups");
+    }
+    QFile newGroup("vdata/MsgData/Groups/"+ui->groupname_led->text()+".dat");
     if(!newGroup.open(QIODevice::WriteOnly))
     {
         ui->result_lbl->setText("Cannot write a new group data in file");

@@ -255,7 +255,7 @@ border-radius: 10%;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="newchat_pbn">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -268,7 +268,7 @@ border-radius: 10%;</string>
      <string>New Chat</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="newchannel_pbn">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -278,7 +278,7 @@ border-radius: 10%;</string>
      </rect>
     </property>
     <property name="text">
-     <string>New Chanell</string>
+     <string>New Chanel</string>
     </property>
    </widget>
   </widget>
