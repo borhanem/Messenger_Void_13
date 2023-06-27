@@ -36,7 +36,7 @@ public:
     int msgCountGetterDm();
     int msgCountGetterChannel();
     int msgCountGetterGroup();
-    void allMsgCountsReInit(QString dst);
+    void allMsgCountsReInit(const QString &dst);
 private:
     const QString m_UserLogFilePath;
     QString m_username;
@@ -46,12 +46,15 @@ private:
     int msgCountDm;
     int msgCountChannel;
     int msgCountGroup;
+    QMap<QString,int> directCount;
+    QMap<QString,int> groupCount;
+    QMap<QString,int> channelCount;
     //void writeToFile(char* filePath);
     //void readFromFile(char* filePath);
 private slots:
-    void msgCountChannelSlot(QString argMsgCount);
-    void msgCountDmSlot(QString argMsgCount);
-    void msgCountGroupSlot(QString argMsgCount);
+    void msgCountChannelSlot(const QString& argMsgCount);
+    void msgCountDmSlot(const QString& argMsgCount);
+    void msgCountGroupSlot(const QString& argMsgCount);
     void server_handler_on_Register();
     void server_handler_on_Login(QString token);
     void server_handler_on_Logout();

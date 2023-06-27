@@ -15,6 +15,7 @@ refresherChannel::refresherChannel(QObject *parent,const QString& argDst)
 
 void refresherChannel::refresherMain()
 {
+    currUser->allMsgCountsReInit(dstChannel);
     int countTemp = currUser->msgCountGetterChannel();
     if(msgCount != countTemp){
         emit channelRefreshSignal();

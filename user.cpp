@@ -196,7 +196,7 @@ void User::SetPassWord(const QString &new_pass_word)
     m_password = new_pass_word;
 }
 
-void User::msgCountChannelSlot(QString argMsgCount)
+void User::msgCountChannelSlot(const QString& argMsgCount)
 {
     QRegularExpression re("-\\d+-");
 
@@ -219,7 +219,7 @@ void User::msgCountChannelSlot(QString argMsgCount)
     }
 }
 
-void User::msgCountDmSlot(QString argMsgCount)
+void User::msgCountDmSlot(const QString& argMsgCount)
 {
     QRegularExpression re("-\\d+-");
 
@@ -242,7 +242,7 @@ void User::msgCountDmSlot(QString argMsgCount)
     }
 }
 
-void User::msgCountGroupSlot(QString argMsgCount)
+void User::msgCountGroupSlot(const QString& argMsgCount)
 {
     QRegularExpression re("-\\d+-");
 
@@ -280,7 +280,7 @@ int User::msgCountGetterGroup()
     return msgCountGroup;
 }
 
-void User::allMsgCountsReInit(QString dst)
+void User::allMsgCountsReInit(const QString& dst)
 {
     m_server->getMsgChannel(m_token,dst);
     m_server->getMsgDM(m_token,dst);

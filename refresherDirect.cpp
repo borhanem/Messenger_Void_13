@@ -14,6 +14,7 @@ refresherDirect::refresherDirect(QObject *parent,const QString& argDst)
 
 void refresherDirect::refresherMain()
 {
+    currUser->allMsgCountsReInit(dstDirect);
     int countTemp = currUser->msgCountGetterDm();
     if(msgCount != countTemp){
         emit directRefreshSignal();

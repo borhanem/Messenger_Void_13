@@ -14,6 +14,7 @@ refresherGroup::refresherGroup(QObject *parent,const QString& argDst)
 
 void refresherGroup::refresherMain()
 {
+    currUser->allMsgCountsReInit(dstGroup);
     int countTemp = currUser->msgCountGetterGroup();
     if(msgCount != countTemp){
         emit groupRefreshSignal();
