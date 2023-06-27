@@ -7,16 +7,24 @@
 #include <QDataStream>
 #include <QFile>
 #include <QDir>
+#include "message.h"
 class User : public QObject
 {
     Q_OBJECT
 public:
+    enum ChatType
+    {
+        Private,
+        Group,
+        Channel
+    };
     User();
     explicit User(QString userName,QString passWord,QString token = "",QString userPath="userLog.dat",QObject* parent = nullptr);
     void Register();
     void login();
     void logOut();
     void createGroup(const QString& groupName)const;
+    void sendMessage(const Message& msg,const ChatType& type);
     void getMsgDM(const QString &dst); // new entry
     void getMsgGroup(const QString &dst); // new entry
     void getMsgChannel(const QString &dst); // new entry

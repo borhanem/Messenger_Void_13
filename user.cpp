@@ -12,6 +12,8 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
     QObject::connect(m_server,&API::SuccessOnLogout,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_Logout);
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
@@ -58,6 +60,25 @@ void User::logOut()
 void User::createGroup(const QString &groupName)const
 {
     m_server->createGroup(this->m_token,groupName);
+}
+
+void User::sendMessage(const Message &msg, const ChatType &type)
+{
+    switch(type)
+    {
+    case Private:
+        m_server->SendMessageToUser(this->m_token,msg.receiver(),msg.body());
+        break;
+    case Group:
+        m_server->sendMessageToGroup(this->m_token,msg.receiver(),msg.body());
+        break;
+    case Channel:
+
+        break;
+
+    default:
+        qDebug("Error - from User::sendMessage : No match for type\n");
+    }
 }
 
 void User::getMsgDM(const QString &dst)
