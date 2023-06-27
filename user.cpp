@@ -196,7 +196,7 @@ void User::SetPassWord(const QString &new_pass_word)
     m_password = new_pass_word;
 }
 
-void User::msgCountChannelSlot(const QString& argMsgCount)
+void User::msgCountChannelSlot(const QString& argMsgCount,QJsonObject jObj)
 {
     QRegularExpression re("-\\d+-");
 
@@ -212,17 +212,33 @@ void User::msgCountChannelSlot(const QString& argMsgCount)
         // Convert the number string to an integer
         int num = numStr.toInt();
 
-        msgCountChannel = num;
+
+        // ignore this part idk whats happening
+        // trying to make the map by bruteforcing the user
+        for (int i = 0; i < num; ++i){
+            QString blockIter = "block " + QString::number(num);
+            QJsonValue blockVal = jObj.value(blockIter);
+            if(blockVal.isObject()){
+                QJsonObject blockObj = blockVal.toObject();
+                QString dst = blockObj.value("dst").toString();
+                if(channelCount.count(dst)){
+                    channelCount[dst] = num;
+                    break;
+                }
+            }
+        }
+        // end of ignore
     }else{
         qDebug() << "User::msgCountDmSlot error";
 
     }
+
 }
 
-void User::msgCountDmSlot(const QString& argMsgCount)
+void User::msgCountDmSlot(const QString& argMsgCount,QJsonObject jObj)
 {
-    QRegularExpression re("-\\d+-");
 
+    QRegularExpression re("-\\d+-");
     // Find the first match in the string
     QRegularExpressionMatch match = re.match(argMsgCount);
     if (match.hasMatch()) {
@@ -235,14 +251,29 @@ void User::msgCountDmSlot(const QString& argMsgCount)
         // Convert the number string to an integer
         int num = numStr.toInt();
 
-        msgCountDm = num;
+
+        // ignore this part idk whats happening
+        // trying to make the map by bruteforcing the user
+        for (int i = 0; i < num; ++i){
+            QString blockIter = "block " + QString::number(num);
+            QJsonValue blockVal = jObj.value(blockIter);
+            if(blockVal.isObject()){
+                QJsonObject blockObj = blockVal.toObject();
+                QString dst = blockObj.value("dst").toString();
+                if(directCount.count(dst)){
+                    directCount[dst] = num;
+                    break;
+                }
+            }
+        }
+        // end of ignore
     }else{
         qDebug() << "User::msgCountDmslot error";
 
     }
 }
 
-void User::msgCountGroupSlot(const QString& argMsgCount)
+void User::msgCountGroupSlot(const QString& argMsgCount,QJsonObject jObj)
 {
     QRegularExpression re("-\\d+-");
 
@@ -258,34 +289,67 @@ void User::msgCountGroupSlot(const QString& argMsgCount)
         // Convert the number string to an integer
         int num = numStr.toInt();
 
-        msgCountGroup = num;
+
+        // ignore this part idk whats happening
+        // trying to make the map by bruteforcing the user
+        for (int i = 0; i < num; ++i){
+            QString blockIter = "block " + QString::number(num);
+            QJsonValue blockVal = jObj.value(blockIter);
+            if(blockVal.isObject()){
+                QJsonObject blockObj = blockVal.toObject();
+                QString dst = blockObj.value("dst").toString();
+                if(groupCount.count(dst)){
+                    groupCount[dst] = num;
+                    break;
+                }
+            }
+        }
+        // end of ignore
     }else{
         qDebug() << "User::msgCountGroupSlot error";
 
     }
 }
 
-int User::msgCountGetterDm()
+int User::msgCountGetterDm(const QString& dst)
 {
-    return msgCountDm;
+    return directCount[dst];
 }
 
-int User::msgCountGetterChannel()
+int User::msgCountGetterChannel(const QString& dst)
 {
-    return msgCountChannel;
+    return channelCount[dst];
 }
 
-int User::msgCountGetterGroup()
+int User::msgCountGetterGroup(const QString& dst)
 {
-    return msgCountGroup;
+    return groupCount[dst];
 }
 
-void User::allMsgCountsReInit(const QString& dst)
+void User::msgCountDmReinit(const QString& dst)
 {
-    m_server->getMsgChannel(m_token,dst);
+    if(!directCount.count(dst)){
+        directCount[dst] = 1;
+    }
     m_server->getMsgDM(m_token,dst);
+}
+
+void User::msgCountGroupReinit(const QString &dst)
+{
+    if(!groupCount.count(dst)){
+        groupCount[dst] = 1;
+    }
     m_server->getMsgGroup(m_token,dst);
 }
+
+void User::msgCountChannelReinit(const QString &dst)
+{
+    if(!channelCount.count(dst)){
+        channelCount[dst] = 1;
+    }
+    m_server->getMsgChannel(m_token,dst);
+}
+
 
 void User::server_handler_on_Register()
 {

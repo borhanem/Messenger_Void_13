@@ -33,10 +33,12 @@ public:
     void SetPassWord(const QString& new_pass_word);
     friend QDataStream& operator<<(QDataStream &stream,const User &u);
     friend QDataStream& operator>>(QDataStream &stream,User &u);
-    int msgCountGetterDm();
-    int msgCountGetterChannel();
-    int msgCountGetterGroup();
-    void allMsgCountsReInit(const QString &dst);
+    int msgCountGetterDm(const QString &dst);
+    int msgCountGetterChannel(const QString &dst);
+    int msgCountGetterGroup(const QString &dst);
+    void msgCountDmReinit(const QString &dst);
+    void msgCountGroupReinit(const QString &dst);
+    void msgCountChannelReinit(const QString &dst);
 private:
     const QString m_UserLogFilePath;
     QString m_username;
@@ -52,9 +54,9 @@ private:
     //void writeToFile(char* filePath);
     //void readFromFile(char* filePath);
 private slots:
-    void msgCountChannelSlot(const QString& argMsgCount);
-    void msgCountDmSlot(const QString& argMsgCount);
-    void msgCountGroupSlot(const QString& argMsgCount);
+    void msgCountChannelSlot(const QString& argMsgCount,QJsonObject jObj);
+    void msgCountDmSlot(const QString& argMsgCount,QJsonObject jObj);
+    void msgCountGroupSlot(const QString& argMsgCount,QJsonObject jObj);
     void server_handler_on_Register();
     void server_handler_on_Login(QString token);
     void server_handler_on_Logout();

@@ -31,9 +31,9 @@ signals:
     void SuccessOnGetMsgDM(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgGroup(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgChannel(QJsonDocument jSonContent); // new entry
-    void getMsgCountSignalDM(QString msgCount);
-    void getMsgCountSignalGroup(QString msgCount);
-    void getMsgCountSignalChannel(QString msgCount);
+    void getMsgCountSignalDM(QString msgCount,QJsonObject jSonObject);
+    void getMsgCountSignalGroup(QString msgCount,QJsonObject jSonObject);
+    void getMsgCountSignalChannel(QString msgCount,QJsonObject jSonObject);
     void SuccessOnCreateGroup();
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);

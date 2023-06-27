@@ -8,15 +8,15 @@ refresherChannel::refresherChannel(QObject *parent,const QString& argDst)
         // file no exist
         qDebug() << "file problem abstract refresher constructor";
     }
-    currUser->allMsgCountsReInit(dstChannel);
+    currUser->msgCountChannelReinit(dstChannel);
     msgCountInit();
 }
 
 
 void refresherChannel::refresherMain()
 {
-    currUser->allMsgCountsReInit(dstChannel);
-    int countTemp = currUser->msgCountGetterChannel();
+    currUser->msgCountChannelReinit(dstChannel);
+    int countTemp = currUser->msgCountGetterChannel(dstChannel);
     if(msgCount != countTemp){
         emit channelRefreshSignal();
         msgCount = countTemp;
@@ -25,6 +25,6 @@ void refresherChannel::refresherMain()
 
 void refresherChannel::msgCountInit()
 {
-    msgCount = currUser->msgCountGetterDm();
+    msgCount = currUser->msgCountGetterDm(dstChannel);
 }
 

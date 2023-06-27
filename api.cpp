@@ -81,7 +81,7 @@ void API::getMsgDmResponder()
         QString respond_message =jObj.value("message").toString();
         if(respond_code == "200"){
             emit SuccessOnGetMsgDM(jDoc);
-            emit getMsgCountSignalDM(respond_message);
+            emit getMsgCountSignalDM(respond_message,jObj);
         } else {
             emit FailureOnGetMsg(respond_message);
         }
@@ -102,7 +102,7 @@ void API::getMsgGroupResponder()
         QString respond_message =jObj.value("message").toString();
         if(respond_code == "200"){
             emit SuccessOnGetMsgGroup(jDoc);
-            emit getMsgCountSignalGroup(respond_message);
+            emit getMsgCountSignalGroup(respond_message,jObj);
         } else {
             emit FailureOnGetMsg(respond_message);
         }
@@ -123,7 +123,7 @@ void API::getMsgChannelResponder()
         QString respond_message =jObj.value("message").toString();
         if(respond_code == "200"){
             emit SuccessOnGetMsgChannel(jDoc);
-            emit getMsgCountSignalChannel(respond_message);
+            emit getMsgCountSignalChannel(respond_message,jObj);
         } else {
             emit FailureOnGetMsg(respond_message);
         }

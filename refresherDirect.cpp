@@ -8,14 +8,14 @@ refresherDirect::refresherDirect(QObject *parent,const QString& argDst)
         // file no exist
         qDebug() << "file problem abstract refresher constructor";
     }
-    currUser->allMsgCountsReInit(dstDirect);
+    currUser->msgCountGroupReinit(dstDirect);
     msgCountInit();
 }
 
 void refresherDirect::refresherMain()
 {
-    currUser->allMsgCountsReInit(dstDirect);
-    int countTemp = currUser->msgCountGetterDm();
+    currUser->msgCountGroupReinit(dstDirect);
+    int countTemp = currUser->msgCountGetterDm(dstDirect);
     if(msgCount != countTemp){
         emit directRefreshSignal();
         msgCount = countTemp;
@@ -24,7 +24,7 @@ void refresherDirect::refresherMain()
 
 void refresherDirect::msgCountInit()
 {
-    msgCount = currUser->msgCountGetterDm();
+    msgCount = currUser->msgCountGetterDm(dstDirect);
 }
 
 

@@ -8,14 +8,14 @@ refresherGroup::refresherGroup(QObject *parent,const QString& argDst)
         // file no exist
         qDebug() << "file problem abstract refresher constructor";
     }
-    currUser->allMsgCountsReInit(dstGroup);
+    currUser->msgCountGroupReinit(dstGroup);
     msgCountInit();
 }
 
 void refresherGroup::refresherMain()
 {
-    currUser->allMsgCountsReInit(dstGroup);
-    int countTemp = currUser->msgCountGetterGroup();
+    currUser->msgCountGroupReinit(dstGroup);
+    int countTemp = currUser->msgCountGetterGroup(dstGroup);
     if(msgCount != countTemp){
         emit groupRefreshSignal();
         msgCount = countTemp;
@@ -24,6 +24,6 @@ void refresherGroup::refresherMain()
 
 void refresherGroup::msgCountInit()
 {
-    msgCount = currUser->msgCountGetterDm();
+    msgCount = currUser->msgCountGetterDm(dstGroup);
 }
 
