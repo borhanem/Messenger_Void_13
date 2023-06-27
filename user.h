@@ -48,6 +48,7 @@ private:
     //void readFromFile(char* filePath);
 private slots:
     void server_handler_on_Register();
+    void server_handler_on_SendMessage();
     void server_handler_on_Login(QString token);
     void server_handler_on_Logout();
     void server_handler_on_creategGroup();
@@ -55,6 +56,7 @@ private slots:
 signals:
     void Success();
     void SuccessOnLogout();
+    void SuccessOnSendMessage();
     void Failure(QString Error);
     void FailureOnLogout(QString Error);
 };

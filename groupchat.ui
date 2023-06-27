@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GroupChat</class>
+ <widget class="QDialog" name="GroupChat">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>579</width>
+    <height>525</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QListWidget" name="message_lstwdgt">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>30</y>
+     <width>491</width>
+     <height>381</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="messagebar_led">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>420</y>
+     <width>491</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Write a message...</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="send_pbn">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>460</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Send</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sendResult_lbl">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>470</y>
+     <width>401</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Send message Result...</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

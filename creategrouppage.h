@@ -22,6 +22,8 @@ private slots:
 
     void success_on_create_group();
     void failure_on_create_group(const QString&);
+signals:
+    void NewGroup(QString groupName);
 private:
     Ui::CreateGroupPage *ui;
     const User* const mp_user;

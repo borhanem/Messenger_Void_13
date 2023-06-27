@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->token_lbl->hide();
     ui->token_led->hide();
     connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
+
 }
 
 MainWindow::~MainWindow()
@@ -251,6 +252,7 @@ void MainWindow::on_createGroup_pbn_clicked()
     mp_cgp = new CreateGroupPage(this->mp_user,this);
     mp_cgp->open();
     connect(mp_cgp,&CreateGroupPage::finished,this,&MainWindow::delete_createGroupPage);
+    connect(mp_cgp,&CreateGroupPage::NewGroup,this,&MainWindow::handler_on_NewGroup);
 }
 
 void MainWindow::delete_createGroupPage()
@@ -258,9 +260,18 @@ void MainWindow::delete_createGroupPage()
     delete mp_cgp;
 }
 
+void MainWindow::handler_on_NewGroup(QString newGroupName)
+{
+    qDebug("handler on NewGroup called in mainWindow\n");
+    AbstractChat* newGroup = new GroupChat(newGroupName,mp_user,this);
+    this->mp_ChatList.push_back(newGroup);
+    dynamic_cast<GroupChat*>(newGroup)->open();
+
+}
+
 
 void MainWindow::on_Exit_pbn_clicked()
 {
-    close();
+    this->close();
 }
 

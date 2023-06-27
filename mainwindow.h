@@ -1,12 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QMainWindow>
+#include <QList>
 #include "user.h"
 #include <QDateTime>
 #include <QMouseEvent>
 #include <QPoint>
 #include <QRect>
 #include <QPropertyAnimation>
+#include <abstractchat.h>
+#include "groupchat.h"
 #include "loginpage.h"
 #include "creategrouppage.h"
 QT_BEGIN_NAMESPACE
@@ -47,10 +50,16 @@ private slots:
     void on_createGroup_pbn_clicked();
 
     void delete_createGroupPage();
+
+    void handler_on_NewGroup(QString newGroupName);
 private:
     Ui::MainWindow *ui;
     User* mp_user;
+    QList<AbstractChat*> mp_ChatList;
     CreateGroupPage* mp_cgp;
+
+
+
     QPoint dragPosition;
     QPoint m_windowPos;
     QPoint m_mousePressPos;

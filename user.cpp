@@ -13,7 +13,8 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
     QObject::connect(m_server,&API::SuccessOnLogout,this,&User::server_handler_on_Logout);
     QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_Logout);
-    QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
@@ -29,6 +30,8 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
       m_token(token),
       m_server(new API("http://api.barafardayebehtar.ml:8080"))
 {
+    QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
     QObject::connect(m_server,&API::SuccessOnLogout,this,&User::server_handler_on_Logout);
@@ -231,6 +234,12 @@ void User::server_handler_on_Register()
     else*{ }*/
         emit Success();
 
+}
+
+void User::server_handler_on_SendMessage()
+{
+        qDebug("server_handler_on_SendMessage from UserClass\n");
+        emit SuccessOnSendMessage();
 }
 
 void User::server_handler_on_Login(QString token)

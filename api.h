@@ -46,7 +46,7 @@ signals:
     void FailureOnCreateGroup(QString error);
     void SuccessOnSendMsgToUser();
     void SuccessOnSendMsgToGroup();
-    void FailureSendMsgToGroup(QString error);
+    void FailureOnSendMsgToGroup(QString error);
     void FailureOnSendMsgToUser(QString error);
 private slots:
     void RegisterResponder();

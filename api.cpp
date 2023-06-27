@@ -47,7 +47,7 @@ void API::sendMessageToGroup(const QString &token, const QString& dst,const QStr
     */
     QString temp = url_s +"/sendmessagegroup?token="+token+"&dst="+dst+"&body="+body;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    connect(reply,&QNetworkReply::finished,this,&API::SendMessageToUserResponder);
+    connect(reply,&QNetworkReply::finished,this,&API::sendMessageToGroupResponder);
 }
 
 
@@ -273,6 +273,7 @@ void API::SendMessageToUserResponder()
 
 void API::sendMessageToGroupResponder()
 {
+        qDebug("sendMessageToGroupResponder from API class\n");
         if (reply->error() == QNetworkReply::NoError) {
         //read the response
         *data = reply->readAll();
@@ -287,14 +288,14 @@ void API::sendMessageToGroupResponder()
         }
         else
         {
-            emit FailureSendMsgToGroup(respond_message);
+            emit FailureOnSendMsgToGroup(respond_message);
         }
         }
         else {
         // If there was an error, display the error message
         // qDebug() << "Error:" << reply->errorString();
         data = NULL;
-        emit FailureSendMsgToGroup(reply->errorString());
+        emit FailureOnSendMsgToGroup(reply->errorString());
         }
         reply->deleteLater();
 }
