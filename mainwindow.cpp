@@ -3,6 +3,7 @@
 #include "theme.h"
 #include <windows.h>
 #include <QListWidgetItem>
+#include "channelchat.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
@@ -263,7 +264,7 @@ void MainWindow::on_createGroup_pbn_clicked()
 void MainWindow::handler_on_NewGroup(QString newGroupName)
 {
     qDebug("handler on NewGroup called in mainWindow\n");
-    AbstractChat* newGroup = new GroupChat(newGroupName,AbstractChat::Group,mp_user,this);
+    AbstractChat* newGroup = new GroupChat(newGroupName,mp_user,this);
     this->mp_ChatList.push_back(newGroup);
     newGroup->saveToFile();
     QListWidgetItem* newItem = new QListWidgetItem(newGroup->chatName());
@@ -271,6 +272,17 @@ void MainWindow::handler_on_NewGroup(QString newGroupName)
     ui->chats_listWidget->addItem(newItem);
     dynamic_cast<GroupChat*>(newGroup)->open();
 
+}
+
+void MainWindow::handler_on_NewChannel(QString newChannelName)
+{
+    AbstractChat* newChannel = new ChannelChat(newChannelName,mp_user,this);
+    this->mp_ChatList.push_back(newChannel);
+    newChannel->saveToFile();
+    QListWidgetItem* newItem = new QListWidgetItem(newChannel->chatName());
+    newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(newChannel));
+    ui->chats_listWidget->addItem(newItem);
+    dynamic_cast<ChannelChat*>(newChannel)->open();
 }
 
 
@@ -293,6 +305,7 @@ void MainWindow::on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item)
         break;
     case AbstractChat::Channel:
         // cast to Channel
+        dynamic_cast<ChannelChat*>(selected_chat)->open();
         break;
     default:
         qDebug("Error From MainWindows::on_chats_listWidget_itemDoubleClicked: Cannot recognize the type");
@@ -305,6 +318,7 @@ void MainWindow::on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item)
 void MainWindow::on_newchannel_pbn_clicked()
 {
     CreateChannelPage* chp = new CreateChannelPage(mp_user,this);
+    connect(chp,&CreateChannelPage::channelCreated,this,&MainWindow::handler_on_NewChannel);
     chp->exec();
     delete chp;
 }

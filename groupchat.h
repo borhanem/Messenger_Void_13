@@ -12,7 +12,7 @@ class GroupChat : public QDialog , public AbstractChat
     Q_OBJECT
 
 public:
-    explicit GroupChat(QString chatName,const AbstractChat::ChatType& ct,User* user=nullptr,QWidget *parent = nullptr);
+    explicit GroupChat(QString chatName,User* user=nullptr,QWidget *parent = nullptr);
     ~GroupChat();
     int saveToFile() override;
     int loadFromFile() override;

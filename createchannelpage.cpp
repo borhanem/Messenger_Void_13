@@ -50,7 +50,7 @@ void CreateChannelPage::success_on_create_channel()
     ui->createchannel_pbn->setDisabled(false);
     ui->channelname_led->setDisabled(false);
     emit channelCreated(newChannelName);
-   // this->close();
+    this->close();
 }
 
 void CreateChannelPage::failure_on_create_channel(const QString& error)

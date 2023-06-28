@@ -1,59 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GroupChat</class>
- <widget class="QDialog" name="GroupChat">
+ <class>ChannelChat</class>
+ <widget class="QDialog" name="ChannelChat">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>579</width>
-    <height>525</height>
+    <width>628</width>
+    <height>568</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QListWidget" name="message_lstwdgt">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>50</y>
-     <width>491</width>
-     <height>381</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="messagebar_led">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>440</y>
-     <width>491</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>Write a message...</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="send_pbn">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>480</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Send</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="sendResult_lbl">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>480</y>
+     <x>70</x>
+     <y>500</y>
      <width>401</width>
      <height>20</height>
     </rect>
@@ -62,11 +26,11 @@
     <string>Send message Result...</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="groupname_led">
+  <widget class="QLineEdit" name="channelname_led">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>20</y>
+     <x>200</x>
+     <y>30</y>
      <width>221</width>
      <height>28</height>
     </rect>
@@ -79,6 +43,42 @@
    </property>
    <property name="placeholderText">
     <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="send_pbn">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>500</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Send</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="message_lstwdgt">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>70</y>
+     <width>491</width>
+     <height>381</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="messagebar_led">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>460</y>
+     <width>491</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Write a message...</string>
    </property>
   </widget>
  </widget>

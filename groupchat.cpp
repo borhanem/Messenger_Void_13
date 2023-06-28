@@ -1,9 +1,9 @@
 #include "groupchat.h"
 #include "ui_groupchat.h"
 
-GroupChat::GroupChat(QString chatName,const AbstractChat::ChatType& ct, User *user,QWidget *parent) :
+GroupChat::GroupChat(QString chatName, User *user,QWidget *parent) :
     QDialog(parent),
-    AbstractChat(chatName,ct,user),
+    AbstractChat(chatName,AbstractChat::Group,user),
     ui(new Ui::GroupChat)
 {
     ui->setupUi(this);
@@ -76,6 +76,11 @@ void GroupChat::on_send_pbn_clicked()
 {
     qDebug("on_send_pbn_clicked from GroupChat class\n");
     QString body = ui->messagebar_led->text();
+    if(body.isEmpty())
+    {
+        ui->sendResult_lbl->setText("No message to send");
+        return;
+    }
     QString sender = mp_user->getUserName();
     Message msg(body,sender,m_chat_name);
     mp_user->sendMessage(msg,User::Group);

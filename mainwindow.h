@@ -54,6 +54,7 @@ private slots:
 //    void delete_createGroupPage();
 
     void handler_on_NewGroup(QString newGroupName);
+    void handler_on_NewChannel(QString newChannelName);
     void on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
     void on_newchannel_pbn_clicked();
