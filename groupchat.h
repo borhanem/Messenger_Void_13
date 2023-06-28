@@ -18,7 +18,6 @@ public:
     int loadFromFile() override;
 private slots:
     void on_send_pbn_clicked();
-
     void success_on_send_message();
     void failure_on_send_message(QString Error);
 

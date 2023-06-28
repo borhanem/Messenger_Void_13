@@ -126,7 +126,7 @@
      <string>LogOut</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QListWidget" name="chats_listWidget">
     <property name="geometry">
      <rect>
       <x>70</x>

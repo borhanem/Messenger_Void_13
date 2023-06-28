@@ -11,3 +11,8 @@ AbstractChat::~AbstractChat()
 {
 
 }
+
+QString AbstractChat::chatName()
+{
+    return m_chat_name;
+}

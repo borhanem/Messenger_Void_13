@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "theme.h"
 #include <windows.h>
-
+#include <QListWidgetItem>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -265,6 +265,10 @@ void MainWindow::handler_on_NewGroup(QString newGroupName)
     qDebug("handler on NewGroup called in mainWindow\n");
     AbstractChat* newGroup = new GroupChat(newGroupName,mp_user,this);
     this->mp_ChatList.push_back(newGroup);
+    newGroup->saveToFile();
+    QListWidgetItem* newItem = new QListWidgetItem(newGroup->chatName());
+    newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(newGroup));
+    ui->chats_listWidget->addItem(newItem);
     dynamic_cast<GroupChat*>(newGroup)->open();
 
 }
@@ -273,5 +277,12 @@ void MainWindow::handler_on_NewGroup(QString newGroupName)
 void MainWindow::on_Exit_pbn_clicked()
 {
     this->close();
+}
+
+
+void MainWindow::on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    AbstractChat* selected_chat = qvariant_cast<AbstractChat*>(item->data(Qt::UserRole));
+    dynamic_cast<GroupChat*>(selected_chat)->open();
 }
 

@@ -11,6 +11,7 @@ public:
     virtual ~AbstractChat();
     virtual int saveToFile() = 0;
     virtual int loadFromFile() = 0;
+    virtual QString chatName();
 protected:
     QString m_chat_name;
     User* mp_user;

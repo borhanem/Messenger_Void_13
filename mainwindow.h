@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include <QList>
+#include "qlistwidget.h"
 #include "user.h"
 #include <QDateTime>
 #include <QMouseEvent>
@@ -52,6 +53,8 @@ private slots:
     void delete_createGroupPage();
 
     void handler_on_NewGroup(QString newGroupName);
+    void on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     User* mp_user;
