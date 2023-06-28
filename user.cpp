@@ -15,6 +15,8 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_Logout);
     QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
     QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
+    QObject::connect(m_server,&API::SuccessOnSendMsgToChannel,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToChannel,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
@@ -95,7 +97,7 @@ void User::sendMessage(const Message &msg, const ChatType &type)
         m_server->sendMessageToGroup(this->m_token,msg.receiver(),msg.body());
         break;
     case Channel:
-
+        m_server->sendMessageToChannel(this->m_token,msg.receiver(),msg.body());
         break;
 
     default:

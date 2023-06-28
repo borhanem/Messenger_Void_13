@@ -50,6 +50,16 @@ void API::sendMessageToGroup(const QString &token, const QString& dst,const QStr
     connect(reply,&QNetworkReply::finished,this,&API::sendMessageToGroupResponder);
 }
 
+void API::sendMessageToChannel(const QString &token, const QString &dst, const QString &body)
+{
+    /*
+         /sendmessagechannel?token=7a3c48f7c7939b7269d01443a431825f&dst=mychannel&body=hello%20all
+    */
+    QString temp = url_s +"/sendmessagechannel?token="+token+"&dst="+dst+"&body="+body;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::sendMessageToChannelResponder);
+}
+
 
 void API::createGroup(const QString &token, const QString &groupName)
 {
@@ -327,6 +337,35 @@ void API::sendMessageToGroupResponder()
         else
         {
             emit FailureOnSendMsgToGroup(respond_message);
+        }
+        }
+        else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnSendMsgToGroup(reply->errorString());
+        }
+        reply->deleteLater();
+}
+
+void API::sendMessageToChannelResponder()
+{
+        qDebug("sendMessageToChannelpResponder from API class\n");
+        if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            emit SuccessOnSendMsgToChannel();
+        }
+        else
+        {
+            emit FailureOnSendMsgToChannel(respond_message);
         }
         }
         else {

@@ -22,6 +22,7 @@ public:
     void Logout(const QString &uname, const QString &pass);
     void SendMessageToUser(const QString& token,const QString& dst,const QString& body);
     void sendMessageToGroup(const QString& token,const QString& dst,const QString& body);
+    void sendMessageToChannel(const QString& token,const QString& dst,const QString& body);
     void createGroup(const QString& token,const QString& groupName);
     void createChannel(const QString& token,const QString& channelName);
     void getMsgDM(const QString &token, const QString &dst); // new entry
@@ -49,6 +50,8 @@ signals:
     void FailureOnCreateChannel(QString error);
     void SuccessOnSendMsgToUser();
     void SuccessOnSendMsgToGroup();
+    void SuccessOnSendMsgToChannel();
+    void FailureOnSendMsgToChannel(QString error);
     void FailureOnSendMsgToGroup(QString error);
     void FailureOnSendMsgToUser(QString error);
 private slots:
@@ -60,6 +63,7 @@ private slots:
     void getMsgResponder(int argMsgID); // new entry
     void SendMessageToUserResponder(); // new entry
     void sendMessageToGroupResponder();
+    void sendMessageToChannelResponder();
     //void getData();
 private:
     QString url_s;
