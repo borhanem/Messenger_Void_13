@@ -3,7 +3,6 @@
 #include "theme.h"
 #include <windows.h>
 #include <QListWidgetItem>
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
@@ -250,15 +249,16 @@ void MainWindow::logoutUser()
 void MainWindow::on_createGroup_pbn_clicked()
 {
     mp_cgp = new CreateGroupPage(this->mp_user,this);
-    mp_cgp->open();
-    connect(mp_cgp,&CreateGroupPage::finished,this,&MainWindow::delete_createGroupPage);
+    //connect(mp_cgp,&CreateGroupPage::finished,this,&MainWindow::delete_createGroupPage);
     connect(mp_cgp,&CreateGroupPage::NewGroup,this,&MainWindow::handler_on_NewGroup);
-}
-
-void MainWindow::delete_createGroupPage()
-{
+    mp_cgp->exec();
     delete mp_cgp;
 }
+
+//void MainWindow::delete_createGroupPage()
+//{
+//    //delete mp_cgp;
+//}
 
 void MainWindow::handler_on_NewGroup(QString newGroupName)
 {
@@ -299,5 +299,13 @@ void MainWindow::on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item)
         break;
     }
 
+}
+
+
+void MainWindow::on_newchannel_pbn_clicked()
+{
+    CreateChannelPage* chp = new CreateChannelPage(mp_user,this);
+    chp->exec();
+    delete chp;
 }
 

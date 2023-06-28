@@ -61,6 +61,16 @@ void API::createGroup(const QString &token, const QString &groupName)
     connect(reply,&QNetworkReply::finished,this,&API::createGroupResponder);
 }
 
+void API::createChannel(const QString &token, const QString &channelName)
+{
+    /*
+     * /createchannel?token=7a3c48f7c7939b7269d01443a431825f&channel_name=mychannel&channel_title=Channel1
+     */
+    QString temp = url_s + "/createchannel?token="+token+"&channel_name="+channelName;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::createChannelResponder);
+}
+
 void API::getMsgDM(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
@@ -211,6 +221,34 @@ void API::createGroupResponder()
         // qDebug() << "Error:" << reply->errorString();
         data = NULL;
         emit FailureOnCreateGroup(reply->errorString());
+        }
+        reply->deleteLater();
+}
+
+void API::createChannelResponder()
+{
+        if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            emit SuccessOnCreateChannel();
+        }
+        else
+        {
+            emit FailureOnCreateChannel(respond_message);
+        }
+        }
+        else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnCreateChannel(reply->errorString());
         }
         reply->deleteLater();
 }

@@ -13,6 +13,7 @@
 #include "groupchat.h"
 #include "loginpage.h"
 #include "creategrouppage.h"
+#include "createchannelpage.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -50,10 +51,12 @@ private slots:
 
     void on_createGroup_pbn_clicked();
 
-    void delete_createGroupPage();
+//    void delete_createGroupPage();
 
     void handler_on_NewGroup(QString newGroupName);
     void on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_newchannel_pbn_clicked();
 
 private:
     Ui::MainWindow *ui;

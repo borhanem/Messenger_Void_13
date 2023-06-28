@@ -40,7 +40,7 @@ void CreateGroupPage::on_creategroup_pbn_clicked()
         return;
     }
     ui->result_lbl->setText("Sending request to server...");
-    mp_user->createGroup(input_group_name);
+    mp_user->createNewChat(input_group_name,User::Group);
 
 }
 

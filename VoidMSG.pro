@@ -12,6 +12,7 @@ CONFIG += c++20
 SOURCES += \
     abstractchat.cpp \
     api.cpp \
+    createchannelpage.cpp \
     creategrouppage.cpp \
     groupchat.cpp \
     loginpage.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 HEADERS += \
     abstractchat.h \
     api.h \
+    createchannelpage.h \
     creategrouppage.h \
     groupchat.h \
     loginpage.h \
@@ -43,6 +45,7 @@ HEADERS += \
     user.h
 
 FORMS += \
+    createchannelpage.ui \
     creategrouppage.ui \
     groupchat.ui \
     loginpage.ui \

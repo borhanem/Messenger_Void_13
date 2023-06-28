@@ -18,8 +18,10 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
-    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
+    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_createNewChat);
     QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnCreateChannel,this,&User::server_handler_on_createNewChat);
+    QObject::connect(m_server,&API::FailureOnCreateChannel,this,&User::server_handler_on_failure);
 }
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
@@ -38,8 +40,10 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
-    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
+    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_createNewChat);
     QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnCreateChannel,this,&User::server_handler_on_createNewChat);
+    QObject::connect(m_server,&API::FailureOnCreateChannel,this,&User::server_handler_on_failure);
 }
 
 void User::Register()
@@ -60,11 +64,26 @@ void User::logOut()
     // std::remove(m_file_path.toStdString().c_str());
 }
 
-void User::createGroup(const QString &groupName)const
+void User::createNewChat(const QString &chatName, const ChatType &type) const
 {
-    m_server->createGroup(this->m_token,groupName);
-}
+    switch(type)
+    {
+    case Private:
+        break;
+    case Group:
+         m_server->createGroup(this->m_token,chatName);
+        break;
+    case Channel:
+        m_server->createChannel(this->m_token,chatName);
 
+        break;
+
+    default:
+        qDebug("Error - from User::sendMessage : No match for type\n");
+    }
+
+
+}
 void User::sendMessage(const Message &msg, const ChatType &type)
 {
     switch(type)
@@ -261,7 +280,7 @@ void User::server_handler_on_Logout()
     emit SuccessOnLogout();
 }
 
-void User::server_handler_on_creategGroup()
+void User::server_handler_on_createNewChat()
 {
     emit Success();
 }
