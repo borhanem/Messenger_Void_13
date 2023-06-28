@@ -9,6 +9,9 @@ GroupChat::GroupChat(QString chatName, User *user,QWidget *parent) :
     ui->setupUi(this);
     ui->sendResult_lbl->clear();
     ui->send_pbn->setDefault(true);
+    ui->groupname_led->setDisabled(true);
+    ui->groupname_led->setText(this->m_chat_name);
+    this->setWindowTitle(this->m_chat_name);
     connect(mp_user,&User::SuccessOnSendMessage,this,&GroupChat::success_on_send_message);
     connect(mp_user,&User::Failure,this,&GroupChat::failure_on_send_message);
     /* ---show all messages---
