@@ -263,7 +263,7 @@ void MainWindow::delete_createGroupPage()
 void MainWindow::handler_on_NewGroup(QString newGroupName)
 {
     qDebug("handler on NewGroup called in mainWindow\n");
-    AbstractChat* newGroup = new GroupChat(newGroupName,mp_user,this);
+    AbstractChat* newGroup = new GroupChat(newGroupName,AbstractChat::Group,mp_user,this);
     this->mp_ChatList.push_back(newGroup);
     newGroup->saveToFile();
     QListWidgetItem* newItem = new QListWidgetItem(newGroup->chatName());
@@ -283,6 +283,21 @@ void MainWindow::on_Exit_pbn_clicked()
 void MainWindow::on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     AbstractChat* selected_chat = qvariant_cast<AbstractChat*>(item->data(Qt::UserRole));
-    dynamic_cast<GroupChat*>(selected_chat)->open();
+    switch (selected_chat->chatType()) {
+    case AbstractChat::Private:
+    // cast to PrivateChat
+        break;
+    case AbstractChat::Group:
+        // cast to GroupChat
+        dynamic_cast<GroupChat*>(selected_chat)->open();
+        break;
+    case AbstractChat::Channel:
+        // cast to Channel
+        break;
+    default:
+        qDebug("Error From MainWindows::on_chats_listWidget_itemDoubleClicked: Cannot recognize the type");
+        break;
+    }
+
 }
 
