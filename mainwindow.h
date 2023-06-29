@@ -90,6 +90,9 @@ private:
     QPropertyAnimation* info_lbl;
     QPropertyAnimation* link_lbl;
     QPropertyAnimation* setting_pbn;
+    QPropertyAnimation* add_chat;
+    QPropertyAnimation* add_channel;
+    QPropertyAnimation* add_group;
 
 };
 #endif // MAINWINDOW_H
