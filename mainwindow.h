@@ -1,14 +1,19 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QMainWindow>
+#include <QList>
+#include "qlistwidget.h"
 #include "user.h"
 #include <QDateTime>
 #include <QMouseEvent>
 #include <QPoint>
 #include <QRect>
 #include <QPropertyAnimation>
+#include <abstractchat.h>
+#include "groupchat.h"
 #include "loginpage.h"
 #include "creategrouppage.h"
+#include "createchannelpage.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -46,11 +51,24 @@ private slots:
 
     void on_createGroup_pbn_clicked();
 
-    void delete_createGroupPage();
+//    void delete_createGroupPage();
+
+    void handler_on_NewGroup(QString newGroupName);
+    void handler_on_NewChannel(QString newChannelName);
+    void on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item);
+    void on_newchannel_pbn_clicked();
+
+
+    void on_Add_tbn_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
     User* mp_user;
+    QList<AbstractChat*> mp_ChatList;
     CreateGroupPage* mp_cgp;
+
+    void loadChats();
+
     QPoint dragPosition;
     QPoint m_windowPos;
     QPoint m_mousePressPos;
@@ -69,6 +87,12 @@ private:
     QPropertyAnimation* color_2_hide;
     QPropertyAnimation* color_3_hide;
     QPropertyAnimation* color_4_hide;
+    QPropertyAnimation* info_lbl;
+    QPropertyAnimation* link_lbl;
+    QPropertyAnimation* setting_pbn;
+    QPropertyAnimation* add_chat;
+    QPropertyAnimation* add_channel;
+    QPropertyAnimation* add_group;
 
 };
 #endif // MAINWINDOW_H

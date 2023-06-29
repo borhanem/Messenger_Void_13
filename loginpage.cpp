@@ -110,6 +110,7 @@ void LoginPage::server_handler_on_failure(QString error)
 void LoginPage::registerPage_handler(int i)
 {
     this->show();
+    ui->login_pbn->setDefault(true);
 }
 
 void LoginPage::autoLogin(User *NewUser)
@@ -146,11 +147,11 @@ int ThemeChange (QString i)
     {
         ((QApplication*)QApplication::instance())->setStyleSheet(css);
         QDir settingDir;
-        if(!settingDir.exists("settingInfo"))
+        if(!settingDir.exists("vdata/settingInfo"))
         {
-            settingDir.mkpath("settingInfo");
+            settingDir.mkpath("vdata/settingInfo");
         }
-        QFile logFile("settingInfo/settingLog.dat");
+        QFile logFile("vdata/settingInfo/settingLog.dat");
         if(!logFile.open(QIODevice::WriteOnly | QIODevice::Truncate))
         {
             return -1;

@@ -16,5 +16,8 @@
         <file>Style/Light_Exit.png</file>
         <file>Style/Red_Exit.png</file>
         <file>Style/Purp_Exit.png</file>
+        <file>Style/light_add.png</file>
+        <file>Style/purp_add.png</file>
+        <file>Style/red_add.png</file>
     </qresource>
 </RCC>

@@ -7,20 +7,25 @@
 #include <QDataStream>
 #include <QFile>
 #include <QDir>
-//#include "refresherchannel.h"
-//#include "refresherDirect.h"
-//#include "refreshergroup.h"
-//#include "refresherabstract.h"
+#include "message.h"
+
 class User : public QObject
 {
     Q_OBJECT
 public:
+    enum ChatType
+    {
+        Private,
+        Group,
+        Channel
+    };
     User();
     explicit User(QString userName,QString passWord,QString token = "",QString userPath="userLog.dat",QObject* parent = nullptr);
     void Register();
     void login();
     void logOut();
-    void createGroup(const QString& groupName)const;
+    void createNewChat(const QString& chatName,const ChatType& type)const;
+    void sendMessage(const Message& msg,const ChatType& type);
     void getMsgDM(const QString &dst); // new entry
     void getMsgGroup(const QString &dst); // new entry
     void getMsgChannel(const QString &dst); // new entry
@@ -58,13 +63,15 @@ private slots:
     void msgCountDmSlot(const QString& argMsgCount,QJsonObject jObj);
     void msgCountGroupSlot(const QString& argMsgCount,QJsonObject jObj);
     void server_handler_on_Register();
+    void server_handler_on_SendMessage();
     void server_handler_on_Login(QString token);
     void server_handler_on_Logout();
-    void server_handler_on_creategGroup();
+    void server_handler_on_createNewChat();
     void server_handler_on_failure(QString Error);
 signals:
     void Success();
     void SuccessOnLogout();
+    void SuccessOnSendMessage();
     void Failure(QString Error);
     void FailureOnLogout(QString Error);
 };

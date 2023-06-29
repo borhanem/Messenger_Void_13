@@ -8,11 +8,12 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //    std::ifstream iFile;
-    //    iFile.open("userLog.dat");
-    //    if(!iFile.is_open())
-    //    {
-    QFile userLogFile("UserInfo/userLog.dat");
+
+//    std::ifstream iFile;
+//    iFile.open("userLog.dat");
+//    if(!iFile.is_open())
+//    {
+    QFile userLogFile("vdata/UserInfo/userLog.dat");
     QString css = read(loadTheme());
     if( css.length() > 0)
     {

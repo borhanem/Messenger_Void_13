@@ -40,23 +40,19 @@ void CreateGroupPage::on_creategroup_pbn_clicked()
         return;
     }
     ui->result_lbl->setText("Sending request to server...");
-    mp_user->createGroup(input_group_name);
+    mp_user->createNewChat(input_group_name,User::Group);
 
 }
 
 void CreateGroupPage::success_on_create_group()
 {
-    QFile newGroup(ui->groupname_led->text()+".dat");
-    if(!newGroup.open(QIODevice::WriteOnly))
-    {
-        ui->result_lbl->setText("Cannot write a new group data in file");
-        return;
-    }
+    QString newGroupName=ui->groupname_led->text();
     ui->result_lbl->setText("Group created Successfully");
-    newGroup.close();
     ui->cancel_pbn->setDisabled(false);
     ui->creategroup_pbn->setDisabled(false);
     ui->groupname_led->setDisabled(false);
+    emit NewGroup(newGroupName);
+    this->close();
 }
 
 void CreateGroupPage::failure_on_create_group(const QString &error)

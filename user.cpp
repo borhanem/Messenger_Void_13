@@ -3,7 +3,8 @@
 #include <iostream>
 #include <string>
 #include <QRegularExpression>
-User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
+
+User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
                m_username ("VoidUser"),
                m_password("123456789"),
                m_token("borhan81alireza82mahta83"),
@@ -12,6 +13,11 @@ User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
     QObject::connect(m_server,&API::SuccessOnLogout,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
+    QObject::connect(m_server,&API::SuccessOnSendMsgToChannel,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToChannel,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
@@ -19,8 +25,10 @@ User::User() : m_UserLogFilePath("UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::getMsgCountSignalDM,this,&User::msgCountDmSlot); // new entry
     QObject::connect(m_server,&API::getMsgCountSignalChannel,this,&User::msgCountChannelSlot); // new entry
     QObject::connect(m_server,&API::getMsgCountSignalGroup,this,&User::msgCountGroupSlot); // new entry
-    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
+    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_createNewChat);
     QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnCreateChannel,this,&User::server_handler_on_createNewChat);
+    QObject::connect(m_server,&API::FailureOnCreateChannel,this,&User::server_handler_on_failure);
 }
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
@@ -34,6 +42,11 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
     QObject::connect(m_server,&API::SuccessOnLogout,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
+    QObject::connect(m_server,&API::SuccessOnSendMsgToChannel,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToChannel,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
@@ -41,8 +54,10 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::getMsgCountSignalDM,this,&User::msgCountDmSlot); // new entry
     QObject::connect(m_server,&API::getMsgCountSignalChannel,this,&User::msgCountChannelSlot); // new entry
     QObject::connect(m_server,&API::getMsgCountSignalGroup,this,&User::msgCountGroupSlot); // new entry
-    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_creategGroup);
+    QObject::connect(m_server,&API::SuccessOnCreateGroup,this,&User::server_handler_on_createNewChat);
     QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnCreateChannel,this,&User::server_handler_on_createNewChat);
+    QObject::connect(m_server,&API::FailureOnCreateChannel,this,&User::server_handler_on_failure);
 }
 
 void User::Register()
@@ -64,9 +79,43 @@ void User::logOut()
 
 }
 
-void User::createGroup(const QString &groupName)const
+void User::createNewChat(const QString &chatName, const ChatType &type) const
 {
-    m_server->createGroup(this->m_token,groupName);
+    switch(type)
+    {
+    case Private:
+        break;
+    case Group:
+         m_server->createGroup(this->m_token,chatName);
+        break;
+    case Channel:
+        m_server->createChannel(this->m_token,chatName);
+
+        break;
+
+    default:
+        qDebug("Error - from User::sendMessage : No match for type\n");
+    }
+
+
+}
+void User::sendMessage(const Message &msg, const ChatType &type)
+{
+    switch(type)
+    {
+    case Private:
+        m_server->SendMessageToUser(this->m_token,msg.receiver(),msg.body());
+        break;
+    case Group:
+        m_server->sendMessageToGroup(this->m_token,msg.receiver(),msg.body());
+        break;
+    case Channel:
+        m_server->sendMessageToChannel(this->m_token,msg.receiver(),msg.body());
+        break;
+
+    default:
+        qDebug("Error - from User::sendMessage : No match for type\n");
+    }
 }
 
 int User::loadFromFile()
@@ -120,9 +169,9 @@ int User::loadFromFile()
 int User::saveToFile()
 {
     QDir LogDir;
-    if(!LogDir.exists("UserInfo"))
+    if(!LogDir.exists("vdata/UserInfo"))
     {
-        LogDir.mkpath("UserInfo");
+        LogDir.mkpath("vdata/UserInfo");
     }
     QFile logFile(m_UserLogFilePath);
     if(!logFile.open(QIODevice::WriteOnly))
@@ -379,6 +428,12 @@ void User::server_handler_on_Register()
 
 }
 
+void User::server_handler_on_SendMessage()
+{
+        qDebug("server_handler_on_SendMessage from UserClass\n");
+        emit SuccessOnSendMessage();
+}
+
 void User::server_handler_on_Login(QString token)
 {
     m_token = token;
@@ -398,7 +453,7 @@ void User::server_handler_on_Logout()
     emit SuccessOnLogout();
 }
 
-void User::server_handler_on_creategGroup()
+void User::server_handler_on_createNewChat()
 {
     emit Success();
 }

@@ -12,6 +12,10 @@ QToolButton#toolButton
 {
 background-image: url(:/new/prefix1/Style/Purp_Setting.png);
 }
+QToolButton#Add_tbn
+{
+image: url(:/new/prefix1/Style/purp_add.png);
+}
 QLabel
 {
 color: rgb(255, 255, 255);

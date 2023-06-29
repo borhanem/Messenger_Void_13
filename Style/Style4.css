@@ -7,6 +7,10 @@ QToolButton#Exit_pbn
 {
 image: url(:/new/prefix1/Style/Light_Exit.png);
 }
+QToolButton#Add_tbn
+{
+image: url(:/new/prefix1/Style/light_add.png);
+}
 QToolButton#toolButton
 {
 background-image: url(:/new/prefix1/Style/Green_Setting.png);
