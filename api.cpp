@@ -1,11 +1,12 @@
 #include "api.h"
-
+#include <QThread>
 API::API(const QString& sUrl,QObject *parent)
     : QObject{parent},url_s(sUrl)
 {
     man_ptr = new QNetworkAccessManager(this);
     data = new QByteArray();
     //connect(reply,&QNetworkReply::finished,this,&API::getData);
+//    qDebug() <<  QThread::currentThreadId() << ": api::constructor1\n";
 }
 
 void API::Register(const QString &uname, const QString &pass)
@@ -85,7 +86,7 @@ void API::getMsgDM(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-
+    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm\n";
     connect(reply,&QNetworkReply::finished,this,&API::getMsgDmResponder);
 
 }
@@ -106,6 +107,7 @@ void API::getMsgChannel(const QString &token, const QString &dst)
 
 void API::getMsgDmResponder()
 {
+    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDmresponder\n";
     if (reply->error() == QNetworkReply::NoError) {
         *data = reply->readAll();
         QJsonDocument jDoc = QJsonDocument::fromJson(*data);
@@ -174,6 +176,7 @@ QByteArray *API::getResponse()
 
 void API::RegisterResponder()
 {
+//    qDebug() <<  QThread::currentThreadId() << ": api::registerResponder\n";
     // If the request was successful
     if (reply->error() == QNetworkReply::NoError) {
        //read the response

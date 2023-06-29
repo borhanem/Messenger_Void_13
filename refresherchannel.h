@@ -9,6 +9,7 @@ class refresherChannel : public refresherAbstract
     Q_OBJECT
 public:
     explicit refresherChannel(QObject *parent = nullptr,const QString& argDst = "");
+    explicit refresherChannel(QObject *parent = nullptr,const QString& argDst = "",User* argUser = nullptr);
     void refresherMain() override;
     void msgCountInit() override;
     void jsonHandle() override;

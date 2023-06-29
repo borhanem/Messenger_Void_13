@@ -12,9 +12,18 @@ refresherChannel::refresherChannel(QObject *parent,const QString& argDst)
     msgCountInit();
 }
 
+refresherChannel::refresherChannel(QObject *parent, const QString &argDst, User *argUser)
+{
+    dstChannel = argDst;
+    currUser = argUser;
+    currUser->msgCountChannelReinit(dstChannel);
+    msgCountInit();
+}
+
 
 void refresherChannel::refresherMain()
 {
+    qDebug() <<  QThread::currentThreadId() << ": channelThread::refresher main\n";
     currUser->msgCountChannelReinit(dstChannel);
     int countTemp = currUser->msgCountGetterChannel(dstChannel);
     if(msgCount != countTemp){
@@ -45,5 +54,6 @@ void refresherChannel::jsonHandle()
         }
     }
     emit channelRefreshSignal(messageContent);
+    qDebug() <<  QThread::currentThreadId() << ": channelthread::jsonHandle\n";
 }
 

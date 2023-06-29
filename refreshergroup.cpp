@@ -14,6 +14,7 @@ refresherGroup::refresherGroup(QObject *parent,const QString& argDst)
 
 void refresherGroup::refresherMain()
 {
+    qDebug() <<  QThread::currentThreadId() << ": groupThread::refresherMain\n";
     currUser->msgCountGroupReinit(dstGroup);
     int countTemp = currUser->msgCountGetterGroup(dstGroup);
     if(msgCount != countTemp){
@@ -44,5 +45,6 @@ void refresherGroup::jsonHandle()
         }
     }
     emit groupRefreshSignal(messageContent);
+    qDebug() <<  QThread::currentThreadId() << ": groupThread::jsonHandle\n";
 }
 

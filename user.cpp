@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <QRegularExpression>
-
+#include <QThread>
 User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
                m_username ("VoidUser"),
                m_password("123456789"),
@@ -288,6 +288,7 @@ void User::msgCountChannelSlot(const QString& argMsgCount,QJsonObject jObj)
 void User::msgCountDmSlot(const QString& argMsgCount,QJsonObject jObj)
 {
 
+    qDebug() <<  QThread::currentThreadId() << ": user::msgCountDmslot\n";
     QRegularExpression re("-\\d+-");
     // Find the first match in the string
     QRegularExpressionMatch match = re.match(argMsgCount);
@@ -395,6 +396,7 @@ QJsonObject User::msgContentGetterGroup(const QString &dst)
 
 void User::msgCountDmReinit(const QString& dst)
 {
+    qDebug() <<  QThread::currentThreadId() << ": user::msgCountdmReinit\n";
     if(!directData.count(dst)){
         directData[dst].first = 1;
     }

@@ -8,7 +8,8 @@ refresherAbstract::refresherAbstract(QObject *parent)
 void refresherAbstract::run()
 {
     while(true){
-        QThread::sleep(FREEZEDURATION);
+        QThread::sleep(FREEZEDURATION * 2);
+        qDebug() <<  QThread::currentThreadId() << ": abstractThread::run\n";
         refresherMain();
     }
 }
