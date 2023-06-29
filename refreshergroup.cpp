@@ -12,7 +12,7 @@ refresherGroup::refresherGroup(QObject *parent,const QString& argDst)
     msgCountInit();
 }
 
-void refresherGroup::refresherMain(User& argUser)
+void refresherGroup::refresherMain(User* argUser)
 {
     qDebug() <<  QThread::currentThreadId() << ": groupThread::refresherMain\n";
     currUser->msgCountGroupReinit(dstGroup);

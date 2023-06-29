@@ -1,5 +1,5 @@
 #include "refresherabstract.h"
-
+#include <QCoreApplication>
 refresherAbstract::refresherAbstract(QObject *parent)
 {
 
@@ -7,9 +7,12 @@ refresherAbstract::refresherAbstract(QObject *parent)
 
 void refresherAbstract::run()
 {
-    User tempUser(QString("receive"),QString::number(1234),QString("dea1fd09fab4c03974c2b0b2e0e37b59"),QString("vdata/UserInfo/userLog.dat"));
+    User* tempUser = new User(QString("receive"),QString::number(1234),QString("dea1fd09fab4c03974c2b0b2e0e37b59"),QString("vdata/UserInfo/userLog.dat"));
     while(true){
-        QThread::sleep(FREEZEDURATION * 2);
+        QTime dieTime= QTime::currentTime().addSecs(1);
+        while (QTime::currentTime() < dieTime){
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        }
         qDebug() <<  QThread::currentThreadId() << ": abstractThread::run\n";
         refresherMain(tempUser);
     }

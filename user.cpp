@@ -288,7 +288,7 @@ void User::msgCountChannelSlot(const QString& argMsgCount,QJsonObject jObj)
 void User::msgCountDmSlot(const QString& argMsgCount,QJsonObject jObj)
 {
 
-    qDebug() <<  QThread::currentThreadId() << ": user::msgCountDmslot\n";
+//    qDebug() <<  QThread::currentThreadId() << ": user::msgCountDmslot\n";
     QRegularExpression re("-\\d+-");
     // Find the first match in the string
     QRegularExpressionMatch match = re.match(argMsgCount);

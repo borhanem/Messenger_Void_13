@@ -21,7 +21,7 @@ refresherChannel::refresherChannel(QObject *parent, const QString &argDst, User 
 }
 
 
-void refresherChannel::refresherMain(User& argUser)
+void refresherChannel::refresherMain(User* argUser)
 {
     qDebug() <<  QThread::currentThreadId() << ": channelThread::refresher main\n";
     currUser->msgCountChannelReinit(dstChannel);

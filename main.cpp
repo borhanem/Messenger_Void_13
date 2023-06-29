@@ -18,8 +18,11 @@ int main(int argc, char *argv[])
     QString css = read(loadTheme());
     qDebug() <<  QThread::currentThreadId() << ": main.cpp\n";
     User* nUser = new User(QString("receive"),QString::number(1234),QString("dea1fd09fab4c03974c2b0b2e0e37b59"),QString("vdata/UserInfo/userLog.dat"));
-    refresherDirect* tr1 = new refresherDirect(QString("send"),nUser);
+//    nUser->msgCountDmReinit("send");
+    refresherDirect* tr1 = new refresherDirect(QString("send"));
     // create user class in new thread not in constructor
+//    tr1->run();
+//    tr1->refresherMain(nUser);
     tr1->start();
     if( css.length() > 0)
     {

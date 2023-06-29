@@ -86,11 +86,47 @@ void API::getMsgDM(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm\n";
+    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm ";
     connect(reply,&QNetworkReply::finished,this,&API::getMsgDmResponder);
 
 }
 
+//void API::getMsgDM(const QString &token, const QString &dst)
+//{
+//    QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
+////    QString temp = "http://api.barafardayebehtar.ml:8080/getuserchats?token=dea1fd09fab4c03974c2b0b2e0e37b59&dst=send";
+//    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+//    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm\n";
+//    while(reply->isRunning()){
+//        qDebug() << "is running";
+//    }
+//    if(reply->isFinished())
+//    {
+//        qDebug() <<  QThread::currentThreadId() << ": api::getmsgDmresponder\n";
+//        if (reply->error() == QNetworkReply::NoError) {
+//            *data = reply->readAll();
+//            QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+//            QJsonObject jObj = jDoc.object();
+//            QString respond_code =  jObj.value("code").toString();
+//            QString respond_message =jObj.value("message").toString();
+//            if(respond_code == "200"){
+//                emit SuccessOnGetMsgDM(jDoc);
+//                emit getMsgCountSignalDM(respond_message,jObj);
+//            } else {
+//                emit FailureOnGetMsg(respond_message);
+//            }
+//        } else {
+//            data = NULL;
+//            emit FailureOnGetMsg(reply->errorString());
+//        }
+//        reply->deleteLater();
+//    }
+//    else
+//    {
+//        qDebug("ride!!!!");
+//    }
+//    //connect(reply,&QNetworkReply::finished,this,&API::getMsgDmResponder);
+//}
 void API::getMsgGroup(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getgroupchats?token=" + token + "&dst=" + dst;
@@ -114,6 +150,7 @@ void API::getMsgDmResponder()
         QJsonObject jObj = jDoc.object();
         QString respond_code =  jObj.value("code").toString();
         QString respond_message =jObj.value("message").toString();
+        qDebug() << respond_code;
         if(respond_code == "200"){
             emit SuccessOnGetMsgDM(jDoc);
             emit getMsgCountSignalDM(respond_message,jObj);
