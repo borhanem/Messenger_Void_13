@@ -11,13 +11,14 @@ public:
     explicit refresherChannel(QObject *parent = nullptr,const QString& argDst = "");
     void refresherMain() override;
     void msgCountInit() override;
+    void jsonHandle() override;
 private:
     QString dstChannel;
     int msgCount;
     User* currUser;
 
 signals:
-    void channelRefreshSignal();
+    void channelRefreshSignal(QList<Message*>);
 private slots:
 
 

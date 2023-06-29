@@ -36,8 +36,11 @@ public:
     int msgCountGetterDm(const QString &dst);
     int msgCountGetterChannel(const QString &dst);
     int msgCountGetterGroup(const QString &dst);
+    QJsonObject msgContentGetterDm(const QString &dst);
+    QJsonObject msgContentGetterChannel(const QString &dst);
+    QJsonObject msgContentGetterGroup(const QString &dst);
     void msgCountDmReinit(const QString &dst);
-    void msgCountGroupReinit(const QString &dst);
+    void msgCountGroupReinit(const QString &dst); // check this for group
     void msgCountChannelReinit(const QString &dst);
 private:
     const QString m_UserLogFilePath;
@@ -45,12 +48,9 @@ private:
     QString m_password;
     QString m_token;
     API* m_server;
-    int msgCountDm;
-    int msgCountChannel;
-    int msgCountGroup;
-    QMap<QString,int> directCount;
-    QMap<QString,int> groupCount;
-    QMap<QString,int> channelCount;
+    QMap<QString,QPair<int,QJsonObject>> directData; // stores msg count and message JSon obj
+    QMap<QString,QPair<int,QJsonObject>> groupData;
+    QMap<QString,QPair<int,QJsonObject>> channelData;
     //void writeToFile(char* filePath);
     //void readFromFile(char* filePath);
 private slots:

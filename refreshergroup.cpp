@@ -17,7 +17,7 @@ void refresherGroup::refresherMain()
     currUser->msgCountGroupReinit(dstGroup);
     int countTemp = currUser->msgCountGetterGroup(dstGroup);
     if(msgCount != countTemp){
-        emit groupRefreshSignal();
+        jsonHandle();
         msgCount = countTemp;
     }
 }
@@ -25,5 +25,24 @@ void refresherGroup::refresherMain()
 void refresherGroup::msgCountInit()
 {
     msgCount = currUser->msgCountGetterDm(dstGroup);
+}
+
+void refresherGroup::jsonHandle()
+{
+    QList<Message*> messageContent;
+    QJsonObject msgContent = currUser->msgContentGetterGroup(dstGroup);
+    for (int jsonIter = 0; jsonIter < msgCount; ++jsonIter){
+        QString blockIter = "block " + QString::number(jsonIter);
+        QJsonValue blockVal = msgContent.value(blockIter);
+        if(blockVal.isObject()){
+            QJsonObject blockObj = blockVal.toObject();
+            QString text = blockObj.value("body").toString();
+            QString time = blockObj.value("date").toString();
+            QString sender = blockObj.value("src").toString();
+            Message* tempMsg = new Message(text,time,sender);
+            messageContent.append(tempMsg);
+        }
+    }
+    emit groupRefreshSignal(messageContent);
 }
 

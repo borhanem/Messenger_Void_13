@@ -11,12 +11,13 @@ public:
     explicit refresherDirect(QObject *parent = nullptr,const QString& argDst = "");
     void refresherMain() override;
     void msgCountInit() override;
+    void jsonHandle() override;
 private:
     QString dstDirect;
     int msgCount;
     User* currUser;
 signals:
-    void directRefreshSignal();
+    void directRefreshSignal(QList<Message*>);
 private slots:
 
 

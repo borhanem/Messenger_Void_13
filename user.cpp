@@ -221,8 +221,9 @@ void User::msgCountChannelSlot(const QString& argMsgCount,QJsonObject jObj)
             if(blockVal.isObject()){
                 QJsonObject blockObj = blockVal.toObject();
                 QString dst = blockObj.value("dst").toString();
-                if(channelCount.count(dst)){
-                    channelCount[dst] = num;
+                if(channelData.count(dst)){
+                    channelData[dst].first = num;
+                    channelData[dst].second = jObj;
                     break;
                 }
             }
@@ -230,7 +231,7 @@ void User::msgCountChannelSlot(const QString& argMsgCount,QJsonObject jObj)
         // end of ignore
     }else{
         qDebug() << "User::msgCountDmSlot error";
-
+        // make value of map a pair
     }
 
 }
@@ -260,8 +261,9 @@ void User::msgCountDmSlot(const QString& argMsgCount,QJsonObject jObj)
             if(blockVal.isObject()){
                 QJsonObject blockObj = blockVal.toObject();
                 QString dst = blockObj.value("dst").toString();
-                if(directCount.count(dst)){
-                    directCount[dst] = num;
+                if(directData.count(dst)){
+                    directData[dst].first = num;
+                    directData[dst].second = jObj;
                     break;
                 }
             }
@@ -298,8 +300,9 @@ void User::msgCountGroupSlot(const QString& argMsgCount,QJsonObject jObj)
             if(blockVal.isObject()){
                 QJsonObject blockObj = blockVal.toObject();
                 QString dst = blockObj.value("dst").toString();
-                if(groupCount.count(dst)){
-                    groupCount[dst] = num;
+                if(groupData.count(dst)){
+                    groupData[dst].first = num;
+                    groupData[dst].second = jObj;
                     break;
                 }
             }
@@ -313,39 +316,54 @@ void User::msgCountGroupSlot(const QString& argMsgCount,QJsonObject jObj)
 
 int User::msgCountGetterDm(const QString& dst)
 {
-    return directCount[dst];
+    return directData[dst].first;
 }
 
 int User::msgCountGetterChannel(const QString& dst)
 {
-    return channelCount[dst];
+    return channelData[dst].first;
 }
 
 int User::msgCountGetterGroup(const QString& dst)
 {
-    return groupCount[dst];
+    return groupData[dst].first;
+}
+
+QJsonObject User::msgContentGetterDm(const QString &dst)
+{
+    return directData[dst].second;
+}
+
+QJsonObject User::msgContentGetterChannel(const QString &dst)
+{
+    return channelData[dst].second;
+}
+
+QJsonObject User::msgContentGetterGroup(const QString &dst)
+{
+    return groupData[dst].second;
 }
 
 void User::msgCountDmReinit(const QString& dst)
 {
-    if(!directCount.count(dst)){
-        directCount[dst] = 1;
+    if(!directData.count(dst)){
+        directData[dst].first = 1;
     }
     m_server->getMsgDM(m_token,dst);
 }
 
 void User::msgCountGroupReinit(const QString &dst)
 {
-    if(!groupCount.count(dst)){
-        groupCount[dst] = 1;
+    if(!groupData.count(dst)){
+        groupData[dst].first = 1;
     }
     m_server->getMsgGroup(m_token,dst);
 }
 
 void User::msgCountChannelReinit(const QString &dst)
 {
-    if(!channelCount.count(dst)){
-        channelCount[dst] = 1;
+    if(!channelData.count(dst)){
+        channelData[dst].first = 1;
     }
     m_server->getMsgChannel(m_token,dst);
 }

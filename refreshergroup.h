@@ -11,12 +11,13 @@ public:
     explicit refresherGroup( QObject *parent = nullptr,const QString& argDst = "");
     void refresherMain() override;
     void msgCountInit() override;
+    void jsonHandle() override;
 private:
     QString dstGroup;
     int msgCount;
     User* currUser;
 signals:
-    void groupRefreshSignal();
+    void groupRefreshSignal(QList<Message*>);
 private slots:
 
 

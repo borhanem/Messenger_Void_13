@@ -5,7 +5,7 @@
 #include <QThread>
 #include "api.h"
 #include "user.h"
-
+#include "message.h"
 #define FREEZEDURATION 1
 
 class refresherAbstract : public QThread
@@ -17,6 +17,7 @@ public:
 
     virtual void refresherMain() = 0;
     virtual void msgCountInit() = 0;
+    virtual void jsonHandle() = 0;
 signals:
 
 private slots:
