@@ -265,6 +265,13 @@ void User::server_handler_on_SendMessage()
 
 void User::server_handler_on_Login(QString token)
 {
+    // user already logged in
+    if(token.isEmpty())
+    {
+        this->logOut();
+        emit Failure("Try Again");
+        return;
+        }
     m_token = token;
     // if savetoFile can't save the user
     if(saveToFile())
