@@ -24,6 +24,7 @@ public:
     void login();
     void logOut();
     void createNewChat(const QString& chatName,const ChatType& type)const;
+    void joinChat(const QString& chatName,const ChatType& type)const;
     void sendMessage(const Message& msg,const ChatType& type);
     void getMsgDM(const QString &dst); // new entry
     void getMsgGroup(const QString &dst); // new entry
@@ -52,6 +53,7 @@ private slots:
     void server_handler_on_Login(QString token);
     void server_handler_on_Logout();
     void server_handler_on_createNewChat();
+    void server_handler_on_joinChat();
     void server_handler_on_failure(QString Error);
 signals:
     void Success();

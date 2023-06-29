@@ -24,6 +24,10 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::SuccessOnCreateChannel,this,&User::server_handler_on_createNewChat);
     QObject::connect(m_server,&API::FailureOnCreateChannel,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnJoinGroup,this,&User::server_handler_on_joinChat);
+    QObject::connect(m_server,&API::FailureOnJoinGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnJoinChannel,this,&User::server_handler_on_joinChat);
+    QObject::connect(m_server,&API::FailureOnJoinChannel,this,&User::server_handler_on_failure);
 }
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
@@ -68,23 +72,40 @@ void User::logOut()
 
 void User::createNewChat(const QString &chatName, const ChatType &type) const
 {
+
     switch(type)
     {
     case Private:
+        qDebug() << "User::joinChat : There is no Option for joining a Private Chat";
         break;
     case Group:
          m_server->createGroup(this->m_token,chatName);
         break;
     case Channel:
         m_server->createChannel(this->m_token,chatName);
-
         break;
 
     default:
         qDebug("Error - from User::sendMessage : No match for type\n");
     }
+}
 
-
+void User::joinChat(const QString &chatName, const ChatType &type) const
+{
+    switch(type)
+    {
+    case Private:
+        qDebug() << "User::joinChat : There is no Option for joining a Private Chat";
+        break;
+    case Channel:
+        m_server->joinChannel(this->m_token,chatName);
+        break;
+    case Group:
+        m_server->joinGroup(this->m_token,chatName);
+    default:
+        qDebug() << "User::joinChat : No match for type";
+        break;
+    }
 }
 void User::sendMessage(const Message &msg, const ChatType &type)
 {
@@ -290,6 +311,11 @@ void User::server_handler_on_Logout()
 }
 
 void User::server_handler_on_createNewChat()
+{
+    emit Success();
+}
+
+void User::server_handler_on_joinChat()
 {
     emit Success();
 }
