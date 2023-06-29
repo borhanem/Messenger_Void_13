@@ -12,7 +12,7 @@ class ChannelChat : public QDialog , public AbstractChat
     Q_OBJECT
 
 public:
-    explicit ChannelChat(QString chatName,User* user=nullptr,QWidget *parent = nullptr);
+    explicit ChannelChat(QString chatName,QWidget *parent = nullptr);
     ~ChannelChat();
     virtual int loadFromFile()override;
     virtual int saveToFile()override;

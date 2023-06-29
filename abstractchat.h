@@ -13,7 +13,7 @@ public:
         Group,
         Channel
     };
-    AbstractChat(QString chatName,const ChatType& ct,User *user=NULL);
+    AbstractChat(QString chatName,const ChatType& ct);
     virtual ~AbstractChat();
     virtual int saveToFile() = 0;
     virtual int loadFromFile() = 0;

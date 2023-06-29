@@ -1,9 +1,9 @@
 #include "channelchat.h"
 #include "ui_channelchat.h"
 
-ChannelChat::ChannelChat(QString chatName, User *user, QWidget *parent) :
+ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     QDialog(parent),
-    AbstractChat(chatName,AbstractChat::Channel,user),
+    AbstractChat(chatName,AbstractChat::Channel),
     ui(new Ui::ChannelChat)
 
 {

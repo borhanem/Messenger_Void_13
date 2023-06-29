@@ -1,9 +1,9 @@
 #include "groupchat.h"
 #include "ui_groupchat.h"
 
-GroupChat::GroupChat(QString chatName, User *user,QWidget *parent) :
+GroupChat::GroupChat(QString chatName,QWidget *parent) :
     QDialog(parent),
-    AbstractChat(chatName,AbstractChat::Group,user),
+    AbstractChat(chatName,AbstractChat::Group),
     ui(new Ui::GroupChat)
 {
     ui->setupUi(this);

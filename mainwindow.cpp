@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     mp_user->loadFromFile();
+    this->loadChats();
     ui->toolButton->setCheckable(true);
     ui->Add_tbn->setCheckable(true);
     ui->user_led->setText(mp_user->getUserName());
@@ -321,7 +322,7 @@ void MainWindow::on_createGroup_pbn_clicked()
 void MainWindow::handler_on_NewGroup(QString newGroupName)
 {
     qDebug("handler on NewGroup called in mainWindow\n");
-    AbstractChat* newGroup = new GroupChat(newGroupName,mp_user,this);
+    AbstractChat* newGroup = new GroupChat(newGroupName,this);
     this->mp_ChatList.push_back(newGroup);
     newGroup->saveToFile();
     QListWidgetItem* newItem = new QListWidgetItem(newGroup->chatName());
@@ -333,7 +334,7 @@ void MainWindow::handler_on_NewGroup(QString newGroupName)
 
 void MainWindow::handler_on_NewChannel(QString newChannelName)
 {
-    AbstractChat* newChannel = new ChannelChat(newChannelName,mp_user,this);
+    AbstractChat* newChannel = new ChannelChat(newChannelName,this);
     this->mp_ChatList.push_back(newChannel);
     newChannel->saveToFile();
     QListWidgetItem* newItem = new QListWidgetItem(newChannel->chatName());
@@ -437,5 +438,43 @@ void MainWindow::on_Add_tbn_clicked(bool checked)
         add_channel->setEndValue(QRect(360,308,180,40));
         add_channel->start();
     }
+}
+
+void MainWindow::loadChats()
+{
+    QDir gDir("vdata/MsgData/Groups"),cDir("vdata/MsgData/Channels"),pDir;
+    if(gDir.exists())
+    {
+        qDebug() << "vdata/MsgData/Groups" << " exist!\n";
+        for (const QFileInfo &file : gDir.entryInfoList(QDir::Files))
+        {
+            qDebug() << file.baseName();
+            AbstractChat* groupEntity = new GroupChat(file.baseName(),this);
+            groupEntity->loadFromFile();
+            qDebug() << "loaded From File";
+            mp_ChatList.push_back(groupEntity);
+            qDebug() << "added to ChatList";
+            QListWidgetItem* newItem = new QListWidgetItem(groupEntity->chatName());
+            newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(groupEntity));
+            ui->chats_listWidget->addItem(newItem);
+        }
+    }
+    if(cDir.exists())
+    {
+        qDebug() << "vdata/MsgData/Channels" << " exist!\n";
+        for (const QFileInfo &file : cDir.entryInfoList(QDir::Files))
+        {
+            qDebug() << file.baseName();
+            AbstractChat* ChannelEntity = new ChannelChat(file.baseName(),this);
+            ChannelEntity->loadFromFile();
+            qDebug() << "loaded From File";
+            mp_ChatList.push_back(ChannelEntity);
+            qDebug() << "added to ChatList";
+            QListWidgetItem* newItem = new QListWidgetItem(ChannelEntity->chatName());
+            newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(ChannelEntity));
+            ui->chats_listWidget->addItem(newItem);
+        }
+    }
+
 }
 

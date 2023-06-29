@@ -67,7 +67,7 @@ private:
     QList<AbstractChat*> mp_ChatList;
     CreateGroupPage* mp_cgp;
 
-
+    void loadChats();
 
     QPoint dragPosition;
     QPoint m_windowPos;
