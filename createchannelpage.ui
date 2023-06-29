@@ -45,9 +45,9 @@
   <widget class="QLabel" name="result_lbl">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>40</x>
      <y>260</y>
-     <width>231</width>
+     <width>341</width>
      <height>20</height>
     </rect>
    </property>

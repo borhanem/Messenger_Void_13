@@ -102,6 +102,7 @@ void User::joinChat(const QString &chatName, const ChatType &type) const
         break;
     case Group:
         m_server->joinGroup(this->m_token,chatName);
+        break;
     default:
         qDebug() << "User::joinChat : No match for type";
         break;

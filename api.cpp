@@ -86,7 +86,7 @@ void API::joinGroup(const QString &token, const QString &gruopName)
  /*
   * /joingroup?token=7a3c48f7c7939b7269d01443a431825f&group_name=ap
   */
-    QString temp = url_s + "/joingroup?token="+token+"&channel_name="+gruopName;
+    QString temp = url_s + "/joingroup?token="+token+"&group_name="+gruopName;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
     connect(reply,&QNetworkReply::finished,this,&API::joinGroupResponder);
 }

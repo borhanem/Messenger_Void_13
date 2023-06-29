@@ -22,6 +22,12 @@ private slots:
 
     void success_on_create_group();
     void failure_on_create_group(const QString&);
+    void on_tojoin_tbn_clicked();
+
+    void on_tocreate_tbn_clicked();
+
+    void on_joingroup_pbn_clicked();
+
 signals:
     void NewGroup(QString groupName);
 private:
