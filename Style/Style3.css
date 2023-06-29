@@ -2,28 +2,55 @@ QToolButton#toolButton
 {
 background-image: url(:/new/prefix1/Style/Pink_Setting.png);
 }
+
 QToolButton#Exit_pbn
 {
 image: url(:/new/prefix1/Style/Light_Exit.png);
 }
+
 QToolButton#Add_tbn
 {
 image: url(:/new/prefix1/Style/light_add.png);
 }
+
+QPushButton#createGroup_pbn
+{
+background-color: white;
+border-radius: 5px;
+color :rgb(242, 124, 169) ;
+}
+
+QPushButton#newchannel_pbn
+{
+background-color: white;
+border-radius: 5px;
+color :rgb(242, 124, 169) ;
+}
+
+QPushButton#newchat_pbn
+{
+background-color: white;
+border-radius: 5px;
+color :rgb(242, 124, 169) ;
+}
+
 QWidget
 {
 color :rgb(4, 93, 148);
 background-color: rgb(255, 235, 248);
 }
+
 QLabel
 {
 color: rgb(2, 2, 161);
 }
+
 QPushButton#Theme_2_pbn
 {
 background-image: url(:/new/prefix1/Style/Purp.png);
 border-radius: 5px;
 }
+
 QPushButton
 {
 background-color: rgb(242, 124, 169);
@@ -36,6 +63,7 @@ background-color: rgb(252, 220, 238);
 border-color: rgb(170, 170, 127);
 border-radius:5%;
 }
+
 QGroupBox
 {
 color: rgb(4, 93, 148);

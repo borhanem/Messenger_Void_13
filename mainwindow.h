@@ -93,6 +93,7 @@ private:
     QPropertyAnimation* add_chat;
     QPropertyAnimation* add_channel;
     QPropertyAnimation* add_group;
+    QPropertyAnimation* list;
 
 };
 #endif // MAINWINDOW_H

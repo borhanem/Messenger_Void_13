@@ -4,18 +4,22 @@ color: rgb(170, 170, 255);
 background-color: black;
 background-image: url(:/new/prefix1/Style/Stars.png);
 }
+
 QToolButton#Exit_pbn
 {
 image: url(:/new/prefix1/Style/Purp_Exit.png);
 }
+
 QToolButton#toolButton
 {
 background-image: url(:/new/prefix1/Style/Purp_Setting.png);
 }
+
 QToolButton#Add_tbn
 {
 image: url(:/new/prefix1/Style/purp_add.png);
 }
+
 QLabel
 {
 color: rgb(255, 255, 255);
@@ -27,12 +31,14 @@ background-image: url(:/new/prefix1/Style/Purp.png);
 border-radius: 5px;
 color: rgb(255, 255, 255);
 }
+
 QLineEdit
 {
 background-color: rgb(56, 56, 56);
 border-color: rgb(170, 170, 127);
 border-radius:5%;
 }
+
 QGroupBox
 {
 color: rgb(170, 170, 255);

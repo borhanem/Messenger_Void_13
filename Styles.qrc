@@ -20,4 +20,5 @@
         <file>Style/purp_add.png</file>
         <file>Style/red_add.png</file>
     </qresource>
+    <qresource prefix="/style2's buttons"/>
 </RCC>
