@@ -302,7 +302,7 @@ void User::msgCountDmSlot(const QString& argMsgCount,QJsonObject jObj)
         // Convert the number string to an integer
         int num = numStr.toInt();
 
-
+        qDebug() << "\n num::msgCountDmSlot :" << num << "\n";
         // ignore this part idk whats happening
         // trying to make the map by bruteforcing the user
         for (int i = 0; i < num; ++i){

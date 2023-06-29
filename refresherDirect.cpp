@@ -20,15 +20,18 @@ refresherDirect::refresherDirect(const QString &argDst, User *argUser,QObject *p
     msgCountInit();
 }
 
-void refresherDirect::refresherMain()
+void refresherDirect::refresherMain(User& argUser)
 {
-//    User tempUser(QString("receive"),QString::number(1234),QString("dea1fd09fab4c03974c2b0b2e0e37b59"),QString("vdata/UserInfo/userLog.dat"));
-
+    argUser.msgCountDmReinit(QString("receive"));
     qDebug() <<  QThread::currentThreadId() << ": directthread::refresher main\n";
-//    tempUser->msgCountDmReinit(dstDirect);
-    currUser->msgCountDmReinit(dstDirect);
+
+//    currUser->msgCountDmReinit(dstDirect);
+//    argUser.msgCountDmReinit();
 //    msgCountInit();
-    int countTemp = currUser->msgCountGetterDm(dstDirect);
+    testInit(argUser);
+//    int countTemp = currUser->msgCountGetterDm(dstDirect);
+    int countTemp = argUser.msgCountGetterDm(QString("receive"));
+    qDebug() << "\n msgCount : " << msgCount << "-countTemp : " << countTemp;
     if(msgCount != countTemp){
         jsonHandle();
         msgCount = countTemp;
@@ -40,7 +43,7 @@ void refresherDirect::msgCountInit()
     msgCount = currUser->msgCountGetterDm(dstDirect);
 }
 
-void refresherDirect::testInit(User &argUser)
+void refresherDirect::testInit(User& argUser)
 {
     msgCount = argUser.msgCountGetterDm(dstDirect);
 }

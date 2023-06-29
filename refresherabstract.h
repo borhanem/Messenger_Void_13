@@ -15,7 +15,7 @@ public:
     explicit refresherAbstract(QObject *parent = nullptr);
     void run();
 
-    virtual void refresherMain() = 0;
+    virtual void refresherMain(User& argUser) = 0;
     virtual void msgCountInit() = 0;
     virtual void jsonHandle() = 0;
 signals:
