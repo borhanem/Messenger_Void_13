@@ -40,3 +40,5 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+// User::msgCountDmSlot not running despite signal being connected
