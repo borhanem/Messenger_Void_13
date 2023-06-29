@@ -25,6 +25,8 @@ public:
     void sendMessageToChannel(const QString& token,const QString& dst,const QString& body);
     void createGroup(const QString& token,const QString& groupName);
     void createChannel(const QString& token,const QString& channelName);
+    void joinGroup(const QString& token,const QString& gruopName);
+    void joinChannel(const QString& token,const QString& channelName);
     void getMsgDM(const QString &token, const QString &dst); // new entry
     void getMsgGroup(const QString &token, const QString &dst); // new entry
     void getMsgChannel(const QString &token, const QString &dst); // new entry
@@ -41,6 +43,10 @@ signals:
     void SuccessOnGetMsgChannel(QJsonDocument jSonContent); // new entry
     void SuccessOnCreateGroup();
     void SuccessOnCreateChannel();
+    void SuccessOnJoinChannel();
+    void FailureOnJoinChannel(QString error);
+    void SuccessOnJoinGroup();
+    void FailureOnJoinGroup(QString error);
     void getMsgCountSignal(QString msgCount);
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);
@@ -64,6 +70,8 @@ private slots:
     void SendMessageToUserResponder(); // new entry
     void sendMessageToGroupResponder();
     void sendMessageToChannelResponder();
+    void joinGroupResponder();
+    void joinChannelResponder();
     //void getData();
 private:
     QString url_s;
