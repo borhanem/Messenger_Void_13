@@ -410,7 +410,13 @@ void API::joinGroupResponder()
 
         if(respond_code == "200")
         {
+            if(respond_message == "You are already Joined!")
+            {
+                emit FailureOnJoinGroup("You are already Joined!");
+            }
+            else{
             emit SuccessOnJoinGroup();
+            }
         }
         else
         {
@@ -439,7 +445,14 @@ void API::joinChannelResponder()
 
         if(respond_code == "200")
         {
-            emit SuccessOnJoinChannel();
+            if(respond_message == "You are already Joined!")
+            {
+            emit FailureOnJoinGroup("You are already Joined!");
+            }
+            else{
+            emit SuccessOnJoinGroup();
+            }
+
         }
         else
         {
