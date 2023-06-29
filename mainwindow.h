@@ -56,8 +56,10 @@ private slots:
     void handler_on_NewGroup(QString newGroupName);
     void handler_on_NewChannel(QString newChannelName);
     void on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item);
-
     void on_newchannel_pbn_clicked();
+
+
+    void on_Add_tbn_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
@@ -85,6 +87,9 @@ private:
     QPropertyAnimation* color_2_hide;
     QPropertyAnimation* color_3_hide;
     QPropertyAnimation* color_4_hide;
+    QPropertyAnimation* info_lbl;
+    QPropertyAnimation* link_lbl;
+    QPropertyAnimation* setting_pbn;
 
 };
 #endif // MAINWINDOW_H
