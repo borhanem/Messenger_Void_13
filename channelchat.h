@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "abstractchat.h"
+#include "refresherchannel.h"
 namespace Ui {
 class ChannelChat;
 }
@@ -23,6 +24,7 @@ private slots:
     void failure_on_send_message(QString error);
 private:
     Ui::ChannelChat *ui;
+    refresherChannel* refresher;
 };
 
 #endif // CHANNELCHAT_H

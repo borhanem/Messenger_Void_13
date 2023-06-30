@@ -5,7 +5,7 @@
 #include <QFile>
 #include <fstream>
 #include<QFrame>
-#include "refresherDirect.h".h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

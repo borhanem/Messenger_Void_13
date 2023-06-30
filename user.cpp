@@ -382,6 +382,96 @@ void User::msgCountGroupSlot(const QString& argMsgCount,QJsonObject jObj)
     }
 }
 
+void User::userListSlot(const QString &argUserCount, QJsonObject jObj)
+{
+    QRegularExpression re("-\\d+-");
+
+    // Find the first match in the string
+    QRegularExpressionMatch match = re.match(argUserCount);
+    if (match.hasMatch()) {
+        // Extract the matched text
+        QString matchText = match.captured(0);
+
+        // Remove the hyphens from the matched text
+        QString numStr = matchText.remove('-');
+
+        // Convert the number string to an integer
+        int num = numStr.toInt();
+        userCount = num;
+        for(int i = 0; i < num; ++i){
+            QString blockIter = "block " + QString::number(i);
+            QJsonValue blockVal = jObj.value(blockIter);
+            if(blockVal.isObject()){
+                QJsonObject blockObj = blockVal.toObject();
+                QString src = blockObj.value("src").toString();
+                if(userList.indexOf(src) == -1){
+                    userList.push_back(src);
+                }
+            }
+        }
+    }
+}
+
+void User::groupListSlot(const QString &argGroupCount, QJsonObject jObj)
+{
+    QRegularExpression re("-\\d+-");
+
+    // Find the first match in the string
+    QRegularExpressionMatch match = re.match(argGroupCount);
+    if (match.hasMatch()) {
+        // Extract the matched text
+        QString matchText = match.captured(0);
+
+        // Remove the hyphens from the matched text
+        QString numStr = matchText.remove('-');
+
+        // Convert the number string to an integer
+        int num = numStr.toInt();
+        userCount = num;
+        for(int i = 0; i < num; ++i){
+            QString blockIter = "block " + QString::number(i);
+            QJsonValue blockVal = jObj.value(blockIter);
+            if(blockVal.isObject()){
+                QJsonObject blockObj = blockVal.toObject();
+                QString src = blockObj.value("group_name").toString();
+                if(groupList.indexOf(src) == -1){
+                    groupList.push_back(src);
+                }
+            }
+        }
+    }
+}
+
+void User::channelListSlot(const QString &argChannelCount, QJsonObject jObj)
+{
+    QRegularExpression re("-\\d+-");
+
+    // Find the first match in the string
+    QRegularExpressionMatch match = re.match(argChannelCount);
+    if (match.hasMatch()) {
+        // Extract the matched text
+        QString matchText = match.captured(0);
+
+        // Remove the hyphens from the matched text
+        QString numStr = matchText.remove('-');
+
+        // Convert the number string to an integer
+        int num = numStr.toInt();
+        userCount = num;
+        for(int i = 0; i < num; ++i){
+            QString blockIter = "block " + QString::number(i);
+            QJsonValue blockVal = jObj.value(blockIter);
+            if(blockVal.isObject()){
+                QJsonObject blockObj = blockVal.toObject();
+                QString src = blockObj.value("channel_name").toString();
+                if(channelList.indexOf(src) == -1){
+                    channelList.push_back(src);
+                }
+            }
+        }
+    }
+}
+
 int User::msgCountGetterDm(const QString& dst)
 {
 //    int num = directData[dst].first;
@@ -398,6 +488,37 @@ int User::msgCountGetterGroup(const QString& dst)
 {
     return groupData[dst].first;
 }
+
+int User::userCountGetter()
+{
+    return userCount;
+}
+
+int User::channelCountGetter()
+{
+    return channelCount;
+}
+
+int User::groupCountGetter()
+{
+    return groupCount;
+}
+
+QVector<QString> User::userListGetter()
+{
+    return userList;
+}
+
+QVector<QString> User::channelListGetter()
+{
+    return channelList;
+}
+
+QVector<QString> User::groupListGetter()
+{
+    return groupList;
+}
+
 
 QJsonObject User::msgContentGetterDm(const QString &dst)
 {
@@ -440,6 +561,21 @@ void User::msgCountChannelReinit(const QString &dst)
         //        qDebug() <<  QThread::currentThreadId() << ": user::msgCountdmReinit2" << directData[dst].first << "|";
     }
     m_server->getMsgChannel(m_token,dst);
+}
+
+void User::userListReinit()
+{
+    m_server->getUserList(m_token);
+}
+
+void User::channelListReinit()
+{
+    m_server->getChannelList(m_token);
+}
+
+void User::groupListReinit()
+{
+    m_server->getGroupList(m_token);
 }
 
 

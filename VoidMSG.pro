@@ -23,7 +23,10 @@ SOURCES += \
     refresherDirect.cpp \
     refresherabstract.cpp \
     refresherchannel.cpp \
+    refresherchannellist.cpp \
+    refresherdirectlist.cpp \
     refreshergroup.cpp \
+    refreshergrouplist.cpp \
     registerpage.cpp \
     theme.cpp \
     user.cpp
@@ -41,7 +44,10 @@ HEADERS += \
     refresherDirect.h \
     refresherabstract.h \
     refresherchannel.h \
+    refresherchannellist.h \
+    refresherdirectlist.h \
     refreshergroup.h \
+    refreshergrouplist.h \
     registerpage.h \
     theme.h \
     user.h

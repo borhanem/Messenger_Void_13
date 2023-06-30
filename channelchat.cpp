@@ -15,6 +15,9 @@ ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     mp_user->sendMessage(Message(("void Messenger"),mp_user->getUserName(),this->m_chat_name),User::Channel);
     ////////////////////////////////////////////////////////////////////////
 
+    // making the refresher
+    refresher = new refresherChannel(chatName);
+    refresher->start();
     ui->setupUi(this);
     ui->sendResult_lbl->clear();
     ui->send_pbn->setDefault(true);

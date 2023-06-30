@@ -141,6 +141,29 @@ void API::getMsgChannel(const QString &token, const QString &dst)
     connect(reply,&QNetworkReply::finished,this,&API::getMsgChannelResponder);
 }
 
+void API::getUserList(const QString &token)
+{
+    QString temp = url_s + "/getuserlist?token=" + token;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::getUserListResponder);
+}
+
+void API::getChannelList(const QString &token)
+{
+    QString temp = url_s + "/getchannellist?token=" + token;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::getChannelListResponder);
+}
+
+void API::getGroupList(const QString &token)
+{
+    QString temp = url_s + "/getgrouplist?token=" + token;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::getGroupListResponder);
+}
+
+
+
 void API::getMsgDmResponder()
 {
 //    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDmresponder\n";
@@ -202,6 +225,69 @@ void API::getMsgChannelResponder()
     } else {
         data = NULL;
         emit FailureOnGetMsg(reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void API::getUserListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            emit SuccessOnGetUserList(jDoc);
+            emit getUserListSignal(respond_message,jObj);
+        } else {
+            emit FailureOnGetChatList(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetChatList(reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void API::getChannelListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            emit SuccessOnGetChannelList(jDoc);
+            emit getChannelListSignal(respond_message,jObj);
+        } else {
+            emit FailureOnGetChatList(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetChatList(reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void API::getGroupListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            emit SuccessOnGetGroupList(jDoc);
+            emit getGroupListSignal(respond_message,jObj);
+        } else {
+            emit FailureOnGetChatList(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetChatList(reply->errorString());
     }
     reply->deleteLater();
 }

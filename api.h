@@ -26,6 +26,9 @@ public:
     void getMsgDM(const QString &token, const QString &dst); // new entry
     void getMsgGroup(const QString &token, const QString &dst); // new entry
     void getMsgChannel(const QString &token, const QString &dst); // new entry
+    void getUserList(const QString &token);
+    void getChannelList(const QString &token);
+    void getGroupList(const QString &token);
     QByteArray* getResponse();
 signals:
     void SuccessOnRegister();
@@ -34,15 +37,22 @@ signals:
     void SuccessOnGetMsgDM(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgGroup(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgChannel(QJsonDocument jSonContent); // new entry
+    void SuccessOnGetUserList(QJsonDocument jSonContent);
+    void SuccessOnGetChannelList(QJsonDocument jSonContent);
+    void SuccessOnGetGroupList(QJsonDocument jSonContent);
     void getMsgCountSignalDM(QString msgCount,QJsonObject jSonObject);
     void getMsgCountSignalGroup(QString msgCount,QJsonObject jSonObject);
     void getMsgCountSignalChannel(QString msgCount,QJsonObject jSonObject);
+    void getUserListSignal(QString userCount,QJsonObject jSonObject);
+    void getChannelListSignal(QString userCount,QJsonObject jSonObject);
+    void getGroupListSignal(QString userCount,QJsonObject jSonObject);
     void SuccessOnCreateGroup();
     void SuccessOnCreateChannel();
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);
     void FailureOnLogout(QString error);
     void FailureOnGetMsg(QString error); // new entry
+    void FailureOnGetChatList(QString error);
     void FailureOnCreateGroup(QString error);
     void FailureOnCreateChannel(QString error);
     void SuccessOnSendMsgToUser();
@@ -58,6 +68,9 @@ private slots:
     void getMsgDmResponder(); // new entry
     void getMsgGroupResponder(); // new entry
     void getMsgChannelResponder(); // new entry
+    void getUserListResponder();
+    void getChannelListResponder();
+    void getGroupListResponder();
     void createGroupResponder();
     void createChannelResponder();
     void SendMessageToUserResponder(); // new entry

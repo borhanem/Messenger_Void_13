@@ -9,7 +9,7 @@ void refresherAbstract::run()
 {
     userMalloc();
     while(true){
-        QTime dieTime= QTime::currentTime().addSecs(1);
+        QTime dieTime= QTime::currentTime().addSecs(FREEZEDURATION);
         while (QTime::currentTime() < dieTime){
             QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
         }
