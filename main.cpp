@@ -5,6 +5,8 @@
 #include <QFile>
 #include <fstream>
 #include<QFrame>
+#include "msgBaseReceive.h"
+#include "msgBaseSend.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -18,6 +20,10 @@ int main(int argc, char *argv[])
     {
         a.setStyleSheet(css);
     }
+    msgBaseReceiver m;
+    m.show();
+    msgBase n;
+    n.show();
 
     if(!userLogFile.exists())
     {

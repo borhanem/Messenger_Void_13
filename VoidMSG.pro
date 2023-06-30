@@ -20,6 +20,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     message.cpp \
+    msgBaseReceive.cpp \
+    msgBaseSend.cpp \
     refresherDirect.cpp \
     refresherabstract.cpp \
     refresherchannel.cpp \
@@ -38,6 +40,8 @@ HEADERS += \
     loginpage.h \
     mainwindow.h \
     message.h \
+    msgBaseReceive.h \
+    msgBaseSend.h \
     refresherDirect.h \
     refresherabstract.h \
     refresherchannel.h \
@@ -53,6 +57,8 @@ FORMS += \
     groupchat.ui \
     loginpage.ui \
     mainwindow.ui \
+    msgBaseReceive.ui \
+    msgBaseSend.ui \
     registerpage.ui
 
 # Default rules for deployment.
