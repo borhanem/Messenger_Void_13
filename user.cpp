@@ -127,19 +127,27 @@ void User::sendMessage(const Message &msg, const ChatType &type)
     }
 }
 
-void User::getMsgDM(const QString &dst)
+void User::getMsg(const QString &dst, const ChatType &type)
 {
-    m_server->getMsgDM(this->m_token,dst);
-}
 
-void User::getMsgGroup(const QString &dst)
-{
-    m_server->getMsgGroup(this->m_token,dst);
-}
+    switch(type)
+    {
+    case Private:
+        m_server->getMsgUser(this->m_token,dst);
+        break;
 
-void User::getMsgChannel(const QString &dst)
-{
-    m_server->getMsgChannel(this->m_token,dst);
+    case Group:
+        m_server->getMsgGroup(this->m_token,dst);
+        break;
+
+    case Channel:
+        m_server->getMsgChannel(this->m_token,dst);
+        break;
+
+    default:
+        qDebug() << "Error - from User::getMsg : No match for type\n";
+        break;
+    }
 }
 
 int User::loadFromFile()

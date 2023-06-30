@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
     {
         a.setStyleSheet(css);
     }
-    msgBaseReceiver m;
-    m.show();
-    msgBase n;
-    n.show();
+//    msgBaseReceiver m;
+//    m.show();
+//    msgBase n;
+//    n.show();
 
     if(!userLogFile.exists())
     {

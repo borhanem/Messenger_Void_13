@@ -101,40 +101,25 @@ void API::joinChannel(const QString &token, const QString &channelName)
     connect(reply,&QNetworkReply::finished,this,&API::joinChannelResponder);
 }
 
-void API::getMsgDM(const QString &token, const QString &dst)
+void API::getMsgUser(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    connect(reply,&QNetworkReply::finished,this,&API::DMId);
+    //connect(reply,&QNetworkReply::finished,this,&API::DMId);
 }
 
 void API::getMsgGroup(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getgroupchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    connect(reply,&QNetworkReply::finished,this,&API::GroupId);
+    connect(reply,&QNetworkReply::finished,this,&API::getMsgGroupResponder);
 }
 
 void API::getMsgChannel(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getchannelchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    connect(reply,&QNetworkReply::finished,this,&API::ChannelID);
-}
-
-void API::DMId()
-{
-    getMsgResponder(1);
-}
-
-void API::GroupId()
-{
-    getMsgResponder(2);
-}
-
-void API::ChannelID()
-{
-    getMsgResponder(3);
+    //connect(reply,&QNetworkReply::finished,this,&API::ChannelID);
 }
 
 QByteArray *API::getResponse()
@@ -283,33 +268,96 @@ void API::createChannelResponder()
         reply->deleteLater();
 }
 
-void API::getMsgResponder(int argMsgID)
+void API::getMsgUserResponder()
 {
-     if (reply->error() == QNetworkReply::NoError) {
+        if (reply->error() == QNetworkReply::NoError) {
         *data = reply->readAll();
         QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        if(jDoc.isObject())
+        {
+            QJsonObject jObj = jDoc.object();
+            QString respond_code =  jObj.value("code").toString();
+            QString respond_message =jObj.value("message").toString();
+            if(respond_code == "200"){
+
+                emit SuccessOnGetMsgUser(jDoc);
+            }
+            else {
+                emit FailureOnGetMsgUser(respond_message);
+            }
+        }
+        else {
+            data = NULL;
+            emit FailureOnGetMsgUser(reply->errorString());
+        }
+        }
+        else
+        {
+        qDebug("getMsgUserResponde: jdoc is not a object\n");
+        }
+        reply->deleteLater();
+}
+
+void API::getMsgChannelResponder()
+{
+        if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        if(jDoc.isObject())
+        {
+            QJsonObject jObj = jDoc.object();
+            QString respond_code =  jObj.value("code").toString();
+            QString respond_message =jObj.value("message").toString();
+            if(respond_code == "200"){
+
+                emit SuccessOnGetMsgChannel(jDoc);
+            }
+            else {
+                emit FailureOnGetMsgChannel(respond_message);
+            }
+        }
+        else {
+            data = NULL;
+            emit FailureOnGetMsgChannel(reply->errorString());
+        }
+        }
+        else
+        {
+        qDebug("getMsgChannelResponde: jdoc is not a object\n");
+        }
+        reply->deleteLater();
+}
+
+void API::getMsgGroupResponder()
+{
+        if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        if(jDoc.isObject())
+        {
         QJsonObject jObj = jDoc.object();
         QString respond_code =  jObj.value("code").toString();
         QString respond_message =jObj.value("message").toString();
         if(respond_code == "200"){
-            if (argMsgID == 1){
-                emit SuccessOnGetMsgDM(jDoc);
-            } else if(argMsgID == 2){
+
                 emit SuccessOnGetMsgGroup(jDoc);
-            } else if(argMsgID == 3){
-                emit SuccessOnGetMsgChannel(jDoc);
-            }
-            // for emitting the response jsonDoc
-            emit getMsgCountSignal(respond_message);
-         } else {
-            emit FailureOnGetMsg(respond_message);
         }
-     } else {
+        else {
+                emit FailureOnGetMsgGroup(respond_message);
+               }
+        }
+        else {
         data = NULL;
-        emit FailureOnGetMsg(reply->errorString());
-     }
-    reply->deleteLater();
+            emit FailureOnGetMsgGroup(reply->errorString());
+        }
+        }
+        else
+        {
+        qDebug("getMsgGroupResponde: jdoc is not a object\n");
+        }
+        reply->deleteLater();
 }
+
 
 void API::SendMessageToUserResponder()
 {

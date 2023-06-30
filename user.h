@@ -26,9 +26,7 @@ public:
     void createNewChat(const QString& chatName,const ChatType& type)const;
     void joinChat(const QString& chatName,const ChatType& type)const;
     void sendMessage(const Message& msg,const ChatType& type);
-    void getMsgDM(const QString &dst); // new entry
-    void getMsgGroup(const QString &dst); // new entry
-    void getMsgChannel(const QString &dst); // new entry
+    void getMsg(const QString &dst,const ChatType& type); // new entry
     int loadFromFile();
     int saveToFile();
     QString getUserName();

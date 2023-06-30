@@ -27,18 +27,16 @@ public:
     void createChannel(const QString& token,const QString& channelName);
     void joinGroup(const QString& token,const QString& gruopName);
     void joinChannel(const QString& token,const QString& channelName);
-    void getMsgDM(const QString &token, const QString &dst); // new entry
+    void getMsgUser(const QString &token, const QString &dst); // new entry
     void getMsgGroup(const QString &token, const QString &dst); // new entry
     void getMsgChannel(const QString &token, const QString &dst); // new entry
-    void DMId(); // new entry
-    void GroupId(); // new entry
-    void ChannelID(); // new entry
+
     QByteArray* getResponse();
 signals:
     void SuccessOnRegister();
     void SuccessOnLogin(QString new_token);
     void SuccessOnLogout();
-    void SuccessOnGetMsgDM(QJsonDocument jSonContent); // new entry
+    void SuccessOnGetMsgUser(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgGroup(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgChannel(QJsonDocument jSonContent); // new entry
     void SuccessOnCreateGroup();
@@ -51,7 +49,9 @@ signals:
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);
     void FailureOnLogout(QString error);
-    void FailureOnGetMsg(QString error); // new entry
+    void FailureOnGetMsgUser(QString error);
+    void FailureOnGetMsgGroup(QString error);
+    void FailureOnGetMsgChannel(QString error);
     void FailureOnCreateGroup(QString error);
     void FailureOnCreateChannel(QString error);
     void SuccessOnSendMsgToUser();
@@ -66,7 +66,9 @@ private slots:
     void LogoutResponder();
     void createGroupResponder();
     void createChannelResponder();
-    void getMsgResponder(int argMsgID); // new entry
+    void getMsgUserResponder();
+    void getMsgChannelResponder();
+    void getMsgGroupResponder();
     void SendMessageToUserResponder(); // new entry
     void sendMessageToGroupResponder();
     void sendMessageToChannelResponder();
