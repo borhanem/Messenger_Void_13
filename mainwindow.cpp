@@ -34,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton->hide();
     ui->token_lbl->hide();
     ui->token_led->hide();
+    ui->repository_link_lbl->setText("<a href=\"https://github.com/borhanem/Messenger_Void_13.git/\">https://github.com/borhanem/Messenger_Void_13.git</a>");
+    ui->repository_link_lbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    ui->repository_link_lbl->setOpenExternalLinks(true);
     connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
 
 }
