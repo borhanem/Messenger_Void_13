@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <QRegularExpression>
+#include "msgBaseReceive.h"
+#include "msgBaseSend.h"
 User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
                m_username ("VoidUser"),
                m_password("123456789"),
@@ -384,7 +386,14 @@ void User::server_hanlder_on_GetMsg(QJsonDocument jSonContent)
             QString sender = blockObj.value("src").toString();
             QString receiver = blockObj.value("dst").toString();
             qDebug() << blockIter << " body: " << text << " -time: " << time << "-sender: "<<sender <<"-reciver: " << receiver;
-            Message* tempMsg = new Message(text,sender,receiver,QDateTime::fromString(time));
+            Message* tempMsg;
+            if(sender==this->m_username)
+            {
+                tempMsg = new msgBaseSend(text,sender,receiver,QDateTime::fromString(time));
+            }
+            else{
+                tempMsg = new msgBaseReceiver(text,sender,receiver,QDateTime::fromString(time));
+            }
             messageContent.append(tempMsg);
         }
         else

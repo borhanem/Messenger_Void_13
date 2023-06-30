@@ -2,18 +2,18 @@
 #define MSGBASESEND_H
 
 #include <QDialog>
-
+#include "message.h"
 namespace Ui {
 class msgBase;
 }
 
-class msgBase : public QDialog
+class msgBaseSend : public QDialog,public Message
 {
     Q_OBJECT
 
 public:
-    explicit msgBase(QWidget *parent = nullptr);
-    ~msgBase();
+    explicit msgBaseSend(const QString& txt,const QString& sender ="void",const QString& receiver="void",const QDateTime& time=QDateTime::currentDateTime(),QWidget *parent = nullptr);
+    ~msgBaseSend();
 
 private:
     Ui::msgBase *ui;

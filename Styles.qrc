@@ -9,16 +9,33 @@
         <file>Style/Style3.css</file>
         <file>Style/Style4.css</file>
         <file>Style/Purp.png</file>
-        <file>Style/Green_Setting.png</file>
-        <file>Style/Pink_Setting.png</file>
-        <file>Style/Purp_Setting.png</file>
-        <file>Style/Red_Setting.png</file>
-        <file>Style/Light_Exit.png</file>
-        <file>Style/Red_Exit.png</file>
-        <file>Style/Purp_Exit.png</file>
-        <file>Style/light_add.png</file>
-        <file>Style/purp_add.png</file>
-        <file>Style/red_add.png</file>
     </qresource>
-    <qresource prefix="/style2's buttons"/>
+    <qresource prefix="/greenButtons">
+        <file>Buttons/green_add.png</file>
+        <file>Buttons/green_exit.png</file>
+        <file>Buttons/green_left_arrow.png</file>
+        <file>Buttons/green_right_arrow.png.png</file>
+        <file>Buttons/Green_Setting.png</file>
+    </qresource>
+    <qresource prefix="/pinkButtons">
+        <file>Buttons/pink_add.png</file>
+        <file>Buttons/pink_exit.png</file>
+        <file>Buttons/pink_lesft_arrow.png</file>
+        <file>Buttons/pink_right_arrow.png.png</file>
+        <file>Buttons/Pink_Setting.png</file>
+    </qresource>
+    <qresource prefix="/redButtons">
+        <file>Buttons/red_exit.png</file>
+        <file>Buttons/red_add.png</file>
+        <file>Buttons/red_left_arrow.png.png</file>
+        <file>Buttons/red_right_arrow.png</file>
+        <file>Buttons/Red_Setting.png</file>
+    </qresource>
+    <qresource prefix="/PurpButtons">
+        <file>Buttons/purp_add.png</file>
+        <file>Buttons/purp_exit.png</file>
+        <file>Buttons/purp_left_arrow.png.png.png</file>
+        <file>Buttons/purp_right_arrow.png.png</file>
+        <file>Buttons/Purp_Setting.png</file>
+    </qresource>
 </RCC>

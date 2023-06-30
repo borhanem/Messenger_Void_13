@@ -1,22 +1,33 @@
 QToolButton#toolButton
 {
-background-image: url(:/new/prefix1/Style/Pink_Setting.png);
+image: url(:/pinkButtons/Buttons/Pink_Setting.png);
 }
 
 QToolButton#Exit_pbn
 {
-image: url(:/new/prefix1/Style/Light_Exit.png);
+image: url(:/pinkButtons/Buttons/pink_exit.png);
 }
 
 QToolButton#Exit_pbn_2
 {
-image: url(:/new/prefix1/Style/Light_Exit.png);
+image: url(:/pinkButtons/Buttons/pink_exit.png);
 }
 
 QToolButton#Add_tbn
 {
-image: url(:/new/prefix1/Style/light_add.png);
+image: url(:/pinkButtons/Buttons/pink_add.png);
 }
+
+QToolButton#tojoin_tbn
+{
+image: url(:/pinkButtons/Buttons/pink_right_arrow.png);
+}
+
+QToolButton#tocreate_tbn
+{
+image: url(:/pinkButtons/Buttons/pink_lesft_arrow.png);
+}
+
 
 QPushButton#createGroup_pbn
 {
