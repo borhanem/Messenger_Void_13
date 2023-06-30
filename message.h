@@ -10,7 +10,7 @@ class Message
 public:
     explicit Message();
     explicit Message(QString txt,QString sender ="void",QString receiver="void",QDateTime time=QDateTime::currentDateTime());
-
+    virtual ~Message();
     friend QDataStream& operator<<(QDataStream &stream,const Message &m);
     friend QDataStream& operator>>(QDataStream &stream,Message &m);
     virtual QString body() const;

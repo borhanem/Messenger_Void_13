@@ -68,15 +68,43 @@ int GroupChat::loadFromFile()
     }
     QDataStream user_ds(&logFile);
     user_ds.setVersion(QDataStream::Qt_6_5);
+    Message *temp = new Message();
+    Message* msg;
     while(!logFile.atEnd())
     {
-        Message *temp = new Message();
         user_ds >> *temp;
-        this->m_message_list.push_back(temp);
+        if(temp->sender()==mp_user->getUserName())
+        {
+            msg = new msgBaseSend(temp->body(),temp->sender(),temp->receiver(),temp->time(),this);
+        }
+        else
+        {
+            msg = new msgBaseReceiver(temp->body(),temp->sender(),temp->receiver(),temp->time(),this);
+        }
+        this->m_message_list.push_back(msg);
     }
-
+    delete temp;
     logFile.close();
+    this->updateList();
     return 0;
+}
+
+void GroupChat::updateList()
+{
+    for(auto& i : this->m_message_list)
+    {
+        if(i->sender() == mp_user->getUserName())
+        {
+            msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
+            msg->setFixedSize(500,60);
+            messagesLayout->addWidget(msg);
+        }
+        else{
+            msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
+            msg->setFixedSize(500,60);
+            messagesLayout->addWidget(msg);
+        }
+    }
 }
 
 void GroupChat::on_send_pbn_clicked()
@@ -116,19 +144,7 @@ void GroupChat::Refresh_handler(QList<Message *> newList)
     this->m_message_list = newList;
     ui->sendResult_lbl->setText("Refreshed Successfully!\n");
     //ui->message_layout.
-    for(auto& i : this->m_message_list)
-    {
-        if(i->sender() == mp_user->getUserName())
-        {
-            msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
-            msg->setFixedSize(500,60);
-            messagesLayout->addWidget(msg);
-        }
-        else{
-            msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
-            msg->setFixedSize(500,60);
-            messagesLayout->addWidget(msg);
-        }
-    }
+    this->updateList();
+    this->saveToFile();
 }
 

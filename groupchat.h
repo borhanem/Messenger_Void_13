@@ -17,6 +17,7 @@ public:
     ~GroupChat();
     int saveToFile() override;
     int loadFromFile() override;
+    void updateList() override;
 private slots:
     void on_send_pbn_clicked();
     void success_on_send_message();

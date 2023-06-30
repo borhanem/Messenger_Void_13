@@ -12,6 +12,11 @@ Message::Message(QString txt, QString sender, QString receiver, QDateTime time)
 
 }
 
+Message::~Message()
+{
+    qDebug()<< "Message Destructor!\n";
+}
+
 QString Message::body() const
 {
     return m_body;
