@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->loadChats();
     ui->toolButton->setCheckable(true);
     ui->Add_tbn->setCheckable(true);
+    ui->stackedWidget->setCurrentIndex(0);
     ui->user_led->setText(mp_user->getUserName());
     ui->pass_led->setText(mp_user->getPassword());
     ui->token_led->setText(mp_user->getToken());
@@ -34,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton->hide();
     ui->token_lbl->hide();
     ui->token_led->hide();
-    ui->repository_link_lbl->setText("<a href=\"https://github.com/borhanem/Messenger_Void_13.git/\">https://github.com/borhanem/Messenger_Void_13.git</a>");
+    ui->repository_link_lbl->setText("<a href=\"https://github.com/borhanem/Messenger_Void_13/tree/master/\">https://github.com/borhanem/Messenger_Void_13.git</a>");
     ui->repository_link_lbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ui->repository_link_lbl->setOpenExternalLinks(true);
     connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
@@ -103,8 +104,8 @@ void MainWindow::on_toolButton_clicked(bool checked)
 
         setting_pbn = new QPropertyAnimation(ui->toolButton , "geometry");
         setting_pbn->setDuration(1);
-        setting_pbn->setStartValue(QRect(530,0,31,31));
-        setting_pbn->setEndValue(QRect(470,0,31,31));
+        setting_pbn->setStartValue(QRect(529,1,31,31));
+        setting_pbn->setEndValue(QRect(469,1,31,31));
         setting_pbn->start();
 
         user_lbl_hide = new QPropertyAnimation(ui->user_lbl , "geometry");
@@ -278,8 +279,8 @@ void MainWindow::on_toolButton_clicked(bool checked)
 
         setting_pbn = new QPropertyAnimation(ui->toolButton , "geometry");
         setting_pbn->setDuration(1);
-        setting_pbn->setStartValue(QRect(470,0,31,31));
-        setting_pbn->setEndValue(QRect(530,0,31,31));
+        setting_pbn->setStartValue(QRect(469,1,31,31));
+        setting_pbn->setEndValue(QRect(529,1,31,31));
         setting_pbn->start();
 
         ui->repository_info_lbl->show();
@@ -416,7 +417,7 @@ void MainWindow::on_Add_tbn_clicked(bool checked)
         list = new QPropertyAnimation(ui->chats_listWidget , "geometry");
         list->setDuration(100);
         list->setStartValue(QRect(20,50,323,490));
-        list->setEndValue(QRect(20,50,590,490));
+        list->setEndValue(QRect(20,50,520,490));
         list->start();
 
 
@@ -492,5 +493,11 @@ void MainWindow::loadChats()
         }
     }
 
+}
+
+
+void MainWindow::on_Exit_pbn_2_clicked()
+{
+    this->close();
 }
 

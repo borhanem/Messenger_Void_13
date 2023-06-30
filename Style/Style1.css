@@ -8,6 +8,11 @@ QToolButton#Exit_pbn
 image: url(:/new/prefix1/Style/Red_Exit.png);
 }
 
+QToolButton#Exit_pbn_2
+{
+image: url(:/new/prefix1/Style/Red_Exit.png);
+}
+
 QToolButton#Add_tbn
 {
 image: url(:/new/prefix1/Style/red_add.png);

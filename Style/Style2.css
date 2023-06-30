@@ -10,6 +10,11 @@ QToolButton#Exit_pbn
 image: url(:/new/prefix1/Style/Purp_Exit.png);
 }
 
+QToolButton#Exit_pbn_2
+{
+image: url(:/new/prefix1/Style/Purp_Exit.png);
+}
+
 QToolButton#toolButton
 {
 background-image: url(:/new/prefix1/Style/Purp_Setting.png);
