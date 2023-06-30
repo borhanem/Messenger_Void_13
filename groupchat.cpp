@@ -1,6 +1,7 @@
 #include "groupchat.h"
 #include "ui_groupchat.h"
-
+#include "msgBaseReceive.h"
+#include "msgBaseSend.h"
 GroupChat::GroupChat(QString chatName,QWidget *parent) :
     QDialog(parent),
     AbstractChat(chatName,AbstractChat::Group),
@@ -65,7 +66,7 @@ int GroupChat::loadFromFile()
     user_ds.setVersion(QDataStream::Qt_6_5);
     while(!logFile.atEnd())
     {
-        Message *temp = new Message(this);
+        Message *temp = new Message();
         user_ds >> *temp;
         this->m_message_list.push_back(temp);
     }
@@ -110,5 +111,16 @@ void GroupChat::Refresh_handler(QList<Message *> newList)
 {
     this->m_message_list = newList;
     ui->sendResult_lbl->setText("Refreshed Successfully!\n");
+    //ui->message_layout.
+    for(auto& i : this->m_message_list)
+    {
+        if(i->sender() == mp_user->getUserName())
+        {
+            ui->message_layout->addWidget(dynamic_cast<msgBaseSend*>(i));
+        }
+        else{
+            ui->message_layout->addWidget(dynamic_cast<msgBaseReceiver*>(i));
+        }
+        }
 }
 

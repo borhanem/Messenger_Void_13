@@ -39,7 +39,7 @@ int ChannelChat::loadFromFile()
     user_ds.setVersion(QDataStream::Qt_6_5);
     while(!logFile.atEnd())
     {
-        Message *temp = new Message(this);
+        Message *temp = new Message();
         user_ds >> *temp;
         this->m_message_list.push_back(temp);
     }
