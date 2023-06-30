@@ -151,6 +151,19 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string/>
    </property>
   </widget>
+  <widget class="QPushButton" name="refresh_pbn">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>480</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

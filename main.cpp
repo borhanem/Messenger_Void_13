@@ -20,6 +20,9 @@ int main(int argc, char *argv[])
     {
         a.setStyleSheet(css);
     }
+    User sample;
+//    sample.loadFromFile();
+//    sample.getMsg("salam",User::Group);
 //    msgBaseReceiver m;
 //    m.show();
 //    msgBase n;

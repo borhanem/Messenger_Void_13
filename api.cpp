@@ -105,7 +105,7 @@ void API::getMsgUser(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    //connect(reply,&QNetworkReply::finished,this,&API::DMId);
+    connect(reply,&QNetworkReply::finished,this,&API::getMsgUserResponder);
 }
 
 void API::getMsgGroup(const QString &token, const QString &dst)
@@ -119,7 +119,7 @@ void API::getMsgChannel(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getchannelchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    //connect(reply,&QNetworkReply::finished,this,&API::ChannelID);
+    connect(reply,&QNetworkReply::finished,this,&API::getMsgChannelResponder);
 }
 
 QByteArray *API::getResponse()

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-
+#include <QRegularExpression>
 User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
                m_username ("VoidUser"),
                m_password("123456789"),
@@ -28,6 +28,12 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::FailureOnJoinGroup,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::SuccessOnJoinChannel,this,&User::server_handler_on_joinChat);
     QObject::connect(m_server,&API::FailureOnJoinChannel,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnGetMsgGroup,this,&User::server_hanlder_on_GetMsg);
+    QObject::connect(m_server,&API::FailureOnGetMsgGroup,this,&User::FailureOnGetMessage);
+    QObject::connect(m_server,&API::SuccessOnGetMsgChannel,this,&User::server_hanlder_on_GetMsg);
+    QObject::connect(m_server,&API::FailureOnGetMsgChannel,this,&User::FailureOnGetMessage);
+    QObject::connect(m_server,&API::SuccessOnGetMsgUser,this,&User::server_hanlder_on_GetMsg);
+    QObject::connect(m_server,&API::FailureOnGetMsgUser,this,&User::FailureOnGetMessage);
 }
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
@@ -38,11 +44,14 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
       m_token(token),
       m_server(new API("http://api.barafardayebehtar.ml:8080"))
 {
-    QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
-    QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
     QObject::connect(m_server,&API::SuccessOnLogout,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
+    QObject::connect(m_server,&API::SuccessOnSendMsgToChannel,this,&User::server_handler_on_SendMessage);//
+    QObject::connect(m_server,&API::FailureOnSendMsgToChannel,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnRegister,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogin,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::FailureOnLogout,this,&User::server_handler_on_failure);
@@ -50,6 +59,16 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::FailureOnCreateGroup,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::SuccessOnCreateChannel,this,&User::server_handler_on_createNewChat);
     QObject::connect(m_server,&API::FailureOnCreateChannel,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnJoinGroup,this,&User::server_handler_on_joinChat);
+    QObject::connect(m_server,&API::FailureOnJoinGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnJoinChannel,this,&User::server_handler_on_joinChat);
+    QObject::connect(m_server,&API::FailureOnJoinChannel,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnGetMsgGroup,this,&User::server_hanlder_on_GetMsg);
+    QObject::connect(m_server,&API::FailureOnGetMsgGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnGetMsgChannel,this,&User::server_hanlder_on_GetMsg);
+    QObject::connect(m_server,&API::FailureOnGetMsgChannel,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::SuccessOnGetMsgUser,this,&User::server_hanlder_on_GetMsg);
+    QObject::connect(m_server,&API::FailureOnGetMsgUser,this,&User::server_handler_on_failure);
 }
 
 void User::Register()
@@ -329,9 +348,58 @@ void User::server_handler_on_joinChat()
     emit Success();
 }
 
+void User::server_hanlder_on_GetMsg(QJsonDocument jSonContent)
+{
+    qDebug() << "User::server_hanlder_on_GetMsg is running\n";
+    QList<Message*> messageContent;
+    QJsonObject msgContent = jSonContent.object();//currUser->msgContentGetterGroup(dstGroup);
+    QRegularExpression re("-\\d+-");
+    size_t msgCount;
+    QString argMsgCount = msgContent.value("message").toString();
+    // Find the first match in the string
+    QRegularExpressionMatch match = re.match(argMsgCount);
+    if (match.hasMatch()) {
+        // Extract the matched text
+        QString matchText = match.captured(0);
+
+        // Remove the hyphens from the matched text
+        QString numStr = matchText.remove('-');
+
+        // Convert the number string to an integer
+        msgCount = numStr.toULongLong();
+        qDebug() << "User::server_hanlder_on_GetMsg - msgCount : " << msgCount;
+    }
+    else
+    {
+        qDebug() << "User::server_hanlder_on_GetMsg - do not match!\n";
+        return;
+    }
+    for (size_t jsonIter = 0; jsonIter < msgCount; ++jsonIter){
+        QString blockIter = "block " + QString::number(jsonIter);
+        QJsonValue blockVal = msgContent.value(blockIter);
+        if(blockVal.isObject()){
+            QJsonObject blockObj = blockVal.toObject();
+            QString text = blockObj.value("body").toString();
+            QString time = blockObj.value("date").toString();
+            QString sender = blockObj.value("src").toString();
+            QString receiver = blockObj.value("dst").toString();
+            qDebug() << blockIter << " body: " << text << " -time: " << time << "-sender: "<<sender <<"-reciver: " << receiver;
+            Message* tempMsg = new Message(text,sender,receiver,QDateTime::fromString(time));
+            messageContent.append(tempMsg);
+        }
+        else
+        {
+            qDebug() << "User::server_hanlder_on_GetMsg : blockVal is not Object\n";
+        }
+    }
+    emit SuccessOnGetMessage(messageContent);
+}
+
 void User::server_handler_on_failure(QString error)
 {
+    qDebug() << "User::server_handler_on_failure : " << error;
     emit Failure(error);
+
 }
 QDataStream& operator<<(QDataStream &stream,const User &u)
 {

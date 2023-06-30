@@ -21,6 +21,8 @@ private slots:
     void success_on_send_message();
     void failure_on_send_message(QString Error);
 
+    void on_refresh_pbn_clicked();
+    void Refresh_handler(QList<Message*>);
 private:
     Ui::GroupChat *ui;
 };

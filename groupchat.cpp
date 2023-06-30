@@ -14,6 +14,8 @@ GroupChat::GroupChat(QString chatName,QWidget *parent) :
     this->setWindowTitle(this->m_chat_name);
     connect(mp_user,&User::SuccessOnSendMessage,this,&GroupChat::success_on_send_message);
     connect(mp_user,&User::Failure,this,&GroupChat::failure_on_send_message);
+    connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
+    connect(mp_user,&User::FailureOnGetMessage,this,&GroupChat::failure_on_send_message);
     /* ---show all messages---
     for(auto&i : this->m_message_list)
     {
@@ -95,5 +97,18 @@ void GroupChat::success_on_send_message()
 void GroupChat::failure_on_send_message(QString Error)
 {
     ui->sendResult_lbl->setText(Error);
+}
+
+
+void GroupChat::on_refresh_pbn_clicked()
+{
+    mp_user->getMsg(this->m_chat_name,User::Group);
+    ui->sendResult_lbl->setText("Refreshing");
+}
+
+void GroupChat::Refresh_handler(QList<Message *> newList)
+{
+    this->m_message_list = newList;
+    ui->sendResult_lbl->setText("Refreshed Successfully!\n");
 }
 
