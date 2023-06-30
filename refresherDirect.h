@@ -10,9 +10,10 @@ class refresherDirect : public refresherAbstract
 public:
     explicit refresherDirect(const QString& argDst = "",QObject *parent = nullptr);
 //    explicit refresherDirect(const QString& argDst = "",User* argUser = nullptr,QObject *parent = nullptr);
-    void refresherMain(User* argUser) override;
+    void refresherMain() override;
     void msgCountInit() override;
-    void testInit(User* argUser);
+    void userMalloc() override;
+//    void testInit(User* argUser);
     void jsonHandle() override;
 private:
     QString dstDirect;

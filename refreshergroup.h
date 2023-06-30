@@ -9,9 +9,10 @@ class refresherGroup : public refresherAbstract
 public:
 
     explicit refresherGroup( QObject *parent = nullptr,const QString& argDst = "");
-    void refresherMain(User* argUser) override;
+    void refresherMain() override;
     void msgCountInit() override;
     void jsonHandle() override;
+    void userMalloc() override;
 private:
     QString dstGroup;
     int msgCount;

@@ -3,13 +3,11 @@
 refresherDirect::refresherDirect(const QString& argDst,QObject *parent)
 {
     dstDirect = argDst;
-    currUser = new User();
-    if(currUser->loadFromFile()){
-        // file no exist
-        qDebug() << "file problem abstract refresher constructor";
-    }
-    currUser->msgCountGroupReinit(dstDirect);
-    msgCountInit();
+//    currUser = new User();
+//    if(currUser->loadFromFile()){
+//        // file no exist
+//        qDebug() << "file problem abstract refresher constructor";
+//    }
 }
 
 //refresherDirect::refresherDirect(const QString &argDst, User *argUser,QObject *parent)
@@ -20,23 +18,18 @@ refresherDirect::refresherDirect(const QString& argDst,QObject *parent)
 //    msgCountInit();
 //}
 
-void refresherDirect::refresherMain(User* argUser)
+void refresherDirect::refresherMain()
 {
-        User* nUser = new User(QString("receive"),QString::number(1234),QString("dea1fd09fab4c03974c2b0b2e0e37b59"),QString("vdata/UserInfo/userLog.dat"));
-        nUser->msgCountDmReinit("send");
-        //    argUser->msgCountDmReinit("send");
-        qDebug() <<  QThread::currentThreadId() << ": directthread::refresher main\n";
 
-        //    currUser->msgCountDmReinit(dstDirect);
-        //    argUser.msgCountDmReinit();
-        //    msgCountInit();
-        testInit(nUser);
-        //    int countTemp = currUser->msgCountGetterDm(dstDirect);
-        int countTemp = nUser->msgCountGetterDm(QString("receive"));
-        qDebug() << "\n msgCount : " << msgCount << "-countTemp : " << countTemp;
+//        qDebug() <<  QThread::currentThreadId() << ": directthread::refresher main\n";
+
+        currUser->msgCountDmReinit(dstDirect);
+        int countTemp = currUser->msgCountGetterDm(dstDirect);
+//        qDebug() << "\n msgCount : " << msgCount << "-countTemp : " << countTemp;
         if(msgCount != countTemp){
             jsonHandle();
             msgCount = countTemp;
+//            qDebug() << "HSHAHHHAAHAHAHAHA";
         }
     }
 
@@ -44,13 +37,28 @@ void refresherDirect::refresherMain(User* argUser)
 
 void refresherDirect::msgCountInit()
 {
-    msgCount = currUser->msgCountGetterDm(dstDirect);
+        msgCount = currUser->msgCountGetterDm(dstDirect);
 }
 
-void refresherDirect::testInit(User* argUser)
+void refresherDirect::userMalloc()
 {
-    msgCount = argUser->msgCountGetterDm(dstDirect);
+//        User* tempUser = new User(QString("receive"),QString::number(1234),QString("dea1fd09fab4c03974c2b0b2e0e37b59"),QString("vdata/UserInfo/userLog.dat"));;
+        currUser = new User();
+//         this is a problem
+        if(currUser->loadFromFile()){
+//         file no exist
+            qDebug() << "file problem abstract refresherdirect::userMalloc";
+        }
+//        currUser = tempUser;
+        currUser->msgCountDmReinit(dstDirect);
+        msgCountInit();
+//        qDebug() << "refresherDirect::userMalloc";
 }
+
+//void refresherDirect::testInit(User* argUser)
+//{
+//    msgCount = argUser->msgCountGetterDm(dstDirect);
+//}
 
 void refresherDirect::jsonHandle()
 {
@@ -68,7 +76,7 @@ void refresherDirect::jsonHandle()
             messageContent.append(tempMsg);
         }
     }
-    qDebug() <<  QThread::currentThreadId() << ": directThread::jsonHandle\n";
+//    qDebug() <<  QThread::currentThreadId() << ": directThread::jsonHandle\n";
     emit directRefreshSignal(messageContent);
 
 }

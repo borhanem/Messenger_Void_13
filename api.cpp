@@ -86,7 +86,7 @@ void API::getMsgDM(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm ";
+//    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm ";
     connect(reply,&QNetworkReply::finished,this,&API::getMsgDmResponder);
 
 }
@@ -143,7 +143,7 @@ void API::getMsgChannel(const QString &token, const QString &dst)
 
 void API::getMsgDmResponder()
 {
-    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDmresponder\n";
+//    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDmresponder\n";
     if (reply->error() == QNetworkReply::NoError) {
         *data = reply->readAll();
         QJsonDocument jDoc = QJsonDocument::fromJson(*data);

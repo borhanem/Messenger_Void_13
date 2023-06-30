@@ -1,29 +1,29 @@
 #include "refresherchannel.h"
 
-refresherChannel::refresherChannel(QObject *parent,const QString& argDst)
+refresherChannel::refresherChannel(const QString& argDst,QObject *parent)
 {
     dstChannel = argDst;
-    currUser = new User();
-    if(currUser->loadFromFile()){
+//    currUser = new User();
+//    if(currUser->loadFromFile()){
         // file no exist
-        qDebug() << "file problem abstract refresher constructor";
-    }
-    currUser->msgCountChannelReinit(dstChannel);
-    msgCountInit();
+//        qDebug() << "file problem abstract refresher constructor";
+//    }
+//    currUser->msgCountChannelReinit(dstChannel);
+//    msgCountInit();
 }
 
-refresherChannel::refresherChannel(QObject *parent, const QString &argDst, User *argUser)
-{
-    dstChannel = argDst;
-    currUser = argUser;
-    currUser->msgCountChannelReinit(dstChannel);
-    msgCountInit();
-}
+//refresherChannel::refresherChannel(QObject *parent, const QString &argDst, User *argUser)
+//{
+//    dstChannel = argDst;
+//    currUser = argUser;
+//    currUser->msgCountChannelReinit(dstChannel);
+//    msgCountInit();
+//}
 
 
-void refresherChannel::refresherMain(User* argUser)
+void refresherChannel::refresherMain()
 {
-    qDebug() <<  QThread::currentThreadId() << ": channelThread::refresher main\n";
+//    qDebug() <<  QThread::currentThreadId() << ": channelThread::refresher main\n";
     currUser->msgCountChannelReinit(dstChannel);
     int countTemp = currUser->msgCountGetterChannel(dstChannel);
     if(msgCount != countTemp){
@@ -54,6 +54,18 @@ void refresherChannel::jsonHandle()
         }
     }
     emit channelRefreshSignal(messageContent);
-    qDebug() <<  QThread::currentThreadId() << ": channelthread::jsonHandle\n";
+//    qDebug() <<  QThread::currentThreadId() << ": channelthread::jsonHandle\n";
+}
+
+void refresherChannel::userMalloc()
+{
+    currUser = new User();
+    // this is a problem
+    if(currUser->loadFromFile()){
+        // file no exist
+        qDebug() << "file problem abstract refresherdirect::userMalloc";
+    }
+    currUser->msgCountChannelReinit(dstChannel);
+    msgCountInit();
 }
 

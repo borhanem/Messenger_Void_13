@@ -264,23 +264,29 @@ void User::msgCountChannelSlot(const QString& argMsgCount,QJsonObject jObj)
 
         // ignore this part idk whats happening
         // trying to make the map by bruteforcing the user
+        QList<QString> keys = channelData.keys();
         for (int i = 0; i < num; ++i){
-            QString blockIter = "block " + QString::number(num);
+            QString blockIter = "block " + QString::number(i);
             QJsonValue blockVal = jObj.value(blockIter);
             if(blockVal.isObject()){
                 QJsonObject blockObj = blockVal.toObject();
+                QString src = blockObj.value("src").toString();
                 QString dst = blockObj.value("dst").toString();
-                if(channelData.count(dst)){
-                    channelData[dst].first = num;
-                    channelData[dst].second = jObj;
-                    break;
+//                qDebug() << QThread::currentThreadId() << "num::msgCountDmSlot2 : ";
+                foreach(const QString& key, keys){
+                    if(src == key || dst == key){
+                        channelData[key].first = num;
+                        channelData[key].second = jObj;
+//                        qDebug() << QThread::currentThreadId() << "num::msgCountDmSlot3 : " << directData[key].first << "\n";
+                        break;
+                    }
                 }
             }
         }
         // end of ignore
     }else{
-        qDebug() << "User::msgCountDmSlot error";
-        // make value of map a pair
+        qDebug() << "User::msgCountDmslot error";
+
     }
 
 }
@@ -302,19 +308,25 @@ void User::msgCountDmSlot(const QString& argMsgCount,QJsonObject jObj)
         // Convert the number string to an integer
         int num = numStr.toInt();
 
-        qDebug() << "\n num::msgCountDmSlot :" << num << "\n";
+//        qDebug() << QThread::currentThreadId() << "num::msgCountDmSlot1 :" << num << "\n";
         // ignore this part idk whats happening
         // trying to make the map by bruteforcing the user
+        QList<QString> keys = directData.keys();
         for (int i = 0; i < num; ++i){
-            QString blockIter = "block " + QString::number(num);
+            QString blockIter = "block " + QString::number(i);
             QJsonValue blockVal = jObj.value(blockIter);
             if(blockVal.isObject()){
                 QJsonObject blockObj = blockVal.toObject();
+                QString src = blockObj.value("src").toString();
                 QString dst = blockObj.value("dst").toString();
-                if(directData.count(dst)){
-                    directData[dst].first = num;
-                    directData[dst].second = jObj;
-                    break;
+//                qDebug() << QThread::currentThreadId() << "num::msgCountDmSlot2 : ";
+                foreach(const QString& key, keys){
+                    if(src == key || dst == key){
+                        directData[key].first = num;
+                        directData[key].second = jObj;
+//                        qDebug() << QThread::currentThreadId() << "num::msgCountDmSlot3 : " << directData[key].first << "\n";
+                        break;
+                    }
                 }
             }
         }
@@ -344,16 +356,22 @@ void User::msgCountGroupSlot(const QString& argMsgCount,QJsonObject jObj)
 
         // ignore this part idk whats happening
         // trying to make the map by bruteforcing the user
+        QList<QString> keys = groupData.keys();
         for (int i = 0; i < num; ++i){
-            QString blockIter = "block " + QString::number(num);
+            QString blockIter = "block " + QString::number(i);
             QJsonValue blockVal = jObj.value(blockIter);
             if(blockVal.isObject()){
                 QJsonObject blockObj = blockVal.toObject();
+                QString src = blockObj.value("src").toString();
                 QString dst = blockObj.value("dst").toString();
-                if(groupData.count(dst)){
-                    groupData[dst].first = num;
-                    groupData[dst].second = jObj;
-                    break;
+//                qDebug() << QThread::currentThreadId() << "num::msgCountDmSlot2 : ";
+                foreach(const QString& key, keys){
+                    if(src == key || dst == key){
+                        groupData[key].first = num;
+                        groupData[key].second = jObj;
+//                        qDebug() << QThread::currentThreadId() << "num::msgCountDmSlot3 : " << directData[key].first << "\n";
+                        break;
+                    }
                 }
             }
         }
@@ -366,6 +384,8 @@ void User::msgCountGroupSlot(const QString& argMsgCount,QJsonObject jObj)
 
 int User::msgCountGetterDm(const QString& dst)
 {
+//    int num = directData[dst].first;
+//    qDebug() << "num::msgCountGetterDm - " << num;
     return directData[dst].first;
 }
 
@@ -396,25 +416,28 @@ QJsonObject User::msgContentGetterGroup(const QString &dst)
 
 void User::msgCountDmReinit(const QString& dst)
 {
-    qDebug() <<  QThread::currentThreadId() << ": user::msgCountdmReinit\n";
-    if(!directData.count(dst)){
+//    qDebug() <<  QThread::currentThreadId() << ": user::msgCountdmReinit1" << directData[dst].first << "|";
+    if(!directData[dst].first){
         directData[dst].first = 1;
+//        qDebug() <<  QThread::currentThreadId() << ": user::msgCountdmReinit2" << directData[dst].first << "|";
     }
     m_server->getMsgDM(m_token,dst);
 }
 
 void User::msgCountGroupReinit(const QString &dst)
 {
-    if(!groupData.count(dst)){
+    if(!groupData[dst].first){
         groupData[dst].first = 1;
+//        qDebug() <<  QThread::currentThreadId() << ": user::msgCountdmReinit2" << directData[dst].first << "|";
     }
     m_server->getMsgGroup(m_token,dst);
 }
 
 void User::msgCountChannelReinit(const QString &dst)
 {
-    if(!channelData.count(dst)){
+    if(!channelData[dst].first){
         channelData[dst].first = 1;
+        //        qDebug() <<  QThread::currentThreadId() << ": user::msgCountdmReinit2" << directData[dst].first << "|";
     }
     m_server->getMsgChannel(m_token,dst);
 }

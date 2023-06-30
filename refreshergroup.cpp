@@ -3,18 +3,18 @@
 refresherGroup::refresherGroup(QObject *parent,const QString& argDst)
 {
     dstGroup = argDst;
-    currUser = new User();
-    if(currUser->loadFromFile()){
-        // file no exist
-        qDebug() << "file problem abstract refresher constructor";
-    }
-    currUser->msgCountGroupReinit(dstGroup);
-    msgCountInit();
+//    currUser = new User();
+//    if(currUser->loadFromFile()){
+//        // file no exist
+//        qDebug() << "file problem abstract refresher constructor";
+//    }
+//    currUser->msgCountGroupReinit(dstGroup);
+//    msgCountInit();
 }
 
-void refresherGroup::refresherMain(User* argUser)
+void refresherGroup::refresherMain()
 {
-    qDebug() <<  QThread::currentThreadId() << ": groupThread::refresherMain\n";
+//    qDebug() <<  QThread::currentThreadId() << ": groupThread::refresherMain\n";
     currUser->msgCountGroupReinit(dstGroup);
     int countTemp = currUser->msgCountGetterGroup(dstGroup);
     if(msgCount != countTemp){
@@ -25,7 +25,7 @@ void refresherGroup::refresherMain(User* argUser)
 
 void refresherGroup::msgCountInit()
 {
-    msgCount = currUser->msgCountGetterDm(dstGroup);
+    msgCount = currUser->msgCountGetterGroup(dstGroup);
 }
 
 void refresherGroup::jsonHandle()
@@ -45,6 +45,18 @@ void refresherGroup::jsonHandle()
         }
     }
     emit groupRefreshSignal(messageContent);
-    qDebug() <<  QThread::currentThreadId() << ": groupThread::jsonHandle\n";
+//    qDebug() <<  QThread::currentThreadId() << ": groupThread::jsonHandle\n";
+}
+
+void refresherGroup::userMalloc()
+{
+    currUser = new User();
+    // this is a problem
+    if(currUser->loadFromFile()){
+        // file no exist
+        qDebug() << "file problem abstract refresherdirect::userMalloc";
+    }
+    currUser->msgCountGroupReinit(dstGroup);
+    msgCountInit();
 }
 

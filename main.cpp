@@ -16,14 +16,9 @@ int main(int argc, char *argv[])
 //    {
     QFile userLogFile("vdata/UserInfo/userLog.dat");
     QString css = read(loadTheme());
-    qDebug() <<  QThread::currentThreadId() << ": main.cpp\n";
-    User* nUser = new User(QString("receive"),QString::number(1234),QString("dea1fd09fab4c03974c2b0b2e0e37b59"),QString("vdata/UserInfo/userLog.dat"));
-//    nUser->msgCountDmReinit("send");
-    refresherDirect* tr1 = new refresherDirect(QString("send"));
-    // create user class in new thread not in constructor
-//    tr1->run();
-//    tr1->refresherMain(nUser);
-    tr1->start();
+//    qDebug() <<  QThread::currentThreadId() << ": main.cpp\n";
+// what do we do for first chat
+
     if( css.length() > 0)
     {
         a.setStyleSheet(css);
