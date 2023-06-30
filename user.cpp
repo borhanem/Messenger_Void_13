@@ -389,10 +389,10 @@ void User::server_hanlder_on_GetMsg(QJsonDocument jSonContent)
             Message* tempMsg;
             if(sender==this->m_username)
             {
-                tempMsg = new msgBaseSend(text,sender,receiver,QDateTime::fromString(time));
+                tempMsg = new msgBaseSend(text,sender,receiver,QDateTime::fromString(time,"yyyy-MM-dd HH:mm:ss"));
             }
             else{
-                tempMsg = new msgBaseReceiver(text,sender,receiver,QDateTime::fromString(time));
+                tempMsg = new msgBaseReceiver(text,sender,receiver,QDateTime::fromString(time,"yyyy-MM-dd HH:mm:ss"));
             }
             messageContent.append(tempMsg);
         }
