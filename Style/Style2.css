@@ -7,22 +7,32 @@ background-image: url(:/new/prefix1/Style/Stars.png);
 
 QToolButton#Exit_pbn
 {
-image: url(:/new/prefix1/Style/Purp_Exit.png);
+image: url(:/PurpButtons/Buttons/purp_exit.png);
 }
 
 QToolButton#Exit_pbn_2
 {
-image: url(:/new/prefix1/Style/Purp_Exit.png);
+image: url(:/PurpButtons/Buttons/purp_exit.png);
 }
 
 QToolButton#toolButton
 {
-background-image: url(:/new/prefix1/Style/Purp_Setting.png);
+image: url(:/PurpButtons/Buttons/Purp_Setting.png);
 }
 
 QToolButton#Add_tbn
 {
-image: url(:/new/prefix1/Style/purp_add.png);
+image: url(:/PurpButtons/Buttons/purp_add.png);
+}
+
+QToolButton#tojoin_tbn
+{
+image: url(:/PurpButtons/Buttons/purp_right_arrow.png);
+}
+
+QToolButton#tocreate_tbn
+{
+image: url(:/PurpButtons/Buttons/purp_left_arrow.png.png);
 }
 
 QLabel

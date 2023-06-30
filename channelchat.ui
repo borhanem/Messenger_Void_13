@@ -121,16 +121,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <height>391</height>
      </rect>
     </property>
-    <widget class="QWidget" name="verticalLayoutWidget">
+    <widget class="QWidget" name="gridLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>-1</x>
-       <y>-1</y>
+       <x>0</x>
+       <y>0</y>
        <width>491</width>
-       <height>391</height>
+       <height>421</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout"/>
+     <layout class="QGridLayout" name="gridLayout"/>
     </widget>
    </widget>
   </widget>

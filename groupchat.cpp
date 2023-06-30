@@ -13,6 +13,10 @@ GroupChat::GroupChat(QString chatName,QWidget *parent) :
     ui->groupname_led->setDisabled(true);
     ui->groupname_led->setText(this->m_chat_name);
     this->setWindowTitle(this->m_chat_name);
+    ui->group_scroll_area->setWidget(ui->scrollAreaWidgetContents);
+    messagesLayout = new QVBoxLayout(ui->scrollAreaWidgetContents);
+    ui->scrollAreaWidgetContents->setLayout(messagesLayout);
+    messagesLayout->setAlignment(Qt::AlignTop);
     connect(mp_user,&User::SuccessOnSendMessage,this,&GroupChat::success_on_send_message);
     connect(mp_user,&User::Failure,this,&GroupChat::failure_on_send_message);
     connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
@@ -116,11 +120,15 @@ void GroupChat::Refresh_handler(QList<Message *> newList)
     {
         if(i->sender() == mp_user->getUserName())
         {
-            ui->message_layout->addWidget(dynamic_cast<msgBaseSend*>(i));
+            msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
+            msg->setFixedSize(500,60);
+            messagesLayout->addWidget(msg);
         }
         else{
-            ui->message_layout->addWidget(dynamic_cast<msgBaseReceiver*>(i));
+            msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
+            msg->setFixedSize(500,60);
+            messagesLayout->addWidget(msg);
         }
-        }
+    }
 }
 

@@ -1,21 +1,31 @@
 QToolButton#toolButton
 {
-background-image: url(:/new/prefix1/Style/Red_Setting.png);
+background-image: url(:/redButtons/Buttons/Red_Setting.png);
 }
 
 QToolButton#Exit_pbn
 {
-image: url(:/new/prefix1/Style/Red_Exit.png);
+image: url(:/redButtons/Buttons/red_exit.png);
 }
 
 QToolButton#Exit_pbn_2
 {
-image: url(:/new/prefix1/Style/Red_Exit.png);
+image: url(:/redButtons/Buttons/red_exit.png);
 }
 
 QToolButton#Add_tbn
 {
-image: url(:/new/prefix1/Style/red_add.png);
+image: url(:/redButtons/Buttons/red_add.png);
+}
+
+QToolButton#tojoin_tbn
+{
+image: url(:/redButtons/Buttons/red_right_arrow.png);
+}
+
+QToolButton#tocreate_tbn
+{
+image: url(:/redButtons/Buttons/red_left_arrow.png);
 }
 
 QWidget
