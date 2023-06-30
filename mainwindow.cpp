@@ -333,7 +333,10 @@ void MainWindow::handler_on_NewGroup(QString newGroupName)
     QListWidgetItem* newItem = new QListWidgetItem(newGroup->chatName());
     newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(newGroup));
     ui->chats_listWidget->addItem(newItem);
+    ui->chats_listWidget_2->addItem(newItem);
     dynamic_cast<GroupChat*>(newGroup)->open();
+
+
 
 }
 
@@ -345,6 +348,7 @@ void MainWindow::handler_on_NewChannel(QString newChannelName)
     QListWidgetItem* newItem = new QListWidgetItem(newChannel->chatName());
     newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(newChannel));
     ui->chats_listWidget->addItem(newItem);
+    ui->chats_listWidget_2->addItem(newItem);
     dynamic_cast<ChannelChat*>(newChannel)->open();
 }
 
@@ -474,6 +478,7 @@ void MainWindow::loadChats()
             QListWidgetItem* newItem = new QListWidgetItem(groupEntity->chatName());
             newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(groupEntity));
             ui->chats_listWidget->addItem(newItem);
+            ui->chats_listWidget_2->addItem(newItem);
         }
     }
     if(cDir.exists())
@@ -490,6 +495,7 @@ void MainWindow::loadChats()
             QListWidgetItem* newItem = new QListWidgetItem(ChannelEntity->chatName());
             newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(ChannelEntity));
             ui->chats_listWidget->addItem(newItem);
+            ui->chats_listWidget_2->addItem(newItem);
         }
     }
 
