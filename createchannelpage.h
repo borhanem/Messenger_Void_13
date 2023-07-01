@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include "user.h"
+
+
 namespace Ui {
 class CreateChannelPage;
 }
@@ -34,6 +36,7 @@ signals:
 private:
     Ui::CreateChannelPage *ui;
     const User* const mp_user;
+
 };
 
 #endif // CREATECHANNELPAGE_H

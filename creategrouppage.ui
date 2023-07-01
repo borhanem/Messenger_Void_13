@@ -28,6 +28,9 @@
      <height>20</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">font: 10pt &quot;Segoe Script&quot;;</string>
+   </property>
    <property name="text">
     <string>Group Name</string>
    </property>
@@ -52,7 +55,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>create Group result...</string>
+    <string>Create Group result...</string>
    </property>
   </widget>
   <widget class="QStackedWidget" name="stackedWidget">
@@ -65,7 +68,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QPushButton" name="creategroup_pbn">
@@ -82,6 +85,9 @@
        <width>100</width>
        <height>30</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 8pt &quot;Segoe Script&quot;;</string>
      </property>
      <property name="text">
       <string>Create</string>
@@ -103,6 +109,9 @@
        <width>100</width>
        <height>30</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 8pt &quot;Segoe Script&quot;;</string>
      </property>
      <property name="text">
       <string>Join</string>
@@ -162,6 +171,9 @@
      <width>100</width>
      <height>30</height>
     </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 8pt &quot;Segoe Script&quot;;</string>
    </property>
    <property name="text">
     <string>Cancel</string>

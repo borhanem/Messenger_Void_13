@@ -63,6 +63,8 @@ private slots:
 
     void on_Exit_pbn_2_clicked();
 
+    void on_Minus_tbn_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
     User* mp_user;

@@ -16,6 +16,7 @@
         <file>Buttons/green_left_arrow.png</file>
         <file>Buttons/green_right_arrow.png.png</file>
         <file>Buttons/Green_Setting.png</file>
+        <file>Buttons/green_minus_png.png</file>
     </qresource>
     <qresource prefix="/pinkButtons">
         <file>Buttons/pink_add.png</file>
@@ -23,6 +24,7 @@
         <file>Buttons/pink_lesft_arrow.png</file>
         <file>Buttons/pink_right_arrow.png.png</file>
         <file>Buttons/Pink_Setting.png</file>
+        <file>Buttons/pink_minus_png.png</file>
     </qresource>
     <qresource prefix="/redButtons">
         <file>Buttons/red_exit.png</file>
@@ -30,6 +32,7 @@
         <file>Buttons/red_left_arrow.png.png</file>
         <file>Buttons/red_right_arrow.png</file>
         <file>Buttons/Red_Setting.png</file>
+        <file>Buttons/red_minus_png.png</file>
     </qresource>
     <qresource prefix="/PurpButtons">
         <file>Buttons/purp_add.png</file>
@@ -37,5 +40,6 @@
         <file>Buttons/purp_left_arrow.png.png.png</file>
         <file>Buttons/purp_right_arrow.png.png</file>
         <file>Buttons/Purp_Setting.png</file>
+        <file>Buttons/purp_minust_png.png</file>
     </qresource>
 </RCC>

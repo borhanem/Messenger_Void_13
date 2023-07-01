@@ -25,6 +25,7 @@ private slots:
     void Refresh_Handler(QList<Message*>);
 private:
     Ui::ChannelChat *ui;
+
     refresherChannel* refresher;
 };
 

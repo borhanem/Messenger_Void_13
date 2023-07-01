@@ -16,6 +16,7 @@ CreateChannelPage::CreateChannelPage(const User* const user,QWidget *parent ) :
 
 }
 
+
 CreateChannelPage::~CreateChannelPage()
 {
     delete ui;

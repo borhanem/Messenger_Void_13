@@ -1,95 +1,100 @@
 QToolButton#toolButton
 {
-background-image: url(:/redButtons/Buttons/Red_Setting.png);
+    background-image: url(:/redButtons/Buttons/Red_Setting.png);
 }
 
 QToolButton#Exit_pbn
 {
-image: url(:/redButtons/Buttons/red_exit.png);
+    image: url(:/redButtons/Buttons/red_exit.png);
 }
 
 QToolButton#Exit_pbn_2
 {
-image: url(:/redButtons/Buttons/red_exit.png);
+    image: url(:/redButtons/Buttons/red_exit.png);
 }
 
 QToolButton#Add_tbn
 {
-image: url(:/redButtons/Buttons/red_add.png);
+    image: url(:/redButtons/Buttons/red_add.png);
+}
+
+QToolButton#Minus_tbn
+{
+    image: url(:/redButtons/Buttons/red_minus_png.png);
 }
 
 QToolButton#tojoin_tbn
 {
-image: url(:/redButtons/Buttons/red_right_arrow.png);
+    image: url(:/redButtons/Buttons/red_right_arrow.png);
 }
 
 QTextBrowser#textBrowser
 {
-    background-color: rgb(56, 56, 56);
+    background-color: gray;
 }
 
 QLabel#msg_index
 {
-    background-color: rgb(170, 0, 0);
+    background-color: rgb(56, 56, 56);
+}
 
 QToolButton#tocreate_tbn
 {
-image: url(:/redButtons/Buttons/red_left_arrow.png);
+    image: url(:/redButtons/Buttons/red_left_arrow.png);
 }
-
 QWidget
 {
-color : gray;
-background-color: black ;
+    color : gray;
+    background-color: black ;
 }
 
 QLabel
 {
-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 QPushButton#Theme_2_pbn
 {
-background-image: url(:/new/prefix1/Style/Purp.png);
-border-radius: 5px;
+    background-image: url(:/new/prefix1/Style/Purp.png);
+    border-radius: 5px;
 }
 
 QPushButton#newchannel_pbn
 {
-background-color: gray;
-border-radius: 5px;
-color : black;
+    background-color: gray;
+    border-radius: 5px;
+    color : black;
 }
 
 QPushButton#newchat_pbn
 {
-background-color: rgb(179, 179, 179);
-border-radius: 5px;
-color : rgb(170, 0, 0);
+    background-color: rgb(179, 179, 179);
+    border-radius: 5px;
+    color : rgb(170, 0, 0);
 }
 
 QPushButton#createGroup_pbn
 {
-background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color : gray;
+    background-color: rgb(170, 0, 0);
+    border-radius: 5px;
+    color : gray;
 }
 
 QPushButton
 {
-background-color: rgb(170, 0, 0);
-border-radius: 5px;
-color : black;
+    background-color: rgb(170, 0, 0);
+    border-radius: 5px;
+    color : black;
 }
 
 QLineEdit
 {
-background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;
+    background-color: rgb(56, 56, 56);
+    border-color: rgb(170, 170, 127);
+    border-radius:5%;
 }
 
 QGroupBox
 {
-color: rgb(179, 179, 179);
+    color: rgb(179, 179, 179);
 }

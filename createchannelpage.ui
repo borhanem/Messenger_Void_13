@@ -22,6 +22,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">font: 10pt &quot;Segoe Script&quot;;</string>
+   </property>
    <property name="text">
     <string>Channel Name</string>
    </property>
@@ -71,7 +74,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QPushButton" name="createchannel_pbn">
@@ -88,6 +91,9 @@
        <width>100</width>
        <height>30</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 8pt &quot;Segoe Script&quot;;</string>
      </property>
      <property name="text">
       <string>Create</string>
@@ -110,6 +116,9 @@
        <height>30</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 8pt &quot;Segoe Script&quot;;</string>
+     </property>
      <property name="text">
       <string>Join</string>
      </property>
@@ -130,6 +139,9 @@
      <width>100</width>
      <height>30</height>
     </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 8pt &quot;Segoe Script&quot;;</string>
    </property>
    <property name="text">
     <string>Cancel</string>
