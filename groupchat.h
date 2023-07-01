@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "abstractchat.h"
 #include <QVBoxLayout>
+#include "workerrefresher.h"
 namespace Ui {
 class GroupChat;
 }
@@ -28,6 +29,7 @@ private slots:
 private:
     Ui::GroupChat *ui;
     QVBoxLayout* messagesLayout;
+    WorkerRefresher* worker;
 };
 
 #endif // GROUPCHAT_H
