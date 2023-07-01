@@ -1,7 +1,7 @@
 #include "api.h"
 
 API::API(const QString& sUrl,QObject *parent)
-    : QObject{parent},url_s(sUrl)
+    : QObject{parent},url_s(sUrl),m_isAvailable(true)
 {
     man_ptr = new QNetworkAccessManager(this);
     data = new QByteArray();
@@ -103,23 +103,44 @@ void API::joinChannel(const QString &token, const QString &channelName)
 
 void API::getMsgUser(const QString &token, const QString &dst)
 {
+    if(m_isAvailable){
+    m_isAvailable = false;
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
     connect(reply,&QNetworkReply::finished,this,&API::getMsgUserResponder);
-}
+    }
+    else
+    {
+    qDebug() << "API::getMsgUser => API is not available";
+    }
+    }
 
 void API::getMsgGroup(const QString &token, const QString &dst)
 {
+    if(m_isAvailable){
+    m_isAvailable = false;
     QString temp = url_s + "/getgroupchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
     connect(reply,&QNetworkReply::finished,this,&API::getMsgGroupResponder);
+    }
+    else
+    {
+    qDebug() << "API::getMsgUser => API is not available";
+    }
 }
 
 void API::getMsgChannel(const QString &token, const QString &dst)
 {
+    if(m_isAvailable){
+    m_isAvailable = false;
     QString temp = url_s + "/getchannelchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
     connect(reply,&QNetworkReply::finished,this,&API::getMsgChannelResponder);
+    }
+    else
+    {
+    qDebug() << "API::getMsgUser => API is not available";
+    }
 }
 
 QByteArray *API::getResponse()
@@ -296,6 +317,7 @@ void API::getMsgUserResponder()
         qDebug("getMsgUserResponde: jdoc is not a object\n");
         }
         reply->deleteLater();
+        m_isAvailable = true;
 }
 
 void API::getMsgChannelResponder()
@@ -326,6 +348,7 @@ void API::getMsgChannelResponder()
         qDebug("getMsgChannelResponde: jdoc is not a object\n");
         }
         reply->deleteLater();
+        m_isAvailable = true;
 }
 
 void API::getMsgGroupResponder()
@@ -356,6 +379,7 @@ void API::getMsgGroupResponder()
         qDebug("getMsgGroupResponde: jdoc is not a object\n");
         }
         reply->deleteLater();
+        m_isAvailable = true;
 }
 
 
