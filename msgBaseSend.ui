@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>60</height>
+    <height>52</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,7 +39,7 @@
      <x>241</x>
      <y>20</y>
      <width>211</width>
-     <height>32</height>
+     <height>28</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -47,9 +47,8 @@
 border-bottom-right-radius:15px;
 border-top-right-radius:0px;
 border-bottom-left-radius:0px;
-font: 9pt &quot;MV Boli&quot;;
+font: 8pt &quot;MV Boli&quot;;
 color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 0);
 SizePolicy:  Expanding;
 </string>
    </property>
@@ -60,23 +59,24 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MV Boli'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;hii&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MV Boli'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:7pt;&quot;&gt;hii&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="Time">
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>30</y>
-     <width>81</width>
+     <y>27</y>
+     <width>51</width>
      <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-bottom-right-radius: 0px;
+    <string notr="true">borderradius: 10px;
 background-color: transparent;
-color : black;</string>
+color : black;
+font: 6pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="text">
     <string>  12:00 pm </string>

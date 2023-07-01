@@ -73,6 +73,17 @@ background-color: rgb(242, 124, 169);
 border-radius: 5px;
 color: white;
 }
+
+QTextBrowser#textBrowser
+{
+    background-color: rgb(252, 220, 238);
+}
+
+QLabel#msg_index
+{
+    background-color: rgb(242, 124, 169);
+}
+
 QLineEdit
 {
 background-color: rgb(252, 220, 238);

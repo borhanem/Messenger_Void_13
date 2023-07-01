@@ -40,6 +40,21 @@ QLabel
 color: rgb(255, 255, 255);
 }
 
+QTextBrowser#textBrowser
+{
+    background-image: url(:/new/prefix1/Style/Purp.png);
+}
+
+QLabel#msg_index
+{
+   background-image: url(:/new/prefix1/Style/Purp.png);
+}
+
+QLabel#Time
+{
+   background-image: url(:/new/prefix1/Style/Purp.png);
+}
+
 QPushButton
 {
 background-image: url(:/new/prefix1/Style/Purp.png);

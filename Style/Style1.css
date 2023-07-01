@@ -23,6 +23,15 @@ QToolButton#tojoin_tbn
 image: url(:/redButtons/Buttons/red_right_arrow.png);
 }
 
+QTextBrowser#textBrowser
+{
+    background-color: rgb(56, 56, 56);
+}
+
+QLabel#msg_index
+{
+    background-color: rgb(170, 0, 0);
+
 QToolButton#tocreate_tbn
 {
 image: url(:/redButtons/Buttons/red_left_arrow.png);

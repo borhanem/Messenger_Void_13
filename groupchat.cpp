@@ -2,6 +2,7 @@
 #include "ui_groupchat.h"
 #include "msgBaseReceive.h"
 #include "msgBaseSend.h"
+#include <refreshergroup.h>
 
 GroupChat::GroupChat(QString chatName,QWidget *parent) :
     QDialog(parent),
@@ -25,7 +26,7 @@ GroupChat::GroupChat(QString chatName,QWidget *parent) :
     // making the refresher
     refresher = new refresherGroup(chatName);
     refresher->start();
-    connect(refresher,&refresherGroup::groupRefreshSignal,this,&GroupChat::Refresh_handler);
+    //connect(refresher,&refresherGroup::groupRefreshSignal,this,&GroupChat::Refresh_handler);
     ///////////////////////
     /* ---show all messages---
     for(auto&i : this->m_message_list)
