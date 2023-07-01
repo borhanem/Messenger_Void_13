@@ -30,6 +30,9 @@ public:
     void getMsgUser(const QString &token, const QString &dst); // new entry
     void getMsgGroup(const QString &token, const QString &dst); // new entry
     void getMsgChannel(const QString &token, const QString &dst); // new entry
+    void getGroupList(const QString &token);
+    void getChannelList(const QString &token);
+    void getUserList(const QString &token);
 
     QByteArray* getResponse();
 signals:
@@ -39,6 +42,9 @@ signals:
     void SuccessOnGetMsgUser(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgGroup(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgChannel(QJsonDocument jSonContent); // new entry
+    void SuccessOnGetGroupList(QJsonDocument);
+    void SuccessOnGetChannelList(QJsonDocument);
+    void SuccessOnGetUserList(QJsonDocument);
     void SuccessOnCreateGroup();
     void SuccessOnCreateChannel();
     void SuccessOnJoinChannel();
@@ -54,6 +60,9 @@ signals:
     void FailureOnGetMsgChannel(QString error);
     void FailureOnCreateGroup(QString error);
     void FailureOnCreateChannel(QString error);
+    void FailureOnGetGroupList(QString error);
+    void FailureOnGetChannelList(QString error);
+    void FailureOnGetUserList(QString error);
     void SuccessOnSendMsgToUser();
     void SuccessOnSendMsgToGroup();
     void SuccessOnSendMsgToChannel();
@@ -69,6 +78,9 @@ private slots:
     void getMsgUserResponder();
     void getMsgChannelResponder();
     void getMsgGroupResponder();
+    void getGroupListResponder();
+    void getChannelListResponder();
+    void getUserListResponder();
     void SendMessageToUserResponder(); // new entry
     void sendMessageToGroupResponder();
     void sendMessageToChannelResponder();

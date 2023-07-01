@@ -212,6 +212,57 @@ void API::getMsgChannel(const QString &token, const QString &dst)
     }
 }
 
+void API::getGroupList(const QString &token)
+{
+    /*
+     * getgrouplist?token=7a3c48f7c7939b7269d01443a431825f
+     */
+    if(m_isAvailable){
+        m_isAvailable = false;
+        QString temp = url_s + "/getgrouplist?token=" + token;
+        reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+        connect(reply,&QNetworkReply::finished,this,&API::getGroupListResponder);
+    }
+    else
+    {
+        qDebug() << "API::getGroupList => API is not available";
+    }
+}
+
+void API::getChannelList(const QString &token)
+{
+    /*
+     * getchannellist?token=7a3c48f7c7939b7269d01443a431825f
+     */
+    if(m_isAvailable){
+        m_isAvailable = false;
+        QString temp = url_s + "/getchannellist?token=" + token;
+        reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+        connect(reply,&QNetworkReply::finished,this,&API::getChannelListResponder);
+    }
+    else
+    {
+        qDebug() << "API::getChannelList => API is not available";
+    }
+}
+
+void API::getUserList(const QString &token)
+{
+    /*
+     * getuserlist?token=7a3c48f7c7939b7269d01443a431825f
+     */
+    if(m_isAvailable){
+        m_isAvailable = false;
+        QString temp = url_s + "/getuserlist?token=" + token;
+        reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+        connect(reply,&QNetworkReply::finished,this,&API::getUserListResponder);
+    }
+    else
+    {
+        qDebug() << "API::getUserList => API is not available";
+    }
+}
+
 QByteArray *API::getResponse()
 {
     return data;
@@ -454,6 +505,93 @@ void API::getMsgGroupResponder()
     }
     reply->deleteLater();
     m_isAvailable = true;
+}
+
+void API::getGroupListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            emit SuccessOnGetGroupList(jDoc);
+        }
+        else
+        {
+            emit FailureOnGetGroupList(respond_message);
+        }
+    }
+    else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnGetGroupList(reply->errorString());
+    }
+    reply->deleteLater();
+    m_isAvailable =true;
+}
+
+void API::getChannelListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            emit SuccessOnGetChannelList(jDoc);
+        }
+        else
+        {
+            emit FailureOnGetChannelList(respond_message);
+        }
+    }
+    else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnGetChannelList(reply->errorString());
+    }
+    reply->deleteLater();
+    m_isAvailable =true;
+}
+
+void API::getUserListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            emit SuccessOnGetUserList(jDoc);
+        }
+        else
+        {
+            emit FailureOnGetUserList(respond_message);
+        }
+    }
+    else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnGetUserList(reply->errorString());
+    }
+    reply->deleteLater();
+    m_isAvailable =true;
 }
 
 
