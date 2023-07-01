@@ -78,9 +78,9 @@ void WorkerRefresher::handleRespond(QJsonObject Repond,size_t new_size)
             {
                 qDebug() << "User::server_hanlder_on_GetMsg : blockVal is not Object\n";
             }
-            this->m_pre_size = new_size;
-            emit resultReady(messageContent);
         }
+        this->m_pre_size = new_size;
+        emit resultReady(messageContent);
     }
     else{
         qDebug() << "WorkerRefresher::handleRespond => No difference in number of messages\n";

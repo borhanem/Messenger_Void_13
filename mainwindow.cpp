@@ -447,7 +447,7 @@ void MainWindow::loadChats()
         {
             qDebug() << file.baseName();
             AbstractChat* groupEntity = new GroupChat(file.baseName(),this);
-            groupEntity->loadFromFile();
+            //groupEntity->loadFromFile();
             qDebug() << "loaded From File";
             mp_ChatList.push_back(groupEntity);
             qDebug() << "added to ChatList";
@@ -464,7 +464,7 @@ void MainWindow::loadChats()
         {
             qDebug() << file.baseName();
             AbstractChat* ChannelEntity = new ChannelChat(file.baseName(),this);
-            ChannelEntity->loadFromFile();
+            //ChannelEntity->loadFromFile();
             qDebug() << "loaded From File";
             mp_ChatList.push_back(ChannelEntity);
             qDebug() << "added to ChatList";

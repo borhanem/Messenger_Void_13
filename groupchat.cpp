@@ -45,12 +45,13 @@ GroupChat::~GroupChat()
 int GroupChat::saveToFile()
 {
     QDir LogDir;
+    qDebug() << "GroupChat::saveToFile is  running";
     if(!LogDir.exists("vdata/MsgData/Groups"))
     {
         LogDir.mkpath("vdata/MsgData/Groups");
     }
     QFile logFile("vdata/MsgData/Groups/"+this->m_chat_name+".dat");
-    if(!logFile.open(QIODevice::WriteOnly))
+    if(!logFile.open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
         return -1;
     }
@@ -69,10 +70,12 @@ int GroupChat::saveToFile()
 int GroupChat::loadFromFile()
 {
     QFile logFile("vdata/MsgData/Groups/"+this->m_chat_name+".dat");
+    qDebug() << "GroupChat::loadFromFile is  running";
     if(!logFile.open(QIODevice::ReadOnly))
     {
         return -1;
     }
+    this->m_message_list.clear();
     QDataStream user_ds(&logFile);
     user_ds.setVersion(QDataStream::Qt_6_5);
     Message *temp = new Message();
