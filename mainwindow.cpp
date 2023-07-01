@@ -392,7 +392,7 @@ void MainWindow::on_newchannel_pbn_clicked()
 }
 
 
-void MainWindow::on_Minus_tbn_clicked(bool checked)
+void MainWindow::on_Minus_tbn_clicked()
 {
 
         ui->createGroup_pbn->show();
@@ -484,7 +484,7 @@ void MainWindow::on_Exit_pbn_2_clicked()
 }
 
 
-void MainWindow::on_Add_tbn_clicked(bool checked)
+void MainWindow::on_Add_tbn_clicked()
 {
     ui->toolButton->hide();
     ui->createGroup_pbn->show();

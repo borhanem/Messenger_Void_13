@@ -58,12 +58,13 @@ private slots:
     void on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_newchannel_pbn_clicked();
 
-
-    void on_Add_tbn_clicked(bool checked);
-
     void on_Exit_pbn_2_clicked();
 
-    void on_Minus_tbn_clicked(bool checked);
+    void on_Minus_tbn_clicked();
+
+    void on_Add_tbn_clicked();
+
+    void on_Add_tbn_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
