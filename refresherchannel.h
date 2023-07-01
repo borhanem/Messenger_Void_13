@@ -8,11 +8,21 @@ class refresherChannel : public refresherAbstract
 {
     Q_OBJECT
 public:
-    explicit refresherChannel(QObject *parent = nullptr);
-    void jSonChecker(int& argMsgCount);
-    int msgCountInit(const QString& responseMsg);
+    explicit refresherChannel(const QString& argDst = "",QObject *parent = nullptr);
+//    explicit refresherChannel(QObject *parent = nullptr,const QString& argDst = "",User* argUser = nullptr);
+    void refresherMain() override;
+    void msgCountInit() override;
+    void jsonHandle() override;
+    void userMalloc() override;
+private:
+    QString dstChannel;
+    int msgCount;
+    User* currUser;
 signals:
-    void channelRefreshSignal();
+    void channelRefreshSignal(QList<Message*>);
+private slots:
+
+
 };
 
 #endif // REFRESHERCHANNEL_H
