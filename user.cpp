@@ -36,6 +36,12 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::FailureOnGetMsgChannel,this,&User::FailureOnGetMessage);
     QObject::connect(m_server,&API::SuccessOnGetMsgUser,this,&User::server_hanlder_on_GetMsg);
     QObject::connect(m_server,&API::FailureOnGetMsgUser,this,&User::FailureOnGetMessage);
+    QObject::connect(m_server,&API::SuccessOnGetUserList,this,&::User::server_handler_on_GetChatList);
+    QObject::connect(m_server,&API::FailureOnGetUserList,this,&::User::FailureOnGetChatList);
+    QObject::connect(m_server,&API::SuccessOnGetGroupList,this,&::User::server_handler_on_GetChatList);
+    QObject::connect(m_server,&API::FailureOnGetGroupList,this,&::User::FailureOnGetChatList);
+    QObject::connect(m_server,&API::SuccessOnGetChannelList,this,&::User::server_handler_on_GetChatList);
+    QObject::connect(m_server,&API::FailureOnGetChannelList,this,&::User::FailureOnGetChatList);
 }
 
 User::User(QString userName, QString passWord, QString token,QString userPath, QObject *parent)
@@ -66,13 +72,18 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::SuccessOnJoinChannel,this,&User::server_handler_on_joinChat);
     QObject::connect(m_server,&API::FailureOnJoinChannel,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::SuccessOnGetMsgGroup,this,&User::server_hanlder_on_GetMsg);
-    QObject::connect(m_server,&API::FailureOnGetMsgGroup,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::FailureOnGetMsgGroup,this,&User::FailureOnGetMessage);
     QObject::connect(m_server,&API::SuccessOnGetMsgChannel,this,&User::server_hanlder_on_GetMsg);
-    QObject::connect(m_server,&API::FailureOnGetMsgChannel,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::FailureOnGetMsgChannel,this,&User::FailureOnGetMessage);
     QObject::connect(m_server,&API::SuccessOnGetMsgUser,this,&User::server_hanlder_on_GetMsg);
-    QObject::connect(m_server,&API::FailureOnGetMsgUser,this,&User::server_handler_on_failure);
+    QObject::connect(m_server,&API::FailureOnGetMsgUser,this,&User::FailureOnGetMessage);
+    QObject::connect(m_server,&API::SuccessOnGetUserList,this,&::User::server_handler_on_GetChatList);
+    QObject::connect(m_server,&API::FailureOnGetUserList,this,&::User::FailureOnGetChatList);
+    QObject::connect(m_server,&API::SuccessOnGetGroupList,this,&::User::server_handler_on_GetChatList);
+    QObject::connect(m_server,&API::FailureOnGetGroupList,this,&::User::FailureOnGetChatList);
+    QObject::connect(m_server,&API::SuccessOnGetChannelList,this,&::User::server_handler_on_GetChatList);
+    QObject::connect(m_server,&API::FailureOnGetChannelList,this,&::User::FailureOnGetChatList);
 }
-
 void User::Register()
 {
     m_server->Register(m_username,m_password);
@@ -163,6 +174,28 @@ void User::getMsg(const QString &dst, const ChatType &type)
 
     case Channel:
         m_server->getMsgChannel(this->m_token,dst);
+        break;
+
+    default:
+        qDebug() << "Error - from User::getMsg : No match for type\n";
+        break;
+    }
+}
+
+void User::getChatList(const ChatType &type)
+{
+    switch(type)
+    {
+    case Private:
+        m_server->getUserList(this->m_token);
+        break;
+
+    case Group:
+        m_server->getGroupList(this->m_token);
+        break;
+
+    case Channel:
+        m_server->getChannelList(this->m_token);
         break;
 
     default:
@@ -383,6 +416,34 @@ void User::server_handler_on_failure(QString error)
     qDebug() << "User::server_handler_on_failure : " << error;
     emit Failure(error);
 
+}
+
+void User::server_handler_on_GetChatList(QJsonDocument jSonContent)
+{
+    qDebug() << "User::server_handler_on_GetChatList is running\n";
+    QJsonObject msgContent = jSonContent.object();//currUser->msgContentGetterGroup(dstGroup);
+    QRegularExpression re("-\\d+-");
+    size_t msgCount;
+    QString argMsgCount = msgContent.value("message").toString();
+    // Find the first match in the string
+    QRegularExpressionMatch match = re.match(argMsgCount);
+    if (match.hasMatch()) {
+        // Extract the matched text
+        QString matchText = match.captured(0);
+
+        // Remove the hyphens from the matched text
+        QString numStr = matchText.remove('-');
+
+        // Convert the number string to an integer
+        msgCount = numStr.toULongLong();
+        qDebug() << "User::server_handler_on_GetChatList - msgCount : " << msgCount;
+    }
+    else
+    {
+        qDebug() << "User::server_handler_on_GetChatList - do not match!\n";
+        return;
+    }
+    emit SuccessOnGetChatList(msgContent,msgCount);
 }
 QDataStream& operator<<(QDataStream &stream,const User &u)
 {

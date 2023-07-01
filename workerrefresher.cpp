@@ -41,10 +41,10 @@ void WorkerRefresher::sendRefreshRequest()
     switch(m_refresher_type)
     {
     case(MSGList):
-        mp_currUser->getMsg(m_chat_name,m_chat_type);
+        mp_currUser->getMsg(this->m_chat_name,this->m_chat_type);
         break;
     case(ChatList):
-        //  will request the server for ChatList
+        mp_currUser->getChatList(this->m_chat_type);
         break;
     }
 }

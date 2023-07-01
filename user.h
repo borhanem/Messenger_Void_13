@@ -27,6 +27,7 @@ public:
     void joinChat(const QString& chatName,const ChatType& type)const;
     void sendMessage(const Message& msg,const ChatType& type);
     void getMsg(const QString &dst,const ChatType& type); // new entry
+    void getChatList(const ChatType& type);
     int loadFromFile();
     int saveToFile();
     QString getUserName();
@@ -54,10 +55,13 @@ private slots:
     void server_handler_on_joinChat();
     void server_hanlder_on_GetMsg(QJsonDocument jSonContent);
     void server_handler_on_failure(QString Error);
+    void server_handler_on_GetChatList(QJsonDocument);
 signals:
     void Success();
     void SuccessOnLogout();
     void SuccessOnSendMessage();
+    void SuccessOnGetChatList(QJsonObject,size_t);
+    void FailureOnGetChatList(QString Error);
     void SuccessOnGetMessage(QJsonObject,size_t);
     void FailureOnGetMessage(QString Error);
     void Failure(QString Error);
