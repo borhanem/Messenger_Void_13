@@ -64,8 +64,6 @@ private slots:
 
     void on_Add_tbn_clicked();
 
-    void on_Add_tbn_clicked(bool checked);
-
 private:
     Ui::MainWindow *ui;
     User* mp_user;
