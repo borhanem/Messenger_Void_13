@@ -124,8 +124,7 @@ border-radius:10%;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 9pt &quot;Snap ITC&quot;;
-</string>
+        <string notr="true">font: 700 9pt &quot;Segoe Script&quot;;</string>
        </property>
        <property name="text">
         <string>New Channel</string>
@@ -141,8 +140,8 @@ border-radius:10%;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-font: 12pt &quot;8514oem&quot;;</string>
+        <string notr="true">font: 9pt &quot;Webdings&quot;;
+font: 14pt &quot;Simplified Arabic Fixed&quot;;</string>
        </property>
       </widget>
       <widget class="QPushButton" name="createGroup_pbn">
@@ -155,8 +154,7 @@ font: 12pt &quot;8514oem&quot;;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 9pt &quot;Snap ITC&quot;;
-</string>
+        <string notr="true">font: 700 9pt &quot;Segoe Script&quot;;</string>
        </property>
        <property name="text">
         <string>New Group</string>
@@ -237,7 +235,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <property name="geometry">
         <rect>
          <x>499</x>
-         <y>1</y>
+         <y>2</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -269,8 +267,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <widget class="QToolButton" name="Exit_pbn">
        <property name="geometry">
         <rect>
-         <x>529</x>
-         <y>1</y>
+         <x>527</x>
+         <y>2</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -311,7 +309,7 @@ border-radius:10%;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 9pt &quot;Snap ITC&quot;;</string>
+        <string notr="true">font: 700 9pt &quot;Segoe Script&quot;;</string>
        </property>
        <property name="text">
         <string>New Chat</string>
@@ -335,7 +333,7 @@ color: rgb(0, 85, 0);</string>
        <property name="geometry">
         <rect>
          <x>469</x>
-         <y>1</y>
+         <y>2</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -378,6 +376,22 @@ border-radius: 10%;</string>
         <string notr="true">background-image: url(:/new/prefix1/Style/Green.png);
 border-color: rgb(170, 170, 127);
 border-radius: 10%;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QToolButton" name="Minus_tbn">
+       <property name="geometry">
+        <rect>
+         <x>438</x>
+         <y>2</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
        <property name="text">
         <string/>

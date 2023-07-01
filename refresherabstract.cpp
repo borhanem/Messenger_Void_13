@@ -1,23 +1,21 @@
 #include "refresherabstract.h"
-
+#include <QCoreApplication>
 refresherAbstract::refresherAbstract(QObject *parent)
 {
-    currUser = new User();
-    if(currUser->loadFromFile()){
-        // file no exist
-        qDebug() << "file problem refresher constructor";
-    }
+
 }
 
 void refresherAbstract::run()
 {
-    int msgCount = 0;
-
-//    msgCount = msgCountInit();
+    userMalloc();
     while(true){
-        QThread::sleep(FREEZEDURATION);
-        jSonChecker(msgCount);
+        QTime dieTime= QTime::currentTime().addSecs(FREEZEDURATION);
+        while (QTime::currentTime() < dieTime){
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        }
+//        qDebug() <<  QThread::currentThreadId() << ": abstractThread::run\n";
+        refresherMain();
     }
 }
 
-
+// create map of users chats or groups map<username-groupname-channelname,int msgCount>

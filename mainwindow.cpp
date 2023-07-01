@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     mp_user->loadFromFile();
     this->loadChats();
+    ui->Minus_tbn->hide();
     ui->toolButton->setCheckable(true);
     ui->Add_tbn->setCheckable(true);
     ui->stackedWidget->setCurrentIndex(0);
@@ -104,8 +105,8 @@ void MainWindow::on_toolButton_clicked(bool checked)
 
         setting_pbn = new QPropertyAnimation(ui->toolButton , "geometry");
         setting_pbn->setDuration(1);
-        setting_pbn->setStartValue(QRect(529,1,31,31));
-        setting_pbn->setEndValue(QRect(469,1,31,31));
+        setting_pbn->setStartValue(QRect(527,2,31,31));
+        setting_pbn->setEndValue(QRect(467,2,31,31));
         setting_pbn->start();
 
         user_lbl_hide = new QPropertyAnimation(ui->user_lbl , "geometry");
@@ -279,8 +280,8 @@ void MainWindow::on_toolButton_clicked(bool checked)
 
         setting_pbn = new QPropertyAnimation(ui->toolButton , "geometry");
         setting_pbn->setDuration(1);
-        setting_pbn->setStartValue(QRect(469,1,31,31));
-        setting_pbn->setEndValue(QRect(529,1,31,31));
+        setting_pbn->setStartValue(QRect(467,2,31,31));
+        setting_pbn->setEndValue(QRect(527,2,31,31));
         setting_pbn->start();
 
         ui->repository_info_lbl->show();
@@ -391,14 +392,23 @@ void MainWindow::on_newchannel_pbn_clicked()
 }
 
 
-void MainWindow::on_Add_tbn_clicked(bool checked)
+void MainWindow::on_Minus_tbn_clicked()
 {
-    if(!checked)
-    {
+
         ui->createGroup_pbn->show();
         ui->newchannel_pbn->show();
         ui->newchat_pbn->show();
         ui->toolButton->show();
+        ui->Exit_pbn->show();
+        ui->Add_tbn->show();
+        ui->Minus_tbn->hide();
+        ui->Add_tbn->setStyleSheet(ui->Minus_tbn->styleSheet());
+
+        setting_pbn = new QPropertyAnimation(ui->Minus_tbn , "geometry");
+        setting_pbn->setDuration(1);
+        setting_pbn->setStartValue(QRect(527,2,31,31));
+        setting_pbn->setEndValue(QRect(499,2,31,31));
+        setting_pbn->start();
 
         add_chat = new QPropertyAnimation(ui->newchat_pbn , "geometry");
         add_chat->setDuration(150);
@@ -425,40 +435,6 @@ void MainWindow::on_Add_tbn_clicked(bool checked)
         list->start();
 
 
-    }
-    else
-    {
-        ui->toolButton->hide();
-        ui->createGroup_pbn->show();
-        ui->newchannel_pbn->show();
-        ui->newchat_pbn->show();
-
-        list = new QPropertyAnimation(ui->chats_listWidget , "geometry");
-        list->setDuration(100);
-        list->setStartValue(QRect(20,50,520,490));
-        list->setEndValue(QRect(20,50,323,490));
-        list->start();
-
-        add_chat = new QPropertyAnimation(ui->newchat_pbn , "geometry");
-        add_chat->setDuration(150);
-        add_chat->setStartValue(QRect(550,105,180,40));
-        add_chat->setEndValue(QRect(360,105,180,40));
-        add_chat->start();
-
-        add_group = new QPropertyAnimation(ui->createGroup_pbn , "geometry");
-        add_group->setDuration(300);
-        add_group->setStartValue(QRect(550,207,180,40));
-        add_group->setEndValue(QRect(360,207,180,40));
-        add_group->start();
-
-        add_channel = new QPropertyAnimation(ui->newchannel_pbn , "geometry");
-        add_channel->setDuration(450);
-        add_channel->setStartValue(QRect(550,308,180,40));
-        add_channel->setEndValue(QRect(360,308,180,40));
-        add_channel->start();
-
-
-    }
 
 }
 void MainWindow::loadChats()
@@ -505,5 +481,48 @@ void MainWindow::loadChats()
 void MainWindow::on_Exit_pbn_2_clicked()
 {
     this->close();
+}
+
+
+void MainWindow::on_Add_tbn_clicked()
+{
+    ui->toolButton->hide();
+    ui->createGroup_pbn->show();
+    ui->newchannel_pbn->show();
+    ui->newchat_pbn->show();
+    ui->Exit_pbn->hide();
+    ui->Minus_tbn->show();
+    ui->Add_tbn->hide();
+    ui->Add_tbn->setStyleSheet(ui->Minus_tbn->styleSheet());
+
+    list = new QPropertyAnimation(ui->chats_listWidget , "geometry");
+    list->setDuration(100);
+    list->setStartValue(QRect(20,50,520,490));
+    list->setEndValue(QRect(20,50,323,490));
+    list->start();
+
+    add_chat = new QPropertyAnimation(ui->newchat_pbn , "geometry");
+    add_chat->setDuration(150);
+    add_chat->setStartValue(QRect(550,105,180,40));
+    add_chat->setEndValue(QRect(360,105,180,40));
+    add_chat->start();
+
+    add_group = new QPropertyAnimation(ui->createGroup_pbn , "geometry");
+    add_group->setDuration(300);
+    add_group->setStartValue(QRect(550,207,180,40));
+    add_group->setEndValue(QRect(360,207,180,40));
+    add_group->start();
+
+    add_channel = new QPropertyAnimation(ui->newchannel_pbn , "geometry");
+    add_channel->setDuration(450);
+    add_channel->setStartValue(QRect(550,308,180,40));
+    add_channel->setEndValue(QRect(360,308,180,40));
+    add_channel->start();
+
+    setting_pbn = new QPropertyAnimation(ui->Minus_tbn , "geometry");
+    setting_pbn->setDuration(1);
+    setting_pbn->setStartValue(QRect(499,2,31,31));
+    setting_pbn->setEndValue(QRect(527,2,31,31));
+    setting_pbn->start();
 }
 

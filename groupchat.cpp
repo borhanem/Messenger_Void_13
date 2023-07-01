@@ -2,6 +2,8 @@
 #include "ui_groupchat.h"
 #include "msgBaseReceive.h"
 #include "msgBaseSend.h"
+#include <refreshergroup.h>
+
 GroupChat::GroupChat(QString chatName,QWidget *parent) :
     QDialog(parent),
     AbstractChat(chatName,AbstractChat::Group),
@@ -23,7 +25,13 @@ GroupChat::GroupChat(QString chatName,QWidget *parent) :
     //connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
     connect(mp_user,&User::FailureOnGetMessage,this,&GroupChat::failure_on_send_message);
     connect(worker,&WorkerRefresher::resultReady,this,&GroupChat::Refresh_handler);
-    this->loadFromFile();
+
+    // making the refresher
+    //refresher = new refresherGroup(chatName);
+    //refresher->start();
+    //connect(refresher,&refresherGroup::groupRefreshSignal,this,&GroupChat::Refresh_handler);
+    ///////////////////////
+
     /* ---show all messages---
     for(auto&i : this->m_message_list)
     {
@@ -102,12 +110,12 @@ void GroupChat::updateList()
         if(i->sender() == mp_user->getUserName())
         {
             msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
-            msg->setFixedSize(500,60);
+            msg->setFixedSize(455,60);
             messagesLayout->addWidget(msg);
         }
         else{
             msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
-            msg->setFixedSize(500,60);
+            msg->setFixedSize(455,60);
             messagesLayout->addWidget(msg);
         }
     }

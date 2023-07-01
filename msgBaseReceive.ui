@@ -22,8 +22,8 @@
     <rect>
      <x>18</x>
      <y>20</y>
-     <width>370</width>
-     <height>32</height>
+     <width>210</width>
+     <height>28</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -31,9 +31,8 @@
 border-bottom-left-radius:15px;
 border-top-left-radius:0px;
 border-bottom-right-radius:0px;
-font: 9pt &quot;MV Boli&quot;;
+font: 8pt &quot;MV Boli&quot;;
 color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 0);
 SizePolicy:  Expanding;</string>
    </property>
    <property name="text">
@@ -59,16 +58,17 @@ SizePolicy:  Expanding;</string>
   <widget class="QLabel" name="Time">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>190</x>
      <y>30</y>
-     <width>71</width>
+     <width>41</width>
      <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-bottom-right-radius: 0px;
+    <string notr="true">borderradius: 10px;
 background-color: transparent;
-color : black;</string>
+color : black;
+font: 6pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="text">
     <string>12:00 pm </string>

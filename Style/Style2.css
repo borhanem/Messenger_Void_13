@@ -1,60 +1,80 @@
 QWidget
 {
-color: rgb(170, 170, 255);
-background-color: black;
-background-image: url(:/new/prefix1/Style/Stars.png);
+    color: rgb(170, 170, 255);
+    background-color: black;
+    background-image: url(:/new/prefix1/Style/Stars.png);
 }
 
 QToolButton#Exit_pbn
 {
-image: url(:/PurpButtons/Buttons/purp_exit.png);
+    image: url(:/PurpButtons/Buttons/purp_exit.png);
 }
 
 QToolButton#Exit_pbn_2
 {
-image: url(:/PurpButtons/Buttons/purp_exit.png);
+    image: url(:/PurpButtons/Buttons/purp_exit.png);
 }
 
 QToolButton#toolButton
 {
-image: url(:/PurpButtons/Buttons/Purp_Setting.png);
+    image: url(:/PurpButtons/Buttons/Purp_Setting.png);
 }
 
 QToolButton#Add_tbn
 {
-image: url(:/PurpButtons/Buttons/purp_add.png);
+    image: url(:/PurpButtons/Buttons/purp_add.png);
+}
+
+QToolButton#Minus_tbn
+{
+    image: url(:/PurpButtons/Buttons/purp_minust_png.png);
 }
 
 QToolButton#tojoin_tbn
 {
-image: url(:/PurpButtons/Buttons/purp_right_arrow.png);
+    image: url(:/PurpButtons/Buttons/purp_right_arrow.png);
 }
 
 QToolButton#tocreate_tbn
 {
-image: url(:/PurpButtons/Buttons/purp_left_arrow.png.png);
+    image: url(:/PurpButtons/Buttons/purp_left_arrow.png.png);
 }
 
 QLabel
 {
-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+QTextBrowser#textBrowser
+{
+    background-image: url(:/new/prefix1/Style/Purp.png);
+}
+
+QLabel#msg_index
+{
+   background-image: url(:/new/prefix1/Style/Purp.png);
+}
+
+QLabel#Time
+{
+   background-image: url(:/new/prefix1/Style/Purp.png);
 }
 
 QPushButton
 {
-background-image: url(:/new/prefix1/Style/Purp.png);
-border-radius: 5px;
-color: rgb(255, 255, 255);
+    background-image: url(:/new/prefix1/Style/Purp.png);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
 }
 
 QLineEdit
 {
-background-color: rgb(56, 56, 56);
-border-color: rgb(170, 170, 127);
-border-radius:5%;
+    background-color: rgb(56, 56, 56);
+    border-color: rgb(170, 170, 127);
+    border-radius:5%;
 }
 
 QGroupBox
 {
-color: rgb(170, 170, 255);
+    color: rgb(170, 170, 255);
 }
