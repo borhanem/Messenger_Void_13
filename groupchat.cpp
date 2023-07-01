@@ -102,12 +102,12 @@ void GroupChat::updateList()
         if(i->sender() == mp_user->getUserName())
         {
             msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
-            msg->setFixedSize(500,60);
+            msg->setFixedSize(455,60);
             messagesLayout->addWidget(msg);
         }
         else{
             msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
-            msg->setFixedSize(500,60);
+            msg->setFixedSize(455,60);
             messagesLayout->addWidget(msg);
         }
     }

@@ -22,7 +22,7 @@
     <rect>
      <x>18</x>
      <y>20</y>
-     <width>370</width>
+     <width>210</width>
      <height>32</height>
     </rect>
    </property>
@@ -59,7 +59,7 @@ SizePolicy:  Expanding;</string>
   <widget class="QLabel" name="Time">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>160</x>
      <y>30</y>
      <width>71</width>
      <height>20</height>
