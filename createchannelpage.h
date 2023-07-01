@@ -22,6 +22,13 @@ private slots:
 
     void success_on_create_channel();
     void failure_on_create_channel(const QString& error);
+
+    void on_tojoin_tbn_clicked();
+
+    void on_tocreate_tbn_clicked();
+
+    void on_joinchannel_pbn_clicked();
+
 signals:
     void channelCreated(QString channelname);
 private:

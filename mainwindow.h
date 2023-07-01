@@ -61,6 +61,8 @@ private slots:
 
     void on_Add_tbn_clicked(bool checked);
 
+    void on_Exit_pbn_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     User* mp_user;
@@ -93,6 +95,7 @@ private:
     QPropertyAnimation* add_chat;
     QPropertyAnimation* add_channel;
     QPropertyAnimation* add_group;
+    QPropertyAnimation* list;
 
 };
 #endif // MAINWINDOW_H

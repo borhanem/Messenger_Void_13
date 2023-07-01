@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "abstractchat.h"
+#include <QVBoxLayout>
 namespace Ui {
 class GroupChat;
 }
@@ -16,13 +17,17 @@ public:
     ~GroupChat();
     int saveToFile() override;
     int loadFromFile() override;
+    void updateList() override;
 private slots:
     void on_send_pbn_clicked();
     void success_on_send_message();
     void failure_on_send_message(QString Error);
 
+    void on_refresh_pbn_clicked();
+    void Refresh_handler(QList<Message*>);
 private:
     Ui::GroupChat *ui;
+    QVBoxLayout* messagesLayout;
 };
 
 #endif // GROUPCHAT_H

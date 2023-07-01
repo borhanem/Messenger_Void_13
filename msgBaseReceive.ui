@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>msgBaseReceiver</class>
+ <widget class="QDialog" name="msgBaseReceiver">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>60</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">border_radius:5px;
+</string>
+  </property>
+  <widget class="QLabel" name="msg_index">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>20</y>
+     <width>370</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-top-right-radius:15px;
+border-bottom-left-radius:15px;
+border-top-left-radius:0px;
+border-bottom-right-radius:0px;
+font: 9pt &quot;MV Boli&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 0);
+SizePolicy:  Expanding;</string>
+   </property>
+   <property name="text">
+    <string>    Hiiii!</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Name">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>0</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 9pt &quot;Vladimir Script&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Mahta</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Time">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>30</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-bottom-right-radius: 0px;
+background-color: transparent;
+color : black;</string>
+   </property>
+   <property name="text">
+    <string>12:00 pm </string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

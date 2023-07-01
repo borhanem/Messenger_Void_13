@@ -82,13 +82,32 @@ void API::createChannel(const QString &token, const QString &channelName)
     connect(reply,&QNetworkReply::finished,this,&API::createChannelResponder);
 }
 
-void API::getMsgDM(const QString &token, const QString &dst)
+void API::joinGroup(const QString &token, const QString &gruopName)
+{
+ /*
+  * /joingroup?token=7a3c48f7c7939b7269d01443a431825f&group_name=ap
+  */
+    QString temp = url_s + "/joingroup?token="+token+"&group_name="+gruopName;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::joinGroupResponder);
+}
+
+void API::joinChannel(const QString &token, const QString &channelName)
+{
+ /*
+  * /joinchannel?token=7a3c48f7c7939b7269d01443a431825f&channel_name=aplab
+  */
+    QString temp = url_s + "/joinchannel?token="+token+"&channel_name="+channelName;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::joinChannelResponder);
+}
+
+void API::getMsgDm(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
 //    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm ";
     connect(reply,&QNetworkReply::finished,this,&API::getMsgDmResponder);
-
 }
 
 //void API::getMsgDM(const QString &token, const QString &dst)
@@ -175,7 +194,7 @@ void API::getMsgDmResponder()
         QString respond_message =jObj.value("message").toString();
         qDebug() << respond_code;
         if(respond_code == "200"){
-            emit SuccessOnGetMsgDM(jDoc);
+            emit SuccessOnGetMsgDm(jDoc);
             emit getMsgCountSignalDM(respond_message,jObj);
         } else {
             emit FailureOnGetMsg(respond_message);
@@ -290,6 +309,7 @@ void API::getGroupListResponder()
         emit FailureOnGetChatList(reply->errorString());
     }
     reply->deleteLater();
+
 }
 
 QByteArray *API::getResponse()
@@ -439,7 +459,6 @@ void API::createChannelResponder()
         reply->deleteLater();
 }
 
-
 void API::SendMessageToUserResponder()
 {
         if (reply->error() == QNetworkReply::NoError) {
@@ -522,6 +541,77 @@ void API::sendMessageToChannelResponder()
         // qDebug() << "Error:" << reply->errorString();
         data = NULL;
         emit FailureOnSendMsgToGroup(reply->errorString());
+        }
+        reply->deleteLater();
+}
+
+void API::joinGroupResponder()
+{
+        qDebug("joinGroupResponder from API class\n");
+        if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            if(respond_message == "You are already Joined!")
+            {
+                emit FailureOnJoinGroup("You are already Joined!");
+            }
+            else{
+            emit SuccessOnJoinGroup();
+            }
+        }
+        else
+        {
+            emit FailureOnJoinGroup(respond_message);
+        }
+        }
+        else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnJoinGroup(reply->errorString());
+        }
+        reply->deleteLater();
+}
+
+void API::joinChannelResponder()
+{
+        qDebug("joinGroupResponder from API class\n");
+        if (reply->error() == QNetworkReply::NoError) {
+        //read the response
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+
+        if(respond_code == "200")
+        {
+            if(respond_message == "You are already Joined!")
+            {
+            emit FailureOnJoinGroup("You are already Joined!");
+            }
+            else{
+            emit SuccessOnJoinGroup();
+            }
+
+        }
+        else
+        {
+            emit FailureOnJoinChannel(respond_message);
+        }
+        }
+        else {
+        // If there was an error, display the error message
+        // qDebug() << "Error:" << reply->errorString();
+        data = NULL;
+        emit FailureOnJoinChannel(reply->errorString());
         }
         reply->deleteLater();
 }

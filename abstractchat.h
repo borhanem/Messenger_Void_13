@@ -19,6 +19,7 @@ public:
     virtual int loadFromFile() = 0;
     virtual QString chatName() const;
     virtual ChatType chatType() const;
+    virtual void updateList() =0 ;
 protected:
     QString m_chat_name;
     User* mp_user;

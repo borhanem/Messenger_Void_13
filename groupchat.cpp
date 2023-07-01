@@ -1,6 +1,7 @@
 #include "groupchat.h"
 #include "ui_groupchat.h"
-
+#include "msgBaseReceive.h"
+#include "msgBaseSend.h"
 GroupChat::GroupChat(QString chatName,QWidget *parent) :
     QDialog(parent),
     AbstractChat(chatName,AbstractChat::Group),
@@ -12,8 +13,14 @@ GroupChat::GroupChat(QString chatName,QWidget *parent) :
     ui->groupname_led->setDisabled(true);
     ui->groupname_led->setText(this->m_chat_name);
     this->setWindowTitle(this->m_chat_name);
+    ui->group_scroll_area->setWidget(ui->scrollAreaWidgetContents);
+    messagesLayout = new QVBoxLayout(ui->scrollAreaWidgetContents);
+    ui->scrollAreaWidgetContents->setLayout(messagesLayout);
+    messagesLayout->setAlignment(Qt::AlignTop);
     connect(mp_user,&User::SuccessOnSendMessage,this,&GroupChat::success_on_send_message);
     connect(mp_user,&User::Failure,this,&GroupChat::failure_on_send_message);
+    connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
+    connect(mp_user,&User::FailureOnGetMessage,this,&GroupChat::failure_on_send_message);
     /* ---show all messages---
     for(auto&i : this->m_message_list)
     {
@@ -61,15 +68,43 @@ int GroupChat::loadFromFile()
     }
     QDataStream user_ds(&logFile);
     user_ds.setVersion(QDataStream::Qt_6_5);
+    Message *temp = new Message();
+    Message* msg;
     while(!logFile.atEnd())
     {
-        Message *temp = new Message(this);
         user_ds >> *temp;
-        this->m_message_list.push_back(temp);
+        if(temp->sender()==mp_user->getUserName())
+        {
+            msg = new msgBaseSend(temp->body(),temp->sender(),temp->receiver(),temp->time(),this);
+        }
+        else
+        {
+            msg = new msgBaseReceiver(temp->body(),temp->sender(),temp->receiver(),temp->time(),this);
+        }
+        this->m_message_list.push_back(msg);
     }
-
+    delete temp;
     logFile.close();
+    this->updateList();
     return 0;
+}
+
+void GroupChat::updateList()
+{
+    for(auto& i : this->m_message_list)
+    {
+        if(i->sender() == mp_user->getUserName())
+        {
+            msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
+            msg->setFixedSize(500,60);
+            messagesLayout->addWidget(msg);
+        }
+        else{
+            msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
+            msg->setFixedSize(500,60);
+            messagesLayout->addWidget(msg);
+        }
+    }
 }
 
 void GroupChat::on_send_pbn_clicked()
@@ -95,5 +130,21 @@ void GroupChat::success_on_send_message()
 void GroupChat::failure_on_send_message(QString Error)
 {
     ui->sendResult_lbl->setText(Error);
+}
+
+
+void GroupChat::on_refresh_pbn_clicked()
+{
+    mp_user->getMsg(this->m_chat_name,User::Group);
+    ui->sendResult_lbl->setText("Refreshing");
+}
+
+void GroupChat::Refresh_handler(QList<Message *> newList)
+{
+    this->m_message_list = newList;
+    ui->sendResult_lbl->setText("Refreshed Successfully!\n");
+    //ui->message_layout.
+    this->updateList();
+    this->saveToFile();
 }
 

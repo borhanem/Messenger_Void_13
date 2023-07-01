@@ -23,7 +23,9 @@ public:
     void sendMessageToChannel(const QString& token,const QString& dst,const QString& body);
     void createGroup(const QString& token,const QString& groupName);
     void createChannel(const QString& token,const QString& channelName);
-    void getMsgDM(const QString &token, const QString &dst); // new entry
+    void joinGroup(const QString& token,const QString& gruopName);
+    void joinChannel(const QString& token,const QString& channelName);
+    void getMsgDm(const QString &token, const QString &dst); // new entry
     void getMsgGroup(const QString &token, const QString &dst); // new entry
     void getMsgChannel(const QString &token, const QString &dst); // new entry
     void getUserList(const QString &token);
@@ -34,7 +36,7 @@ signals:
     void SuccessOnRegister();
     void SuccessOnLogin(QString new_token);
     void SuccessOnLogout();
-    void SuccessOnGetMsgDM(QJsonDocument jSonContent); // new entry
+    void SuccessOnGetMsgDm(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgGroup(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgChannel(QJsonDocument jSonContent); // new entry
     void SuccessOnGetUserList(QJsonDocument jSonContent);
@@ -48,11 +50,15 @@ signals:
     void getGroupListSignal(QString userCount,QJsonObject jSonObject);
     void SuccessOnCreateGroup();
     void SuccessOnCreateChannel();
+    void FailureOnGetChatList(QString error);
+    void SuccessOnJoinChannel();
+    void FailureOnJoinChannel(QString error);
+    void SuccessOnJoinGroup();
+    void FailureOnJoinGroup(QString error);
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);
     void FailureOnLogout(QString error);
-    void FailureOnGetMsg(QString error); // new entry
-    void FailureOnGetChatList(QString error);
+    void FailureOnGetMsg(QString error);
     void FailureOnCreateGroup(QString error);
     void FailureOnCreateChannel(QString error);
     void SuccessOnSendMsgToUser();
@@ -65,17 +71,19 @@ private slots:
     void RegisterResponder();
     void LoginResponder();
     void LogoutResponder();
-    void getMsgDmResponder(); // new entry
-    void getMsgGroupResponder(); // new entry
-    void getMsgChannelResponder(); // new entry
     void getUserListResponder();
     void getChannelListResponder();
     void getGroupListResponder();
     void createGroupResponder();
     void createChannelResponder();
+    void getMsgDmResponder();
+    void getMsgChannelResponder();
+    void getMsgGroupResponder();
     void SendMessageToUserResponder(); // new entry
     void sendMessageToGroupResponder();
     void sendMessageToChannelResponder();
+    void joinGroupResponder();
+    void joinChannelResponder();
     //void getData();
 private:
     QString url_s;

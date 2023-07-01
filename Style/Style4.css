@@ -3,39 +3,84 @@ QWidget
 color : rgb(4, 93, 148);
 background-color: rgb(139, 220, 255);
 }
+
 QToolButton#Exit_pbn
 {
-image: url(:/new/prefix1/Style/Light_Exit.png);
+image: url(:/greenButtons/Buttons/green_exit.png);
 }
+
+QToolButton#Exit_pbn_2
+{
+image: url(:/greenButtons/Buttons/green_exit.png);
+}
+
 QToolButton#Add_tbn
 {
-image: url(:/new/prefix1/Style/light_add.png);
+image: url(:/greenButtons/Buttons/green_add.png);
 }
+
 QToolButton#toolButton
 {
-background-image: url(:/new/prefix1/Style/Green_Setting.png);
+image: url(:/greenButtons/Buttons/Green_Setting.png);
 }
+
+QToolButton#tojoin_tbn
+{
+image: url(:/greenButtons/Buttons/green_right_arrow.png);
+}
+
+QToolButton#tocreate_tbn
+{
+image: url(:/greenButtons/Buttons/green_left_arrow.png);
+}
+
+
 QLabel
 {
 color: rgb(2, 2, 161);
 }
+
 QPushButton#Theme_2_pbn
 {
 background-image: url(:/new/prefix1/Style/Stars.png);
 border-radius: 5px;
 }
+
 QPushButton
 {
 background-color: rgb(2, 186, 119);
 border-radius: 5px;
 color: white;
 }
+
 QLineEdit
 {
 background-color: rgb(129, 240, 200);
 border-color: rgb(170, 170, 127);
 border-radius:5%;
 }
+
+QPushButton#newchat_pbn
+{
+background-color:rgb(129, 240, 200);
+border-radius: 5px;
+color :rgb(2, 186, 119);
+}
+
+QPushButton#createGroup_pbn
+{
+background-color:rgb(129, 240, 200);
+border-radius: 5px;
+color :rgb(2, 186, 119);
+}
+
+QPushButton#newchannel_pbn
+{
+background-color:rgb(129, 240, 200);
+border-radius: 5px;
+color :rgb(2, 186, 119);
+}
+
 QGroupBox
 {
 color: rgb(4, 93, 148);

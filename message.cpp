@@ -1,15 +1,20 @@
 #include "message.h"
 
-Message::Message(QObject *parent)
-    : QObject{parent},m_body("I am the Danger"),m_time(QDateTime::currentDateTime()),m_sender("void"),m_receiver("void")
+Message::Message()
+    : m_body("I am the Danger"),m_time(QDateTime::currentDateTime()),m_sender("void"),m_receiver("void")
 {
 
 }
 
-Message::Message(QString txt, QString sender, QString receiver, QDateTime time, QObject *parent)
-    : QObject{parent},m_body(txt),m_time(time),m_sender(sender),m_receiver(receiver)
+Message::Message(QString txt, QString sender, QString receiver, QDateTime time)
+    : m_body(txt),m_time(time),m_sender(sender),m_receiver(receiver)
 {
 
+}
+
+Message::~Message()
+{
+    qDebug()<< "Message Destructor!\n";
 }
 
 QString Message::body() const

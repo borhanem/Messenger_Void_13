@@ -1,6 +1,7 @@
 #include "channelchat.h"
 #include "ui_channelchat.h"
-
+#include "msgBaseReceive.h"
+#include "msgBaseSend.h"
 ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     QDialog(parent),
     AbstractChat(chatName,AbstractChat::Channel),
@@ -42,7 +43,7 @@ int ChannelChat::loadFromFile()
     user_ds.setVersion(QDataStream::Qt_6_5);
     while(!logFile.atEnd())
     {
-        Message *temp = new Message(this);
+        Message *temp = new Message();
         user_ds >> *temp;
         this->m_message_list.push_back(temp);
     }
@@ -73,6 +74,24 @@ int ChannelChat::saveToFile()
 
     logFile.close();
     return 0;
+}
+
+void ChannelChat::updateList()
+{
+//    for(auto& i : this->m_message_list)
+//    {
+//        if(i->sender() == mp_user->getUserName())
+//        {
+//            msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
+//            msg->setFixedSize(500,60);
+//            messagesLayout->addWidget(msg);
+//        }
+//        else{
+//            msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
+//            msg->setFixedSize(500,60);
+//            messagesLayout->addWidget(msg);
+//        }
+//    }
 }
 
 void ChannelChat::on_send_pbn_clicked()
