@@ -31,8 +31,7 @@ SOURCES += \
     refreshergrouplist.cpp \
     registerpage.cpp \
     theme.cpp \
-    user.cpp \
-    workerrefresher.cpp
+    user.cpp
 
 HEADERS += \
     abstractchat.h \
@@ -55,8 +54,7 @@ HEADERS += \
     refreshergrouplist.h \
     registerpage.h \
     theme.h \
-    user.h \
-    workerrefresher.h
+    user.h
 
 FORMS += \
     channelchat.ui \
