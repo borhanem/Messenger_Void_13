@@ -1,11 +1,12 @@
 #include "api.h"
-
+#include <QThread>
 API::API(const QString& sUrl,QObject *parent)
     : QObject{parent},url_s(sUrl)
 {
     man_ptr = new QNetworkAccessManager(this);
     data = new QByteArray();
     //connect(reply,&QNetworkReply::finished,this,&API::getData);
+//    qDebug() <<  QThread::currentThreadId() << ": api::constructor1\n";
 }
 
 void API::Register(const QString &uname, const QString &pass)
@@ -101,13 +102,50 @@ void API::joinChannel(const QString &token, const QString &channelName)
     connect(reply,&QNetworkReply::finished,this,&API::joinChannelResponder);
 }
 
-void API::getMsgUser(const QString &token, const QString &dst)
+void API::getMsgDm(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
     reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
-    connect(reply,&QNetworkReply::finished,this,&API::getMsgUserResponder);
+//    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm ";
+    connect(reply,&QNetworkReply::finished,this,&API::getMsgDmResponder);
 }
 
+//void API::getMsgDM(const QString &token, const QString &dst)
+//{
+//    QString temp = url_s + "/getuserchats?token=" + token + "&dst=" + dst;
+////    QString temp = "http://api.barafardayebehtar.ml:8080/getuserchats?token=dea1fd09fab4c03974c2b0b2e0e37b59&dst=send";
+//    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+//    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDm\n";
+//    while(reply->isRunning()){
+//        qDebug() << "is running";
+//    }
+//    if(reply->isFinished())
+//    {
+//        qDebug() <<  QThread::currentThreadId() << ": api::getmsgDmresponder\n";
+//        if (reply->error() == QNetworkReply::NoError) {
+//            *data = reply->readAll();
+//            QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+//            QJsonObject jObj = jDoc.object();
+//            QString respond_code =  jObj.value("code").toString();
+//            QString respond_message =jObj.value("message").toString();
+//            if(respond_code == "200"){
+//                emit SuccessOnGetMsgDM(jDoc);
+//                emit getMsgCountSignalDM(respond_message,jObj);
+//            } else {
+//                emit FailureOnGetMsg(respond_message);
+//            }
+//        } else {
+//            data = NULL;
+//            emit FailureOnGetMsg(reply->errorString());
+//        }
+//        reply->deleteLater();
+//    }
+//    else
+//    {
+//        qDebug("ride!!!!");
+//    }
+//    //connect(reply,&QNetworkReply::finished,this,&API::getMsgDmResponder);
+//}
 void API::getMsgGroup(const QString &token, const QString &dst)
 {
     QString temp = url_s + "/getgroupchats?token=" + token + "&dst=" + dst;
@@ -122,6 +160,158 @@ void API::getMsgChannel(const QString &token, const QString &dst)
     connect(reply,&QNetworkReply::finished,this,&API::getMsgChannelResponder);
 }
 
+void API::getUserList(const QString &token)
+{
+    QString temp = url_s + "/getuserlist?token=" + token;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::getUserListResponder);
+}
+
+void API::getChannelList(const QString &token)
+{
+    QString temp = url_s + "/getchannellist?token=" + token;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::getChannelListResponder);
+}
+
+void API::getGroupList(const QString &token)
+{
+    QString temp = url_s + "/getgrouplist?token=" + token;
+    reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
+    connect(reply,&QNetworkReply::finished,this,&API::getGroupListResponder);
+}
+
+
+
+void API::getMsgDmResponder()
+{
+//    qDebug() <<  QThread::currentThreadId() << ": api::getmsgDmresponder\n";
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        qDebug() << respond_code;
+        if(respond_code == "200"){
+            emit SuccessOnGetMsgDm(jDoc);
+            emit getMsgCountSignalDM(respond_message,jObj);
+        } else {
+            emit FailureOnGetMsg(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetMsg(reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void API::getMsgGroupResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            emit SuccessOnGetMsgGroup(jDoc);
+            emit getMsgCountSignalGroup(respond_message,jObj);
+        } else {
+            emit FailureOnGetMsg(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetMsg(reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void API::getMsgChannelResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            emit SuccessOnGetMsgChannel(jDoc);
+            emit getMsgCountSignalChannel(respond_message,jObj);
+        } else {
+            emit FailureOnGetMsg(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetMsg(reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void API::getUserListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            emit SuccessOnGetUserList(jDoc);
+            emit getUserListSignal(respond_message,jObj);
+        } else {
+            emit FailureOnGetChatList(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetChatList(reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void API::getChannelListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            emit SuccessOnGetChannelList(jDoc);
+            emit getChannelListSignal(respond_message,jObj);
+        } else {
+            emit FailureOnGetChatList(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetChatList(reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void API::getGroupListResponder()
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        *data = reply->readAll();
+        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
+        QJsonObject jObj = jDoc.object();
+        QString respond_code =  jObj.value("code").toString();
+        QString respond_message =jObj.value("message").toString();
+        if(respond_code == "200"){
+            emit SuccessOnGetGroupList(jDoc);
+            emit getGroupListSignal(respond_message,jObj);
+        } else {
+            emit FailureOnGetChatList(respond_message);
+        }
+    } else {
+        data = NULL;
+        emit FailureOnGetChatList(reply->errorString());
+    }
+    reply->deleteLater();
+
+}
+
 QByteArray *API::getResponse()
 {
     return data;
@@ -129,6 +319,7 @@ QByteArray *API::getResponse()
 
 void API::RegisterResponder()
 {
+//    qDebug() <<  QThread::currentThreadId() << ": api::registerResponder\n";
     // If the request was successful
     if (reply->error() == QNetworkReply::NoError) {
        //read the response
@@ -267,97 +458,6 @@ void API::createChannelResponder()
         }
         reply->deleteLater();
 }
-
-void API::getMsgUserResponder()
-{
-        if (reply->error() == QNetworkReply::NoError) {
-        *data = reply->readAll();
-        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
-        if(jDoc.isObject())
-        {
-            QJsonObject jObj = jDoc.object();
-            QString respond_code =  jObj.value("code").toString();
-            QString respond_message =jObj.value("message").toString();
-            if(respond_code == "200"){
-
-                emit SuccessOnGetMsgUser(jDoc);
-            }
-            else {
-                emit FailureOnGetMsgUser(respond_message);
-            }
-        }
-        else {
-            data = NULL;
-            emit FailureOnGetMsgUser(reply->errorString());
-        }
-        }
-        else
-        {
-        qDebug("getMsgUserResponde: jdoc is not a object\n");
-        }
-        reply->deleteLater();
-}
-
-void API::getMsgChannelResponder()
-{
-        if (reply->error() == QNetworkReply::NoError) {
-        *data = reply->readAll();
-        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
-        if(jDoc.isObject())
-        {
-            QJsonObject jObj = jDoc.object();
-            QString respond_code =  jObj.value("code").toString();
-            QString respond_message =jObj.value("message").toString();
-            if(respond_code == "200"){
-
-                emit SuccessOnGetMsgChannel(jDoc);
-            }
-            else {
-                emit FailureOnGetMsgChannel(respond_message);
-            }
-        }
-        else {
-            data = NULL;
-            emit FailureOnGetMsgChannel(reply->errorString());
-        }
-        }
-        else
-        {
-        qDebug("getMsgChannelResponde: jdoc is not a object\n");
-        }
-        reply->deleteLater();
-}
-
-void API::getMsgGroupResponder()
-{
-        if (reply->error() == QNetworkReply::NoError) {
-        *data = reply->readAll();
-        QJsonDocument jDoc = QJsonDocument::fromJson(*data);
-        if(jDoc.isObject())
-        {
-        QJsonObject jObj = jDoc.object();
-        QString respond_code =  jObj.value("code").toString();
-        QString respond_message =jObj.value("message").toString();
-        if(respond_code == "200"){
-
-                emit SuccessOnGetMsgGroup(jDoc);
-        }
-        else {
-                emit FailureOnGetMsgGroup(respond_message);
-               }
-        }
-        else {
-        data = NULL;
-            emit FailureOnGetMsgGroup(reply->errorString());
-        }
-        }
-        else
-        {
-        qDebug("getMsgGroupResponde: jdoc is not a object\n");
-        }
-        reply->deleteLater();
-}
-
 
 void API::SendMessageToUserResponder()
 {

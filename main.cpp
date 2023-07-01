@@ -10,12 +10,16 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
 //    std::ifstream iFile;
 //    iFile.open("userLog.dat");
 //    if(!iFile.is_open())
 //    {
     QFile userLogFile("vdata/UserInfo/userLog.dat");
     QString css = read(loadTheme());
+//    qDebug() <<  QThread::currentThreadId() << ": main.cpp\n";
+// what do we do for first chat
+
     if( css.length() > 0)
     {
         a.setStyleSheet(css);
@@ -32,7 +36,7 @@ int main(int argc, char *argv[])
     {
         LoginPage* lpg = new LoginPage();
         lpg->open();
-       // delete lpg;
+        // delete lpg;
     }
     else
     {
@@ -42,3 +46,5 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+// User::msgCountDmSlot not running despite signal being connected

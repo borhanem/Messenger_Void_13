@@ -8,9 +8,7 @@
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonObject>
-//#include "refresherchannel.h"
-//#include "refresherDirect.h"
-//#include "refreshergroup.h"
+
 
 class API : public QObject
 {
@@ -27,31 +25,40 @@ public:
     void createChannel(const QString& token,const QString& channelName);
     void joinGroup(const QString& token,const QString& gruopName);
     void joinChannel(const QString& token,const QString& channelName);
-    void getMsgUser(const QString &token, const QString &dst); // new entry
+    void getMsgDm(const QString &token, const QString &dst); // new entry
     void getMsgGroup(const QString &token, const QString &dst); // new entry
     void getMsgChannel(const QString &token, const QString &dst); // new entry
-
+    void getUserList(const QString &token);
+    void getChannelList(const QString &token);
+    void getGroupList(const QString &token);
     QByteArray* getResponse();
 signals:
     void SuccessOnRegister();
     void SuccessOnLogin(QString new_token);
     void SuccessOnLogout();
-    void SuccessOnGetMsgUser(QJsonDocument jSonContent); // new entry
+    void SuccessOnGetMsgDm(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgGroup(QJsonDocument jSonContent); // new entry
     void SuccessOnGetMsgChannel(QJsonDocument jSonContent); // new entry
+    void SuccessOnGetUserList(QJsonDocument jSonContent);
+    void SuccessOnGetChannelList(QJsonDocument jSonContent);
+    void SuccessOnGetGroupList(QJsonDocument jSonContent);
+    void getMsgCountSignalDM(QString msgCount,QJsonObject jSonObject);
+    void getMsgCountSignalGroup(QString msgCount,QJsonObject jSonObject);
+    void getMsgCountSignalChannel(QString msgCount,QJsonObject jSonObject);
+    void getUserListSignal(QString userCount,QJsonObject jSonObject);
+    void getChannelListSignal(QString userCount,QJsonObject jSonObject);
+    void getGroupListSignal(QString userCount,QJsonObject jSonObject);
     void SuccessOnCreateGroup();
     void SuccessOnCreateChannel();
+    void FailureOnGetChatList(QString error);
     void SuccessOnJoinChannel();
     void FailureOnJoinChannel(QString error);
     void SuccessOnJoinGroup();
     void FailureOnJoinGroup(QString error);
-    void getMsgCountSignal(QString msgCount);
     void FailureOnRegister(QString error);
     void FailureOnLogin(QString error);
     void FailureOnLogout(QString error);
-    void FailureOnGetMsgUser(QString error);
-    void FailureOnGetMsgGroup(QString error);
-    void FailureOnGetMsgChannel(QString error);
+    void FailureOnGetMsg(QString error);
     void FailureOnCreateGroup(QString error);
     void FailureOnCreateChannel(QString error);
     void SuccessOnSendMsgToUser();
@@ -64,9 +71,12 @@ private slots:
     void RegisterResponder();
     void LoginResponder();
     void LogoutResponder();
+    void getUserListResponder();
+    void getChannelListResponder();
+    void getGroupListResponder();
     void createGroupResponder();
     void createChannelResponder();
-    void getMsgUserResponder();
+    void getMsgDmResponder();
     void getMsgChannelResponder();
     void getMsgGroupResponder();
     void SendMessageToUserResponder(); // new entry
