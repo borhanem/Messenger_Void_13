@@ -90,7 +90,6 @@ private:
     QNetworkAccessManager* man_ptr;
     QByteArray* data;
     QNetworkReply *reply;
-    bool m_isAvailable;
 };
 
 #endif // API_H

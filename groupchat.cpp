@@ -7,8 +7,7 @@
 GroupChat::GroupChat(QString chatName,QWidget *parent) :
     QDialog(parent),
     AbstractChat(chatName,AbstractChat::Group),
-    ui(new Ui::GroupChat),
-    worker(new WorkerRefresher(WorkerRefresher::MSGList,User::Group,0,chatName,this))
+    ui(new Ui::GroupChat)
 {
     ui->setupUi(this);
     ui->sendResult_lbl->clear();
@@ -22,25 +21,19 @@ GroupChat::GroupChat(QString chatName,QWidget *parent) :
     messagesLayout->setAlignment(Qt::AlignTop);
     connect(mp_user,&User::SuccessOnSendMessage,this,&GroupChat::success_on_send_message);
     connect(mp_user,&User::Failure,this,&GroupChat::failure_on_send_message);
-    //connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
+    connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
     connect(mp_user,&User::FailureOnGetMessage,this,&GroupChat::failure_on_send_message);
-    connect(worker,&WorkerRefresher::resultReady,this,&GroupChat::Refresh_handler);
-
     // making the refresher
     //refresher = new refresherGroup(chatName);
     //refresher->start();
     //connect(refresher,&refresherGroup::groupRefreshSignal,this,&GroupChat::Refresh_handler);
     ///////////////////////
-
     /* ---show all messages---
     for(auto&i : this->m_message_list)
     {
         ui->message_lstwdgt->addItem(i.body());
     }
-    *
     */
-    worker->setPreSize(this->m_message_list.size());
-    worker->run();
 }
 
 
@@ -139,7 +132,6 @@ void GroupChat::on_send_pbn_clicked()
 void GroupChat::success_on_send_message()
 {
     ui->sendResult_lbl->setText("Message Send Successfuly");
-    ui->messagebar_led->clear();
 }
 
 void GroupChat::failure_on_send_message(QString Error)
@@ -156,8 +148,7 @@ void GroupChat::on_refresh_pbn_clicked()
 
 void GroupChat::Refresh_handler(QList<Message *> newList)
 {
-    qDebug() << "GroupChat::Refresh_handler called\n";
-    this->m_message_list += newList;
+    this->m_message_list = newList;
     ui->sendResult_lbl->setText("Refreshed Successfully!\n");
     //ui->message_layout.
     this->updateList();
