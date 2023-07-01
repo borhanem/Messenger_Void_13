@@ -91,7 +91,7 @@ signals:
     void Success();
     void SuccessOnLogout();
     void SuccessOnSendMessage();
-    void SuccessOnGetMessage(QList<Message*>);
+    void SuccessOnGetMessage(QJsonObject,size_t);
     void FailureOnGetMessage(QString Error);
     void Failure(QString Error);
     void FailureOnLogout(QString Error);
