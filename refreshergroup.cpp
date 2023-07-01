@@ -1,6 +1,6 @@
 #include "refreshergroup.h"
 
-refresherGroup::refresherGroup(QObject *parent,const QString& argDst)
+refresherGroup::refresherGroup(const QString& argDst,QObject *parent)
 {
     dstGroup = argDst;
 //    currUser = new User();
