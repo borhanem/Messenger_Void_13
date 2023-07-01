@@ -23,7 +23,7 @@ GroupChat::GroupChat(QString chatName,QWidget *parent) :
     connect(mp_user,&User::Failure,this,&GroupChat::failure_on_send_message);
     //connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
     connect(mp_user,&User::FailureOnGetMessage,this,&GroupChat::failure_on_send_message);
-    connect(worker,&WorkerRefresher::resultReady,this,&GroupChat::Refresh_handler);
+    connect(worker,&WorkerRefresher::msgResultReady,this,&GroupChat::Refresh_handler);
     this->loadFromFile();
     /* ---show all messages---
     for(auto&i : this->m_message_list)
