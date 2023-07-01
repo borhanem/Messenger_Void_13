@@ -22,6 +22,7 @@ private slots:
     void on_send_pbn_clicked();
     void success_on_send_message();
     void failure_on_send_message(QString error);
+    void Refresh_Handler(QList<Message*>);
 private:
     Ui::ChannelChat *ui;
     refresherChannel* refresher;

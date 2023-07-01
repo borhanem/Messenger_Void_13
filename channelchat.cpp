@@ -19,6 +19,8 @@ ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     // making the refresher
     refresher = new refresherChannel(chatName);
     refresher->start();
+    connect(refresher,&refresherChannel::channelRefreshSignal,this,&ChannelChat::Refresh_Handler);
+    ///////////////////
     ui->setupUi(this);
     ui->sendResult_lbl->clear();
     ui->send_pbn->setDefault(true);
@@ -126,5 +128,11 @@ void ChannelChat::failure_on_send_message(QString Error)
     }
     ui->sendResult_lbl->setText(Error);
 }
+
+void ChannelChat::Refresh_Handler(QList<Message *>)
+{
+    // handles the messages
+}
+
 
 
