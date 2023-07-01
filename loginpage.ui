@@ -26,37 +26,35 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">font: 700 8pt &quot;Segoe Script&quot;;
+</string>
    </property>
    <property name="title">
     <string>Login</string>
    </property>
-   <widget class="QPushButton" name="login_pbn">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>171</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>Log in</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>20</y>
       <width>321</width>
-      <height>146</height>
+      <height>228</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="username_lbl">
        <property name="styleSheet">
@@ -67,10 +65,21 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="username_led">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="placeholderText">
+        <string>John Doe</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="0" colspan="2">
       <widget class="QLabel" name="usrname_warning_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(170, 0, 0);</string>
+        <string notr="true">font: 700 7pt &quot;Segoe Script&quot;;
+color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
         <string>Username Warning...</string>
@@ -100,34 +109,36 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="0" colspan="2">
+     <item row="4" column="0">
       <widget class="QLabel" name="password_warning_lbl">
        <property name="styleSheet">
-        <string notr="true">color: rgb(170, 0, 0);</string>
+        <string notr="true">font: 700 7pt &quot;Segoe Script&quot;;
+
+color: rgb(170, 0, 0);</string>
        </property>
        <property name="text">
         <string>Password Warning...</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="username_led">
+     <item row="8" column="1">
+      <widget class="QPushButton" name="login_pbn">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
-       <property name="placeholderText">
-        <string>John Doe</string>
+       <property name="text">
+        <string>Log in</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <spacer name="horizontalSpacer">
+     <item row="9" column="1">
+      <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>218</width>
          <height>20</height>
         </size>
        </property>
@@ -139,7 +150,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>200</y>
+      <y>230</y>
       <width>319</width>
       <height>20</height>
      </rect>
@@ -161,6 +172,9 @@
      <height>91</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">font: 700 8pt &quot;Segoe Script&quot;;</string>
+   </property>
    <property name="title">
     <string/>
    </property>
@@ -169,8 +183,8 @@
      <rect>
       <x>60</x>
       <y>30</y>
-      <width>202</width>
-      <height>31</height>
+      <width>223</width>
+      <height>34</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -274,7 +288,6 @@ border-radius: 10%;</string>
  <tabstops>
   <tabstop>username_led</tabstop>
   <tabstop>password_led</tabstop>
-  <tabstop>login_pbn</tabstop>
   <tabstop>Register_pbn</tabstop>
   <tabstop>Theme_1</tabstop>
   <tabstop>Theme_2_pbn</tabstop>

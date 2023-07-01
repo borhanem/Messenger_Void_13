@@ -30,7 +30,7 @@ private slots:
 private:
     Ui::GroupChat *ui;
     QVBoxLayout* messagesLayout;
-    refresherGroup* refresher;
+    //refresherGroup* refresher;
 };
 
 #endif // GROUPCHAT_H

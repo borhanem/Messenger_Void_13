@@ -124,8 +124,7 @@ border-radius:10%;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 9pt &quot;Snap ITC&quot;;
-</string>
+        <string notr="true">font: 700 9pt &quot;Segoe Script&quot;;</string>
        </property>
        <property name="text">
         <string>New Channel</string>
@@ -141,8 +140,8 @@ border-radius:10%;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-font: 12pt &quot;8514oem&quot;;</string>
+        <string notr="true">font: 9pt &quot;Webdings&quot;;
+font: 14pt &quot;Simplified Arabic Fixed&quot;;</string>
        </property>
       </widget>
       <widget class="QPushButton" name="createGroup_pbn">
@@ -155,8 +154,7 @@ font: 12pt &quot;8514oem&quot;;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 9pt &quot;Snap ITC&quot;;
-</string>
+        <string notr="true">font: 700 9pt &quot;Segoe Script&quot;;</string>
        </property>
        <property name="text">
         <string>New Group</string>
@@ -311,7 +309,7 @@ border-radius:10%;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 9pt &quot;Snap ITC&quot;;</string>
+        <string notr="true">font: 700 9pt &quot;Segoe Script&quot;;</string>
        </property>
        <property name="text">
         <string>New Chat</string>
