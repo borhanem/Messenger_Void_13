@@ -26,7 +26,7 @@ private slots:
 private:
     Ui::ChannelChat *ui;
 
-    refresherChannel* refresher;
+//    refresherChannel* refresher;
 };
 
 #endif // CHANNELCHAT_H
