@@ -14,11 +14,13 @@ public:
     enum RefresherType{
         MSGList,ChatList
     };
-    explicit WorkerRefresher(const RefresherType& rt,const User::ChatType& ct,const QString& chatname="",QObject *parent = nullptr);
+    explicit WorkerRefresher(const RefresherType& rt,const User::ChatType& ct,size_t preSize=0,const QString& chatname="",QObject *parent = nullptr);
     ~WorkerRefresher();
     void run();
+    void setPreSize(size_t new_size);
 private slots:
     void sendRefreshRequest();
+    void handleRespond(QJsonObject,size_t);
 signals:
     void resultReady(QList<Message*>);
 private:
@@ -27,6 +29,7 @@ private:
     const RefresherType m_refresher_type;
     const User::ChatType m_chat_type;
     QString m_chat_name;
+    size_t m_pre_size;
 };
 
 #endif // WORKERREFRESHER_H

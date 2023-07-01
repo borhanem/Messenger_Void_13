@@ -353,7 +353,6 @@ void User::server_handler_on_joinChat()
 void User::server_hanlder_on_GetMsg(QJsonDocument jSonContent)
 {
     qDebug() << "User::server_hanlder_on_GetMsg is running\n";
-    QList<Message*> messageContent;
     QJsonObject msgContent = jSonContent.object();//currUser->msgContentGetterGroup(dstGroup);
     QRegularExpression re("-\\d+-");
     size_t msgCount;
@@ -376,32 +375,7 @@ void User::server_hanlder_on_GetMsg(QJsonDocument jSonContent)
         qDebug() << "User::server_hanlder_on_GetMsg - do not match!\n";
         return;
     }
-    for (size_t jsonIter = 0; jsonIter < msgCount; ++jsonIter){
-        QString blockIter = "block " + QString::number(jsonIter);
-        QJsonValue blockVal = msgContent.value(blockIter);
-        if(blockVal.isObject()){
-            QJsonObject blockObj = blockVal.toObject();
-            QString text = blockObj.value("body").toString();
-            QString time = blockObj.value("date").toString();
-            QString sender = blockObj.value("src").toString();
-            QString receiver = blockObj.value("dst").toString();
-            qDebug() << blockIter << " body: " << text << " -time: " << time << "-sender: "<<sender <<"-reciver: " << receiver;
-            Message* tempMsg;
-            if(sender==this->m_username)
-            {
-                tempMsg = new msgBaseSend(text,sender,receiver,QDateTime::fromString(time,"yyyy-MM-dd HH:mm:ss"));
-            }
-            else{
-                tempMsg = new msgBaseReceiver(text,sender,receiver,QDateTime::fromString(time,"yyyy-MM-dd HH:mm:ss"));
-            }
-            messageContent.append(tempMsg);
-        }
-        else
-        {
-            qDebug() << "User::server_hanlder_on_GetMsg : blockVal is not Object\n";
-        }
-    }
-    emit SuccessOnGetMessage(messageContent);
+    emit SuccessOnGetMessage(msgContent,msgCount);
 }
 
 void User::server_handler_on_failure(QString error)
