@@ -14,7 +14,7 @@ public:
     friend QDataStream& operator<<(QDataStream &stream,const Message &m);
     friend QDataStream& operator>>(QDataStream &stream,Message &m);
     virtual QString body() const;
-
+    bool isEmpty() const;
     QDateTime time() const;
 
     QString sender() const;

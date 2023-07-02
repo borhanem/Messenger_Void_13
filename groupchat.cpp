@@ -106,6 +106,7 @@ void GroupChat::updateList()
 {
     for(auto& i : this->m_message_list)
     {
+        if(!i->isEmpty()){
         if(i->sender() == mp_user->getUserName())
         {
             msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
@@ -116,6 +117,7 @@ void GroupChat::updateList()
             msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
             msg->setFixedSize(500,60);
             messagesLayout->addWidget(msg);
+        }
         }
     }
 }

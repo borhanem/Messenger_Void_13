@@ -22,6 +22,17 @@ QString Message::body() const
     return m_body;
 }
 
+bool Message::isEmpty() const
+{
+    if(this->m_body.isEmpty())
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 QDateTime Message::time() const
 {
     return m_time;
