@@ -18,11 +18,12 @@ QString read(QString path)
 
 
 LoginPage::LoginPage(QWidget *parent) :
-    QDialog(parent),
+    QDialog(nullptr),
     ui(new Ui::LoginPage),
     register_ptr(NULL),
     mp_user(new User())
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
 //    register_ptr=new RegisterPage(this);
     ui->usrname_warning_lbl->clear();
@@ -31,6 +32,20 @@ LoginPage::LoginPage(QWidget *parent) :
     ui->login_pbn->setDefault(true);
     connect(mp_user,&User::Success,this,&::LoginPage::server_handler_on_success);
     connect(mp_user,&User::Failure,this,&::LoginPage::server_handler_on_failure);
+}
+
+void LoginPage::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void LoginPage::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
 }
 
 LoginPage::~LoginPage()
@@ -200,5 +215,11 @@ void LoginPage::on_Theme_3_pbn_clicked()
 void LoginPage::on_pushButton_clicked()
 {
         ThemeChange("4");
+}
+
+
+void LoginPage::on_Exit_pbn_clicked()
+{
+    this->close();
 }
 

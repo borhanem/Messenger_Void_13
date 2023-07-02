@@ -2,10 +2,11 @@
 #include "ui_creategrouppage.h"
 
 CreateGroupPage::CreateGroupPage(const User* const user,QWidget *parent) :
-    QDialog(parent),
+    QDialog(nullptr),
     ui(new Ui::CreateGroupPage),
     mp_user(user)
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
     ui->result_lbl->clear();
     ui->creategroup_pbn->setDefault(true);
@@ -108,5 +109,24 @@ void CreateGroupPage::on_joingroup_pbn_clicked()
     }
     ui->result_lbl->setText("Sending request to server...");
     mp_user->joinChat(input_group_name,User::Group);
+}
+
+void CreateGroupPage::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void CreateGroupPage::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
+}
+
+void CreateGroupPage::on_Exit_pbn_clicked()
+{
+    this->close();
 }
 

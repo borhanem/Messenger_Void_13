@@ -3,11 +3,12 @@
 #include "msgBaseReceive.h"
 #include "msgBaseSend.h"
 PrivateChat::PrivateChat(QString chatName,QWidget *parent) :
-    QDialog(parent),
+    QDialog(nullptr),
     AbstractChat(chatName,AbstractChat::Private),
     ui(new Ui::PrivateChat),
     worker(new WorkerRefresher(WorkerRefresher::MSGList,User::Private,0,chatName))
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
     ui->sendResult_lbl->clear();
     ui->send_pbn->setDefault(true);
@@ -34,6 +35,8 @@ PrivateChat::PrivateChat(QString chatName,QWidget *parent) :
     worker->setPreSize(this->m_message_list.size());
     worker->run();
 }
+
+
 
 PrivateChat::~PrivateChat()
 {
@@ -65,6 +68,20 @@ int PrivateChat::saveToFile()
 
     logFile.close();
     return 0;
+}
+
+void PrivateChat::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void PrivateChat::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
 }
 
 int PrivateChat::loadFromFile()
@@ -151,5 +168,11 @@ void PrivateChat::Refresh_handler(QList<Message *> newList)
     //ui->message_layout.
     this->updateList();
     this->saveToFile();
+}
+
+
+void PrivateChat::on_Exit_pbn_clicked()
+{
+    this->close();
 }
 

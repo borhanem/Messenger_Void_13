@@ -3,12 +3,13 @@
 #include "msgBaseReceive.h"
 #include "msgBaseSend.h"
 ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
-    QDialog(parent),
+    QDialog(nullptr),
     AbstractChat(chatName,AbstractChat::Channel),
     ui(new Ui::ChannelChat),
     worker(new WorkerRefresher(WorkerRefresher::MSGList,User::Channel,0,chatName,this))
 
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     qDebug() << "this is running\n";
     ui->setupUi(this);
     ui->sendResult_lbl->clear();
@@ -44,6 +45,20 @@ ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     qDebug() << "this is still running[2]";
     worker->setPreSize(this->m_message_list.size());
     worker->run();
+}
+
+void ChannelChat::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void ChannelChat::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
 }
 
 ChannelChat::~ChannelChat()
@@ -172,4 +187,10 @@ void ChannelChat::Refresh_Handler(QList<Message *> newList)
 }
 
 
+
+
+void ChannelChat::on_Exit_pbn_clicked()
+{
+    this->close();
+}
 

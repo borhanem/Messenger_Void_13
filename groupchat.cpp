@@ -4,11 +4,12 @@
 #include "msgBaseSend.h"
 #include "workerrefresher.h"
 GroupChat::GroupChat(QString chatName,QWidget *parent) :
-    QDialog(parent),
+    QDialog(nullptr),
     AbstractChat(chatName,AbstractChat::Group),
     ui(new Ui::GroupChat),
     worker(new WorkerRefresher(WorkerRefresher::MSGList,User::Group,0,chatName,this))
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
     ui->sendResult_lbl->clear();
     ui->send_pbn->setDefault(true);
@@ -119,6 +120,21 @@ void GroupChat::updateList()
     }
 }
 
+
+void GroupChat::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void GroupChat::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
+}
+
 void GroupChat::on_send_pbn_clicked()
 {
     qDebug("on_send_pbn_clicked from GroupChat class\n");
@@ -160,5 +176,11 @@ void GroupChat::Refresh_handler(QList<Message *> newList)
     //ui->message_layout.
     this->updateList();
     this->saveToFile();
+}
+
+
+void GroupChat::on_Exit_pbn_clicked()
+{
+    this->close();
 }
 
