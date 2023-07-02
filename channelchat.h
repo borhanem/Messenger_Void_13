@@ -6,6 +6,7 @@
 #include "controllerrefresher.h"
 #include "workerrefresher.h"
 #include "abstractchat.h"
+#include <QMouseEvent>
 //#include "refresherchannel.h"
 namespace Ui {
 class ChannelChat;
@@ -26,7 +27,12 @@ private slots:
     void success_on_send_message();
     void failure_on_send_message(QString error);
     void Refresh_Handler(QList<Message*>);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void on_Exit_pbn_clicked();
+
 private:
+        QPoint dragPosition;
     Ui::ChannelChat *ui;
     QVBoxLayout* messagesLayout;
     ControllerRefresher* controller;

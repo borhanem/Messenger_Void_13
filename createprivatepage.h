@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "user.h"
+#include <QMouseEvent>
 namespace Ui {
 class CreatePrivatePage;
 }
@@ -24,9 +25,14 @@ private slots:
 
     void failure_on_create_NewPrivate(QString error);
 
+    void on_Exit_pbn_clicked();
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+
 signals:
     void NewPrivate(QString);
 private:
+    QPoint dragPosition;
     Ui::CreatePrivatePage *ui;
     const User* const mp_user;
 };

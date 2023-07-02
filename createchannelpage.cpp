@@ -2,10 +2,11 @@
 #include "ui_createchannelpage.h"
 
 CreateChannelPage::CreateChannelPage(const User* const user,QWidget *parent ) :
-    QDialog(parent),
+    QDialog(nullptr),
     ui(new Ui::CreateChannelPage),
     mp_user(user)
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
     ui->result_lbl->clear();
     ui->stackedWidget->setCurrentIndex(0);
@@ -109,5 +110,24 @@ void CreateChannelPage::on_joinchannel_pbn_clicked()
     ui->result_lbl->setText("Sending request to server...");
     mp_user->joinChat(input_channel_name,User::Channel);
 
+}
+
+void CreateChannelPage::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void CreateChannelPage::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
+}
+
+void CreateChannelPage::on_Exit_pbn_clicked()
+{
+    this->close();
 }
 

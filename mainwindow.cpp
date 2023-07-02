@@ -33,8 +33,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->createGroup_pbn->hide();
     ui->newchannel_pbn->hide();
     ui->newchat_pbn->hide();
+    ui->pass_led->setDisabled(true);
+    ui->user_led->setDisabled(true);
+    ui->token_led->setDisabled(true);
     ui->pass_led->hide();
-    ui->label->hide();
+    ui->pass_lbl->hide();
     ui->Theme_3_pbn->hide();
     ui->Theme_2_pbn->hide();
     ui->Theme_1->hide();
@@ -144,7 +147,7 @@ void MainWindow::on_toolButton_clicked(bool checked)
         user_led_hide-> setEndValue(QRect(-383,75,350,61));
         user_led_hide->start();
 
-        pass_lbl_hide = new QPropertyAnimation(ui->label , "geometry");
+        pass_lbl_hide = new QPropertyAnimation(ui->pass_lbl , "geometry");
         pass_lbl_hide-> setDuration(200);
         pass_lbl_hide->setStartValue(QRect(17,143,52,20));
         pass_lbl_hide-> setEndValue(QRect(-383,143,68,20));
@@ -233,7 +236,7 @@ void MainWindow::on_toolButton_clicked(bool checked)
         user_led_hide-> setEndValue(QRect(17,75,350,61));
         user_led_hide->start();
 
-        pass_lbl_hide = new QPropertyAnimation(ui->label , "geometry");
+        pass_lbl_hide = new QPropertyAnimation(ui->pass_lbl , "geometry");
         pass_lbl_hide-> setDuration(200);
         pass_lbl_hide->setStartValue(QRect(-83,143,52,20));
         pass_lbl_hide-> setEndValue(QRect(17,143,68,20));
@@ -310,7 +313,7 @@ void MainWindow::on_toolButton_clicked(bool checked)
         ui->repository_info_lbl->show();
         ui->repository_link_lbl->show();
         ui->pass_led->show();
-        ui->label->show();
+        ui->pass_lbl->show();
         ui->Theme_3_pbn->show();
         ui->Theme_2_pbn->show();
         ui->Theme_1->show();

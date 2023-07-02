@@ -2,10 +2,11 @@
 #include "ui_createprivatepage.h"
 #include "message.h"
 CreatePrivatePage::CreatePrivatePage(const User* const user,QWidget *parent) :
-    QDialog(parent),
+    QDialog(nullptr),
     ui(new Ui::CreatePrivatePage),
     mp_user(user)
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
     ui->result_lbl->clear();
     ui->newprivate_pbn->setDefault(true);
@@ -60,5 +61,24 @@ void CreatePrivatePage::failure_on_create_NewPrivate(QString error)
     ui->newprivate_pbn->setDisabled(false);
     ui->username_led->setDisabled(false);
 
+}
+
+void CreatePrivatePage::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void CreatePrivatePage::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
+}
+
+void CreatePrivatePage::on_Exit_pbn_clicked()
+{
+    this->close();
 }
 

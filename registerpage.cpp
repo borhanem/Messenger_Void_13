@@ -2,10 +2,11 @@
 #include "ui_registerpage.h"
 
 RegisterPage::RegisterPage(QWidget *parent) :
-    QDialog(parent),
+    QDialog(nullptr),
     ui(new Ui::RegisterPage),
     mp_newuser(new User())
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
     ui->fname_warning_lbl->clear();
     ui->lnam_warning_lbl->clear();
@@ -17,6 +18,20 @@ RegisterPage::RegisterPage(QWidget *parent) :
     connect(mp_newuser,&User::Success,this,&::RegisterPage::server_handler_on_success);
     connect(mp_newuser,&User::Failure,this,&::RegisterPage::server_handler_on_failure);
 
+}
+
+void RegisterPage::mousePressEvent(QMouseEvent* event)
+{
+    dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+}
+void RegisterPage::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
 }
 
 RegisterPage::~RegisterPage()
@@ -128,3 +143,9 @@ void RegisterPage::server_handler_on_failure(QString error)
     ui->pass_led_2->setDisabled(false);
     ui->confirmpass_led->setDisabled(false);
 }
+
+void RegisterPage::on_Exit_pbn_clicked()
+{
+    this->close();
+}
+

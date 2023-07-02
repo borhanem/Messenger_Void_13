@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "user.h"
-
+#include <QMouseEvent>
 
 namespace Ui {
 class CreateChannelPage;
@@ -31,9 +31,14 @@ private slots:
 
     void on_joinchannel_pbn_clicked();
 
+    void on_Exit_pbn_clicked();
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+
 signals:
     void channelCreated(QString channelname);
 private:
+    QPoint dragPosition;
     Ui::CreateChannelPage *ui;
     const User* const mp_user;
 

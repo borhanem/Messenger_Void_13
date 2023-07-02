@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "user.h"
+#include <QMouseEvent>
 namespace Ui {
 class CreateGroupPage;
 }
@@ -28,9 +29,14 @@ private slots:
 
     void on_joingroup_pbn_clicked();
 
+    void on_Exit_pbn_clicked();
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+
 signals:
     void NewGroup(QString groupName);
 private:
+    QPoint dragPosition;
     Ui::CreateGroupPage *ui;
     const User* const mp_user;
 };
