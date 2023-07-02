@@ -67,12 +67,15 @@ private slots:
 
     void group_refresh_handler(QList<AbstractChat*>);
 
+    void channel_refresh_handler(QList<AbstractChat*>);
+
 private:
     Ui::MainWindow *ui;
     User* mp_user;
     QList<AbstractChat*> mp_ChatList;
     CreateGroupPage* mp_cgp;
     WorkerRefresher* mp_groupWorker;
+    WorkerRefresher* mp_channelWorker;
     void loadChats();
     size_t m_groupCount,m_channelCount,m_userCount;
     QPoint dragPosition;

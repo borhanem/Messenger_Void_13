@@ -103,7 +103,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string/>
    </property>
   </widget>
-  <widget class="QScrollArea" name="scrollArea">
+  <widget class="QScrollArea" name="channel_scroll_area">
    <property name="geometry">
     <rect>
      <x>70</x>

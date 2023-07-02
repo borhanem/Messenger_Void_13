@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow),
       mp_user(new User()),
     mp_groupWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Group)),
+    mp_channelWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Channel)),
     m_groupCount(0),
     m_channelCount(0),
     m_userCount(0)
@@ -45,8 +46,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->repository_link_lbl->setOpenExternalLinks(true);
     connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
     connect(mp_groupWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::group_refresh_handler);
+    connect(mp_channelWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::channel_refresh_handler);
     mp_groupWorker->setPreSize(this->m_groupCount);
+    mp_channelWorker->setPreSize(this->m_channelCount);
     mp_groupWorker->run();
+    mp_channelWorker->run();
 }
 
 MainWindow::~MainWindow()
@@ -54,6 +58,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete mp_user;
     delete mp_groupWorker;
+    delete mp_channelWorker;
     for(auto& i : this->mp_ChatList)
     {
         delete i;
@@ -366,6 +371,7 @@ void MainWindow::handler_on_NewChannel(QString newChannelName)
 
 void MainWindow::on_Exit_pbn_clicked()
 {
+    //this->deleteLater();
     this->close();
 }
 
@@ -395,6 +401,7 @@ void MainWindow::on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::on_newchannel_pbn_clicked()
 {
+    this->mp_channelWorker->setPreSize(++this->m_channelCount);
     CreateChannelPage* chp = new CreateChannelPage(mp_user,this);
     connect(chp,&CreateChannelPage::channelCreated,this,&MainWindow::handler_on_NewChannel);
     chp->exec();
@@ -546,6 +553,18 @@ void MainWindow::on_Add_tbn_clicked()
 void MainWindow::group_refresh_handler(QList<AbstractChat*> new_chats)
 {
     this->m_groupCount += new_chats.size();
+    this->mp_ChatList += new_chats;
+    for(auto& i : new_chats){
+    QListWidgetItem* newItem = new QListWidgetItem(i->chatName());
+    newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(i));
+    ui->chats_listWidget->addItem(newItem);
+    ui->chats_listWidget_2->addItem(newItem);
+    }
+}
+
+void MainWindow::channel_refresh_handler(QList<AbstractChat *> new_chats)
+{
+    this->m_channelCount += new_chats.size();
     this->mp_ChatList += new_chats;
     for(auto& i : new_chats){
     QListWidgetItem* newItem = new QListWidgetItem(i->chatName());

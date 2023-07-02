@@ -2,8 +2,10 @@
 #define CHANNELCHAT_H
 
 #include <QDialog>
+#include <QVBoxLayout>
+#include "workerrefresher.h"
 #include "abstractchat.h"
-#include "refresherchannel.h"
+//#include "refresherchannel.h"
 namespace Ui {
 class ChannelChat;
 }
@@ -25,6 +27,8 @@ private slots:
     void Refresh_Handler(QList<Message*>);
 private:
     Ui::ChannelChat *ui;
+    QVBoxLayout* messagesLayout;
+    WorkerRefresher* worker;
 
 //    refresherChannel* refresher;
 };

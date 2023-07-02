@@ -446,7 +446,7 @@ void User::server_handler_on_GetChatList(QJsonDocument jSonContent)
 
         // Convert the number string to an integer
         msgCount = numStr.toULongLong();
-        qDebug() << "User::server_handler_on_GetChatList - msgCount : " << msgCount;
+        qDebug() << "User::server_handler_on_GetChatList - ChatCount : " << msgCount;
     }
     else
     {

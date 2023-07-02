@@ -25,6 +25,7 @@ WorkerRefresher::WorkerRefresher(const RefresherType& rt,const User::ChatType& c
 
 WorkerRefresher::~WorkerRefresher()
 {
+
     delete mp_currUser;
     delete mp_timer;
 }
@@ -140,7 +141,23 @@ void WorkerRefresher::handleGroups(QJsonObject Respond,size_t new_size)
 
 void WorkerRefresher::handleChannels(QJsonObject Respond,size_t new_size)
 {
-
+    QList<AbstractChat*> ChatList;
+    for (size_t jsonIter = this->m_pre_size; jsonIter < new_size; ++jsonIter){
+        QString blockIter = "block " + QString::number(jsonIter);
+        QJsonValue blockVal = Respond.value(blockIter);
+        if(blockVal.isObject()){
+        QJsonObject blockObj = blockVal.toObject();
+        QString ChatName = blockObj.value("channel_name").toString();
+        qDebug() << blockIter << " ChatName: " << ChatName;
+        AbstractChat* tempMsg = new ChannelChat(ChatName);
+        ChatList.push_back(tempMsg);
+        }
+        else
+        {
+        qDebug() << " WorkerRefresher::handleChannels : blockVal is not Object\n";
+        }
+    }
+    emit chatResultReady(ChatList);
 }
 
 void WorkerRefresher::handleUsers(QJsonObject Respond,size_t new_size)

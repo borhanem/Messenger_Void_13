@@ -16,7 +16,7 @@ AbstractChat::~AbstractChat()
     {
         delete i;
     }
-
+ //this->loadFromFile();
 }
 
 QString AbstractChat::chatName()const

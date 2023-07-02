@@ -5,15 +5,34 @@
 ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     QDialog(parent),
     AbstractChat(chatName,AbstractChat::Channel),
-    ui(new Ui::ChannelChat)
+    ui(new Ui::ChannelChat),
+    worker(new WorkerRefresher(WorkerRefresher::MSGList,User::Channel,0,chatName,this))
 
 {
+    qDebug() << "this is running\n";
+    ui->setupUi(this);
+    ui->sendResult_lbl->clear();
+    ui->send_pbn->setDefault(true);
+    ui->channelname_led->setDisabled(true);
+    ui->channelname_led->setText(this->m_chat_name);
+    this->setWindowTitle(this->m_chat_name);
+    qDebug() << " this is still running [1]";
+
+    ui->channel_scroll_area->setWidget(ui->scrollAreaWidgetContents);
+    messagesLayout = new QVBoxLayout(ui->scrollAreaWidgetContents);
+    ui->scrollAreaWidgetContents->setLayout(messagesLayout);
+    messagesLayout->setAlignment(Qt::AlignTop);
+    //    connect(mp_user,&User::SuccessOnSendMessage,this,&ChannelChat::success_on_send_message);
+    connect(mp_user,&User::Failure,this,&ChannelChat::failure_on_send_message);
+    //    //connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
+    //    connect(mp_user,&User::FailureOnGetMessage,this,&ChannelChat::failure_on_send_message);
+    connect(worker,&WorkerRefresher::msgResultReady,this,&ChannelChat::Refresh_Handler);
     connect(mp_user,&User::SuccessOnSendMessage,this,&ChannelChat::success_on_send_message);
     connect(mp_user,&User::Failure,this,&ChannelChat::failure_on_send_message);
 
     ////////////////////////////////////////////////////////////////////////
     // sending a experimental message to determine the user is admin or not
-    mp_user->sendMessage(Message(("void Messenger"),mp_user->getUserName(),this->m_chat_name),User::Channel);
+    this->mp_user->sendMessage(Message((""),mp_user->getUserName(),this->m_chat_name),User::Channel);
     ////////////////////////////////////////////////////////////////////////
 
     // making the refresher
@@ -21,36 +40,48 @@ ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
 //    refresher->start();
 //    connect(refresher,&refresherChannel::channelRefreshSignal,this,&ChannelChat::Refresh_Handler);
     ///////////////////
-    ui->setupUi(this);
-    ui->sendResult_lbl->clear();
-    ui->send_pbn->setDefault(true);
-    ui->channelname_led->setDisabled(true);
-    ui->channelname_led->setText(this->m_chat_name);
-    this->setWindowTitle(this->m_chat_name);
+    this->loadFromFile();
+    qDebug() << "this is still running[2]";
+    worker->setPreSize(this->m_message_list.size());
+    worker->run();
 }
 
 ChannelChat::~ChannelChat()
 {
     delete ui;
+    delete messagesLayout;
+    delete worker;
 }
 
 int ChannelChat::loadFromFile()
 {
+    qDebug() << "ChannelChat::loadFromFile => loadFromFile is running";
     QFile logFile("vdata/MsgData/Channels/"+this->m_chat_name+".dat");
     if(!logFile.open(QIODevice::ReadOnly))
     {
         return -1;
     }
+    this->m_message_list.clear();
     QDataStream user_ds(&logFile);
     user_ds.setVersion(QDataStream::Qt_6_5);
-    while(!logFile.atEnd())
-    {
-        Message *temp = new Message();
-        user_ds >> *temp;
-        this->m_message_list.push_back(temp);
-    }
-
+    Message *temp = new Message();
+    Message* msg;
+        while(!logFile.atEnd())
+        {
+            user_ds >> *temp;
+            if(temp->sender()==mp_user->getUserName())
+            {
+                msg = new msgBaseSend(temp->body(),temp->sender(),temp->receiver(),temp->time(),this);
+            }
+            else
+            {
+                msg = new msgBaseReceiver(temp->body(),temp->sender(),temp->receiver(),temp->time(),this);
+            }
+            this->m_message_list.push_back(msg);
+        }
+    delete temp;
     logFile.close();
+    this->updateList();
     return 0;
 }
 
@@ -62,7 +93,7 @@ int ChannelChat::saveToFile()
         LogDir.mkpath("vdata/MsgData/Channels");
     }
     QFile logFile("vdata/MsgData/Channels/"+this->m_chat_name+".dat");
-    if(!logFile.open(QIODevice::WriteOnly))
+    if(!logFile.open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
         return -1;
     }
@@ -80,20 +111,20 @@ int ChannelChat::saveToFile()
 
 void ChannelChat::updateList()
 {
-//    for(auto& i : this->m_message_list)
-//    {
-//        if(i->sender() == mp_user->getUserName())
-//        {
-//            msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
-//            msg->setFixedSize(500,60);
-//            messagesLayout->addWidget(msg);
-//        }
-//        else{
-//            msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
-//            msg->setFixedSize(500,60);
-//            messagesLayout->addWidget(msg);
-//        }
-//    }
+    for(auto& i : this->m_message_list)
+    {
+        if(i->sender() == mp_user->getUserName())
+        {
+            msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
+            msg->setFixedSize(500,60);
+            messagesLayout->addWidget(msg);
+        }
+        else{
+            msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
+            msg->setFixedSize(500,60);
+            messagesLayout->addWidget(msg);
+        }
+    }
 }
 
 void ChannelChat::on_send_pbn_clicked()
@@ -113,6 +144,7 @@ void ChannelChat::on_send_pbn_clicked()
 void ChannelChat::success_on_send_message()
 {
     ui->sendResult_lbl->setText("Message Send Successfuly");
+    ui->messagebar_led->clear();
 }
 
 void ChannelChat::failure_on_send_message(QString Error)
@@ -129,9 +161,14 @@ void ChannelChat::failure_on_send_message(QString Error)
     ui->sendResult_lbl->setText(Error);
 }
 
-void ChannelChat::Refresh_Handler(QList<Message *>)
+void ChannelChat::Refresh_Handler(QList<Message *> newList)
 {
-    // handles the messages
+    qDebug() << "ChannelChat::Refresh_Handler called\n";
+    this->m_message_list += newList;
+    ui->sendResult_lbl->setText("Refreshed Successfully!\n");
+    //ui->message_layout.
+    this->updateList();
+    this->saveToFile();
 }
 
 
