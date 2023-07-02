@@ -10,9 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
       mp_user(new User()),
-    mp_groupWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Group)),
-    mp_channelWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Channel)),
-    mp_privateWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Private)),
+    mp_groupController(new ControllerRefresher(WorkerRefresher::ChatList,User::Group)),
+    mp_channelController(new ControllerRefresher(WorkerRefresher::ChatList,User::Channel)),
+    mp_privateController(new ControllerRefresher(WorkerRefresher::ChatList,User::Private)),
     m_groupCount(0),
     m_channelCount(0),
     m_privateCount(0)
@@ -48,23 +48,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->repository_link_lbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ui->repository_link_lbl->setOpenExternalLinks(true);
     connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
-    connect(mp_groupWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::group_refresh_handler);
-    connect(mp_channelWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::channel_refresh_handler);
-    connect(mp_privateWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::private_refresh_handler);
-    mp_groupWorker->setPreSize(this->m_groupCount);
-    mp_channelWorker->setPreSize(this->m_channelCount);
-    mp_privateWorker->setPreSize(this->m_privateCount);
-    mp_groupWorker->run();
-    mp_channelWorker->run();
-    mp_privateWorker->run();
+    connect(mp_groupController,&ControllerRefresher::chatResultReady,this,&MainWindow::group_refresh_handler);
+    connect(mp_channelController,&ControllerRefresher::chatResultReady,this,&MainWindow::channel_refresh_handler);
+    connect(mp_privateController,&ControllerRefresher::chatResultReady,this,&MainWindow::private_refresh_handler);
+    mp_groupController->setPreSize(this->m_groupCount);
+    mp_channelController->setPreSize(this->m_channelCount);
+    mp_privateController->setPreSize(this->m_privateCount);
+    mp_groupController->operate();
+    mp_channelController->operate();
+    mp_privateController->operate();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete mp_user;
-    delete mp_groupWorker;
-    delete mp_channelWorker;
+    delete mp_groupController;
+    delete mp_channelController;
+    delete mp_privateController;
     for(auto& i : this->mp_ChatList)
     {
         delete i;
@@ -350,7 +351,7 @@ void MainWindow::on_createGroup_pbn_clicked()
 
 void MainWindow::handler_on_NewGroup(QString newGroupName)
 {
-    this->mp_groupWorker->setPreSize(++this->m_groupCount);
+    this->mp_groupController->setPreSize(++this->m_groupCount);
     qDebug("handler on NewGroup called in mainWindow\n");
     AbstractChat* newGroup = new GroupChat(newGroupName,this);
     this->mp_ChatList.push_back(newGroup);
@@ -364,7 +365,7 @@ void MainWindow::handler_on_NewGroup(QString newGroupName)
 
 void MainWindow::handler_on_NewChannel(QString newChannelName)
 {
-    this->mp_channelWorker->setPreSize(++this->m_channelCount);
+    this->mp_channelController->setPreSize(++this->m_channelCount);
     AbstractChat* newChannel = new ChannelChat(newChannelName,this);
     this->mp_ChatList.push_back(newChannel);
     newChannel->saveToFile();
@@ -377,7 +378,7 @@ void MainWindow::handler_on_NewChannel(QString newChannelName)
 
 void MainWindow::hanlder_on_NewPrivate(QString newPrivateName)
 {
-    this->mp_privateWorker->setPreSize(++this->m_privateCount);
+    this->mp_privateController->setPreSize(++this->m_privateCount);
     qDebug() << "MainWindow::hanlder_on_NewPrivate => PrivateChat with the name " << newPrivateName << "created";
     AbstractChat* newPrivate = new PrivateChat(newPrivateName,this);
     this->mp_ChatList.push_back(newPrivate);

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QVBoxLayout>
+#include "controllerrefresher.h"
 #include "workerrefresher.h"
 #include "abstractchat.h"
 //#include "refresherchannel.h"
@@ -28,7 +29,7 @@ private slots:
 private:
     Ui::ChannelChat *ui;
     QVBoxLayout* messagesLayout;
-    WorkerRefresher* worker;
+    ControllerRefresher* controller;
 
 //    refresherChannel* refresher;
 };

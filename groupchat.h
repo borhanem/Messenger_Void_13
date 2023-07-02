@@ -5,7 +5,7 @@
 #include "abstractchat.h"
 #include <QVBoxLayout>
 #include "refreshergroup.h"
-#include "workerrefresher.h"
+#include "controllerrefresher.h"
 namespace Ui {
 class GroupChat;
 }
@@ -30,7 +30,7 @@ private slots:
 private:
     Ui::GroupChat *ui;
     QVBoxLayout* messagesLayout;
-    WorkerRefresher* worker;
+    ControllerRefresher* controller;
 
     //refresherGroup* refresher;
 };

@@ -5,6 +5,7 @@
 #include "abstractchat.h"
 #include <QVBoxLayout>
 #include "workerrefresher.h"
+#include "controllerrefresher.h"
 namespace Ui {
 class PrivateChat;
 }
@@ -27,7 +28,7 @@ private slots:
 private:
     Ui::PrivateChat *ui;
     QVBoxLayout* messagesLayout;
-    WorkerRefresher* worker;
+    ControllerRefresher* controller;
 };
 
 #endif // PRIVATECHAT_H
