@@ -64,7 +64,7 @@
         <string>User:     </string>
        </property>
       </widget>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="pass_lbl">
        <property name="geometry">
         <rect>
          <x>17</x>
