@@ -23,6 +23,7 @@ SOURCES += \
     message.cpp \
     msgBaseReceive.cpp \
     msgBaseSend.cpp \
+    privatechat.cpp \
     refresherDirect.cpp \
     refresherabstract.cpp \
     refresherchannel.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     message.h \
     msgBaseReceive.h \
     msgBaseSend.h \
+    privatechat.h \
     refresherDirect.h \
     refresherabstract.h \
     refresherchannel.h \
@@ -70,6 +72,7 @@ FORMS += \
     mainwindow.ui \
     msgBaseReceive.ui \
     msgBaseSend.ui \
+    privatechat.ui \
     registerpage.ui
 
 # Default rules for deployment.

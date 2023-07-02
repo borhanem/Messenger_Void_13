@@ -5,6 +5,7 @@
 #include <QListWidgetItem>
 #include "channelchat.h"
 #include "createprivatepage.h"
+#include "privatechat.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
@@ -359,6 +360,7 @@ void MainWindow::handler_on_NewGroup(QString newGroupName)
 
 void MainWindow::handler_on_NewChannel(QString newChannelName)
 {
+    this->mp_channelWorker->setPreSize(++this->m_channelCount);
     AbstractChat* newChannel = new ChannelChat(newChannelName,this);
     this->mp_ChatList.push_back(newChannel);
     newChannel->saveToFile();
@@ -372,7 +374,15 @@ void MainWindow::handler_on_NewChannel(QString newChannelName)
 void MainWindow::hanlder_on_NewPrivate(QString newPrivateName)
 {
     //do stuff later
-    qDebug() << "PrivateChat within the name " << newPrivateName << "created";
+    qDebug() << "MainWindow::hanlder_on_NewPrivate => PrivateChat with the name " << newPrivateName << "created";
+    AbstractChat* newPrivate = new PrivateChat(newPrivateName,this);
+    this->mp_ChatList.push_back(newPrivate);
+    newPrivate->saveToFile();
+    QListWidgetItem* newItem = new QListWidgetItem(newPrivate->chatName());
+    newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(newPrivate));
+    ui->chats_listWidget->addItem(newItem);
+    ui->chats_listWidget_2->addItem(newItem);
+    dynamic_cast<PrivateChat*>(newPrivate)->open();
 }
 
 
@@ -389,6 +399,7 @@ void MainWindow::on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item)
     switch (selected_chat->chatType()) {
     case AbstractChat::Private:
     // cast to PrivateChat
+        dynamic_cast<PrivateChat*>(selected_chat)->open();
         break;
     case AbstractChat::Group:
         // cast to GroupChat
