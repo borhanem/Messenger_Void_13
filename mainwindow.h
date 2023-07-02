@@ -15,6 +15,7 @@
 #include "creategrouppage.h"
 #include "createchannelpage.h"
 #include "workerrefresher.h"
+#include "controllerrefresher.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -79,9 +80,9 @@ private:
     User* mp_user;
     QList<AbstractChat*> mp_ChatList;
     CreateGroupPage* mp_cgp;
-    WorkerRefresher* mp_groupWorker;
-    WorkerRefresher* mp_channelWorker;
-    WorkerRefresher* mp_privateWorker;
+    ControllerRefresher* mp_groupController;
+    ControllerRefresher* mp_channelController;
+    ControllerRefresher* mp_privateController;
     void loadChats();
     size_t m_groupCount,m_channelCount,m_privateCount;
     QPoint dragPosition;

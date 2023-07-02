@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QMouseEvent>
 #include "workerrefresher.h"
+#include "controllerrefresher.h"
 namespace Ui {
 class PrivateChat;
 }
@@ -34,7 +35,7 @@ private:
     QPoint dragPosition;
     Ui::PrivateChat *ui;
     QVBoxLayout* messagesLayout;
-    WorkerRefresher* worker;
+    ControllerRefresher* controller;
 };
 
 #endif // PRIVATECHAT_H

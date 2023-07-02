@@ -6,7 +6,7 @@ ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     QDialog(nullptr),
     AbstractChat(chatName,AbstractChat::Channel),
     ui(new Ui::ChannelChat),
-    worker(new WorkerRefresher(WorkerRefresher::MSGList,User::Channel,0,chatName,this))
+    controller(new ControllerRefresher(WorkerRefresher::MSGList,User::Channel,0,this->mp_user->getUserName(),chatName,this))
 
 {
     setWindowFlags(Qt::FramelessWindowHint);
@@ -27,7 +27,7 @@ ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     connect(mp_user,&User::Failure,this,&ChannelChat::failure_on_send_message);
     //    //connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
     //    connect(mp_user,&User::FailureOnGetMessage,this,&ChannelChat::failure_on_send_message);
-    connect(worker,&WorkerRefresher::msgResultReady,this,&ChannelChat::Refresh_Handler);
+    connect(controller,&ControllerRefresher::msgResultReady,this,&ChannelChat::Refresh_Handler);
     connect(mp_user,&User::SuccessOnSendMessage,this,&ChannelChat::success_on_send_message);
     connect(mp_user,&User::Failure,this,&ChannelChat::failure_on_send_message);
 
@@ -43,8 +43,8 @@ ChannelChat::ChannelChat(QString chatName, QWidget *parent) :
     ///////////////////
     this->loadFromFile();
     qDebug() << "this is still running[2]";
-    worker->setPreSize(this->m_message_list.size());
-    worker->run();
+    controller->setPreSize(this->m_message_list.size());
+    controller->operate();
 }
 
 void ChannelChat::mousePressEvent(QMouseEvent* event)
@@ -65,7 +65,7 @@ ChannelChat::~ChannelChat()
 {
     delete ui;
     delete messagesLayout;
-    delete worker;
+    delete controller;
 }
 
 int ChannelChat::loadFromFile()
@@ -128,6 +128,7 @@ void ChannelChat::updateList()
 {
     for(auto& i : this->m_message_list)
     {
+        if(!i->isEmpty()){
         if(i->sender() == mp_user->getUserName())
         {
             msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
@@ -138,6 +139,7 @@ void ChannelChat::updateList()
             msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
             msg->setFixedSize(500,60);
             messagesLayout->addWidget(msg);
+        }
         }
     }
 }

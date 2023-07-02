@@ -5,6 +5,8 @@
 #include "abstractchat.h"
 #include <QVBoxLayout>
 #include "refreshergroup.h"
+
+#include "controllerrefresher.h"
 #include "workerrefresher.h"
 #include <QMouseEvent>
 namespace Ui {
@@ -37,7 +39,7 @@ private:
     QPoint m_mousePressPos;
     Ui::GroupChat *ui;
     QVBoxLayout* messagesLayout;
-    WorkerRefresher* worker;
+    ControllerRefresher* controller;
 
     //refresherGroup* refresher;
 };

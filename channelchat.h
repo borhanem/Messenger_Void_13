@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QVBoxLayout>
+#include "controllerrefresher.h"
 #include "workerrefresher.h"
 #include "abstractchat.h"
 #include <QMouseEvent>
@@ -34,7 +35,7 @@ private:
         QPoint dragPosition;
     Ui::ChannelChat *ui;
     QVBoxLayout* messagesLayout;
-    WorkerRefresher* worker;
+    ControllerRefresher* controller;
 
 //    refresherChannel* refresher;
 };

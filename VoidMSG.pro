@@ -13,6 +13,7 @@ SOURCES += \
     abstractchat.cpp \
     api.cpp \
     channelchat.cpp \
+    controllerrefresher.cpp \
     createchannelpage.cpp \
     creategrouppage.cpp \
     createprivatepage.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     abstractchat.h \
     api.h \
     channelchat.h \
+    controllerrefresher.h \
     createchannelpage.h \
     creategrouppage.h \
     createprivatepage.h \

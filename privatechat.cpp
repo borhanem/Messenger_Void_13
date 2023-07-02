@@ -6,7 +6,7 @@ PrivateChat::PrivateChat(QString chatName,QWidget *parent) :
     QDialog(nullptr),
     AbstractChat(chatName,AbstractChat::Private),
     ui(new Ui::PrivateChat),
-    worker(new WorkerRefresher(WorkerRefresher::MSGList,User::Private,0,chatName))
+    controller(new ControllerRefresher(WorkerRefresher::MSGList,User::Private,0,this->mp_user->getUserName(),chatName))
 {
     setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
@@ -23,7 +23,7 @@ PrivateChat::PrivateChat(QString chatName,QWidget *parent) :
     connect(mp_user,&User::Failure,this,&PrivateChat::failure_on_send_message);
     //connect(mp_user,&User::SuccessOnGetMessage,this,&GroupChat::Refresh_handler);
     //connect(mp_user,&User::FailureOnGetMessage,this,&GroupChat::failure_on_send_message);
-    connect(worker,&WorkerRefresher::msgResultReady,this,&PrivateChat::Refresh_handler);
+    connect(controller,&ControllerRefresher::msgResultReady,this,&PrivateChat::Refresh_handler);
     this->loadFromFile();
     /* ---show all messages---
     for(auto&i : this->m_message_list)
@@ -32,8 +32,8 @@ PrivateChat::PrivateChat(QString chatName,QWidget *parent) :
     }
     *
     */
-    worker->setPreSize(this->m_message_list.size());
-    worker->run();
+    controller->setPreSize(this->m_message_list.size());
+    controller->operate();
 }
 
 
@@ -42,7 +42,7 @@ PrivateChat::~PrivateChat()
 {
     delete ui;
     delete messagesLayout;
-    delete worker;
+    delete controller;
 }
 
 int PrivateChat::saveToFile()
@@ -120,6 +120,7 @@ void PrivateChat::updateList()
 {
     for(auto& i : this->m_message_list)
     {
+        if(!i->isEmpty()){
         if(i->sender() == mp_user->getUserName())
         {
             msgBaseSend* msg = dynamic_cast<msgBaseSend*>(i);
@@ -130,6 +131,7 @@ void PrivateChat::updateList()
             msgBaseReceiver* msg = dynamic_cast<msgBaseReceiver*>(i);
             msg->setFixedSize(500,60);
             messagesLayout->addWidget(msg);
+        }
         }
     }
 }
