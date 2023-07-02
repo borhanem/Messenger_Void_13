@@ -405,7 +405,7 @@ border-radius: 10%;</string>
        <rect>
         <x>20</x>
         <y>43</y>
-        <width>520</width>
+        <width>161</width>
         <height>490</height>
        </rect>
       </property>
@@ -417,8 +417,8 @@ font: 12pt &quot;8514oem&quot;;</string>
      <widget class="QToolButton" name="Exit_pbn_2">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>0</y>
+        <x>527</x>
+        <y>2</y>
         <width>31</width>
         <height>31</height>
        </rect>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>442</width>
+    <width>530</width>
     <height>60</height>
    </rect>
   </property>
@@ -14,8 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">border-radius:5px;
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QLabel" name="Name">
    <property name="geometry">
@@ -38,13 +37,12 @@
     <rect>
      <x>18</x>
      <y>20</y>
-     <width>211</width>
-     <height>28</height>
+     <width>222</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-top-right-radius:15px;
-background-color: rgb(255, 170, 127);
+    <string notr="true">border-radius:0px;
 border-bottom-left-radius:15px;
 border-top-left-radius:0px;
 border-bottom-right-radius:0px;
@@ -53,23 +51,23 @@ color: rgb(0, 0, 0);
 </string>
    </property>
   </widget>
-  <widget class="QLabel" name="Time">
+  <widget class="QLabel" name="Time_lbl">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>15</y>
-     <width>41</width>
-     <height>20</height>
+     <x>238</x>
+     <y>20</y>
+     <width>31</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-top-right-radius:15px;
-background-color: transparent;
-color : black;
-font: 5pt &quot;Segoe UI&quot;;</string>
+    <string notr="true">border-radius:0px;
+font: 5pt &quot;Segoe UI&quot;;
+border-top-right-radius:15px;
+</string>
    </property>
    <property name="text">
-    <string>12:00 pm </string>
+    <string/>
    </property>
   </widget>
  </widget>

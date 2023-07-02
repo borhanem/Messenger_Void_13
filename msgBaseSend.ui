@@ -6,21 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>442</width>
-    <height>73</height>
+    <width>530</width>
+    <height>60</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">border-radius:5px;
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QLabel" name="Name">
    <property name="geometry">
     <rect>
-     <x>385</x>
+     <x>432</x>
      <y>0</y>
      <width>51</width>
      <height>20</height>
@@ -37,20 +36,20 @@
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
-     <x>226</x>
+     <x>271</x>
      <y>20</y>
-     <width>211</width>
-     <height>28</height>
+     <width>222</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-top-left-radius:15px;
+    <string notr="true">border-radius:0px;
 border-bottom-right-radius:15px;
 border-top-right-radius:0px;
 border-bottom-left-radius:0px;
-font: 8pt &quot;MV Boli&quot;;
+font: 7pt &quot;MV Boli&quot;;
 color: rgb(0, 0, 0);
-background-color: rgb(170, 255, 127);
+
 </string>
    </property>
    <property name="html">
@@ -60,27 +59,29 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MV Boli'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:7pt;&quot;&gt;hii&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MV Boli'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;hii&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Time">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>15</y>
-     <width>51</width>
-     <height>20</height>
+     <x>240</x>
+     <y>20</y>
+     <width>31</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-top-left-radius:15px;
-background-color: transparent;
+    <string notr="true">border-radius:0px;
+border-top-left-radius:15px;
 color : black;
-font: 5pt &quot;Segoe UI&quot;;</string>
+font: 5pt &quot;Segoe UI&quot;;border-top-left-radius:15px;
+
+</string>
    </property>
    <property name="text">
-    <string>12:00 pm </string>
+    <string/>
    </property>
   </widget>
  </widget>

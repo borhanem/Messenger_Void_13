@@ -63,9 +63,19 @@ QTextBrowser#textBrowser
     background-color: rgb(129, 240, 200);
 }
 
-QLabel#msg_index
+QLabel#label
 {
-     background-color: rgb(2, 186, 119);
+    background-color: rgb(129, 240, 200);
+}
+
+QLabel#Time_lbl
+{
+    background-color: rgb(2, 186, 119);
+}
+
+QTextBrowser#msg_index
+{
+    background-color: rgb(2, 186, 119);
 }
 
 

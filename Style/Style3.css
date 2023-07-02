@@ -84,9 +84,20 @@ QTextBrowser#textBrowser
     background-color: rgb(252, 220, 238);
 }
 
-QLabel#msg_index
+QLabel#label
 {
-    background-color: rgb(242, 124, 169);
+    background-color: rgb(252, 220, 238);
+
+}
+
+QLabel#Time_lbl
+{
+   background-color: rgb(242, 124, 169);
+}
+
+QTextBrowser#msg_index
+{
+   background-color: rgb(242, 124, 169);
 }
 
 QLineEdit

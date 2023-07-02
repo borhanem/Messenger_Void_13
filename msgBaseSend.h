@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "message.h"
+#include "QSizePolicy"
 namespace Ui {
 class msgBase;
 }

@@ -11,7 +11,11 @@ msgBaseSend::msgBaseSend(const QString& txt,const QString& sender ,const QString
     ui->textBrowser->setText(this->m_body);
     ui->textBrowser->setAlignment(Qt::AlignRight);
     ui->Name->setText(this->m_sender);
-    ui->Time->setText(this->m_time.time().toString());
+    ui->label->setText(this->m_time.time().toString());
+    //ui->textBrowser->setSizePolicy(QSizePolicy::Fixed , QSizePolicy::Expanding);
+    //ui->textBrowser->setMaximumWidth(215);
+    //ui->textBrowser->setMaximumHeight(200);
+    //ui->textBrowser->adjustSize();
 }
 
 msgBaseSend::~msgBaseSend()

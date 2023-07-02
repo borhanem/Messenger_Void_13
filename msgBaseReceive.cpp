@@ -9,8 +9,9 @@ msgBaseReceiver::msgBaseReceiver(const QString& txt,const QString& sender,const 
     ui->setupUi(this);
     ui->msg_index->setText(this->m_body);
     ui->Name->setText(this->m_sender);
-    ui->Time->setText(this->m_time.time().toString());
-    ui->msg_index->setMaximumWidth(500);
+    ui->Time_lbl->setText(this->m_time.time().toString());
+    //ui->msg_index->setSizePolicy(QSizePolicy::Expanding , QSizePolicy::Expanding);
+    //ui->msg_index->setMaximumWidth(215);
     //ui->msg_index->adjustSize();
 }
 

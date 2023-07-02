@@ -50,7 +50,17 @@ QTextBrowser#textBrowser
     background-image: url(:/new/prefix1/Style/Purp.png);
 }
 
-QLabel#msg_index
+QLabel#label
+{
+    background-image: url(:/new/prefix1/Style/Purp.png);
+}
+
+QLabel#Time_lbl
+{
+    background-image: url(:/new/prefix1/Style/Purp.png);
+}
+
+QTextBrowser#msg_index
 {
    background-image: url(:/new/prefix1/Style/Purp.png);
 }
