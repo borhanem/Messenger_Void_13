@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <QListWidgetItem>
 #include "channelchat.h"
+#include "createprivatepage.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
@@ -368,6 +369,12 @@ void MainWindow::handler_on_NewChannel(QString newChannelName)
     dynamic_cast<ChannelChat*>(newChannel)->open();
 }
 
+void MainWindow::hanlder_on_NewPrivate(QString newPrivateName)
+{
+    //do stuff later
+    qDebug() << "PrivateChat within the name " << newPrivateName << "created";
+}
+
 
 void MainWindow::on_Exit_pbn_clicked()
 {
@@ -572,5 +579,14 @@ void MainWindow::channel_refresh_handler(QList<AbstractChat *> new_chats)
     ui->chats_listWidget->addItem(newItem);
     ui->chats_listWidget_2->addItem(newItem);
     }
+}
+
+
+void MainWindow::on_newchat_pbn_clicked()
+{
+    CreatePrivatePage* cpg = new CreatePrivatePage(this->mp_user,this);
+    connect(cpg,&CreatePrivatePage::NewPrivate,this,&MainWindow::hanlder_on_NewPrivate);
+    cpg->exec();
+    delete cpg;
 }
 

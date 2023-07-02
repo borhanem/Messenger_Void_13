@@ -56,6 +56,7 @@ private slots:
 
     void handler_on_NewGroup(QString newGroupName);
     void handler_on_NewChannel(QString newChannelName);
+    void hanlder_on_NewPrivate(QString newPrivateName);
     void on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_newchannel_pbn_clicked();
 
@@ -68,6 +69,8 @@ private slots:
     void group_refresh_handler(QList<AbstractChat*>);
 
     void channel_refresh_handler(QList<AbstractChat*>);
+
+    void on_newchat_pbn_clicked();
 
 private:
     Ui::MainWindow *ui;

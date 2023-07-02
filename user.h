@@ -26,14 +26,14 @@ public:
     void logOut();
     void createNewChat(const QString& chatName,const ChatType& type)const;
     void joinChat(const QString& chatName,const ChatType& type)const;
-    void sendMessage(const Message& msg,const ChatType& type);
+    void sendMessage(const Message& msg,const ChatType& type)const;
     void getMsg(const QString &dst,const ChatType& type); // new entry
     void getChatList(const ChatType& type);
     int loadFromFile();
     int saveToFile();
-    QString getUserName();
-    QString getPassword();
-    QString getToken();
+    QString getUserName()const;
+    QString getPassword()const;
+    QString getToken()const;
     void SetUserName(const QString& new_user_name);
     void SetPassWord(const QString& new_pass_word);
     friend QDataStream& operator<<(QDataStream &stream,const User &u);

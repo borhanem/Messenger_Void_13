@@ -15,6 +15,7 @@ SOURCES += \
     channelchat.cpp \
     createchannelpage.cpp \
     creategrouppage.cpp \
+    createprivatepage.cpp \
     groupchat.cpp \
     loginpage.cpp \
     main.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     channelchat.h \
     createchannelpage.h \
     creategrouppage.h \
+    createprivatepage.h \
     groupchat.h \
     loginpage.h \
     mainwindow.h \
@@ -62,6 +64,7 @@ FORMS += \
     channelchat.ui \
     createchannelpage.ui \
     creategrouppage.ui \
+    createprivatepage.ui \
     groupchat.ui \
     loginpage.ui \
     mainwindow.ui \

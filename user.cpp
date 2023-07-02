@@ -14,7 +14,8 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
     QObject::connect(m_server,&API::SuccessOnLogout,this,&User::server_handler_on_Logout);
-    QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_SendMessage);
+    QObject::connect(m_server,&API::FailureOnSendMsgToUser,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
     QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
     QObject::connect(m_server,&API::SuccessOnSendMsgToChannel,this,&User::server_handler_on_SendMessage);//
@@ -55,7 +56,8 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);
     QObject::connect(m_server,&API::SuccessOnLogout,this,&User::server_handler_on_Logout);
-    QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_Logout);
+    QObject::connect(m_server,&API::SuccessOnSendMsgToUser,this,&User::server_handler_on_SendMessage);
+    QObject::connect(m_server,&API::FailureOnSendMsgToUser,this,&User::server_handler_on_failure);
     QObject::connect(m_server,&API::SuccessOnSendMsgToGroup,this,&User::server_handler_on_SendMessage);//
     QObject::connect(m_server,&API::FailureOnSendMsgToGroup,this,&User::server_handler_on_failure);//
     QObject::connect(m_server,&API::SuccessOnSendMsgToChannel,this,&User::server_handler_on_SendMessage);//
@@ -145,7 +147,7 @@ void User::joinChat(const QString &chatName, const ChatType &type) const
         break;
     }
 }
-void User::sendMessage(const Message &msg, const ChatType &type)
+void User::sendMessage(const Message &msg, const ChatType &type) const
 {
     switch(type)
     {
@@ -311,17 +313,17 @@ int User::saveToFile()
 
 }
 
-QString User::getUserName()
+QString User::getUserName() const
 {
     return m_username;
 }
 
-QString User::getPassword()
+QString User::getPassword() const
 {
     return m_password;
 }
 
-QString User::getToken()
+QString User::getToken() const
 {
     return m_token;
 }
