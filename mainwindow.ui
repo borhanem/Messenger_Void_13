@@ -397,6 +397,30 @@ border-radius: 10%;</string>
         <string/>
        </property>
       </widget>
+      <widget class="QLabel" name="VoidMSG_lbl">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>4</y>
+         <width>320</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">/*
+font: 9pt &quot;Simplified Arabic Fixed&quot;;
+font: 9pt &quot;Segoe Script&quot;;
+font: 9pt &quot;Papyrus&quot;;
+font: 9pt &quot;Wide Latin&quot;;
+font: 700 9pt &quot;System&quot;;
+font: 9pt &quot;Viner Hand ITC&quot;;
+font: 9pt &quot;Terminal&quot;;*/
+font: 700 16pt &quot;Segoe Print&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Void Messenger</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="page_2">

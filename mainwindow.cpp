@@ -128,7 +128,7 @@ void MainWindow::on_toolButton_clicked(bool checked)
         ui->chats_listWidget->show();
         ui->Exit_pbn->show();
         ui->Add_tbn->show();
-
+        ui->VoidMSG_lbl->show();
         setting_pbn = new QPropertyAnimation(ui->toolButton , "geometry");
         setting_pbn->setDuration(1);
         setting_pbn->setStartValue(QRect(527,2,31,31));
@@ -223,6 +223,7 @@ void MainWindow::on_toolButton_clicked(bool checked)
         ui->newchat_pbn->hide();
         ui->Exit_pbn->hide();
         ui->Add_tbn->hide();
+        ui->VoidMSG_lbl->hide();
 
         user_lbl_hide = new QPropertyAnimation(ui->user_lbl , "geometry");
         user_lbl_hide-> setDuration(200);
