@@ -80,7 +80,7 @@ private:
     WorkerRefresher* mp_groupWorker;
     WorkerRefresher* mp_channelWorker;
     void loadChats();
-    size_t m_groupCount,m_channelCount,m_userCount;
+    size_t m_groupCount,m_channelCount,m_privateCount;
     QPoint dragPosition;
     QPoint m_windowPos;
     QPoint m_mousePressPos;

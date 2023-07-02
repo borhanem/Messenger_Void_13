@@ -115,7 +115,7 @@ border-radius:5px;</string>
     </rect>
    </property>
    <property name="text">
-    <string>Group Name:</string>
+    <string>َUser Name:</string>
    </property>
   </widget>
   <widget class="QTextBrowser" name="groupname_led">

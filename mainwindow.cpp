@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     mp_channelWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Channel)),
     m_groupCount(0),
     m_channelCount(0),
-    m_userCount(0)
+    m_privateCount(0)
 {
     ui->setupUi(this);
     mp_user->loadFromFile();
@@ -373,7 +373,7 @@ void MainWindow::handler_on_NewChannel(QString newChannelName)
 
 void MainWindow::hanlder_on_NewPrivate(QString newPrivateName)
 {
-    //do stuff later
+
     qDebug() << "MainWindow::hanlder_on_NewPrivate => PrivateChat with the name " << newPrivateName << "created";
     AbstractChat* newPrivate = new PrivateChat(newPrivateName,this);
     this->mp_ChatList.push_back(newPrivate);
@@ -419,7 +419,7 @@ void MainWindow::on_chats_listWidget_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::on_newchannel_pbn_clicked()
 {
-    this->mp_channelWorker->setPreSize(++this->m_channelCount);
+
     CreateChannelPage* chp = new CreateChannelPage(mp_user,this);
     connect(chp,&CreateChannelPage::channelCreated,this,&MainWindow::handler_on_NewChannel);
     chp->exec();
@@ -474,7 +474,7 @@ void MainWindow::on_Minus_tbn_clicked()
 }
 void MainWindow::loadChats()
 {
-    QDir gDir("vdata/MsgData/Groups"),cDir("vdata/MsgData/Channels"),pDir;
+        QDir gDir("vdata/MsgData/Groups"),cDir("vdata/MsgData/Channels"),pDir("vdata/MsgData/Privates");
     if(gDir.exists())
     {
         qDebug() << "vdata/MsgData/Groups" << " exist!\n";
@@ -513,6 +513,25 @@ void MainWindow::loadChats()
         }
         qDebug() << "MainWindow::loadChats => channelCount = " << m_channelCount;
 
+    }
+    if(pDir.exists())
+    {
+        qDebug() << "vdata/MsgData/Privates" << " exist!\n";
+        for (const QFileInfo &file : pDir.entryInfoList(QDir::Files))
+        {
+            qDebug() << file.baseName();
+            AbstractChat* PrivateEntity = new PrivateChat(file.baseName(),this);
+            //groupEntity->loadFromFile();
+            qDebug() << "loaded From File";
+            mp_ChatList.push_back(PrivateEntity);
+            qDebug() << "added to ChatList";
+            QListWidgetItem* newItem = new QListWidgetItem(PrivateEntity->chatName());
+            newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(PrivateEntity));
+            ui->chats_listWidget->addItem(newItem);
+            ui->chats_listWidget_2->addItem(newItem);
+            m_privateCount++;
+        }
+        qDebug() << "MainWindow::loadChats => groupCount = " << m_groupCount;
     }
 
 }
