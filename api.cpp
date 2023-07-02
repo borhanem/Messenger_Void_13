@@ -1,9 +1,8 @@
 #include "api.h"
 
 API::API(const QString& sUrl,QObject *parent)
-    : QObject{parent},url_s(sUrl),m_isAvailable(true)
+    : QObject{parent},url_s(sUrl),man_ptr(new QNetworkAccessManager(this)),m_isAvailable(true)
 {
-    man_ptr = new QNetworkAccessManager(this);
     data = new QByteArray();
     //connect(reply,&QNetworkReply::finished,this,&API::getData);
 }

@@ -9,7 +9,7 @@ User::User() : m_UserLogFilePath("vdata/UserInfo/userLog.dat"),
     m_username ("VoidUser"),
     m_password("123456789"),
     m_token("borhan81alireza82mahta83"),
-    m_server(new API("http://api.barafardayebehtar.ml:8080"))
+    m_server(new API("http://api.barafardayebehtar.ml:8080",this))
 {
     QObject::connect(m_server,&API::SuccessOnRegister,this,&User::server_handler_on_Register);
     QObject::connect(m_server,&API::SuccessOnLogin,this,&User::server_handler_on_Login);

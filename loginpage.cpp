@@ -158,7 +158,8 @@ int ThemeChange (QString i)
 
     if( css.length() > 0)
     {
-        ((QApplication*)QApplication::instance())->setStyleSheet(css);
+        qApp->setStyleSheet(css);
+        //((QApplication*)QApplication::instance())->setStyleSheet(css);
         QDir settingDir;
         if(!settingDir.exists("vdata/settingInfo"))
         {

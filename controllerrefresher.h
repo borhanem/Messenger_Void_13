@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QThread>
 #include "workerrefresher.h"
+#include "abstractchat.h"
 class ControllerRefresher : public QObject
 {
     Q_OBJECT

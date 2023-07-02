@@ -4,7 +4,6 @@
 #include <QObject>
 #include "user.h"
 #include <QTimer>
-#include "abstractchat.h"
 #define PAUSETIME 2000
 
 class WorkerRefresher : public QObject

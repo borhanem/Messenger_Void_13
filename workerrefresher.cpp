@@ -7,22 +7,17 @@
 //#include "privatechat.h"
 WorkerRefresher::WorkerRefresher(const RefresherType& rt,const User::ChatType& ct,size_t preSize,const QString& chatname,QObject *parent)
     : QObject{parent},
-    mp_currUser(new User()),
-    mp_timer(new QTimer()),
+
+//    mp_timer(new QTimer()),
     m_refresher_type(rt),
     m_chat_type(ct),
     m_chat_name(chatname),
     m_pre_size(preSize)
 {
-    if(mp_currUser->loadFromFile())
-    {
-        qDebug("WorkerRefresher::WorkerRefresher : Cannot Load User From File\n");
-    }
-    mp_timer->setInterval(PAUSETIME);
-    connect(mp_timer,&QTimer::timeout,this,&WorkerRefresher::sendRefreshRequest);
-    connect(mp_currUser,&User::SuccessOnGetMessage,this,&WorkerRefresher::handleRespond);
-    connect(mp_currUser,&User::SuccessOnGetChatList,this,&WorkerRefresher::handleRespond);
-    mp_timer->start();
+
+
+
+//    mp_timer->start();
 }
 
 WorkerRefresher::~WorkerRefresher()
@@ -34,7 +29,19 @@ WorkerRefresher::~WorkerRefresher()
 
 void WorkerRefresher::run()
 {
-
+    // setting up User
+    mp_currUser= new User();
+    if(mp_currUser->loadFromFile())
+    {
+        qDebug("WorkerRefresher::WorkerRefresher : Cannot Load User From File\n");
+    }
+    connect(mp_currUser,&User::SuccessOnGetMessage,this,&WorkerRefresher::handleRespond);
+    connect(mp_currUser,&User::SuccessOnGetChatList,this,&WorkerRefresher::handleRespond);
+    //////// setting up timer
+    mp_timer = new QTimer(this);
+    connect(mp_timer,&QTimer::timeout,this,&WorkerRefresher::sendRefreshRequest);
+    mp_timer->setInterval(PAUSETIME);
+    mp_timer->start();
 }
 
 void WorkerRefresher::setPreSize(size_t new_size)
