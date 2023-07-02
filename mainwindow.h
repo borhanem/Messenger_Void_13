@@ -14,6 +14,7 @@
 #include "loginpage.h"
 #include "creategrouppage.h"
 #include "createchannelpage.h"
+#include "workerrefresher.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -64,14 +65,16 @@ private slots:
 
     void on_Add_tbn_clicked();
 
+    void group_refresh_handler(QList<AbstractChat*>);
+
 private:
     Ui::MainWindow *ui;
     User* mp_user;
     QList<AbstractChat*> mp_ChatList;
     CreateGroupPage* mp_cgp;
-
+    WorkerRefresher* mp_groupWorker;
     void loadChats();
-
+    size_t m_groupCount,m_channelCount,m_userCount;
     QPoint dragPosition;
     QPoint m_windowPos;
     QPoint m_mousePressPos;

@@ -7,7 +7,11 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
-      mp_user(new User())
+      mp_user(new User()),
+    mp_groupWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Group)),
+    m_groupCount(0),
+    m_channelCount(0),
+    m_userCount(0)
 {
     ui->setupUi(this);
     mp_user->loadFromFile();
@@ -40,7 +44,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->repository_link_lbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ui->repository_link_lbl->setOpenExternalLinks(true);
     connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
-
+    connect(mp_groupWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::group_refresh_handler);
+    mp_groupWorker->setPreSize(this->m_groupCount);
+    mp_groupWorker->run();
 }
 
 MainWindow::~MainWindow()
@@ -327,6 +333,7 @@ void MainWindow::on_createGroup_pbn_clicked()
 
 void MainWindow::handler_on_NewGroup(QString newGroupName)
 {
+    this->mp_groupWorker->setPreSize(++this->m_groupCount);
     qDebug("handler on NewGroup called in mainWindow\n");
     AbstractChat* newGroup = new GroupChat(newGroupName,this);
     this->mp_ChatList.push_back(newGroup);
@@ -336,9 +343,6 @@ void MainWindow::handler_on_NewGroup(QString newGroupName)
     ui->chats_listWidget->addItem(newItem);
     ui->chats_listWidget_2->addItem(newItem);
     dynamic_cast<GroupChat*>(newGroup)->open();
-
-
-
 }
 
 void MainWindow::handler_on_NewChannel(QString newChannelName)
@@ -455,7 +459,9 @@ void MainWindow::loadChats()
             newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(groupEntity));
             ui->chats_listWidget->addItem(newItem);
             ui->chats_listWidget_2->addItem(newItem);
+            m_groupCount++;
         }
+        qDebug() << "MainWindow::loadChats => groupCount = " << m_groupCount;
     }
     if(cDir.exists())
     {
@@ -472,7 +478,10 @@ void MainWindow::loadChats()
             newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(ChannelEntity));
             ui->chats_listWidget->addItem(newItem);
             ui->chats_listWidget_2->addItem(newItem);
+            m_channelCount++;
         }
+        qDebug() << "MainWindow::loadChats => channelCount = " << m_channelCount;
+
     }
 
 }
@@ -524,5 +533,17 @@ void MainWindow::on_Add_tbn_clicked()
     setting_pbn->setStartValue(QRect(499,2,31,31));
     setting_pbn->setEndValue(QRect(527,2,31,31));
     setting_pbn->start();
+}
+
+void MainWindow::group_refresh_handler(QList<AbstractChat*> new_chats)
+{
+    this->m_groupCount += new_chats.size();
+    this->mp_ChatList += new_chats;
+    for(auto& i : new_chats){
+    QListWidgetItem* newItem = new QListWidgetItem(i->chatName());
+    newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(i));
+    ui->chats_listWidget->addItem(newItem);
+    ui->chats_listWidget_2->addItem(newItem);
+    }
 }
 
