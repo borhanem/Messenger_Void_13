@@ -264,8 +264,8 @@
   <widget class="QToolButton" name="Exit_pbn">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>10</y>
+     <x>465</x>
+     <y>2</y>
      <width>31</width>
      <height>31</height>
     </rect>
