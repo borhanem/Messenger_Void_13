@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>442</width>
     <height>60</height>
    </rect>
   </property>
@@ -14,31 +14,9 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">border_radius:5px;
+   <string notr="true">border-radius:5px;
 </string>
   </property>
-  <widget class="QLabel" name="msg_index">
-   <property name="geometry">
-    <rect>
-     <x>18</x>
-     <y>20</y>
-     <width>210</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border-top-right-radius:15px;
-border-bottom-left-radius:15px;
-border-top-left-radius:0px;
-border-bottom-right-radius:0px;
-font: 8pt &quot;MV Boli&quot;;
-color: rgb(0, 0, 0);
-SizePolicy:  Expanding;</string>
-   </property>
-   <property name="text">
-    <string>    Hiiii!</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="Name">
    <property name="geometry">
     <rect>
@@ -49,26 +27,46 @@ SizePolicy:  Expanding;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 9pt &quot;Vladimir Script&quot;;</string>
+    <string notr="true">font: 9pt &quot;Source Code Pro&quot;;</string>
    </property>
    <property name="text">
     <string>Mahta</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="msg_index">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>20</y>
+     <width>211</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-top-right-radius:15px;
+background-color: rgb(255, 170, 127);
+border-bottom-left-radius:15px;
+border-top-left-radius:0px;
+border-bottom-right-radius:0px;
+font: 7pt &quot;MV Boli&quot;;
+color: rgb(0, 0, 0);
+</string>
    </property>
   </widget>
   <widget class="QLabel" name="Time">
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>30</y>
+     <y>15</y>
      <width>41</width>
      <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">borderradius: 10px;
+    <string notr="true">border-top-right-radius:15px;
 background-color: transparent;
 color : black;
-font: 6pt &quot;Segoe UI&quot;;</string>
+font: 5pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="text">
     <string>12:00 pm </string>

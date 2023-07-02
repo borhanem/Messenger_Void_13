@@ -11,7 +11,7 @@ msgBaseReceiver::msgBaseReceiver(const QString& txt,const QString& sender,const 
     ui->Name->setText(this->m_sender);
     ui->Time->setText(this->m_time.time().toString());
     ui->msg_index->setMaximumWidth(500);
-    ui->msg_index->adjustSize();
+    //ui->msg_index->adjustSize();
 }
 
 msgBaseReceiver::~msgBaseReceiver()

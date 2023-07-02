@@ -10,8 +10,6 @@ msgBaseSend::msgBaseSend(const QString& txt,const QString& sender ,const QString
     ui->setupUi(this);
     ui->textBrowser->setText(this->m_body);
     ui->textBrowser->setAlignment(Qt::AlignRight);
-    ui->textBrowser->setMaximumWidth(500);
-    ui->textBrowser->adjustSize();
     ui->Name->setText(this->m_sender);
     ui->Time->setText(this->m_time.time().toString());
 }
