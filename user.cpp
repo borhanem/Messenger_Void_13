@@ -369,6 +369,11 @@ void User::server_handler_on_Login(QString token)
 
 void User::server_handler_on_Logout()
 {
+    QDir VoidData("vdata");
+    if(!VoidData.removeRecursively())
+    {
+        qDebug() << " User::server_handler_on_Logout => Cannot remove vdata Contents";
+    }
     std::remove(m_UserLogFilePath.toStdString().c_str());
     emit SuccessOnLogout();
 }
