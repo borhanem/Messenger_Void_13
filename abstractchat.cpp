@@ -11,6 +11,12 @@ AbstractChat::AbstractChat(QString chatName,const ChatType& ct)
 AbstractChat::~AbstractChat()
 {
     qDebug("AbstractChat Destructor\n");
+    delete mp_user;
+    for(auto& i : this->m_message_list)
+    {
+        delete i;
+    }
+
 }
 
 QString AbstractChat::chatName()const

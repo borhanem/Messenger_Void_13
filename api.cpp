@@ -8,6 +8,11 @@ API::API(const QString& sUrl,QObject *parent)
     //connect(reply,&QNetworkReply::finished,this,&API::getData);
 }
 
+API::~API()
+{
+    delete man_ptr;
+}
+
 void API::Register(const QString &uname, const QString &pass)
 {
     // http://api.barafardayebehtar.ml:8080/signup?username=sara&password=1234&firstname=sara&lastname=baradaran
@@ -41,16 +46,16 @@ void API::Login(const QString &uname, const QString &pass)
 
 void API::Logout(const QString &uname, const QString &pass)
 {
-    if(m_isAvailable)
-    {
-        m_isAvailable = false;
+    //if(m_isAvailable)
+  //  {
+     //   m_isAvailable = false;
         QString temp = url_s + "/logout?username="+uname+"&password="+pass;
         reply = man_ptr->get(QNetworkRequest(QUrl(temp)));
         connect(reply,&QNetworkReply::finished,this,&API::LogoutResponder);
-    }
-    else{
-        qDebug()<< "API::Logout => API is not available";
-    }
+ //   }
+  //  else{
+      //  qDebug()<< "API::Logout => API is not available";
+   // }
 }
 
 void API::SendMessageToUser(const QString &token,const QString& dst,const QString& body)
@@ -353,7 +358,7 @@ void API::LogoutResponder()
         emit FailureOnLogout(reply->errorString());
     }
     reply->deleteLater();
-    m_isAvailable = true;
+    //m_isAvailable = true;
 }
 
 void API::createGroupResponder()

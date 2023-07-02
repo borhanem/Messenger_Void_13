@@ -84,6 +84,11 @@ User::User(QString userName, QString passWord, QString token,QString userPath, Q
     QObject::connect(m_server,&API::SuccessOnGetChannelList,this,&::User::server_handler_on_GetChatList);
     QObject::connect(m_server,&API::FailureOnGetChannelList,this,&::User::FailureOnGetChatList);
 }
+
+User::~User()
+{
+    delete m_server;
+}
 void User::Register()
 {
     m_server->Register(m_username,m_password);
@@ -352,8 +357,8 @@ void User::server_handler_on_Login(QString token)
     // user already logged in
     if(token.isEmpty())
     {
-        this->logOut();
         emit Failure("Try Again");
+        this->logOut();
         return;
     }
     m_token = token;

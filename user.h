@@ -20,6 +20,7 @@ public:
     };
     User();
     explicit User(QString userName,QString passWord,QString token = "",QString userPath="userLog.dat",QObject* parent = nullptr);
+    ~User();
     void Register();
     void login();
     void logOut();

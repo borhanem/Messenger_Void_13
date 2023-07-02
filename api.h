@@ -17,6 +17,7 @@ class API : public QObject
     Q_OBJECT
 public:
     explicit API(const QString& sUrl,QObject *parent = nullptr);
+    ~API();
     void Register(const QString& uname,const QString& pass);
     void Login(const QString& uname,const QString& pass);
     void Logout(const QString &uname, const QString &pass);

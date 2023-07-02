@@ -53,6 +53,11 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete mp_user;
+    delete mp_groupWorker;
+    for(auto& i : this->mp_ChatList)
+    {
+        delete i;
+    }
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* event)
@@ -313,6 +318,7 @@ void MainWindow::logoutUser()
 {
     LoginPage* lpgPtr = new LoginPage();
     lpgPtr->open();
+    this->deleteLater();
     this->close();
 }
 
@@ -489,7 +495,9 @@ void MainWindow::loadChats()
 
 void MainWindow::on_Exit_pbn_2_clicked()
 {
+    this->deleteLater();
     this->close();
+
 }
 
 

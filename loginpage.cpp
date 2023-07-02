@@ -36,6 +36,8 @@ LoginPage::LoginPage(QWidget *parent) :
 LoginPage::~LoginPage()
 {
     delete ui;
+    delete mp_user;
+    delete register_ptr;
 }
 
 
@@ -95,6 +97,7 @@ void LoginPage::server_handler_on_success()
     ui->password_led->setDisabled(false);
     MainWindow* mainptr = new MainWindow();
     mainptr->show();
+    this->deleteLater();
     this->close();
 }
 
@@ -105,6 +108,11 @@ void LoginPage::server_handler_on_failure(QString error)
     ui->login_pbn->setDisabled(false);
     ui->username_led->setDisabled(false);
     ui->password_led->setDisabled(false);
+//    if(error == "Try Again")
+//    {
+//          User temp(this->mp_user->getUserName(),this->mp_user->getPassword());
+//          temp.logOut();
+//    }
 }
 
 void LoginPage::registerPage_handler(int i)
@@ -118,6 +126,11 @@ void LoginPage::autoLogin(User *NewUser)
     ui->username_led->setText(NewUser->getUserName());
     ui->password_led->setText(NewUser->getPassword());
 }
+
+//void LoginPage::autoLogout(User user)
+//{
+//    user.logOut();
+//}
 
 bool LoginPage::checkInput()
 {

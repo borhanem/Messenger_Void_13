@@ -26,12 +26,13 @@ private slots:
     void registerPage_handler(int i);
     void autoLogin(User* NewUser);
 
-
+ //   void autoLogout(User user);
     void on_Theme_1_clicked();
     void on_Theme_2_pbn_clicked();
     void on_Theme_3_pbn_clicked();
     void on_pushButton_clicked();
-
+signals:
+   // void needLogout(User user);
 private:
     bool checkInput();
     Ui::LoginPage *ui;

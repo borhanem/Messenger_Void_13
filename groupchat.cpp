@@ -40,6 +40,8 @@ GroupChat::GroupChat(QString chatName,QWidget *parent) :
 GroupChat::~GroupChat()
 {
     delete ui;
+    delete messagesLayout;
+    delete worker;
 }
 
 int GroupChat::saveToFile()
