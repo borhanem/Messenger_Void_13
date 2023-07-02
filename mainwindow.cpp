@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
       mp_user(new User()),
     mp_groupWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Group)),
     mp_channelWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Channel)),
+    mp_privateWorker(new WorkerRefresher(WorkerRefresher::ChatList,User::Private)),
     m_groupCount(0),
     m_channelCount(0),
     m_privateCount(0)
@@ -49,10 +50,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mp_user,&User::SuccessOnLogout,this,&MainWindow::logoutUser);
     connect(mp_groupWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::group_refresh_handler);
     connect(mp_channelWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::channel_refresh_handler);
+    connect(mp_privateWorker,&WorkerRefresher::chatResultReady,this,&MainWindow::private_refresh_handler);
     mp_groupWorker->setPreSize(this->m_groupCount);
     mp_channelWorker->setPreSize(this->m_channelCount);
+    mp_privateWorker->setPreSize(this->m_privateCount);
     mp_groupWorker->run();
     mp_channelWorker->run();
+    mp_privateWorker->run();
 }
 
 MainWindow::~MainWindow()
@@ -373,7 +377,7 @@ void MainWindow::handler_on_NewChannel(QString newChannelName)
 
 void MainWindow::hanlder_on_NewPrivate(QString newPrivateName)
 {
-
+    this->mp_privateWorker->setPreSize(++this->m_privateCount);
     qDebug() << "MainWindow::hanlder_on_NewPrivate => PrivateChat with the name " << newPrivateName << "created";
     AbstractChat* newPrivate = new PrivateChat(newPrivateName,this);
     this->mp_ChatList.push_back(newPrivate);
@@ -602,6 +606,18 @@ void MainWindow::group_refresh_handler(QList<AbstractChat*> new_chats)
 void MainWindow::channel_refresh_handler(QList<AbstractChat *> new_chats)
 {
     this->m_channelCount += new_chats.size();
+    this->mp_ChatList += new_chats;
+    for(auto& i : new_chats){
+    QListWidgetItem* newItem = new QListWidgetItem(i->chatName());
+    newItem->setData(Qt::UserRole,QVariant::fromValue<AbstractChat*>(i));
+    ui->chats_listWidget->addItem(newItem);
+    ui->chats_listWidget_2->addItem(newItem);
+    }
+}
+
+void MainWindow::private_refresh_handler(QList<AbstractChat *> new_chats)
+{
+    this->m_privateCount += new_chats.size();
     this->mp_ChatList += new_chats;
     for(auto& i : new_chats){
     QListWidgetItem* newItem = new QListWidgetItem(i->chatName());

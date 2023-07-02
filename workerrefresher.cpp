@@ -4,6 +4,7 @@
 #include "abstractchat.h"
 #include "groupchat.h"
 #include "channelchat.h"
+#include "privatechat.h"
 WorkerRefresher::WorkerRefresher(const RefresherType& rt,const User::ChatType& ct,size_t preSize,const QString& chatname,QObject *parent)
     : QObject{parent},
     mp_currUser(new User()),
@@ -162,5 +163,21 @@ void WorkerRefresher::handleChannels(QJsonObject Respond,size_t new_size)
 
 void WorkerRefresher::handleUsers(QJsonObject Respond,size_t new_size)
 {
-
+    QList<AbstractChat*> ChatList;
+    for (size_t jsonIter = this->m_pre_size; jsonIter < new_size; ++jsonIter){
+        QString blockIter = "block " + QString::number(jsonIter);
+        QJsonValue blockVal = Respond.value(blockIter);
+        if(blockVal.isObject()){
+        QJsonObject blockObj = blockVal.toObject();
+        QString ChatName = blockObj.value("src").toString();
+        qDebug() << blockIter << " ChatName: " << ChatName;
+        AbstractChat* tempMsg = new PrivateChat(ChatName);
+        ChatList.push_back(tempMsg);
+        }
+        else
+        {
+        qDebug() << " WorkerRefresher::handleChannels : blockVal is not Object\n";
+        }
+    }
+    emit chatResultReady(ChatList);
 }

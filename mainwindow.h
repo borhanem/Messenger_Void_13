@@ -70,6 +70,8 @@ private slots:
 
     void channel_refresh_handler(QList<AbstractChat*>);
 
+    void private_refresh_handler(QList<AbstractChat*>);
+
     void on_newchat_pbn_clicked();
 
 private:
@@ -79,6 +81,7 @@ private:
     CreateGroupPage* mp_cgp;
     WorkerRefresher* mp_groupWorker;
     WorkerRefresher* mp_channelWorker;
+    WorkerRefresher* mp_privateWorker;
     void loadChats();
     size_t m_groupCount,m_channelCount,m_privateCount;
     QPoint dragPosition;
