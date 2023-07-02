@@ -171,6 +171,7 @@ int ThemeChange (QString i)
         }
         QDataStream data_dst(&logFile);
         data_dst << i;
+        logFile.close();
         return 0;
     }
     return 1;
