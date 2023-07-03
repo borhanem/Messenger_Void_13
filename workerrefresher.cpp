@@ -22,9 +22,9 @@ WorkerRefresher::WorkerRefresher(const RefresherType& rt,const User::ChatType& c
 
 WorkerRefresher::~WorkerRefresher()
 {
-    this->mp_timer->stop();
+   // this->mp_timer->stop();
     delete mp_currUser;
-    delete mp_timer;
+    //delete mp_timer;
 }
 
 void WorkerRefresher::run()
@@ -40,6 +40,7 @@ void WorkerRefresher::run()
     //////// setting up timer
     mp_timer = new QTimer(this);
     connect(mp_timer,&QTimer::timeout,this,&WorkerRefresher::sendRefreshRequest);
+    connect(mp_currUser,&User::destroyed,mp_timer,&QTimer::deleteLater);
     mp_timer->setInterval(PAUSETIME);
     mp_timer->start();
 }

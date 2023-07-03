@@ -59,7 +59,7 @@ void CreateChannelPage::success_on_create_channel()
     ui->tojoin_tbn->setDisabled(false);
     ui->tocreate_tbn->setDisabled(false);
     emit channelCreated(newChannelName);
-    //this->close();
+    this->close();
 }
 
 void CreateChannelPage::failure_on_create_channel(const QString& error)
