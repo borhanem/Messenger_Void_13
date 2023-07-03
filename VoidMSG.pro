@@ -86,3 +86,4 @@ DISTFILES +=
 
 RESOURCES += \
     Styles.qrc
+

@@ -9,6 +9,7 @@
         <file>Style/Style3.css</file>
         <file>Style/Style4.css</file>
         <file>Style/Purp.png</file>
+        <file>Style/VoidMSG main.ico</file>
     </qresource>
     <qresource prefix="/greenButtons">
         <file>Buttons/green_add.png</file>

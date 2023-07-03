@@ -5,11 +5,14 @@
 #include <QFile>
 #include <fstream>
 #include<QFrame>
-#include "msgBaseReceive.h"
-#include "msgBaseSend.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QIcon icon(":/new/prefix1/Style/VoidMSG main.ico");
+    a.setWindowIcon(icon);
+
 
 //    std::ifstream iFile;
 //    iFile.open("userLog.dat");
